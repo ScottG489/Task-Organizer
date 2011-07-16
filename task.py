@@ -1,4 +1,4 @@
-import textwrap
+from textwrap import dedent
 class Task():
 	def __init__(self, title='', notes = '', priority = int(), tags = []):
 #		self.id
@@ -8,7 +8,7 @@ class Task():
 #		self.tags = tags
 
 	def __str__(self):
-		return textwrap.dedent('''\
+		return dedent('''\
 			Title: %(title)s
 			Notes: %(notes)s''') % {
 				'title': self.title,
