@@ -4,6 +4,7 @@
 import argparse
 import task
 import uicontroller
+import taskfilestorage
 
 def main():
 	
@@ -13,8 +14,15 @@ def main():
 	print foo
 #	args = arg_parser.parse_args()
 #	print args
-#	myTask = task.Task(''.join(args.title), ''.join(args.notes))
 
-#	print myTask
+#	my_task = task.Task(''.join(foo.title), ''.join(foo.notes))
+#	print my_task
+	
+	my_storage = taskfilestorage.TaskFileStorage()
+#	my_storage.add(my_task)
+	
+	for item in my_storage.find('.*'):
+		print item
+		print
 
 main()
