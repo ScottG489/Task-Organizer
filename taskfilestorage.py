@@ -29,18 +29,14 @@ class TaskFileStorage():
 
 		task_list.append(task_item)
 		self.write(task_list)
-		
-
 
 	def find(self, regex):
-		task_file = open('taskfile', 'r')
-		task_list = []
-		while True:
-			try:
-				task_list.append(pickle.load(task_file))
-			except EOFError:
-				break
 		match_list = []
+		try:
+			task_list = self.read()
+		except (EOFError, IOError):	#No tasks
+			return match_list
+		
 		for task_item in task_list:
 ##TODO:Valid the input regular expression here or somewhere
 			if re.search(r'' + regex + '', task_item.title):

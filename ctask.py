@@ -21,8 +21,8 @@ def main():
 	my_storage = taskfilestorage.TaskFileStorage()
 	my_storage.add(my_task)
 	
-#	for item in my_storage.find('.*'):
-#		print item
-#		print
+	for item in my_storage.find('.*'):
+		print item
+		print
 
 main()
