@@ -9,7 +9,7 @@ class TestTaskFileStorage(unittest.TestCase):
 		pass
 
 	def test_add(self):
-		self.file_storage(self.my_task)
+		#self.file_storage().add(my_task)
 		pass
 	
 	def test_find(self):

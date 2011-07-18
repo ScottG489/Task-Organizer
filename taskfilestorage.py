@@ -5,6 +5,10 @@ import re
 file_name = 'taskfile'
 
 class TaskFileStorage():
+#TODO:Add error handing for malformed file
+#	* Make private?
+#	* Make it return an empty list instead of raise?
+#   * Duplicate functionality of read() in TaskFileStorage?
 	def read(self):
 		task_file = open(file_name, 'r')
 		try:
@@ -15,13 +19,14 @@ class TaskFileStorage():
 		
 		return task_list
 
+#TODO:Make private?
 	def write(self, task_list):
 		task_file = open(file_name, 'w')
 		pickle.dump(task_list, task_file, 0)
 		task_file.close()
 
+#TODO:Auto create ID's (make KeyGenerator class)
 	def add(self, task_item):
-#TODO:Auto create ID's
 		try:
 			task_list = self.read()
 		except (EOFError, IOError):	#No tasks
@@ -37,13 +42,11 @@ class TaskFileStorage():
 		except (EOFError, IOError):	#No tasks
 			return match_list
 		
+##TODO:Validate the input regular expression here or somewhere
 		for task_item in task_list:
-##TODO:Valid the input regular expression here or somewhere
 			if re.search(r'' + regex + '', task_item.title):
 				match_list.append(task_item)
 
 		return match_list
 	def delx(self):
-##TODO:Must rewrite the entire file? If so, maybe all writes should rewrite
-##		the entire file with a task list.
 		pass
