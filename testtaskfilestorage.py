@@ -25,6 +25,8 @@ class TestTaskFileStorage(unittest.TestCase):
 		file_storage = taskfilestorage.TaskFileStorage()
 		id = file_storage.add(my_task)
 		new_task = file_storage.find(id)
+		assertEqual(my_task, new_task)
+		pass
 
 	
 	def test_find(self):
