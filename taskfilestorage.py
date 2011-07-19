@@ -42,21 +42,19 @@ class TaskFileStorage():
 		return task_item.id
 
 #TODO:Validate the input regular expression here or somewhere
-#	* Return an int instead of a list when id is specified?
-	def find(self, regex=None, id=None):
-		if regex and id:
-			raise TypeError('find() takes exactly 1 argument (2 given)')
+#	* Return a task instead of a list when id is specified?
+	def find(self, search=None):
 		match_list = []
 		try:
 			task_list = self.read()
 		except (EOFError, IOError):	#No tasks
 			return match_list
 		
-		if regex != None:
+		if isinstance(search, str):
 			for task_item in task_list:
 				if re.search(r'' + regex + '', task_item.title):
 					match_list.append(task_item)
-		elif id != None:
+		if isinstance(search, int):
 			for task_item in task_list:
 				if id == task_item.id:
 					match_list.append(task_item)

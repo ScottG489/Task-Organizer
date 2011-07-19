@@ -23,7 +23,8 @@ class TestTaskFileStorage(unittest.TestCase):
 		my_task.title = 'title'
 		my_task.notes = 'note'
 		file_storage = taskfilestorage.TaskFileStorage()
-		id = file_storage.add(my_task).id
+		id = file_storage.add(my_task)
+		new_task = file_storage.find(id)
 
 	
 	def test_find(self):
