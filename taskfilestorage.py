@@ -3,14 +3,13 @@ import task
 import re
 import keygenerator
 
-file_name = 'taskfile'
-
 class TaskFileStorage():
 #TODO:Add error handing for malformed file
 #	* Make private?
 #	* Make it return an empty list instead of raise?
 #   * Duplicate functionality of read() in TaskFileStorage?
 	def read(self):
+		file_name = 'taskfile'
 		task_file = open(file_name, 'r')
 		try:
 			task_list = pickle.load(task_file)
