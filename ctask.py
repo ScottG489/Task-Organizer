@@ -1,7 +1,6 @@
 ##TODO:
 #	Make it so the 'find' subparser requires at least one argument and displays
 #		error otherwise.
-import argparse
 import task
 import uicontroller
 import taskfilestorage
