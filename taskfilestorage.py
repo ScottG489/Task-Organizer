@@ -52,7 +52,7 @@ class TaskFileStorage():
 		
 		if isinstance(search, str):
 			for task_item in task_list:
-				if re.search(r'' + regex + '', task_item.title):
+				if re.search(r'' + search + '', task_item.title):
 					match_list.append(task_item)
 		if isinstance(search, int):
 			for task_item in task_list:
