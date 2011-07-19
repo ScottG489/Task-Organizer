@@ -35,7 +35,6 @@ class TaskFileStorage():
 
 		key_gen = keygenerator.KeyGenerator()
 		task_item.id = key_gen.get_key()
-		key_gen.update_key()
 		
 		task_list.append(task_item)
 		self.write(task_list)

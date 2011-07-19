@@ -1,5 +1,5 @@
 
-file_name = 'keyfile'
+file_name = 'keyfile'	# Will hold the ID of the NEXT task
 
 class KeyGenerator():
 #TODO:Add error handling for malformed file
@@ -27,9 +27,10 @@ class KeyGenerator():
 			key = 0
 			self.write(key)
 		
+		self.update_key(key)
+
 		return key
 
-	def update_key(self):
-		key = self.get_key()
+	def update_key(self, key):
 		key += 1
 		self.write(key)
