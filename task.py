@@ -1,6 +1,6 @@
 from textwrap import dedent
 class Task():
-	def __init__(self, title='', notes = '', priority = int(), tags = []):
+	def __init__(self, title='', notes = ''):
 		self.id = int()
 		self.title = title
 		self.notes = notes

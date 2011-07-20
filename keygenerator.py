@@ -1,13 +1,15 @@
 
-file_name = 'keyfile'	# Will hold the ID of the NEXT task
 
 class KeyGenerator():
+	def __init__(self):
+		self.file_name = 'keyfile'	# Will hold the ID of the NEXT task
+		
 #TODO:Add error handling for malformed file
 #	* Make prvate?
 #	* Return empty list instead of raise?
 #	* Duplicate functionality of read() in TaskFileStorage?
 	def read(self):
-		key_file = open(file_name, 'r')
+		key_file = open(self.file_name, 'r')
 		try:
 			key = int(key_file.read())
 		except (EOFError, IOError, ValueError):
@@ -16,7 +18,7 @@ class KeyGenerator():
 		return key
 	
 	def write(self, key):
-		key_file = open(file_name, 'w')
+		key_file = open(self.file_name, 'w')
 		key_file.write(str(key))
 		key_file.close()
 		

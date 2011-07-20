@@ -2,7 +2,6 @@
 #	Make it so the 'find' subparser requires at least one argument and displays
 #		error otherwise.
 import argparse
-import task
 
 class UIController():
 	def parse_command_line(self):
