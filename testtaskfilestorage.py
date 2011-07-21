@@ -39,7 +39,7 @@ class TestTaskFileStorage(unittest.TestCase):
 		task_file = open(self.file_storage.file_name, 'r')
 		new_task = pickle.load(task_file)
 
-		self.assertEqual(my_task.key, new_task[0].key)
+		self.assertEqual(my_task.key, new_task[0].key, key)
 	
 	def test_find(self):
 		pass
