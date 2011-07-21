@@ -3,15 +3,16 @@ import re
 import keygenerator
 
 class TaskFileStorage():
-	def __init__(self):
-		self.file_name = 'taskfile'
+	def __init__(self, task_file_name='taskfile', key_file_name='keyfile'):
+		self.task_file_name = task_file_name
+		self.key_file_name = key_file_name
 
 #TODO:Add error handing for malformed file
 #	* Make private?
 #	* Make it return an empty list instead of raise?
 #   * Duplicate functionality of read() in TaskFileStorage?
 	def read(self):
-		task_file = open(self.file_name, 'r')
+		task_file = open(self.task_file_name, 'r')
 		try:
 			task_list = pickle.load(task_file)
 			task_file.close()
@@ -22,7 +23,7 @@ class TaskFileStorage():
 
 #TODO:Make private?
 	def write(self, task_list):
-		task_file = open(self.file_name, 'w')
+		task_file = open(self.task_file_name, 'w')
 		pickle.dump(task_list, task_file, 0)
 		task_file.close()
 
@@ -33,7 +34,7 @@ class TaskFileStorage():
 		except (EOFError, IOError):	#No tasks
 			task_list = []
 
-		key_gen = keygenerator.KeyGenerator()
+		key_gen = keygenerator.KeyGenerator(self.key_file_name)
 		task_item.key = key_gen.get_key()
 		
 		task_list.append(task_item)

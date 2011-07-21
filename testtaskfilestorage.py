@@ -8,22 +8,27 @@ import os
 ## Is there a simple way to test non-returning functions?
 class TestTaskFileStorage(unittest.TestCase):
 	def setUp(self):
+		self.test_task_file_name = 'testtaskfile'
+		self.test_key_file_name = 'testkeyfile'
 		self.my_task = task.Task()
-		self.file_storage = taskfilestorage.TaskFileStorage()
-		self.key_gen = keygenerator.KeyGenerator()
+		self.file_storage = taskfilestorage.TaskFileStorage(
+			self.test_task_file_name,
+			self.test_key_file_name
+		)
+		self.key_gen = keygenerator.KeyGenerator(self.test_key_file_name)
 		try:
-			os.remove(self.file_storage.file_name)
+			os.remove(self.file_storage.task_file_name)
 		except:
 			pass
 		try:
-			os.remove(self.key_gen.file_name)
+			os.remove(self.key_gen.key_file_name)
 		except:
 			pass
 	
 #	def test_read(self):
 #		file_storage = taskfilestorage.TaskFileStorage()
-#		file_storage.file_name
-#		task_file = open(file_storage.file_name, 'r')
+#		file_storage.task_file_name
+#		task_file = open(file_storage.task_file_name, 'r')
 #		task_file.close()
 #		task_list = pickle.load(task_file)
 #		self.assertEqual(task_list, file_storage.read())
@@ -36,7 +41,7 @@ class TestTaskFileStorage(unittest.TestCase):
 
 		key = self.file_storage.add(my_task)
 
-		task_file = open(self.file_storage.file_name, 'r')
+		task_file = open(self.file_storage.task_file_name, 'r')
 		new_task = pickle.load(task_file)
 
 		self.assertEqual(my_task.key, new_task[0].key, key)
