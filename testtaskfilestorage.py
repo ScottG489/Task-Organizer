@@ -34,8 +34,6 @@ class TestTaskFileStorage(unittest.TestCase):
 		my_task.title = 'title'
 		my_task.notes = 'note'
 
-		key = self.file_storage.add(my_task)
-
 		task_file = open(self.file_storage.file_name, 'r')
 		new_task = pickle.load(task_file)
 
