@@ -56,7 +56,7 @@ class TaskFileStorage():
 					match_list.append(task_item)
 		if isinstance(search, int):
 			for task_item in task_list:
-				if id == task_item.id:
+				if search == task_item.id:
 					match_list.append(task_item)
 
 

@@ -14,13 +14,13 @@ def main():
 #	args = arg_parser.parse_args()
 #	print args
 
-	my_task = task.Task(''.join(foo.title), ''.join(foo.notes))
-	print my_task
-	
+#	my_task = task.Task(''.join(foo.title), ''.join(foo.notes))
+#	print my_task
+#	
 	my_storage = taskfilestorage.TaskFileStorage()
-	my_storage.add(my_task)
+#	my_storage.add(my_task)
 	
-	for item in my_storage.find('.*'):
+	for item in my_storage.find(3):
 		print item
 		print
 
