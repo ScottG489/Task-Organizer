@@ -34,15 +34,15 @@ class TaskFileStorage():
 			task_list = []
 
 		key_gen = keygenerator.KeyGenerator()
-		task_item.id = key_gen.get_key()
+		task_item.key = key_gen.get_key()
 		
 		task_list.append(task_item)
 		self.write(task_list)
 
-		return task_item.id
+		return task_item.key
 
 #TODO:Validate the input regular expression here or somewhere
-#	* Return a task instead of a list when id is specified?
+#	* Return a task instead of a list when key is specified?
 	def find(self, search=None):
 		match_list = []
 		try:
@@ -56,7 +56,7 @@ class TaskFileStorage():
 					match_list.append(task_item)
 		if isinstance(search, int):
 			for task_item in task_list:
-				if search == task_item.id:
+				if search == task_item.key:
 					match_list.append(task_item)
 
 

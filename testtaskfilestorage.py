@@ -34,10 +34,10 @@ class TestTaskFileStorage(unittest.TestCase):
 		my_task.notes = 'note'
 
 		file_storage = taskfilestorage.TaskFileStorage()
-		id = file_storage.add(my_task)
-		print id
-		new_task = file_storage.find(id)
-#		new_task[0].id = 0
+		key = file_storage.add(my_task)
+		print key
+		new_task = file_storage.find(key)
+#		new_task[0].key = 0
 		print new_task
 		self.assertEqual(my_task, new_task)
 		pass

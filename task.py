@@ -1,7 +1,7 @@
 from textwrap import dedent
 class Task():
 	def __init__(self, title='', notes = ''):
-		self.id = int()
+		self.key = int()
 		self.title = title
 		self.notes = notes
 #		self.priority = priority
@@ -9,10 +9,10 @@ class Task():
 
 	def __str__(self):
 		return dedent('''\
-			ID: %(id)s
+			ID: %(key)s
 			Title: %(title)s
 			Notes: %(notes)s''') % {
-				'id': self.id,
+				'key': self.key,
 				'title': self.title,
 				'notes': self.notes
 		}

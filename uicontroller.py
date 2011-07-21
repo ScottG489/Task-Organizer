@@ -48,11 +48,11 @@ class UIController():
 			'find',
 			help='find and get information on tasks'
 		)
-		arg_parser_find.add_argument('--id',
+		arg_parser_find.add_argument('--key',
 			action='store',
 			nargs=1,
 			type=int,
-			help='the id of the task')
+			help='the key of the task')
 		arg_parser_find.add_argument('--title',
 			action='store',
 			nargs=1,
@@ -64,11 +64,11 @@ class UIController():
 			'edit',
 			help='edit tasks'
 		)
-		arg_parser_edit.add_argument('--id',
+		arg_parser_edit.add_argument('--key',
 			action='store',
 			nargs=1,
 			type=int,
-			help='the id of the task'
+			help='the key of the task'
 		)
 		arg_parser_edit.add_argument('--title',
 			action='store',
@@ -99,11 +99,11 @@ class UIController():
 			'del',
 			help='delete tasks'
 		)
-		arg_parser_delete.add_argument('--id',
+		arg_parser_delete.add_argument('--key',
 			action='store',
 			nargs=1,
 			type=int,
-			help='the id of the task'
+			help='the key of the task'
 		)
 		arg_parser_delete.add_argument('--title',
 			action='store',
