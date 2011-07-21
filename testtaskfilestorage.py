@@ -1,6 +1,7 @@
 import unittest
 import taskfilestorage
 import keygenerator
+import pickle
 import task
 import os
 
@@ -33,15 +34,12 @@ class TestTaskFileStorage(unittest.TestCase):
 		my_task.title = 'title'
 		my_task.notes = 'note'
 
-		file_storage = taskfilestorage.TaskFileStorage()
-		key = file_storage.add(my_task)
-		print key
-		new_task = file_storage.find(key)
-#		new_task[0].key = 0
-		print new_task
-		self.assertEqual(my_task, new_task)
-		pass
+		key = self.file_storage.add(my_task)
 
+		task_file = open(self.file_storage.file_name, 'r')
+		new_task = pickle.load(task_file)
+
+		self.assertEqual(my_task.key, new_task[0].key)
 	
 	def test_find(self):
 		pass
