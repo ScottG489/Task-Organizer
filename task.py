@@ -16,3 +16,50 @@ class Task():
 				'title': self.title,
 				'notes': self.notes
 		}
+
+#	def __cmp__(self, other):
+#		if (self.key == other.key 
+#				and self.title == other.title
+#				and self.notes == other.notes):
+#			return 0
+#		elif self.key > other.key:
+#			return 1
+#		elif self.key < other.key:
+#			return -1
+			
+	def __lt__(self, other):
+		if self.key < other.key:
+			return True
+		
+		return False
+
+	def __le__(self, other):
+		if self.key <= other.key:
+			return True
+		
+		return False
+
+	def __eq__(self, other):
+		if self.key == other.key and self.title == other.title and self.notes == other.notes:
+			return True
+		
+		return False
+
+	def __ne__(self, other):
+		if self.key != other.key and self.title != other.title and self.notes != other.notes:
+			return True
+		
+		return False
+
+	def __gt__(self, other):
+		if self.key > other.key:
+			return True
+		
+		return False
+
+	def __ge__(self, other):
+		if self.key >= other.key:
+			return True
+		
+		return False
+
