@@ -16,13 +16,16 @@ def main():
 	my_task = task.Task(''.join(foo.title), ''.join(foo.notes))
 	new_task = my_task
 	
-	my_storage = taskfilestorage.TaskFileStorage()
-	my_task.key = my_storage.add(my_task)
-	new_task.key = my_storage.add(new_task)
+	print new_task
 	
-	print my_task
-	for item in my_storage.read():
-#	item = my_storage.find(9)
-		print item
+	my_storage = taskfilestorage.TaskFileStorage()
+	my_storage.add(new_task)
+	print new_task
+#	new_task.key = my_storage.add(new_task)
+#	
+#	print my_task
+#	for item in my_storage.read():
+##	item = my_storage.find(9)
+#		print item
 
 main()

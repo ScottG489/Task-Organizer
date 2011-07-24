@@ -52,20 +52,14 @@ class TestTaskFileStorage(unittest.TestCase):
 
 
 	def test_add(self):
-		#new_task = self.my_task
-		#self.my_task.key = self.file_storage.add(self.my_task)
-		#new_task.key = self.file_storage.add(new_task)
-		print self.file_storage.add(self.my_task)
-		print self.file_storage.add(self.my_task)
-		print self.file_storage.add(self.my_task)
-		print self.file_storage.add(self.my_task)
-		print self.file_storage.add(self.my_task)
-		print self.file_storage.add(self.my_task)
+		self.my_task.key = self.file_storage.add(self.my_task)
+		new_task = self.file_storage.find(self.my_task.key)
+		new_task.key = self.file_storage.add(new_task)
 
 		#self.my_task = self.file_storage.find(self.my_task.key)
-		print self.my_task
-		print '-----'
-		#print new_task
+#		print self.my_task
+#		print '-----'
+#		print new_task
 		
 		self.assertEqual(self.my_task.key, new_task.key - 1)
 	

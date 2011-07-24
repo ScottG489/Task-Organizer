@@ -1,7 +1,7 @@
 from textwrap import dedent
 class Task():
-	def __init__(self, title='', notes = ''):
-		self.key = int()
+	def __init__(self, title=None, notes=None):
+		self.key = None
 		self.title = title
 		self.notes = notes
 #		self.priority = priority
