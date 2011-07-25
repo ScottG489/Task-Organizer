@@ -4,6 +4,9 @@
 import argparse
 
 class UIController():
+	def __init__(self):
+		pass
+
 	def parse_command_line(self):
 		arg_parser = argparse.ArgumentParser(
 			description='Task organizer.',
@@ -31,18 +34,18 @@ class UIController():
 			type=str,
 			help='notes	about the task'
 		)
-	#	arg_parser_add.add_argument('--priority',
-	#		action='store',
-	#		nargs=1,
-	#		type=int,
-	#		help='the priority of the task'
-	#	)
-#		arg_parser_add.add_argument('--tags',
-#			action='store',
-#			nargs=1,
-#			type=str,
-#			help='the tags for the task'
-#		)
+		#arg_parser_add.add_argument('--priority',
+		#	action='store',
+		#	nargs=1,
+		#	type=int,
+		#	help='the priority of the task'
+		#)
+		#arg_parser_add.add_argument('--tags',
+		#	action='store',
+		#	nargs=1,
+		#	type=str,
+		#	help='the tags for the task'
+		#)
 	##Find sub-command arguments
 		arg_parser_find = arg_subparsers.add_parser(
 			'find',
@@ -82,18 +85,18 @@ class UIController():
 			type=str,
 			help='notes about the task'
 		)
-	#	arg_parser_edit.add_argument('--priority',
-	#		action='store',
-	#		nargs=1,
-	#		type=int,
-	#		help='the priority of the task'
-	#	)
-#		arg_parser_edit.add_argument('--tags',
-#			action='store',
-#			nargs=1,
-#			type=str,
-#			help='the tags for the task'
-#		)
+		#arg_parser_edit.add_argument('--priority',
+		#	action='store',
+		#	nargs=1,
+		#	type=int,
+		#	help='the priority of the task'
+		#)
+		#arg_parser_edit.add_argument('--tags',
+		#	action='store',
+		#	nargs=1,
+		#	type=str,
+		#	help='the tags for the task'
+		#)
 	##Delete sub-command arguments
 		arg_parser_delete = arg_subparsers.add_parser(
 			'del',

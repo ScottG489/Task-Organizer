@@ -2,44 +2,59 @@ import task
 import pickle
 import keygenerator
 import os
+import logging
 
 class TaskFileStorage():
 	def __init__(self, task_file_name='taskfile', key_file_name='keyfile'):
 		self.task_file_name = task_file_name
 		self.key_file_name = key_file_name
 
+		self.logger = logging.getLogger()
+		self.logger.setLevel(logging.DEBUG)
+
 	#TODO:Make private?
 	#	* raise more informative messages? (ex. if path exists as a dir)
 	def read(self):
 		try:
 			# Try to open file for reading
+			self.logger.debug('try: open file for reading: \'%s\'' % self.task_file_name)
 			task_file = open(self.task_file_name, 'r')
 			# Try to load task_list
 			try:
+				self.logger.debug('try: load pickled task list')
 				task_list = pickle.load(task_file)
 				task_file.close()
 				# Try to validate file contents.
 				try:
+					self.logger.debug('try: validate task list')
 					self.validate(task_list)
+					self.logger.debug('success! returning task list')
 				# If file is not valid; raise
 				except TypeError:
+					self.logger.exception('file failed to validate')
 					raise
 			# If task list won't load, check if it's empty
 			except:
+				self.logger.debug('checking if file is empty')
 				# If the file is empty there are no tasks; return empty list
 				if os.stat(self.task_file_name).st_size == 0:
 					task_list = []
+					self.logger.debug('success! file is empty; returning empty list')
 				# If also not empty, file is in an unreadable format; raise
 				else:
+					self.logger.exception('file is corrupt or in an unreadable format')
 					raise
 		# If file won't open for reading, check that it exists as a file
 		except:
+			self.logger.debug('checking if file path exists')
 			# If path doesn't exist as a file, create it and return empty list
 			if not os.path.exists(self.task_file_name):
 				temp_file_handler = open(self.task_file_name, 'w').close()
 				task_list = []
+				self.logger.debug('success! file was created; returning empty list')
 			# If it also exists then we can't use it; raise.
 			else:
+				self.logger.exception('file can\'t be read')
 				raise
 
 		return task_list

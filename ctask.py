@@ -4,23 +4,29 @@
 import task
 import uicontroller
 import taskfilestorage
+import logging
 
 def main():
-	
-	myCtrl = uicontroller.UIController()
-	foo = myCtrl.parse_command_line()
+	logging.basicConfig(
+		level=logging.DEBUG,
+		format='[%(asctime)s] %(levelname)s:%(name)s: %(message)s'
+	)
+
+	my_ctrl = uicontroller.UIController()
+	temp = my_ctrl.parse_command_line()
 	
 #	args = arg_parser.parse_args()
 #	print args
 
-	my_task = task.Task(''.join(foo.title), ''.join(foo.notes))
-	new_task = my_task
+	my_task = task.Task(''.join(temp.title), ''.join(temp.notes))
 	
-	print new_task
 	
 	my_storage = taskfilestorage.TaskFileStorage()
-	my_storage.add(new_task)
-	print new_task
+	my_storage.add(my_task)
+	print my_task
+
+	logging.warning('this is a warning')
+	logging.info('this is some info')
 #	new_task.key = my_storage.add(new_task)
 #	
 #	print my_task

@@ -1,15 +1,15 @@
 import os
 
 class KeyGenerator():
-	def __init__(self, key_file_name='keyfile'):
-		self.key_file_name = key_file_name	# Will hold the ID of the NEXT task
+	def __init__(self, key_filename='keyfile'):
+		self.key_filename = key_filename	# Will hold the ID of the NEXT task
 
 	#TODO:Make private?
 	#	* raise more informative messages? (ex. if path exists as a dir)
 	def read(self):
 		try:
 			# Try to open file for reading
-			key_file = open(self.key_file_name, 'r')
+			key_file = open(self.key_filename, 'r')
 			# Try to read the key
 			try:
 				key = int(key_file.read())
@@ -23,7 +23,7 @@ class KeyGenerator():
 			# If key won't load, check if it's empty
 			except:
 				# If the file is empty create first key
-				if os.stat(self.key_file_name).st_size == 0:
+				if os.stat(self.key_filename).st_size == 0:
 					key = 0
 				# If also not empty, file is in an unreadable format; raise
 				else:
@@ -31,8 +31,8 @@ class KeyGenerator():
 		# If file won't open for reading, check that it exists as a file
 		except:
 			# If path doesn't exist as a file, create it and first key
-			if not os.path.exists(self.key_file_name):
-				temp_file_handler = open(self.key_file_name, 'w').close()
+			if not os.path.exists(self.key_filename):
+				temp_file_handler = open(self.key_filename, 'w').close()
 				key = 0
 			# If it also exists then we can't use it; raise.
 			else:
@@ -45,7 +45,7 @@ class KeyGenerator():
 	def write(self, key):
 		try:
 			# Try to open file for	writing 
-			key_file = open(self.key_file_name, 'w')
+			key_file = open(self.key_filename, 'w')
 			# Try to read key
 			try:
 				key = int(key_file.read())
@@ -60,7 +60,7 @@ class KeyGenerator():
 			# If key won't load, check if it's empty
 			except:
 				# If the file is empty there is nothing to read; write key
-				if os.stat(self.key_file_name).st_size == 0:
+				if os.stat(self.key_filename).st_size == 0:
 					key_file.write(str(key))
 				# If also not empty, file is in an unreadable format; raise
 				else:

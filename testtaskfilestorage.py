@@ -2,8 +2,8 @@ import unittest
 import taskfilestorage
 import task
 import os
+import logging
 
-## Is there a simple way to test non-returning functions?
 class TestTaskFileStorage(unittest.TestCase):
 	def setUp(self):
 		# Initialize task object with attributes
@@ -19,6 +19,13 @@ class TestTaskFileStorage(unittest.TestCase):
 			self.test_key_file_name
 		)
 		
+		self.logger = logging.getLogger()
+		self.stderr = logging.StreamHandler()
+		self.stderr.setLevel(logging.DEBUG)
+		self.formatter = logging.Formatter('[%(asctime)s] %(levelname)s:%(name)s:%(module)s.%(funcName)s(): %(message)s')
+		self.stderr.setFormatter(self.formatter)
+		self.logger.addHandler(self.stderr)
+
 		# Clear/Create test files
 		temp_file_handler = open(self.test_task_file_name, 'w').close()
 		temp_file_handler = open(self.test_key_file_name, 'w').close()
@@ -88,4 +95,5 @@ class TestTaskFileStorage(unittest.TestCase):
 	
 
 if __name__ == '__main__':
-	unittest.main()
+	suite = unittest.TestLoader().loadTestsFromTestCase(TestTaskFileStorage)
+	unittest.TextTestRunner(verbosity=2).run(suite)
