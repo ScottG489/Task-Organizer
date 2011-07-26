@@ -5,8 +5,8 @@ import os
 import logging
 
 class TaskFileStorage():
-    def __init__(self, task_file_name='taskfile', key_file_name='keyfile'):
-        self.task_file_name = task_file_name
+    def __init__(self, task_filename='taskfile', key_file_name='keyfile'):
+        self.task_file_name = task_filename
         self.key_file_name = key_file_name
 
         self.logger = logging.getLogger()
@@ -65,9 +65,7 @@ class TaskFileStorage():
         try:
             task_list = self.read()
 
-            self.logger.debug("try: validate task list")
             self.validate(task_list)
-            self.logger.debug("success! returning task list")
         except:
             self.logger.exception('failed to access file for reading')
             raise
@@ -82,7 +80,7 @@ class TaskFileStorage():
             self.logger.exception('failed to access file for writing')
             raise
 
-        self.logger.debug('success! task item successfully added:\n%s' % task_item)
+        self.logger.debug('success! task item added:\n%s' % task_item)
         return task_item.key
 
     #TODO:Validate the input regular expression here or somewhere
@@ -111,5 +109,3 @@ class TaskFileStorage():
     def delete(self, key):
         pass
 #        return key
-
-logging.shutdown()

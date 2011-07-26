@@ -1,101 +1,83 @@
 import os
+import logging
 
 class KeyGenerator():
     def __init__(self, key_filename='keyfile'):
         self.key_filename = key_filename    # Will hold the ID of the NEXT task
 
+        self.logger = logging.getLogger()
+        self.logger.setLevel(logging.DEBUG)
+
     #TODO:Make private?
     #    * raise more informative messages? (ex. if path exists as a dir)
     def read(self):
+        self.logger.info('attempting to read key')
+        key = 0
         try:
-            # Try to open file for reading
+            self.logger.debug("try: open file for reading: %s" % self.key_filename)
             key_file = open(self.key_filename, 'r')
-            # Try to read the key
-            try:
-                key = int(key_file.read())
-                key_file.close()
-                # Try to validate the read file contents.
-                try:
-                    self.validate(key)
-                # If file is not valid; raise
-                except TypeError:
-                    raise
-            # If key won't load, check if it's empty
-            except:
-                # If the file is empty create first key
-                if os.stat(self.key_filename).st_size == 0:
-                    key = 0
-                # If also not empty, file is in an unreadable format; raise
-                else:
-                    raise
-        # If file won't open for reading, check that it exists as a file
+
+            self.logger.debug("try: read key")
+            key = int(key_file.read())
+            key_file.close()
         except:
-            # If path doesn't exist as a file, create it and first key
-            if not os.path.exists(self.key_filename):
-                open(self.key_filename, 'w').close()
-                key = 0
-            # If it also exists then we can't use it; raise.
-            else:
-                raise
+            if os.stat(self.key_filename).st_size == 0:
+                self.logger.debug('success! file is empty; returning key')
+                return key
+            self.logger.exception("unable to successfully read key file")
+            raise
 
-
+        self.logger.debug('success! returning key')
         return key
 
     #TODO:Make private?
     def write(self, key):
+        self.logger.info('attempting to write key')
         try:
-            # Try to open file for    writing 
+            self.logger.debug("try: open file for writing: %s" % self.key_filename)
             key_file = open(self.key_filename, 'w')
-            # Try to read key
-            try:
-                key = int(key_file.read())
-                # Try to validate read key
-                try:
-                    self.validate(key)
-                # If file is not valid; raise
-                except TypeError:
-                    raise
-                # If the file is valid, write to it
-                key_file.write(str(key))
-            # If key won't load, check if it's empty
-            except:
-                # If the file is empty there is nothing to read; write key
-                if os.stat(self.key_filename).st_size == 0:
-                    key_file.write(str(key))
-                # If also not empty, file is in an unreadable format; raise
-                else:
-                    raise
-        # If file won't open for writing, we can't do anything; raise
+
+            self.logger.debug("try: write key to file")
+            key_file.write(str(key))
         except:
+            self.logger.exception("unable to successfully write task file")
             raise
 
         key_file.close()
 
     def validate(self, key):
+        self.logger.info('attempting to validate key')
         if key < 0:
             raise TypeError('invalid or corrupt key file')
-
+        self.logger.debug('success! key validated')
         return True
 
     def get(self):
+        self.logger.info("attempting to retrieve key")
         try:
             key = self.read()
         except:
+            self.logger.exception("failed to access file for reading")
             raise
+
         try:
             self.write(key)
         except:
+            self.logger.exception("failed to access file for writing")
             raise
 
         self.update(key)
 
+        self.logger.debug('success! key successfully retrieved and updated: %s' % key)
         return key
 
     def update(self, key):
+        self.logger.info("attempting to update key")
         key += 1
         try:
             self.write(key)
         except:
+            self.logger.exception("failed to access file for writing")
             raise
-
+        self.logger.debug('success! key updated')
         return key

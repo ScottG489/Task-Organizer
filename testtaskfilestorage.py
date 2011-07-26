@@ -33,6 +33,8 @@ class TestTaskFileStorage(unittest.TestCase):
         open(self.test_task_file_name, 'w').close()
         open(self.test_key_file_name, 'w').close()
 
+        print   # So output from tests is on a new linex
+
     def tearDown(self):
         # Delete test files
         os.remove(self.test_task_file_name)
