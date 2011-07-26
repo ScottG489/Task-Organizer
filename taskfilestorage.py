@@ -16,87 +16,37 @@ class TaskFileStorage():
     #    * raise more informative messages? (ex. if path exists as a dir)
     def read(self):
         self.logger.info('attempting to read task list')
+        task_list = []
         try:
-            # Try to open file for reading
-            self.logger.debug('try: open file for reading: \'%s\'' % self.task_file_name)
+            self.logger.debug("try: open file for reading: %s" % self.task_file_name)
             task_file = open(self.task_file_name, 'r')
-            # Try to load task_list
-            try:
-                self.logger.debug('try: load pickled task list')
-                task_list = pickle.load(task_file)
-                task_file.close()
-                # Try to validate file contents.
-                try:
-                    self.logger.debug('try: validate task list')
-                    self.validate(task_list)
-                    self.logger.debug('success! returning task list')
-                # If file is not valid; raise
-                except TypeError:
-                    self.logger.exception('file failed to validate')
-                    raise
-            # If task list won't load, check if it's empty
-            except:
-                self.logger.debug('checking if file is empty')
-                # If the file is empty there are no tasks; return empty list
-                if os.stat(self.task_file_name).st_size == 0:
-                    task_list = []
-                    self.logger.debug('success! file is empty; returning empty list')
-                # If also not empty, file is in an unreadable format; raise
-                else:
-                    self.logger.exception('file is corrupt or in an unreadable format')
-                    raise
-        # If file won't open for reading, check that it exists as a file
-        except:
-            self.logger.debug('checking if file path exists')
-            # If path doesn't exist as a file, create it and return empty list
-            if not os.path.exists(self.task_file_name):
-                open(self.task_file_name, 'w').close()
-                task_list = []
-                self.logger.debug('success! file was created; returning empty list')
-            # If it also exists then we can't use it; raise.
-            else:
-                self.logger.exception('file can\'t be read')
-                raise
 
+            self.logger.debug("try: load pickled task list")
+            task_list = pickle.load(task_file)
+            task_file.close()
+
+        except:
+            if os.stat(self.task_file_name).st_size == 0:
+                self.logger.debug('success! file is empty; returning empty task list')
+                return task_list
+            self.logger.exception("unable to successfully read task file")
+            raise
+
+        self.logger.debug('success! returning task list')
         return task_list
 
     #TODO:Make private?
     def write(self, task_list):
         self.logger.info('attempting to write task list')
         try:
-            # Try to open file for    writing 
-            self.logger.debug('try: open file for writing: \'%s\'' % self.task_file_name)
+            self.logger.debug("try: open file for writing: %s" % self.task_file_name)
             task_file = open(self.task_file_name, 'w')
-            # Try to load task_list
-            try:
-                self.logger.debug('try: load pickled task list')
-                temp_task_list = pickle.load(task_file)
-                task_file.close()
-                # Try to validate file contents.
-                try:
-                    self.logger.debug('try: validate task list')
-                    self.validate(temp_task_list)
-                # If file is not valid; raise
-                except TypeError:
-                    self.logger.exception('file failed to validate')
-                    raise
-                # If the file is valid, write to it
-                pickle.dump(task_list, task_file, 0)
-            # If task list won't load, check if it's empty
-            except:
-                self.logger.warning('failed to open file for writing')
-                self.logger.debug('checking if file is empty')
-                # If the file is empty there are no tasks to validate
-                if os.stat(self.task_file_name).st_size == 0:
-                    pickle.dump(task_list, task_file, 0)
-                    self.logger.debug('success! file is empty; dumping pickled object')
-                # If also not empty, file is in an unreadable format; raise
-                else:
-                    self.logger.exception('file is corrupt or in an unreadable format')
-                    raise
-        # If file won't open for writing, we can't do anything; raise
+
+            self.logger.debug("try: dump pickled task list to file")
+            pickle.dump(task_list, task_file, 0)
+            task_file.close()
         except:
-            self.logger.exception('file can\'t be read')
+            self.logger.exception("unable to successfully write task file")
             raise
 
 
@@ -111,9 +61,13 @@ class TaskFileStorage():
 
     #TODO:Auto create ID's (make KeyGenerator class)
     def add(self, task_item):
-        self.logger.info('attempting to add task item: %s' % task_item)
+        self.logger.info('attempting to add task item:\n%s' % task_item)
         try:
             task_list = self.read()
+
+            self.logger.debug("try: validate task list")
+            self.validate(task_list)
+            self.logger.debug("success! returning task list")
         except:
             self.logger.exception('failed to access file for reading')
             raise
@@ -128,7 +82,7 @@ class TaskFileStorage():
             self.logger.exception('failed to access file for writing')
             raise
 
-        self.logger.debug('success! task item successfully added')
+        self.logger.debug('success! task item successfully added:\n%s' % task_item)
         return task_item.key
 
     #TODO:Validate the input regular expression here or somewhere

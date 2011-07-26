@@ -23,8 +23,8 @@ class TestTaskFileStorage(unittest.TestCase):
         self.stderr = logging.StreamHandler()
         self.stderr.setLevel(logging.DEBUG)
         self.formatter = logging.Formatter(
-                '[%(asctime)s] %(levelname)s:%(name)s:\
-                %(module)s.%(funcName)s(): %(message)s'
+                '[%(asctime)s] %(levelname)s:%(name)s:'
+                '%(module)s.%(funcName)s(): %(message)s'
         )
         self.stderr.setFormatter(self.formatter)
         self.logger.addHandler(self.stderr)
