@@ -42,7 +42,7 @@ class TestTaskFileStorage(unittest.TestCase):
 
         # Clear the my_task Task object
         self.my_task = None
-        
+
         # Remove handler so loggers aren't continuously created
         self.logger.removeHandler(self.stderr)
 
@@ -64,7 +64,6 @@ class TestTaskFileStorage(unittest.TestCase):
         task_list = self.file_storage.read()
 
         self.assertTrue(self.file_storage.validate(task_list))
-
 
     def test_add(self):
         self.my_task.key = self.file_storage.add(self.my_task)
@@ -95,7 +94,6 @@ class TestTaskFileStorage(unittest.TestCase):
         new_task = self.file_storage.find(key)
 
         self.assertIsNone(new_task)
-
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestTaskFileStorage)

@@ -13,7 +13,6 @@ class TaskFileStorage():
         self.logger.setLevel(logging.DEBUG)
 
     #TODO:Make private?
-    #    * raise more informative messages? (ex. if path exists as a dir)
     def read(self):
         self.logger.info('attempting to read task list')
         task_list = []
@@ -59,7 +58,6 @@ class TaskFileStorage():
         self.logger.debug('success! task list validated')
         return True
 
-    #TODO:Auto create ID's (make KeyGenerator class)
     def add(self, task_item):
         self.logger.info('attempting to add task item:\n%s' % task_item)
         try:
@@ -83,8 +81,6 @@ class TaskFileStorage():
         self.logger.debug('success! task item added:\n%s' % task_item)
         return task_item.key
 
-    #TODO:Validate the input regular expression here or somewhere
-    #    * Return a task instead of a list when key is specified?
     def find(self, key):
         self.logger.info('attempting to find item with key: %s' % key)
         try:

@@ -3,13 +3,12 @@ import logging
 
 class KeyGenerator():
     def __init__(self, key_filename='keyfile'):
-        self.key_filename = key_filename    # Will hold the ID of the NEXT task
+        self.key_filename = key_filename    # File will hold the ID of the NEXT task
 
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.DEBUG)
 
     #TODO:Make private?
-    #    * raise more informative messages? (ex. if path exists as a dir)
     def read(self):
         self.logger.info('attempting to read key')
         key = 0
