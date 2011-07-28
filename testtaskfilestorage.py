@@ -92,7 +92,7 @@ class TestTaskFileStorage(unittest.TestCase):
         self.my_task.title = 'foo'
         key = self.file_storage.update(self.my_task)
         new_task = self.file_storage.find(key)
-        print type(key)
+
         self.assertEqual(self.my_task, new_task)
 
     def test_delete(self):
