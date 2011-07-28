@@ -81,8 +81,11 @@ class TaskFileStorage():
         self.logger.debug('success! task item added:\n%s' % task_item)
         return task_item.key
 
-    def find(self, key):
+    def find(self, key = None):
         self.logger.info('attempting to find item with key: %s' % key)
+        if key == None:
+            self.logger.debug('no key specified; returning task list')
+            return self.read()
         try:
             task_list = self.read()
         except:
@@ -99,6 +102,7 @@ class TaskFileStorage():
         return task_item
 
     def update(self, task_item):
+        #TODO: Implement something that returns the entire list of tasks first
         pass
     #    return key
 
