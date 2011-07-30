@@ -67,6 +67,11 @@ class TestTaskFileStorage(unittest.TestCase):
 
         self.assertTrue(self.file_storage.validate(task_list))
 
+    def test_validate_fail(self):
+
+        #self.assertRaises(TypeError)
+        pass
+
     def test_add(self):
         self.my_task.key = self.file_storage.add(self.my_task)
         new_task = self.file_storage.find(self.my_task.key)

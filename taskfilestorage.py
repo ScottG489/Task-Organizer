@@ -109,15 +109,26 @@ class TaskFileStorage():
         return task_item
 
     def update(self, task_item):
+        self.logger.info('attempting to task task: %s' % task_item)
         task_list = self.find()
+        key_match = None
         #TODO: Call find() again except with an arg instead of below loop?
+        #    * Add error handing to all read() and write() calls
         for i, item in enumerate(task_list):
             if task_item.key == item.key:
+                self.logger.debug('matching task found; updating task')
                 key_match = item.key
                 task_list[i] = task_item
-                self.write(task_list)
-                break
+                try:
+                    self.write(task_list)
+                except:
+                    self.logger.exception('failed to access file for writing')
+                    raise
 
+                self.logger.info('success! task item updated')
+                return key_match
+
+        self.logger.info('no matching key found; nothing updated')
         return key_match
 
     def delete(self, key):
@@ -125,14 +136,19 @@ class TaskFileStorage():
         task_list = self.find()
         key_match = None
         #TODO: Call find() again except with an arg instead of below loop?
+        #    * Add error handing to all read() and write() calls
         for i, item in enumerate(task_list):
             if key == item.key:
                 self.logger.debug('matching task found; deleting task')
                 key_match = item.key
                 del task_list[i]
-                self.write(task_list)
+                try:
+                    self.write(task_list)
+                except:
+                    self.logger.exception('failed to access file for writing')
+                    raise
                 self.logger.info('success! task item deleted')
                 return key_match
 
-
+        self.logger.info('no matching key found; nothing deleted')
         return key_match
