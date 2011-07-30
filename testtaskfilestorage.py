@@ -97,6 +97,16 @@ class TestTaskFileStorage(unittest.TestCase):
 
         self.assertIsNone(new_task)
 
+    def test_search(self):
+        self.file_storage.add(self.my_task)
+        search_task = task.Task('title', 'note')
+        task_search_list = self.file_storage.search(search_task)
+
+        self.assertTrue(self.my_task in task_search_list)
+        # Do a matching AND on all attributes given.
+        # search(Task)
+        # return task_list
+
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestTaskFileStorage)
     unittest.TextTestRunner(verbosity=2).run(suite)

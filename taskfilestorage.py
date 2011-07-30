@@ -1,4 +1,3 @@
-import task
 import pickle
 import keygenerator
 import os
@@ -75,7 +74,7 @@ class TaskFileStorage():
         if key == None:
             try:
                 task_list = self.read()
-                self.logger.debug('no key specified; returning task list')
+                self.logger.debug('no key specified; returning entire task list')
                 return task_list
             except:
                 self.logger.exception('failed to access file for reading')
@@ -141,3 +140,18 @@ class TaskFileStorage():
 
         self.logger.info('no matching key found; nothing deleted')
         return key_match
+
+    def search(self, search_task):
+        self.logger.info('attempting to search for task:\n%s' % search_task)
+        task_list = self.find()
+        task_search_list = []
+        for task_item in task_list:
+            if search_task.title == task_item.title\
+                    and search_task.notes == task_item.notes:
+                self.logger.debug('matching task found:\n%s' % task_item)
+                task_search_list.append(task_item)
+
+
+        if not task_search_list: self.logger.info('no matches found')
+        else: self.logger.info('success! returning matching tasks')
+        return task_search_list
