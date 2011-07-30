@@ -49,20 +49,10 @@ class TaskFileStorage():
             raise
 
 
-    def validate(self, task_list):
-        self.logger.info('attempting to validate task list')
-        for item in task_list:
-            if not isinstance(item, task.Task):
-                self.logger.exception('invalid or corrupt task list')
-                raise TypeError('invalid or corrupt task list')
-        self.logger.info('success! task list validated')
-        return True
-
     def add(self, task_item):
         self.logger.info('attempting to add task item:\n%s' % task_item)
         try:
             task_list = self.read()
-            self.validate(task_list)
         except:
             self.logger.exception('failed to access file for reading')
             raise
@@ -85,7 +75,6 @@ class TaskFileStorage():
         if key == None:
             try:
                 task_list = self.read()
-                self.validate(task_list)
                 self.logger.debug('no key specified; returning task list')
                 return task_list
             except:

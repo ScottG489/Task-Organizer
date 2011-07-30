@@ -12,18 +12,18 @@ class TestTaskFileStorage(unittest.TestCase):
         self.my_task = task.Task('title', 'note')
 
         # Initialize test file names
-        self.test_task_file_name = 'testtaskfile'
-        self.test_key_file_name = 'testkeyfile'
+        self.test_task_filename = 'testtaskfile'
+        self.test_key_filename = 'testkeyfile'
 
         # Initialize file storage object using test-specific file names
         self.file_storage = taskfilestorage.TaskFileStorage(
-            self.test_task_file_name,
-            self.test_key_file_name
+            self.test_task_filename,
+            self.test_key_filename
         )
 
         self.logger = logging.getLogger()
         self.stderr = logging.StreamHandler()
-        self.stderr.setLevel(logging.WARNING)
+        self.stderr.setLevel(logging.DEBUG)
         self.formatter = logging.Formatter(
                 '[%(asctime)s] %(levelname)s:%(name)s:'
                 '%(module)s.%(funcName)s(): %(message)s'
@@ -32,15 +32,15 @@ class TestTaskFileStorage(unittest.TestCase):
         self.logger.addHandler(self.stderr)
 
         # Clear/Create test files
-        open(self.test_task_file_name, 'w').close()
-        open(self.test_key_file_name, 'w').close()
+        open(self.test_task_filename, 'w').close()
+        open(self.test_key_filename, 'w').close()
 
         print   # So output from tests is on a new linex
 
     def tearDown(self):
         # Delete test files
-        os.remove(self.test_task_file_name)
-        os.remove(self.test_key_file_name)
+        os.remove(self.test_task_filename)
+        os.remove(self.test_key_filename)
 
         # Clear the my_task Task object
         self.my_task = None
@@ -60,17 +60,6 @@ class TestTaskFileStorage(unittest.TestCase):
         task_list = self.file_storage.read()
 
         self.assertEqual(self.my_task, task_list[0])
-
-    def test_validate(self):
-        self.my_task.key = self.file_storage.add(self.my_task)
-        task_list = self.file_storage.read()
-
-        self.assertTrue(self.file_storage.validate(task_list))
-
-    def test_validate_fail(self):
-
-        #self.assertRaises(TypeError)
-        pass
 
     def test_add(self):
         self.my_task.key = self.file_storage.add(self.my_task)
