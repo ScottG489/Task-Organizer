@@ -32,7 +32,7 @@ class UIController():
             action='store',
             nargs=1,
             type=str,
-            help='notes    about the task'
+            help='notes about the task'
         )
         #arg_parser_add.add_argument('--priority',
         #    action='store',
