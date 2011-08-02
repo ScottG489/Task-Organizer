@@ -2,8 +2,9 @@ import pickle
 import keygenerator
 import os
 import logging
+import taskstorage
 
-class TaskFileStorage():
+class TaskFileStorage(taskstorage.TaskStorage):
     def __init__(self, task_filename='taskfile', key_file_name='keyfile'):
         self.task_file_name = task_filename
         self.key_file_name = key_file_name
@@ -151,7 +152,8 @@ class TaskFileStorage():
                 self.logger.debug('matching task found:\n%s' % task_item)
                 task_search_list.append(task_item)
 
-
-        if not task_search_list: self.logger.info('no matches found')
-        else: self.logger.info('success! returning matching tasks')
+        if not task_search_list:
+            self.logger.info('no matches found')
+        else:
+            self.logger.info('success! returning matching tasks')
         return task_search_list
