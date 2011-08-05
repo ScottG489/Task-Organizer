@@ -1,7 +1,7 @@
 ##TODO:
 #    Make it so the 'find' subparser requires at least one argument and displays
 #        error otherwise.
-import uicontroller
+import cliparser
 import taskfilestorage
 import logging
 
@@ -16,7 +16,7 @@ def main():
 #    open(key_filename, 'w').close()
 
     #my_storage = taskfilestorage.TaskFileStorage(task_filename, key_filename)
-    my_ctrl = uicontroller.UIController()
+    my_ctrl = cliparser.CLIParser()
 
     my_ctrl.parse_cl_args()
 
