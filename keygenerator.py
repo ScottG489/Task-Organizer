@@ -3,7 +3,8 @@ import logging
 
 class KeyGenerator():
     def __init__(self, key_filename='keyfile'):
-        self.key_filename = key_filename    # File will hold the ID of the NEXT task
+    # File will hold the ID of the NEXT task
+        self.key_filename = key_filename
 
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.DEBUG)
@@ -13,7 +14,8 @@ class KeyGenerator():
         self.logger.info('attempting to read key')
         key = 0
         try:
-            self.logger.debug("try: open file for reading: %s" % self.key_filename)
+            self.logger.debug("try: open file for reading: %s"
+                    % self.key_filename)
             key_file = open(self.key_filename, 'r')
 
             self.logger.debug("try: read key")
@@ -33,7 +35,8 @@ class KeyGenerator():
     def write(self, key):
         self.logger.info('attempting to write key')
         try:
-            self.logger.debug("try: open file for writing: %s" % self.key_filename)
+            self.logger.debug("try: open file for writing: %s"
+                    % self.key_filename)
             key_file = open(self.key_filename, 'w')
 
             self.logger.debug("try: write key to file")
@@ -67,7 +70,8 @@ class KeyGenerator():
 
         self.update(key)
 
-        self.logger.debug('success! key successfully retrieved and updated: %s' % key)
+        self.logger.debug('success! key retrieved and updated: %s'
+                % key)
         return key
 
     def update(self, key):

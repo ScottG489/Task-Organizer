@@ -17,7 +17,8 @@ class TaskFileStorage(taskstorage.TaskStorage):
         self.logger.info('attempting to read task list')
         task_list = []
         try:
-            self.logger.debug("try: open file for reading: %s" % self.task_file_name)
+            self.logger.debug("try: open file for reading: %s"
+                    % self.task_file_name)
             task_file = open(self.task_file_name, 'r')
 
             self.logger.debug("try: load pickled task list")
@@ -26,7 +27,8 @@ class TaskFileStorage(taskstorage.TaskStorage):
 
         except:
             if os.stat(self.task_file_name).st_size == 0:
-                self.logger.info('success! file is empty; returning empty task list')
+                self.logger.info('success! file is empty; '
+                        'returning empty task list')
                 return task_list
             self.logger.exception("unable to successfully read task file")
             raise
@@ -38,7 +40,8 @@ class TaskFileStorage(taskstorage.TaskStorage):
     def write(self, task_list):
         self.logger.info('attempting to write task list')
         try:
-            self.logger.debug("try: open file for writing: %s" % self.task_file_name)
+            self.logger.debug('try: open file for writing: %s'
+                    % self.task_file_name)
             task_file = open(self.task_file_name, 'w')
 
             self.logger.debug("try: dump pickled task list to file")
@@ -75,7 +78,8 @@ class TaskFileStorage(taskstorage.TaskStorage):
         if key == None:
             try:
                 task_list = self.read()
-                self.logger.debug('no key specified; returning entire task list')
+                self.logger.debug('no key specified; '
+                        'returning entire task list')
                 return task_list
             except:
                 self.logger.exception('failed to access file for reading')
@@ -87,7 +91,8 @@ class TaskFileStorage(taskstorage.TaskStorage):
             self.logger.exception('failed to access file for reading')
             raise
 
-        self.logger.debug('searching task list for item with matching key: %s' % key)
+        self.logger.debug('searching task list for item with matching key: %s'
+                % key)
         task_item = None
         for task_item in task_list:
             if key == task_item.key:
@@ -98,11 +103,10 @@ class TaskFileStorage(taskstorage.TaskStorage):
         return task_item
 
     def update(self, task_item):
-        self.logger.info('attempting to task task: %s' % task_item)
+        self.logger.info('attempting to update task: %s' % task_item)
         task_list = self.find()
         key_match = None
         #TODO: Call find() again except with an arg instead of below loop?
-        #    * Add error handing to all read() and write() calls
         for i, item in enumerate(task_list):
             if task_item.key == item.key:
                 self.logger.debug('matching task found; updating task')
@@ -125,7 +129,6 @@ class TaskFileStorage(taskstorage.TaskStorage):
         task_list = self.find()
         key_match = None
         #TODO: Call find() again except with an arg instead of below loop?
-        #    * Add error handing to all read() and write() calls
         for i, item in enumerate(task_list):
             if key == item.key:
                 self.logger.debug('matching task found; deleting task')

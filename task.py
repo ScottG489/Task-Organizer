@@ -1,8 +1,8 @@
 from textwrap import dedent
 
 class Task():
-    def __init__(self, title=None, notes=None):
-        self.key = None
+    def __init__(self, key=None, title=None, notes=None):
+        self.key = key
         self.title = title
         self.notes = notes
 #        self.priority = priority
@@ -18,15 +18,6 @@ class Task():
                 'notes': self.notes
         }
 
-#    def __cmp__(self, other):
-#        if (self.key == other.key 
-#                and self.title == other.title
-#                and self.notes == other.notes):
-#            return 0
-#        elif self.key > other.key:
-#            return 1
-#        elif self.key < other.key:
-#            return -1
 
     def __lt__(self, other):
         if self.key < other.key:
@@ -67,4 +58,3 @@ class Task():
             return True
 
         return False
-
