@@ -1,3 +1,4 @@
+#!/usr/bin/python2
 ##TODO:
 #    Make it so the 'find' subparser requires at least one argument and displays
 #        error otherwise.

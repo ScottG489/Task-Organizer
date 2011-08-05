@@ -1,10 +1,22 @@
 from textwrap import dedent
 
 class Task():
-    def __init__(self, title=None, notes=None):
-        self.key = None
-        self.title = title
-        self.notes = notes
+    def __init__(self, **kwargs):
+        try:
+            self.key = kwargs['key']
+        except:
+            self.key = None
+    
+        try:
+            self.title = kwargs['title']
+        except:
+            self.title = None
+    
+        try:
+            self.notes = kwargs['notes']
+        except:
+            self.notes = None
+
 #        self.priority = priority
 #        self.tags = tags
 

@@ -10,7 +10,7 @@ import testtaskstorage
 class TestTaskFileStorage(testtaskstorage.TestTaskStorage):
     def setUp(self):
         # Initialize task object with attributes
-        self.my_task = task.Task('title', 'note')
+        self.my_task = task.Task(title='title', notes='note')
 
         # Initialize test file names
         self.test_task_filename = 'testtaskfile'

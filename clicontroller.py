@@ -12,7 +12,7 @@ class CLIController(uicontroller.UIController):
             args.title = ''.join(args.title)
         if args.notes:
             args.notes = ''.join(args.notes)
-        task_item = task.Task(args.title, args.notes)
+        task_item = task.Task(title=args.title, notes=args.notes)
 
         self.storage.add(task_item)
 

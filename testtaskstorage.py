@@ -57,7 +57,7 @@ class TestTaskStorage(unittest.TestCase):
 
     def test_search(self):
         self.storage.add(self.my_task)
-        search_task = task.Task('title', 'note')
+        search_task = task.Task(title='title', notes='note')
         task_search_list = self.storage.search(search_task)
 
         self.assertTrue(self.my_task in task_search_list)
