@@ -1,7 +1,8 @@
 import unittest
 import logging
+import cliparser
 
-class TestTaskFileStorage(unittest.TestCase):
+class TestUIController(unittest.TestCase):
     def setUp(self):
         # Initialize file storage object using test-specific file names
         self.logger = logging.getLogger()
@@ -14,13 +15,27 @@ class TestTaskFileStorage(unittest.TestCase):
         self.stderr.setFormatter(self.formatter)
         self.logger.addHandler(self.stderr)
 
+        self.cli_parser = cliparser.CLIParser()
+
         print   # So output from tests is on a new linex
 
     def tearDown(self):
         # Remove handler so loggers aren't continuously created
         self.logger.removeHandler(self.stderr)
 
+    def test_add(self):
+        pass
+
+    def test_find(self):
+        pass
+
+    def test_edit(self):
+        pass
+    
+    def test_delete(self):
+        pass
+
 
 if __name__ == '__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestTaskFileStorage)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestUIController)
     unittest.TextTestRunner(verbosity=2).run(suite)

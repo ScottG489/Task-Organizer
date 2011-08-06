@@ -18,8 +18,10 @@ def main():
 
     #my_storage = taskfilestorage.TaskFileStorage(task_filename, key_filename)
     my_ctrl = cliparser.CLIParser()
-
+    # TODO: How do we tell main() which subcommand was used?
     print my_ctrl.parse_cl_args()
+
+    print my_ctrl.exec_cl()
 
     #my_storage.add(my_task)
 

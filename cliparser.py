@@ -131,6 +131,9 @@ class CLIParser():
     # TODO: Is there a way to tell the main() program what sub-commands and
                 # arguments are being called so it can handle them correctly?
     def parse_cl_args(self):
-        cli_args = self.arg_parser.parse_args()
+        self.cli_args = self.arg_parser.parse_args()
+        return self.cli_args
 
-        return cli_args.func(cli_args)
+    def exec_cl(self):
+        return self.cli_args.func(self.cli_args)
+
