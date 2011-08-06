@@ -10,8 +10,8 @@ def main():
     task_filename = 'task_file'
     key_filename = 'key_file'
     logging.basicConfig(
-        level=logging.WARNING,
-        format='[%(asctime)s] %(levelname)s:%(name)s: %(message)s'
+        level=logging.DEBUG,
+        format='[%(asctime)s] %(levelname)s:%(name)s:%(module)s.%(funcName)s(): %(message)s'
     )
 #    open(task_filename, 'w').close()
 #    open(key_filename, 'w').close()
@@ -19,7 +19,7 @@ def main():
     #my_storage = taskfilestorage.TaskFileStorage(task_filename, key_filename)
     my_ctrl = cliparser.CLIParser()
 
-    my_ctrl.parse_cl_args()
+    print my_ctrl.parse_cl_args()
 
     #my_storage.add(my_task)
 

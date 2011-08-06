@@ -91,7 +91,7 @@ class TaskFileStorage(taskstorage.TaskStorage):
             self.logger.exception('failed to access file for reading')
             raise
 
-        self.logger.debug('searching task list for item with matching key: %s'
+        self.logger.debug('finding task list for item with matching key: %s'
                 % key)
         task_item = None
         for task_item in task_list:
@@ -100,6 +100,7 @@ class TaskFileStorage(taskstorage.TaskStorage):
                 return task_item
 
         self.logger.info('no matching key found in task list')
+        task_item = None
         return task_item
 
     def update(self, task_item):

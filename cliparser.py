@@ -3,11 +3,15 @@
 #        error otherwise.
 import argparse
 import uicontrollerfactory
+import logging
 
 class CLIParser():
     def __init__(self):
         self.user_interface = uicontrollerfactory.UIControllerFactory()
         self.user_interface = self.user_interface.getUI()
+
+        self.logger = logging.getLogger()
+        self.logger.setLevel(logging.WARNING)
 
         self.arg_parser = argparse.ArgumentParser(
             description='Task organizer.',
@@ -31,7 +35,6 @@ class CLIParser():
 
 
     def init_add_subparser(self):
-    ##Add sub-command arguments
         arg_parser_add = self.arg_subparsers.add_parser(
             'add',
             epilog = 'Goodbye.',
@@ -56,7 +59,6 @@ class CLIParser():
         )
 
     def init_find_subparser(self):
-    ##Find sub-command arguments
         arg_parser_find = self.arg_subparsers.add_parser(
             'find',
             epilog = 'Goodbye.',
@@ -80,7 +82,6 @@ class CLIParser():
 #        )
 
     def init_edit_subparser(self):
-    ##Edit sub-command arguments
         arg_parser_edit = self.arg_subparsers.add_parser(
             'edit',
             epilog = 'Goodbye.',
@@ -112,7 +113,6 @@ class CLIParser():
         )
 
     def init_delete_subparser(self):
-    ##Delete sub-command arguments
         arg_parser_delete = self.arg_subparsers.add_parser(
             'del',
             epilog = 'Goodbye.',
@@ -128,11 +128,9 @@ class CLIParser():
             type=int,
             help='the key of the task'
         )
-
-
+    # TODO: Is there a way to tell the main() program what sub-commands and
+                # arguments are being called so it can handle them correctly?
     def parse_cl_args(self):
-        args = self.arg_parser.parse_args()
-        
-        args.func(args)
+        cli_args = self.arg_parser.parse_args()
 
-        #return new_task
+        return cli_args.func(cli_args)
