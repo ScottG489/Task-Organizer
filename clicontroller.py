@@ -14,7 +14,6 @@ class CLIController(uicontroller.UIController):
 
     def add(self, cl_args):
         self.logger.info('attempting to add arguments as Task')
-        print cl_args
 
         self.logger.debug('creating task from arguments')
         task_item = task.Task(title=cl_args['title'], notes=cl_args['notes'])

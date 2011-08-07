@@ -75,16 +75,6 @@ class TaskFileStorage(taskstorage.TaskStorage):
 
     def find(self, key = None):
         self.logger.info('attempting to find item with key: %s' % key)
-        if key == None:
-            try:
-                task_list = self.read()
-                self.logger.debug('no key specified; '
-                        'returning entire task list')
-                return task_list
-            except:
-                self.logger.exception('failed to access file for reading')
-                raise
-
         try:
             task_list = self.read()
         except:
@@ -93,7 +83,6 @@ class TaskFileStorage(taskstorage.TaskStorage):
 
         self.logger.debug('finding task list for item with matching key: %s'
                 % key)
-        task_item = None
         for task_item in task_list:
             if key == task_item.key:
                 self.logger.info('success! task item found matching key')
@@ -103,11 +92,22 @@ class TaskFileStorage(taskstorage.TaskStorage):
         task_item = None
         return task_item
 
+    def get_all(self):
+        self.logger.info('attempting to get all tasks')
+        try:
+            task_list = self.read()
+        except:
+            self.logger.exception('failed to access file for reading')
+            raise
+
+        self.logger.info('success! returning list of all tasks')
+        return task_list
+
     def update(self, task_item):
         self.logger.info('attempting to update task: %s' % task_item)
-        task_list = self.find()
+        task_list = self.get_all()
         key_match = None
-        #TODO: Call find() again except with an arg instead of below loop?
+        #TODO: Call get_all() again except with an arg instead of below loop?
         for i, item in enumerate(task_list):
             if task_item.key == item.key:
                 self.logger.debug('matching task found; updating task')
@@ -127,9 +127,9 @@ class TaskFileStorage(taskstorage.TaskStorage):
 
     def delete(self, key):
         self.logger.info('attempting to delete task: %s' % key)
-        task_list = self.find()
+        task_list = self.get_all()
         key_match = None
-        #TODO: Call find() again except with an arg instead of below loop?
+        #TODO: Call get_all() again except with an arg instead of below loop?
         for i, item in enumerate(task_list):
             if key == item.key:
                 self.logger.debug('matching task found; deleting task')
@@ -148,7 +148,7 @@ class TaskFileStorage(taskstorage.TaskStorage):
 
     def search(self, search_task):
         self.logger.info('attempting to search for task:\n%s' % search_task)
-        task_list = self.find()
+        task_list = self.get_all()
         task_search_list = []
         for task_item in task_list:
             if search_task.title == task_item.title\

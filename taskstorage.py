@@ -8,6 +8,9 @@ class TaskStorage():
     def find(self, key = None):
         pass
 
+    def get_all(self):
+        pass
+
     def update(self, task_item):
         pass
 

@@ -32,9 +32,9 @@ class TestTaskStorage(unittest.TestCase):
 
         self.assertEqual(self.my_task, new_task)
 
-    def test_find_all(self):
+    def test_get_all(self):
         self.my_task.key = self.storage.add(self.my_task)
-        task_list = self.storage.find()
+        task_list = self.storage.get_all()
 
         self.assertEqual(task_list[0], self.my_task)
 
