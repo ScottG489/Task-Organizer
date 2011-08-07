@@ -1,6 +1,6 @@
 import unittest
 import logging
-import cliparser
+import clicontroller
 import sys
 
 class TestUIController(unittest.TestCase):
@@ -18,9 +18,9 @@ class TestUIController(unittest.TestCase):
 
         self.title = 'tasks title'
         self.notes = 'notes text'
-        self.key = 'notes text'
+        self.key = 0
 
-        self.cli_parser = cliparser.CLIParser()
+        self.my_ui = clicontroller.CLIController()
 
         print   # So output from tests is on a new linex
 
@@ -30,11 +30,14 @@ class TestUIController(unittest.TestCase):
 
     def test_add(self):
         sys.argv = ['./ctask.py', 'add', '--title', '%s' % self.title, '--notes', '%s' % self.notes]
-        cl_args = self.cli_parser.parse_cl_args()
-        added_task = self.cli_parser.exec_ui()
-        self.assertEqual([added_task.title, added_task.notes], [cl_args.title, cl_args.notes])
+        added_task = self.my_ui.exec_ui()
+        self.assertEqual([added_task.title, added_task.notes], [self.title, self.notes])
 
     def test_find(self):
+        sys.argv = ['./ctask.py', 'find', '--key', '%i' % self.key]
+        pass
+
+    def test_find_all(self):
         pass
 
     def test_edit(self):

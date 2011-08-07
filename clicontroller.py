@@ -12,6 +12,8 @@ class CLIController(uicontroller.UIController):
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.DEBUG)
 
+        #self.command_line_arguments = None
+
     def add(self, cl_args):
         self.logger.info('attempting to add arguments as Task')
 
@@ -27,7 +29,7 @@ class CLIController(uicontroller.UIController):
 
         if not cl_args['key']:
             self.logger.info('no key specified; returning list of all tasks')
-            return self.storage.find(cl_args['key'])
+            return self.storage.get_all()
         else:
             self.logger.info('finding task with key and returning Task')
             return self.storage.find(cl_args['key'])

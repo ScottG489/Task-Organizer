@@ -4,6 +4,7 @@
 import argparse
 import uicontrollerfactory
 import logging
+from copy import copy
 
 class CLIParser():
     def __init__(self):
@@ -136,7 +137,8 @@ class CLIParser():
         return self.raw_parsed_args.func(args_dict)
 
     def santitize(self):
-        args_dict = vars(self.raw_parsed_args)
+        args_dict = copy(vars(self.raw_parsed_args))
+        del(args_dict['func'])
         for key, value in args_dict.iteritems():
             if value != None:
                 if key == 'key':
