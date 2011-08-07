@@ -13,3 +13,6 @@ class UIController():
 
     def delete(self, args):
         pass
+
+    def exec_ui(self):
+        pass

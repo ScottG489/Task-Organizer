@@ -1,6 +1,7 @@
 import task
 import taskstoragefactory
 import uicontroller
+import cliparser
 import logging
 
 class CLIController(uicontroller.UIController):
@@ -11,53 +12,57 @@ class CLIController(uicontroller.UIController):
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.DEBUG)
 
-    def add(self, cli_args):
+    def add(self, cl_args):
         self.logger.info('attempting to add arguments as Task')
-        if cli_args.title:
-            cli_args.title = ''.join(cli_args.title)
-        if cli_args.notes:
-            cli_args.notes = ''.join(cli_args.notes)
+        print cl_args
 
         self.logger.debug('creating task from arguments')
-        task_item = task.Task(title=cli_args.title, notes=cli_args.notes)
+        task_item = task.Task(title=cl_args['title'], notes=cl_args['notes'])
 
-        self.logger.info('storing task and returning its key')
-        return self.storage.add(task_item)
+        self.logger.info('storing and returning task')
+        self.storage.add(task_item)
+        return task_item
 
-    def find(self, cli_args):
+    def find(self, cl_args):
         self.logger.info('attempting to find Task(s) using arguments')
-        if cli_args.key:
-            cli_args.key = int(''.join(map(str, cli_args.key)))
 
-        if not cli_args.key:
+        if not cl_args['key']:
             self.logger.info('no key specified; returning list of all tasks')
-            return self.storage.find(cli_args.key)
+            return self.storage.find(cl_args['key'])
         else:
             self.logger.info('finding task with key and returning Task')
-            return self.storage.find(cli_args.key)
+            return self.storage.find(cl_args['key'])
 
     # TODO: Values not specified are overwritten with None. Change this behavior
                 # so that (either here or in TaskFileStorage) attributes with a
                 # value of None are ignored.
-    def edit(self, cli_args):
+    def edit(self, cl_args):
         self.logger.info('attempting to edit Task using arguments')
-        if cli_args.key:
-            cli_args.key = int(''.join(map(str, cli_args.key)))
-        if cli_args.title:
-            cli_args.title = ''.join(cli_args.title)
-        if cli_args.notes:
-            cli_args.notes = ''.join(cli_args.notes)
 
         self.logger.debug('creating task from arguments')
-        task_item = task.Task(key=cli_args.key, title=cli_args.title, notes=cli_args.notes)
+        task_item = task.Task(
+                key=cl_args['key'],
+                title=cl_args['title'],
+                notes=cl_args['notes']
+        )
 
         self.logger.info('replacing task with newly created task')
-        return self.storage.update(task_item)
+        old_task = self.storage.find(cl_args['key'])
+        self.storage.update(task_item)
 
-    def delete(self, cli_args):
+        return old_task
+
+    def delete(self, cl_args):
         self.logger.info('attempting to delete Task(s) using arguments')
-        if cli_args.key:
-            cli_args.key = int(''.join(map(str, cli_args.key)))
 
         self.logger.info('deleting task with specified key')
-        return self.storage.delete(cli_args.key)
+        # TODO: If nothing is specified for del then this returns
+                    # all tasks. Create filestorage.find_all()
+        deleted_task = self.storage.find(cl_args['key'])
+        self.storage.delete(cl_args['key'])
+
+        return deleted_task
+
+    def exec_ui(self):
+        cli_parser = cliparser.CLIParser()
+        return cli_parser.parse_cl_args()
