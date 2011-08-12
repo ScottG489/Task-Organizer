@@ -1,7 +1,6 @@
 import task
 import taskstoragefactory
 import uicontroller
-import cliparser
 import logging
 
 class CLIController(uicontroller.UIController):
@@ -10,9 +9,8 @@ class CLIController(uicontroller.UIController):
         self.storage = self.storage.getStorage()
 
         self.logger = logging.getLogger()
-        self.logger.setLevel(logging.DEBUG)
+        self.logger.setLevel(logging.WARNING)
 
-        #self.command_line_arguments = None
 
     def add(self, cl_args):
         self.logger.info('attempting to add arguments as Task')
@@ -63,7 +61,3 @@ class CLIController(uicontroller.UIController):
         self.storage.delete(cl_args['key'])
 
         return deleted_task
-
-    def exec_ui(self):
-        cli_parser = cliparser.CLIParser()
-        return cli_parser.parse_cl_args()

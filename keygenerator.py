@@ -7,7 +7,7 @@ class KeyGenerator():
         self.key_filename = key_filename
 
         self.logger = logging.getLogger()
-        self.logger.setLevel(logging.DEBUG)
+        self.logger.setLevel(logging.WARNING)
 
     #TODO:Make private?
     def read(self):

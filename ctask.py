@@ -1,27 +1,36 @@
 #!/usr/bin/python2
-import clicontroller
-import taskfilestorage
+import cliparser
 import logging
-import sys
 
 # TODO: Add piping functionality (not directly in ctask):
             # i.e. do a search for a bunch of tasks then pipe that to a delete
+    # Make symbol tables (would help standardize even debugging output)
 def main():
-    task_filename = 'task_file'
-    key_filename = 'key_file'
+#    task_filename = 'task_file'
+#    key_filename = 'key_file'
     logging.basicConfig(
-        level=logging.DEBUG,
+        level=logging.WARNING,
         format='[%(asctime)s] %(levelname)s:%(name)s:'
         '%(module)s.%(funcName)s(): %(message)s'
     )
 
-    my_ui = clicontroller.CLIController()
+    my_parser = cliparser.CLIParser()
     # TODO: How do we tell main() which subcommand was used?
 
-    print my_ui.exec_ui()
+    parsed_args = my_parser.parse_cl_args()
+
+    something = parsed_args['func'](parsed_args)
+
+    if parsed_args['sub_cmd'] == 'find' and parsed_args['key'] == None:
+        for item in something:
+            print item
+    elif something:
+        print something
+    else:
+        print 'Task not found'
     # TODO: This doesn't work because when exec_ui() is caled it calls
                 # cliparser which creates a clicontroller object itself which
-                # is separate from this one. Fix?
+                # is separate from this one. Fix? Try just calling the parser
     #print my_ui.command_line_arguments
 
     #my_storage.add(my_task)

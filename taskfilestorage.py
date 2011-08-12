@@ -10,7 +10,7 @@ class TaskFileStorage(taskstorage.TaskStorage):
         self.key_file_name = key_file_name
 
         self.logger = logging.getLogger()
-        self.logger.setLevel(logging.DEBUG)
+        self.logger.setLevel(logging.WARNING)
 
     #TODO:Make private?
     def read(self):

@@ -45,6 +45,11 @@ class CLIParser():
         arg_parser_add.set_defaults(func=self.user_interface.add)
 
         arg_parser_add.add_argument(
+            'sub_cmd',
+            action='store_const',
+            const='add'
+        )
+        arg_parser_add.add_argument(
             '--title',
             action='store',
             nargs=1,
@@ -69,6 +74,11 @@ class CLIParser():
         arg_parser_find.set_defaults(func=self.user_interface.find)
 
         arg_parser_find.add_argument(
+            'sub_cmd',
+            action='store_const',
+            const='find'
+        )
+        arg_parser_find.add_argument(
             '--key',
             action='store',
             nargs=1,
@@ -91,6 +101,11 @@ class CLIParser():
 
         arg_parser_edit.set_defaults(func=self.user_interface.edit)
 
+        arg_parser_edit.add_argument(
+            'sub_cmd',
+            action='store_const',
+            const='edit'
+        )
         arg_parser_edit.add_argument(
             '--key',
             action='store',
@@ -123,6 +138,11 @@ class CLIParser():
         arg_parser_delete.set_defaults(func=self.user_interface.delete)
 
         arg_parser_delete.add_argument(
+            'sub_cmd',
+            action='store_const',
+            const='del'
+        )
+        arg_parser_delete.add_argument(
             '--key',
             action='store',
             nargs=1,
@@ -132,13 +152,14 @@ class CLIParser():
     # TODO: Is there a way to tell the main() program what sub-commands and
                 # arguments are being called so it can handle them correctly?
     def parse_cl_args(self):
-        self.raw_parsed_args = self.arg_parser.parse_args()
-        args_dict = self.santitize()
-        return self.raw_parsed_args.func(args_dict)
+        raw_parsed_args = self.arg_parser.parse_args()
+        args_dict = self.sanitize(raw_parsed_args)
+        return args_dict
 
-    def santitize(self):
-        args_dict = copy(vars(self.raw_parsed_args))
-        del(args_dict['func'])
+    def sanitize(self, raw_parsed_args):
+        args_dict = copy(vars(raw_parsed_args))
+        # TODO: Instead of deleting it, convert it into a sub_com key?
+              # This would be a possible fix for the cli arg attribute problem
         for key, value in args_dict.iteritems():
             if value != None:
                 if key == 'key':
