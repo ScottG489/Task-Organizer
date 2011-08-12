@@ -61,7 +61,7 @@ class TestTaskStorage(unittest.TestCase):
         task_search_list = self.storage.search(search_task)
 
         self.assertTrue(self.my_task in task_search_list)
-        # Do a matching AND on all attributes given.
+        #TODO: Do a matching AND on all attributes given.
         # search(Task)
         # return task_list
 

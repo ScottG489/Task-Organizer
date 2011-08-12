@@ -3,7 +3,7 @@ import logging
 import cliparser
 import sys
 # TODO: Create a add_task() function to remove duplicated code?
-class TestUIController(unittest.TestCase):
+class TestCLIController(unittest.TestCase):
     def setUp(self):
         self.test_task_filename = 'taskfile'
         self.test_key_filename = 'keyfile'
@@ -34,7 +34,7 @@ class TestUIController(unittest.TestCase):
         # Remove handler so loggers aren't continuously created
         self.logger.removeHandler(self.stderr)
 
-    def test_add(self):
+    def add_task(self):
         sys.argv = [
                 './ctask.py',
                 'add',
@@ -46,26 +46,9 @@ class TestUIController(unittest.TestCase):
                 % self.notes
         ]
         args_dict = self.my_parser.parse_cl_args()
-        task_value = args_dict['func'](args_dict)
-        self.assertEqual(
-                [task_value.title, task_value.notes],
-                [self.title, self.notes]
-        )
+        return args_dict['func'](args_dict)
 
-    def test_find(self):
-        sys.argv = [
-                './ctask.py',
-                'add',
-                '--title',
-                '%s'
-                % self.title,
-                '--notes', 
-                '%s'
-                % self.notes
-        ]
-        args_dict = self.my_parser.parse_cl_args()
-        task_value = args_dict['func'](args_dict)
-
+    def find_task(self):
         sys.argv = ['./ctask.py', 
                 'find', 
                 '--key', 
@@ -73,23 +56,25 @@ class TestUIController(unittest.TestCase):
                 % self.key
         ]
         args_dict = self.my_parser.parse_cl_args()
-        task_value = args_dict['func'](args_dict)
+        return args_dict['func'](args_dict)
+
+
+    def test_add(self):
+        task_value = self.add_task()
+        self.assertEqual(
+                [task_value.title, task_value.notes],
+                [self.title, self.notes]
+        )
+
+    def test_find(self):
+        task_value = self.add_task()
+
+        task_value = self.find_task()
         self.assertEqual([task_value.title, task_value.notes],
                 [self.title, self.notes])
 
     def test_find_all(self):
-        sys.argv = [
-                './ctask.py',
-                'add',
-                '--title',
-                '%s'
-                % self.title,
-                '--notes', 
-                '%s'
-                % self.notes
-        ]
-        args_dict = self.my_parser.parse_cl_args()
-        args_dict['func'](args_dict)
+        self.add_task()
 
         sys.argv = [
                 './ctask.py', 
@@ -101,18 +86,7 @@ class TestUIController(unittest.TestCase):
                 [self.title, self.notes])
 
     def test_edit(self):
-        sys.argv = [
-                './ctask.py',
-                'add',
-                '--title',
-                '%s'
-                % self.title,
-                '--notes', 
-                '%s'
-                % self.notes
-        ]
-        args_dict = self.my_parser.parse_cl_args()
-        args_dict['func'](args_dict)
+        self.add_task()
 
         new_title = 'new title'
         new_notes = 'new notes'
@@ -132,31 +106,13 @@ class TestUIController(unittest.TestCase):
         args_dict = self.my_parser.parse_cl_args()
         args_dict['func'](args_dict)
 
-        sys.argv = ['./ctask.py', 
-                'find', 
-                '--key', 
-                '%i' 
-                % self.key
-        ]
-        args_dict = self.my_parser.parse_cl_args()
-        task_value = args_dict['func'](args_dict)
+        task_value = self.find_task()
 
         self.assertEqual([task_value.title, task_value.notes],
                 [new_title, new_notes])
 
     def test_delete(self):
-        sys.argv = [
-                './ctask.py',
-                'add',
-                '--title',
-                '%s'
-                % self.title,
-                '--notes', 
-                '%s'
-                % self.notes
-        ]
-        args_dict = self.my_parser.parse_cl_args()
-        args_dict['func'](args_dict)
+        self.add_task()
 
         sys.argv = ['./ctask.py', 
                 'del', 
@@ -167,14 +123,7 @@ class TestUIController(unittest.TestCase):
         args_dict = self.my_parser.parse_cl_args()
         args_dict['func'](args_dict)
 
-        sys.argv = ['./ctask.py', 
-                'find', 
-                '--key', 
-                '%i' 
-                % self.key
-        ]
-        args_dict = self.my_parser.parse_cl_args()
-        task_value = args_dict['func'](args_dict)
+        task_value = self.find_task()
 
         self.assertIsNone(task_value)
 
