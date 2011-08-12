@@ -2,9 +2,12 @@ import unittest
 import logging
 import cliparser
 import sys
-
+# TODO: Create a add_task() function to remove duplicated code?
 class TestUIController(unittest.TestCase):
     def setUp(self):
+        self.test_task_filename = 'taskfile'
+        self.test_key_filename = 'keyfile'
+
         # Initialize file storage object using test-specific file names
         self.logger = logging.getLogger()
         self.stderr = logging.StreamHandler()
@@ -21,6 +24,9 @@ class TestUIController(unittest.TestCase):
         self.key = 0
 
         self.my_parser = cliparser.CLIParser()
+
+        open(self.test_task_filename, 'w').close()
+        open(self.test_key_filename, 'w').close()
 
         print   # So output from tests is on a new linex
 
@@ -59,22 +65,118 @@ class TestUIController(unittest.TestCase):
         ]
         args_dict = self.my_parser.parse_cl_args()
         task_value = args_dict['func'](args_dict)
-        sys.argv = ['./ctask.py', 'find', '--key', '%i' % self.key]
+
+        sys.argv = ['./ctask.py', 
+                'find', 
+                '--key', 
+                '%i' 
+                % self.key
+        ]
         args_dict = self.my_parser.parse_cl_args()
         task_value = args_dict['func'](args_dict)
         self.assertEqual([task_value.title, task_value.notes],
                 [self.title, self.notes])
 
-
     def test_find_all(self):
-        pass
+        sys.argv = [
+                './ctask.py',
+                'add',
+                '--title',
+                '%s'
+                % self.title,
+                '--notes', 
+                '%s'
+                % self.notes
+        ]
+        args_dict = self.my_parser.parse_cl_args()
+        args_dict['func'](args_dict)
+
+        sys.argv = [
+                './ctask.py', 
+                'find'
+        ]
+        args_dict = self.my_parser.parse_cl_args()
+        task_value = args_dict['func'](args_dict)
+        self.assertEqual([task_value[0].title, task_value[0].notes],
+                [self.title, self.notes])
 
     def test_edit(self):
-        pass
+        sys.argv = [
+                './ctask.py',
+                'add',
+                '--title',
+                '%s'
+                % self.title,
+                '--notes', 
+                '%s'
+                % self.notes
+        ]
+        args_dict = self.my_parser.parse_cl_args()
+        args_dict['func'](args_dict)
+
+        new_title = 'new title'
+        new_notes = 'new notes'
+        sys.argv = [
+                './ctask.py',
+                'edit',
+                '--key', 
+                '%i' 
+                % self.key,
+                '--title',
+                '%s'
+                % new_title,
+                '--notes', 
+                '%s'
+                % new_notes
+        ]
+        args_dict = self.my_parser.parse_cl_args()
+        args_dict['func'](args_dict)
+
+        sys.argv = ['./ctask.py', 
+                'find', 
+                '--key', 
+                '%i' 
+                % self.key
+        ]
+        args_dict = self.my_parser.parse_cl_args()
+        task_value = args_dict['func'](args_dict)
+
+        self.assertEqual([task_value.title, task_value.notes],
+                [new_title, new_notes])
 
     def test_delete(self):
-        pass
+        sys.argv = [
+                './ctask.py',
+                'add',
+                '--title',
+                '%s'
+                % self.title,
+                '--notes', 
+                '%s'
+                % self.notes
+        ]
+        args_dict = self.my_parser.parse_cl_args()
+        args_dict['func'](args_dict)
 
+        sys.argv = ['./ctask.py', 
+                'del', 
+                '--key', 
+                '%i' 
+                % self.key
+        ]
+        args_dict = self.my_parser.parse_cl_args()
+        args_dict['func'](args_dict)
+
+        sys.argv = ['./ctask.py', 
+                'find', 
+                '--key', 
+                '%i' 
+                % self.key
+        ]
+        args_dict = self.my_parser.parse_cl_args()
+        task_value = args_dict['func'](args_dict)
+
+        self.assertIsNone(task_value)
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestUIController)
