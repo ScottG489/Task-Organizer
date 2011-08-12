@@ -25,7 +25,7 @@ class CLIController(uicontroller.UIController):
     def find(self, cl_args):
         self.logger.info('attempting to find Task(s) using arguments')
 
-        if not cl_args['key']:
+        if cl_args['key'] == None:
             self.logger.info('no key specified; returning list of all tasks')
             return self.storage.get_all()
         else:

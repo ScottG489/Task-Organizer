@@ -39,15 +39,32 @@ class TestUIController(unittest.TestCase):
                 '%s'
                 % self.notes
         ]
-        added_task = self.my_parser.parse_cl_args()
+        args_dict = self.my_parser.parse_cl_args()
+        task_value = args_dict['func'](args_dict)
         self.assertEqual(
-                [added_task['title'], added_task['notes']],
+                [task_value.title, task_value.notes],
                 [self.title, self.notes]
         )
 
     def test_find(self):
-        #sys.argv = ['./ctask.py', 'find', '--key', '%i' % self.key]
-        pass
+        sys.argv = [
+                './ctask.py',
+                'add',
+                '--title',
+                '%s'
+                % self.title,
+                '--notes', 
+                '%s'
+                % self.notes
+        ]
+        args_dict = self.my_parser.parse_cl_args()
+        task_value = args_dict['func'](args_dict)
+        sys.argv = ['./ctask.py', 'find', '--key', '%i' % self.key]
+        args_dict = self.my_parser.parse_cl_args()
+        task_value = args_dict['func'](args_dict)
+        self.assertEqual([task_value.title, task_value.notes],
+                [self.title, self.notes])
+
 
     def test_find_all(self):
         pass
