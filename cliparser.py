@@ -1,6 +1,4 @@
-##TODO:
-#    Make it so the 'find' subparser requires at least one argument and displays
-#        error otherwise.
+##TODO: Create parent parsers to reduce code duplication.
 import argparse
 import uicontrollerfactory
 import logging
@@ -115,6 +113,7 @@ class CLIParser():
             action='store',
             nargs=1,
             type=int,
+            required=True,
             help='the key of the task'
         )
         arg_parser_edit.add_argument(
@@ -154,6 +153,7 @@ class CLIParser():
             action='store',
             nargs=1,
             type=int,
+            required=True,
             help='the key of the task'
         )
     # TODO: Is there a way to tell the main() program what sub-commands and

@@ -39,15 +39,21 @@ class CLIController(uicontroller.UIController):
         self.logger.info('attempting to edit Task using arguments')
 
         self.logger.debug('creating task from arguments')
-        task_item = task.Task(
+        new_task = task.Task(
                 key=cl_args['key'],
                 title=cl_args['title'],
                 notes=cl_args['notes']
         )
 
-        self.logger.info('replacing task with newly created task')
         old_task = self.storage.find(cl_args['key'])
-        self.storage.update(task_item)
+        if old_task != None:
+            if new_task.title == None:
+                new_task.title = old_task.title
+            if new_task.notes == None:
+                new_task.notes = old_task.notes
+
+        self.logger.info('replacing task with newly created task')
+        self.storage.update(new_task)
 
         return old_task
 

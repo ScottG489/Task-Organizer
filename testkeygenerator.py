@@ -16,7 +16,7 @@ class TestKeyGenerator(unittest.TestCase):
 
         self.logger = logging.getLogger()
         self.stderr = logging.StreamHandler()
-        self.stderr.setLevel(logging.DEBUG)
+        self.stderr.setLevel(logging.WARNING)
         self.formatter = logging.Formatter(
                 '[%(asctime)s] %(levelname)s:%(name)s:'
                 '%(module)s.%(funcName)s(): %(message)s'

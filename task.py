@@ -6,12 +6,12 @@ class Task():
             self.key = kwargs['key']
         except:
             self.key = None
-    
+
         try:
             self.title = kwargs['title']
         except:
             self.title = None
-    
+
         try:
             self.notes = kwargs['notes']
         except:
@@ -19,6 +19,7 @@ class Task():
 
 #        self.priority = priority
 #        self.tags = tags
+
 
     def __str__(self):
         return dedent('''\
@@ -29,7 +30,6 @@ class Task():
                 'title': self.title,
                 'notes': self.notes
         }
-
 
     def __lt__(self, other):
         if self.key < other.key:
@@ -44,6 +44,8 @@ class Task():
         return False
 
     def __eq__(self, other):
+        if not isinstance(other, Task):
+            return False
         if self.key == other.key\
             and self.title == other.title\
             and self.notes == other.notes:
@@ -52,6 +54,8 @@ class Task():
         return False
 
     def __ne__(self, other):
+        if not isinstance(other, Task):
+            return True
         if self.key != other.key\
                 and self.title != other.title\
                 and self.notes != other.notes:
