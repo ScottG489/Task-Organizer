@@ -51,6 +51,7 @@ class CLIParser():
         )
         arg_parser_add.add_argument(
             '--title',
+            '-t',
             action='store',
             nargs=1,
             type=str,
@@ -58,6 +59,7 @@ class CLIParser():
         )
         arg_parser_add.add_argument(
             '--notes',
+            '-n',
             action='store',
             nargs=1,
             type=str,
@@ -80,6 +82,7 @@ class CLIParser():
         )
         arg_parser_find.add_argument(
             '--key',
+            '-k',
             action='store',
             nargs=1,
             type=int,
@@ -108,6 +111,7 @@ class CLIParser():
         )
         arg_parser_edit.add_argument(
             '--key',
+            '-k',
             action='store',
             nargs=1,
             type=int,
@@ -115,6 +119,7 @@ class CLIParser():
         )
         arg_parser_edit.add_argument(
             '--title',
+            '-t',
             action='store',
             nargs=1,
             type=str,
@@ -122,6 +127,7 @@ class CLIParser():
         )
         arg_parser_edit.add_argument(
             '--notes',
+            '-n',
             action='store',
             nargs=1,
             type=str,
@@ -144,6 +150,7 @@ class CLIParser():
         )
         arg_parser_delete.add_argument(
             '--key',
+            '-k',
             action='store',
             nargs=1,
             type=int,

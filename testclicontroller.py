@@ -2,7 +2,6 @@ import unittest
 import logging
 import cliparser
 import sys
-# TODO: Create a add_task() function to remove duplicated code?
 class TestCLIController(unittest.TestCase):
     def setUp(self):
         self.test_task_filename = 'taskfile'
@@ -28,7 +27,7 @@ class TestCLIController(unittest.TestCase):
         open(self.test_task_filename, 'w').close()
         open(self.test_key_filename, 'w').close()
 
-        print   # So output from tests is on a new linex
+        #print   # So output from tests is on a new linex
 
     def tearDown(self):
         # Remove handler so loggers aren't continuously created
@@ -128,5 +127,6 @@ class TestCLIController(unittest.TestCase):
         self.assertIsNone(task_value)
 
 if __name__ == '__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestUIController)
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    unittest.main()
+#    suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIController)
+#    unittest.TextTestRunner(verbosity=2).run(suite)

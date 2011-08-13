@@ -8,7 +8,7 @@ class CLIController(uicontroller.UIController):
         self.storage = taskstoragefactory.TaskStorageFactory()
         self.storage = self.storage.getStorage()
 
-        self.logger = logging.getLogger()
+        self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.WARNING)
 
 

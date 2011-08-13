@@ -5,11 +5,11 @@ import logging
 import taskstorage
 
 class TaskFileStorage(taskstorage.TaskStorage):
-    def __init__(self, task_filename='taskfile', key_file_name='keyfile'):
+    def __init__(self, task_filename='taskfile', key_filename='keyfile'):
         self.task_file_name = task_filename
-        self.key_file_name = key_file_name
+        self.key_filename = key_filename
 
-        self.logger = logging.getLogger()
+        self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.WARNING)
 
     #TODO:Make private?
@@ -60,7 +60,7 @@ class TaskFileStorage(taskstorage.TaskStorage):
             self.logger.exception('failed to access file for reading')
             raise
 
-        key_gen = keygenerator.KeyGenerator(self.key_file_name)
+        key_gen = keygenerator.KeyGenerator(self.key_filename)
         task_item.key = key_gen.get()
 
         task_list.append(task_item)

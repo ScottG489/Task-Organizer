@@ -26,8 +26,8 @@ class TestTaskFileStorage(testtaskstorage.TestTaskStorage):
         self.stderr = logging.StreamHandler()
         self.stderr.setLevel(logging.WARNING)
         self.formatter = logging.Formatter(
-                '[%(asctime)s] %(levelname)s:%(name)s:'
-                '%(module)s.%(funcName)s(): %(message)s'
+                '[%(asctime)s] %(levelname)s:%(name)s.'
+                '%(funcName)s(): %(message)s'
         )
         self.stderr.setFormatter(self.formatter)
         self.logger.addHandler(self.stderr)
@@ -36,7 +36,7 @@ class TestTaskFileStorage(testtaskstorage.TestTaskStorage):
         open(self.test_task_filename, 'w').close()
         open(self.test_key_filename, 'w').close()
 
-        print   # So output from tests is on a new linex
+        #print   # So output from tests is on a new linex
 
     def tearDown(self):
         # Delete test files
@@ -64,5 +64,6 @@ class TestTaskFileStorage(testtaskstorage.TestTaskStorage):
 
 
 if __name__ == '__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestTaskFileStorage)
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    unittest.main()
+#    suite = unittest.TestLoader().loadTestsFromTestCase(TestTaskFileStorage)
+#    unittest.TextTestRunner(verbosity=2).run(suite)

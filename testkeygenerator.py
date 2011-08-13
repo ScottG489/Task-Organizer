@@ -16,7 +16,7 @@ class TestKeyGenerator(unittest.TestCase):
 
         self.logger = logging.getLogger()
         self.stderr = logging.StreamHandler()
-        self.stderr.setLevel(logging.WARNING)
+        self.stderr.setLevel(logging.DEBUG)
         self.formatter = logging.Formatter(
                 '[%(asctime)s] %(levelname)s:%(name)s:'
                 '%(module)s.%(funcName)s(): %(message)s'
@@ -27,7 +27,7 @@ class TestKeyGenerator(unittest.TestCase):
         # Clear/Create test files
         open(self.test_key_file_name, 'w').close()
         
-        print   # So output from tests is on a new linex
+#        print   # So output from tests is on a new linex
 
     def tearDown(self):
         # Delete test files
@@ -68,5 +68,6 @@ class TestKeyGenerator(unittest.TestCase):
         self.assertEqual(key, key2 - 1)
 
 if __name__ == '__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestKeyGenerator)
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    unittest.main()
+#    suite = unittest.TestLoader().loadTestsFromTestCase(TestKeyGenerator)
+#    unittest.TextTestRunner(verbosity=2).run(suite)
