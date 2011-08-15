@@ -6,8 +6,7 @@ import task
 class TestTaskStorage(unittest.TestCase):
     def setUp(self):
         self.my_task = None
-        
-        # Initialize file storage object using test-specific file names
+
         self.storage = None
 
     def tearDown(self):
@@ -24,7 +23,7 @@ class TestTaskStorage(unittest.TestCase):
         new_task = self.storage.find(self.my_task.key)
         new_task.key = self.storage.add(new_task)
 
-        self.assertEqual(self.my_task.key, new_task.key - 1)
+        self.assertNotEqual(self.my_task.key, new_task.key)
 
     def test_find(self):
         self.my_task.key = self.storage.add(self.my_task)
