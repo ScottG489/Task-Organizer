@@ -6,7 +6,7 @@ import logging
 class CLIController(uicontroller.UIController):
     def __init__(self):
         self.storage = taskstoragefactory.TaskStorageFactory()
-        self.storage = self.storage.getStorage()
+        self.storage = self.storage.getStorage('file')
 
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.WARNING)

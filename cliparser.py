@@ -9,7 +9,7 @@ class CLIParser():
         self.user_interface = uicontrollerfactory.UIControllerFactory()
         self.user_interface = self.user_interface.getUI()
 
-        self.logger = logging.getLogger()
+        self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.WARNING)
 
         self.arg_parser = argparse.ArgumentParser(

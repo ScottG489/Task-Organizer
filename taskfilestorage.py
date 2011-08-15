@@ -6,7 +6,7 @@ import taskstorage
 
 class TaskFileStorage(taskstorage.TaskStorage):
     def __init__(self, task_filename='taskfile', key_filename='keyfile'):
-        self.task_file_name = task_filename
+        self.task_filename = task_filename
         self.key_filename = key_filename
 
         self.logger = logging.getLogger(__name__)
@@ -18,15 +18,15 @@ class TaskFileStorage(taskstorage.TaskStorage):
         task_list = []
         try:
             self.logger.debug("try: open file for reading: %s"
-                    % self.task_file_name)
-            task_file = open(self.task_file_name, 'r')
+                    % self.task_filename)
+            task_file = open(self.task_filename, 'r')
 
             self.logger.debug("try: load pickled task list")
             task_list = pickle.load(task_file)
             task_file.close()
 
         except:
-            if os.stat(self.task_file_name).st_size == 0:
+            if os.stat(self.task_filename).st_size == 0:
                 self.logger.info('success! file is empty; '
                         'returning empty task list')
                 return task_list
@@ -41,8 +41,8 @@ class TaskFileStorage(taskstorage.TaskStorage):
         self.logger.info('attempting to write task list')
         try:
             self.logger.debug('try: open file for writing: %s'
-                    % self.task_file_name)
-            task_file = open(self.task_file_name, 'w')
+                    % self.task_filename)
+            task_file = open(self.task_filename, 'w')
 
             self.logger.debug("try: dump pickled task list to file")
             pickle.dump(task_list, task_file, 0)
