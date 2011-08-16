@@ -3,6 +3,7 @@ import task
 
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
+#       Delete added tasks in tearDown()
 class TestTaskStorage(unittest.TestCase):
     def setUp(self):
         self.my_task = None

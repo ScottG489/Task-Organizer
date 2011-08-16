@@ -13,7 +13,7 @@ def main():
 #    key_filename = 'key_file'
 
     logging.basicConfig(
-        level=logging.DEBUG,
+        level=logging.WARNING,
         format='[%(asctime)s] %(levelname)s:%(name)s:'
         '%(module)s.%(funcName)s(): %(message)s'
     )
@@ -26,10 +26,11 @@ def main():
     something = parsed_args['func'](parsed_args)
 
     if parsed_args['sub_cmd'] == 'find':
-        print something
         if parsed_args['key'] == None:
             for item in something:
                 print item
+        else:
+            print something
     elif something:
         pass
         #print something

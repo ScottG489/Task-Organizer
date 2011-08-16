@@ -2,12 +2,9 @@ import unittest
 import logging
 import cliparser
 import sys
-# TODO: Move all of this to a testuicontroller and make it UI generic
-class TestCLIController(unittest.TestCase):
-    def setUp(self):
-        self.test_task_filename = 'taskfile'
-        self.test_key_filename = 'keyfile'
 
+class TestUIController(unittest.TestCase):
+    def setUp(self):
         # Initialize file storage object using test-specific file names
         self.logger = logging.getLogger()
         self.stderr = logging.StreamHandler()
@@ -23,13 +20,9 @@ class TestCLIController(unittest.TestCase):
         self.notes = 'notes text'
         # TODO: Don't set key here. Needs to be set by doing a find()
                 # because 0 isn't storage-generic
-        
         self.key = 0
-        self.add_task()
-        self.my_parser = cliparser.CLIParser()
 
-        open(self.test_task_filename, 'w').close()
-        open(self.test_key_filename, 'w').close()
+        self.my_parser = cliparser.CLIParser()
 
         #print   # So output from tests is on a new linex
 

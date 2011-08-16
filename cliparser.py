@@ -83,7 +83,6 @@ class CLIParser():
             '-k',
             action='store',
             nargs=1,
-            type=int,
             help='the key of the task')
 #        arg_parser_find.add_argument(
 #            '--title',
@@ -112,7 +111,6 @@ class CLIParser():
             '-k',
             action='store',
             nargs=1,
-            type=int,
             required=True,
             help='the key of the task'
         )
@@ -152,7 +150,6 @@ class CLIParser():
             '-k',
             action='store',
             nargs=1,
-            type=int,
             required=True,
             help='the key of the task'
         )
@@ -170,7 +167,7 @@ class CLIParser():
         for key, value in args_dict.iteritems():
             if value != None:
                 if key == 'key':
-                    args_dict[key] = int(''.join(map(str, value)))
+                    args_dict[key] = ''.join(map(str, value))
                 elif key == 'title' or key == 'notes':
                     args_dict[key] = ''.join(value)
 
