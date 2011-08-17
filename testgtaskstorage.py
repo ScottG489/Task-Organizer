@@ -2,11 +2,11 @@ import unittest
 import gtaskstorage
 import task
 import logging
-import testtaskstorage
+import teststorage
 
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
-class TestGTaskStorage(testtaskstorage.TestTaskStorage):
+class TestGTaskStorage(teststorage.TestStorage):
     def setUp(self):
         # Initialize task object with attributes
         self.my_task = task.Task(title='title', notes='note')
@@ -27,12 +27,16 @@ class TestGTaskStorage(testtaskstorage.TestTaskStorage):
         #print   # So output from tests is on a new linex
 
     def tearDown(self):
+        self.storage.delete(self.my_task.key)
+
         # Clear the my_task Task object
         self.my_task = None
 
         # Remove handler so loggers aren't continuously created
         self.logger.removeHandler(self.stderr)
 
+    def search(self):
+        pass
 
 if __name__ == '__main__':
     unittest.main()

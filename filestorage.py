@@ -2,9 +2,9 @@ import pickle
 import keygenerator
 import os
 import logging
-import taskstorage
+import storage
 
-class TaskFileStorage(taskstorage.TaskStorage):
+class FileStorage(storage.Storage):
     def __init__(self, task_filename='taskfile', key_filename='keyfile'):
         self.task_filename = task_filename
         self.key_filename = key_filename

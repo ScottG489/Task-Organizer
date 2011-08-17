@@ -1,13 +1,13 @@
 import unittest
-import taskfilestorage
+import teststorage
+import filestorage
 import task
 import os
 import logging
-import testtaskstorage
 
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
-class TestTaskFileStorage(testtaskstorage.TestTaskStorage):
+class TestTaskFileStorage(teststorage.TestStorage):
     def setUp(self):
         # Initialize task object with attributes
         self.my_task = task.Task(title='title', notes='note')
@@ -17,7 +17,7 @@ class TestTaskFileStorage(testtaskstorage.TestTaskStorage):
         self.test_key_filename = 'testkeyfile'
 
         # Initialize file storage object using test-specific file names
-        self.storage = taskfilestorage.TaskFileStorage(
+        self.storage = filestorage.FileStorage(
             self.test_task_filename,
             self.test_key_filename
         )
