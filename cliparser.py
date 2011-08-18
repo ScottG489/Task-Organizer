@@ -4,6 +4,8 @@ import uicontrollerfactory
 import logging
 from copy import copy
 
+# TODO: Add logging
+    # Figure out how to make this more testable then create tests.
 class CLIParser():
     def __init__(self):
         self.user_interface = uicontrollerfactory.UIControllerFactory()
@@ -11,8 +13,6 @@ class CLIParser():
                 'cli',
                 'file')
 
-        self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(logging.WARNING)
 
         self.arg_parser = argparse.ArgumentParser(
             description='Task organizer.',
