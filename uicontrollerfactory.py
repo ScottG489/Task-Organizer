@@ -7,8 +7,8 @@ class UIControllerFactory():
     def getUI(self,
             ui_type,
             storage_type,
-            task_filename=None,
-            key_filename=None):
+            task_filename='taskfile',
+            key_filename='keyfile'):
         if ui_type == 'cli':
             return clicontroller.CLIController(
                     storage_type,

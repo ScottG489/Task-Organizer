@@ -4,7 +4,7 @@ import uicontroller
 import logging
 
 class CLIController(uicontroller.UIController):
-    def __init__(self, storage_type, task_filename=None, key_filename=None):
+    def __init__(self, storage_type, task_filename='taskfile', key_filename='keyfile'):
         self.storage = storagefactory.StorageFactory()
         self.storage = self.storage.getStorage(
                 storage_type,

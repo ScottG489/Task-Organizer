@@ -5,9 +5,15 @@ import logging
 import storage
 
 class FileStorage(storage.Storage):
+    # TODO: Make this and calling funcs take *args instead of using defaults
     def __init__(self, task_filename='taskfile', key_filename='keyfile'):
         self.task_filename = task_filename
         self.key_filename = key_filename
+
+        if not os.path.exists(task_filename):
+            open(self.task_filename, 'w').close()
+        if not os.path.exists(key_filename):
+            open(self.key_filename, 'w').close()
 
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.WARNING)
