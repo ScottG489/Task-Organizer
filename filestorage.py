@@ -108,7 +108,7 @@ class FileStorage(storage.Storage):
         return task_list
 
     def update(self, task_item):
-        logging.info('attempting to update task: %s' % task_item)
+        logging.info('attempting to update task:\n%s' % task_item)
         task_list = self.get_all()
         key_match = None
         #TODO: Call get_all() again except with an arg instead of below loop?

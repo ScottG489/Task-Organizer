@@ -4,13 +4,15 @@ import uicontroller
 import logging
 
 class CLIController(uicontroller.UIController):
-    def __init__(self, storage_type, task_filename='taskfile', key_filename='keyfile'):
+    def __init__(self,
+            storage_type, 
+            task_filename='taskfile', 
+            key_filename='keyfile'):
         self.storage = storagefactory.StorageFactory()
         self.storage = self.storage.getStorage(
                 storage_type,
                 task_filename=task_filename,
                 key_filename=key_filename)
-
 
 
     def add(self, action_info):
@@ -35,9 +37,6 @@ class CLIController(uicontroller.UIController):
             logging.info('finding task with key and returning Task')
             return self.storage.find(action_info['key'])
 
-    # TODO: Values not specified are overwritten with None. Change this behavior
-                # so that (either here or in TaskFileStorage) attributes with a
-                # value of None are ignored.
     def edit(self, action_info):
         logging.info('attempting to edit Task using arguments')
 
@@ -48,6 +47,7 @@ class CLIController(uicontroller.UIController):
                 notes=action_info['notes']
         )
 
+        logging.debug('using old task attributes if new ones are\'t given')
         old_task = self.storage.find(action_info['key'])
         if old_task != None:
             if new_task.title == None:
@@ -63,8 +63,8 @@ class CLIController(uicontroller.UIController):
     def delete(self, action_info):
         logging.info('attempting to delete Task(s) using arguments')
 
-        logging.info('deleting task with specified key')
         deleted_task = self.storage.find(action_info['key'])
         self.storage.delete(action_info['key'])
 
+        logging.info('success! task deleted')
         return deleted_task

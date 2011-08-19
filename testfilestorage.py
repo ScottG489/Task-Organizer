@@ -22,15 +22,11 @@ class TestTaskFileStorage(teststorage.TestStorage):
             self.test_key_filename
         )
 
-        self.logger = logging.getLogger()
-        self.stderr = logging.StreamHandler()
-        self.stderr.setLevel(logging.WARNING)
-        self.formatter = logging.Formatter(
-                '[%(asctime)s] %(levelname)s:%(name)s.'
-                '%(funcName)s(): %(message)s'
+        logging.basicConfig(
+            level=logging.WARNING,
+            format='[%(asctime)s] %(levelname)s:%(name)s:'
+            '%(module)s.%(funcName)s(): %(message)s'
         )
-        self.stderr.setFormatter(self.formatter)
-        self.logger.addHandler(self.stderr)
 
         # Clear/Create test files
         open(self.test_task_filename, 'w').close()
@@ -45,9 +41,6 @@ class TestTaskFileStorage(teststorage.TestStorage):
 
         # Clear the my_task Task object
         self.my_task = None
-
-        # Remove handler so loggers aren't continuously created
-        self.logger.removeHandler(self.stderr)
 
 
     def test_read(self):

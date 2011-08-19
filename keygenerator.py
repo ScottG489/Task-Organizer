@@ -45,13 +45,6 @@ class KeyGenerator():
 
         key_file.close()
 
-    def validate(self, key):
-        logging.info('attempting to validate key')
-        if key < 0:
-            raise TypeError('invalid or corrupt key file')
-        logging.debug('success! key validated')
-        return True
-
     def get(self):
         logging.info("attempting to retrieve key")
         try:

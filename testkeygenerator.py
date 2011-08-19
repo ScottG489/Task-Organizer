@@ -14,15 +14,11 @@ class TestKeyGenerator(unittest.TestCase):
             self.test_key_file_name
         )
 
-        self.logger = logging.getLogger()
-        self.stderr = logging.StreamHandler()
-        self.stderr.setLevel(logging.WARNING)
-        self.formatter = logging.Formatter(
-                '[%(asctime)s] %(levelname)s:%(name)s:'
-                '%(module)s.%(funcName)s(): %(message)s'
+        logging.basicConfig(
+            level=logging.WARNING,
+            format='[%(asctime)s] %(levelname)s:%(name)s:'
+            '%(module)s.%(funcName)s(): %(message)s'
         )
-        self.stderr.setFormatter(self.formatter)
-        self.logger.addHandler(self.stderr)
 
         # Clear/Create test files
         open(self.test_key_file_name, 'w').close()
@@ -33,8 +29,6 @@ class TestKeyGenerator(unittest.TestCase):
         # Delete test files
         os.remove(self.test_key_file_name)
 
-        # Remove handler so loggers aren't continuously created
-        self.logger.removeHandler(self.stderr)
 
     def test_read(self):
         key = self.key_gen.get()
@@ -49,11 +43,6 @@ class TestKeyGenerator(unittest.TestCase):
         key2 = self.key_gen.read()
 
         self.assertEqual(key, key2)
-
-#    def test_validate(self):
-#        key = self.key_gen.get()
-#
-#        self.assertTrue(self.key_gen.validate(key))
 
     def test_get(self):
         key = self.key_gen.get()
