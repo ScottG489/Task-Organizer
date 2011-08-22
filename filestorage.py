@@ -56,6 +56,14 @@ class FileStorage(storage.Storage):
 
 
     def add(self, task_item):
+        """Add a Task to the file storage.
+
+        Arguments:
+        task_item -- the Task object to be added to storage
+
+        The Task object is given a key and appended to the list of Tasks in the file.
+
+        """
         logging.info('attempting to add task item:\n%s' % task_item)
         try:
             task_list = self.read()
@@ -77,6 +85,15 @@ class FileStorage(storage.Storage):
         return task_item.key
 
     def find(self, key = None):
+        """Return a Task given it's key.
+
+        Arguments:
+        key -- the key for the desired Task object
+
+        Using the given key, iterate through the Task list and return the Task
+        with matching key. If none is found return None.
+
+        """
         logging.info('attempting to find item with key: %s' % key)
         try:
             task_list = self.read()
@@ -96,6 +113,7 @@ class FileStorage(storage.Storage):
         return task_item
 
     def get_all(self):
+        """Return a list of all Task's"""
         logging.info('attempting to get all tasks')
         try:
             task_list = self.read()
@@ -107,6 +125,16 @@ class FileStorage(storage.Storage):
         return task_list
 
     def update(self, task_item):
+        """Update an existing Task in the file storage.
+
+        Arguments:
+        task_item -- the Task object to be updated
+
+        Using the given Task's key, iterate through the Task list to find a
+        matching key and replace the matching Task with the given Task. If
+        none is found, update nothing and return None.
+
+        """
         logging.info('attempting to update task:\n%s' % task_item)
         task_list = self.get_all()
         key_match = None
@@ -129,6 +157,15 @@ class FileStorage(storage.Storage):
         return key_match
 
     def delete(self, key):
+        """Delete an existing Task in the file storage.
+
+        Arguments:
+        key -- the key for the desired Task object to delete
+
+        Using the given key, iterate through the Task list and delete the 
+        matching Task. If none is found, nothing is deleted and return None.
+
+        """
         logging.info('attempting to delete task: %s' % key)
         task_list = self.get_all()
         key_match = None
@@ -150,6 +187,16 @@ class FileStorage(storage.Storage):
         return key_match
 
     def search(self, search_task):
+        """Return a Task given a search Task
+
+        Arguments:
+        search_task -- the Task to be used for searching
+
+        Using the given search Task, iterate through the Task list and append
+        matching Tasks to a Task list then return this list. If none matches,
+        return None.
+
+        """
         logging.info('attempting to search for task:\n%s' % search_task)
         task_list = self.get_all()
         task_search_list = []
@@ -161,6 +208,7 @@ class FileStorage(storage.Storage):
 
         if not task_search_list:
             logging.info('no matches found')
+            task_search_list = None
         else:
             logging.info('success! returning matching tasks')
         return task_search_list
