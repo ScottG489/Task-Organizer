@@ -20,6 +20,7 @@ class TestStorage(unittest.TestCase):
         new_task.key = self.storage.add(new_task)
 
         self.assertNotEqual(self.my_task.key, new_task.key)
+        self.storage.delete(new_task.key)
 
     def test_find(self):
         self.my_task.key = self.storage.add(self.my_task)

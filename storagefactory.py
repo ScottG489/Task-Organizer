@@ -8,9 +8,8 @@ class StorageFactory():
     def getStorage(
             self, 
             storage_type, 
-            task_filename='taskfile', 
-            key_filename='keyfile'):
+            **kwargs):
         if storage_type == 'file':
-            return filestorage.FileStorage(task_filename, key_filename)
+            return filestorage.FileStorage(**kwargs)
         if storage_type == 'gtasks':
             return gtaskstorage.GTaskStorage()

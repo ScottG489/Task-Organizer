@@ -5,7 +5,6 @@ import logging
 import storage
 
 class FileStorage(storage.Storage):
-    # TODO: Make this and calling funcs take *args instead of using defaults
     def __init__(self, task_filename='taskfile', key_filename='keyfile'):
         self.task_filename = task_filename
         self.key_filename = key_filename

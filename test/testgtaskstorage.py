@@ -29,9 +29,6 @@ class TestGTaskStorage(teststorage.TestStorage):
         self.my_task = None
 
 
-    def search(self):
-        pass
-
 if __name__ == '__main__':
     unittest.main()
 #    suite = unittest.TestLoader().loadTestsFromTestCase(TestTaskFileStorage)

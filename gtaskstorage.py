@@ -13,6 +13,7 @@ import logging
 FLAGS = gflags.FLAGS
 
 # XXX: Add try/except blocks around GTask API calls
+#      Should I be including a key visibly in the program this way?
 class GTaskStorage(storage.Storage):
     def __init__(self):
         FLOW = OAuth2WebServerFlow(
@@ -124,3 +125,6 @@ class GTaskStorage(storage.Storage):
         self.service.tasks().delete(tasklist='@default', task=key).execute()
         logging.info('success! returning deleted task\'s key')
         return key
+
+    def search(self, search_task):
+        pass

@@ -25,6 +25,7 @@ class TestUIController(unittest.TestCase):
 
     def test_add(self):
         added_task = self.add_task()
+        self.key = added_task.key
 
         self.assertEqual(
                 [added_task.title, added_task.notes],
