@@ -31,18 +31,6 @@ class Task():
                 'notes': self.notes
         }
 
-    def __lt__(self, other):
-        if self.key < other.key:
-            return True
-
-        return False
-
-    def __le__(self, other):
-        if self.key <= other.key:
-            return True
-
-        return False
-
     def __eq__(self, other):
         if not isinstance(other, Task):
             return False
@@ -59,18 +47,6 @@ class Task():
         if self.key != other.key\
                 and self.title != other.title\
                 and self.notes != other.notes:
-            return True
-
-        return False
-
-    def __gt__(self, other):
-        if self.key > other.key:
-            return True
-
-        return False
-
-    def __ge__(self, other):
-        if self.key >= other.key:
             return True
 
         return False

@@ -46,6 +46,7 @@ class KeyGenerator():
         key_file.close()
 
     def get(self):
+        """Return a unique Task key."""
         logging.info("attempting to retrieve key")
         try:
             key = self.read()

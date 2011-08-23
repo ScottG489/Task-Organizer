@@ -1,12 +1,6 @@
 import unittest
 
 class TestUIController(unittest.TestCase):
-    def setUp(self):
-        pass
-
-    def tearDown(self):
-        pass
-
     def add_task(self):
         action_dict = {
                 'sub_cmd': 'add',

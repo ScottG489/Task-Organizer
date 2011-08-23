@@ -5,15 +5,6 @@ import task
 #           pass by reference
 #       Delete added tasks in tearDown()
 class TestStorage(unittest.TestCase):
-    def setUp(self):
-        self.my_task = None
-
-        self.storage = None
-
-    def tearDown(self):
-        pass
-
-
     def test_add(self):
         self.my_task.key = self.storage.add(self.my_task)
         new_task = self.storage.find(self.my_task.key)
@@ -43,6 +34,17 @@ class TestStorage(unittest.TestCase):
 
         self.assertEqual(self.my_task, new_task)
 
+    def test_update_no_match(self):
+        self.my_task.key = self.storage.add(self.my_task)
+
+        self.storage.delete(self.my_task.key)
+
+        self.my_task.title = 'foo'
+
+        self.key = self.storage.update(self.my_task)
+
+        self.assertIsNone(self.key)
+
     def test_delete(self):
         self.my_task.key = self.storage.add(self.my_task)
 
@@ -50,6 +52,15 @@ class TestStorage(unittest.TestCase):
         new_task = self.storage.find(key)
 
         self.assertIsNone(new_task)
+
+    def test_delete_no_match(self):
+        self.my_task.key = self.storage.add(self.my_task)
+
+        self.storage.delete(self.my_task.key)
+
+        self.key = self.storage.delete(self.my_task.key)
+
+        self.assertIsNone(self.key)
 
     def test_search(self):
         self.storage.add(self.my_task)

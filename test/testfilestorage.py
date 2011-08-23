@@ -49,6 +49,14 @@ class TestTaskFileStorage(teststorage.TestStorage):
 
         self.assertEqual(self.my_task, task_list[0])
 
+# TODO: Not sure why this doesn't work.
+#    def test_read_fail(self):
+#        file_handler = open(self.test_task_filename, 'w')
+#        file_handler.write('Mock corrupt data')
+#        file_handler.close()
+#
+#        self.assertRaises(KeyError, self.storage.read())
+
     def test_write(self):
         self.storage.write([self.my_task])
         task_list = self.storage.read()

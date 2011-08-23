@@ -102,6 +102,14 @@ class GTaskStorage(storage.Storage):
                 task=task_item.key
         ).execute()
 
+        try:
+            logging.debug('try: check if task is marked as deleted')
+            if updating_task['deleted'] == True:
+                logging.debug('task marked as deleted; returning None')
+                return None
+        except:
+            pass
+
         logging.debug('updating gtask attributes using supplied task')
         updating_task['title'] = task_item.title
         try:
@@ -122,6 +130,19 @@ class GTaskStorage(storage.Storage):
 
     def delete(self, key):
         logging.info('attempting to delete task: %s' % key)
+        deleting_task = self.service.tasks().get(
+                tasklist='@default',
+                task=key
+        ).execute()
+
+        try:
+            logging.debug('try: check if task is marked as deleted')
+            if deleting_task['deleted'] == True:
+                logging.debug('task marked as deleted; returning None')
+                return None
+        except:
+            pass
+
         self.service.tasks().delete(tasklist='@default', task=key).execute()
         logging.info('success! returning deleted task\'s key')
         return key
