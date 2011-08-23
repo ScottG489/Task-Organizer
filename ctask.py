@@ -12,7 +12,7 @@ def main():
 #    key_filename = 'key_file'
 
     logging.basicConfig(
-        level=logging.WARNING,
+        level=logging.DEBUG,
         format='[%(asctime)s] %(levelname)s:%(name)s:'
         '%(module)s.%(funcName)s(): %(message)s'
     )

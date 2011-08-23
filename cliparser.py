@@ -9,7 +9,7 @@ class CLIParser():
         self.user_interface = uicontrollerfactory.UIControllerFactory()
         self.user_interface = self.user_interface.get(
                 'cli',
-                'gtasks')
+                'file')
 
         self.arg_parser = argparse.ArgumentParser(
             description='Task organizer.',

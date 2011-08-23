@@ -10,8 +10,12 @@ class FileStorage(storage.Storage):
         self.key_filename = key_filename
 
         if not os.path.exists(task_filename):
+            logging.info('creating task storage file as it doesn\'t exist: %s'
+                    % task_filename)
             open(self.task_filename, 'w').close()
         if not os.path.exists(key_filename):
+            logging.info('creating key storage file as it doesn\'t exist: %s'
+                    % key_filename)
             open(self.key_filename, 'w').close()
 
 
@@ -29,6 +33,7 @@ class FileStorage(storage.Storage):
             task_file.close()
 
         except:
+            logging.debug('unable to open file for reading')
             if os.stat(self.task_filename).st_size == 0:
                 logging.info('success! file is empty; '
                         'returning empty task list')

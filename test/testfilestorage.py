@@ -23,7 +23,7 @@ class TestTaskFileStorage(teststorage.TestStorage):
         )
 
         logging.basicConfig(
-            level=logging.WARNING,
+            level=logging.DEBUG,
             format='[%(asctime)s] %(levelname)s:%(name)s:'
             '%(module)s.%(funcName)s(): %(message)s'
         )
@@ -49,19 +49,33 @@ class TestTaskFileStorage(teststorage.TestStorage):
 
         self.assertEqual(self.my_task, task_list[0])
 
-# TODO: Not sure why this doesn't work.
-#    def test_read_fail(self):
-#        file_handler = open(self.test_task_filename, 'w')
-#        file_handler.write('Mock corrupt data')
-#        file_handler.close()
-#
-#        self.assertRaises(KeyError, self.storage.read())
+    def test_read_corrupt(self):
+        file_handler = open(self.test_task_filename, 'w')
+        file_handler.write('Mock corrupt data')
+        file_handler.close()
+
+        self.assertRaises(KeyError, self.storage.read)
+
+    def test_read_permission_fail(self):
+        file_handler = open(self.test_task_filename, 'w')
+        file_handler.write('Mock corrupt data')
+        file_handler.close()
+
+        os.chmod(self.test_task_filename, 000)
+        # TODO: Make this assert it's errno 13 (Permission denied)
+        self.assertRaises(IOError, self.storage.read)
 
     def test_write(self):
         self.storage.write([self.my_task])
         task_list = self.storage.read()
 
         self.assertEqual(self.my_task, task_list[0])
+
+    def test_write_permission_fail(self):
+        os.chmod(self.test_task_filename, 000)
+        
+
+        self.assertRaises(IOError, self.storage.write, [self.my_task])
 
 
 if __name__ == '__main__':
