@@ -12,7 +12,7 @@ class TestCLIControllerFileStorage(testuicontroller.TestUIController):
         self.test_key_filename = 'test_keyfile'
 
         self.ui = uicontrollerfactory.UIControllerFactory()
-        self.ui = self.ui.getUI(
+        self.ui = self.ui.get(
                 'cli',
                 'file',
                 task_filename=self.test_task_filename,
@@ -42,7 +42,7 @@ class TestCLIControllerFileStorage(testuicontroller.TestUIController):
 class TestCLIControllerGTaskStorage(testuicontroller.TestUIController):
     def setUp(self):
         self.ui = uicontrollerfactory.UIControllerFactory()
-        self.ui = self.ui.getUI(
+        self.ui = self.ui.get(
                 'cli',
                 'gtasks')
 
@@ -61,7 +61,7 @@ class TestCLIControllerGTaskStorage(testuicontroller.TestUIController):
 
     def tearDown(self):
         storage = storagefactory.StorageFactory()
-        storage = storage.getStorage('gtasks')
+        storage = storage.get('gtasks')
         storage.delete(self.key)
 
 

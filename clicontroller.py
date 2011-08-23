@@ -9,13 +9,22 @@ class CLIController(uicontroller.UIController):
             task_filename='taskfile', 
             key_filename='keyfile'):
         self.storage = storagefactory.StorageFactory()
-        self.storage = self.storage.getStorage(
+        self.storage = self.storage.get(
                 storage_type,
                 task_filename=task_filename,
                 key_filename=key_filename)
 
 
     def add(self, action_info):
+        """Return a Task given an argument dictionary.
+
+        Arguments:
+        action_info -- dictionary created from command line arguments
+
+        Using the given dictionary, a Task object is created and added to
+        storage.
+
+        """
         logging.info('attempting to add arguments as Task')
 
         logging.debug('creating task from arguments')
@@ -28,6 +37,15 @@ class CLIController(uicontroller.UIController):
         return task_item
 
     def find(self, action_info):
+        """Return all Tasks or one with matching key.
+
+        Arguments:
+        action_info -- dictionary created from command line arguments
+
+        Using the given dictionary, return a list of all Tasks if the given key
+        is None. Return a single Task if a key is found to match the given key.
+
+        """
         logging.info('attempting to find Task(s) using arguments')
 
         if action_info['key'] == None:
@@ -38,6 +56,16 @@ class CLIController(uicontroller.UIController):
             return self.storage.find(action_info['key'])
 
     def edit(self, action_info):
+        """Edit an existing Task.
+
+        Arguments:
+        action_info -- dictionary created from command line arguments
+
+        Using the given dictionary, create a Task object. If any attributes
+        are None, replace those values with the values of the current values
+        of the Task being updated then update the Task in storage.
+
+        """
         logging.info('attempting to edit Task using arguments')
 
         logging.debug('creating task from arguments')
@@ -61,6 +89,15 @@ class CLIController(uicontroller.UIController):
         return old_task
 
     def delete(self, action_info):
+        """Delete an existing Task.
+
+        Arguments:
+        action_info -- dictionary created from command line arguments
+
+        Using the given dictionary's key, attempt to delete the Task if a
+        matching key is found.
+
+        """
         logging.info('attempting to delete Task(s) using arguments')
 
         deleted_task = self.storage.find(action_info['key'])

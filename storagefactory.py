@@ -5,7 +5,7 @@ class StorageFactory():
     def __init__(self):
         pass
 
-    def getStorage(
+    def get(
             self, 
             storage_type, 
             **kwargs):

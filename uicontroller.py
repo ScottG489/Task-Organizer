@@ -3,16 +3,17 @@ class UIController():
         pass
 
     def add(self, args):
+        """This functions is to be overridden by a specific storage method."""
         pass
 
     def find(self, args):
+        """This functions is to be overridden by a specific storage method."""
         pass
 
     def edit(self, args):
+        """This functions is to be overridden by a specific storage method."""
         pass
 
     def delete(self, args):
-        pass
-
-    def exec_ui(self):
+        """This functions is to be overridden by a specific storage method."""
         pass

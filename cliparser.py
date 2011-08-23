@@ -7,7 +7,7 @@ from copy import copy
 class CLIParser():
     def __init__(self):
         self.user_interface = uicontrollerfactory.UIControllerFactory()
-        self.user_interface = self.user_interface.getUI(
+        self.user_interface = self.user_interface.get(
                 'cli',
                 'gtasks')
 

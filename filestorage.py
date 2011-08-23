@@ -131,8 +131,8 @@ class FileStorage(storage.Storage):
         task_item -- the Task object to be updated
 
         Using the given Task's key, iterate through the Task list to find a
-        matching key and replace the matching Task with the given Task. If
-        none is found, update nothing and return None.
+        matching key, replace the matching Task with the given Task, and
+        return the old Task. If none is found, update nothing and return None.
 
         """
         logging.info('attempting to update task:\n%s' % task_item)

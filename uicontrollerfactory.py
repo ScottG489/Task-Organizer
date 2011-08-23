@@ -4,7 +4,7 @@ class UIControllerFactory():
     def __init__(self):
         pass
 
-    def getUI(self,
+    def get(self,
             ui_type,
             storage_type,
             **kwargs):
