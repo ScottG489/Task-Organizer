@@ -35,18 +35,17 @@ class Task():
         if not isinstance(other, Task):
             return False
         if self.key == other.key\
-            and self.title == other.title\
-            and self.notes == other.notes:
-            return True
-
+                and self.title == other.title\
+                and self.notes == other.notes:
+                    return True
         return False
 
     def __ne__(self, other):
         if not isinstance(other, Task):
             return True
         if self.key != other.key\
-                and self.title != other.title\
-                and self.notes != other.notes:
+                or self.title != other.title\
+                or self.notes != other.notes:
             return True
 
         return False

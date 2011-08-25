@@ -72,6 +72,7 @@ class TestStorage(unittest.TestCase):
         # search(Task)
         # return task_list
 
-if __name__ == '__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestStorage)
-    unittest.TextTestRunner(verbosity=2).run(suite)
+#if __name__ == '__main__':
+#    unittest.main()
+#    suite = unittest.TestLoader().loadTestsFromTestCase(TestStorage)
+#    unittest.TextTestRunner(verbosity=2).run(suite)

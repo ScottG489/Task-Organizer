@@ -7,7 +7,7 @@ import logging
 
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
-class TestTaskFileStorage(teststorage.TestStorage):
+class TestFileStorage(teststorage.TestStorage):
     def setUp(self):
         # Initialize task object with attributes
         self.my_task = task.Task(title='title', notes='note')
@@ -23,7 +23,8 @@ class TestTaskFileStorage(teststorage.TestStorage):
         )
 
         logging.basicConfig(
-            level=logging.DEBUG,
+            level=logging.WARNING
+            ,
             format='[%(asctime)s] %(levelname)s:%(name)s:'
             '%(module)s.%(funcName)s(): %(message)s'
         )
@@ -32,7 +33,7 @@ class TestTaskFileStorage(teststorage.TestStorage):
         open(self.test_task_filename, 'w').close()
         open(self.test_key_filename, 'w').close()
 
-        #print   # So output from tests is on a new linex
+        print   # So output from tests is on a new linex
 
     def tearDown(self):
         # Delete test files
@@ -42,6 +43,53 @@ class TestTaskFileStorage(teststorage.TestStorage):
         # Clear the my_task Task object
         self.my_task = None
 
+    def test_add_read_fail(self):
+        file_handler = open(self.test_task_filename, 'w')
+        file_handler.write('Mock corrupt data')
+        file_handler.close()
+        os.chmod(self.test_task_filename, 000)
+
+        self.assertRaises(IOError, self.storage.add, self.my_task)
+
+    def test_add_write_fail(self):
+        os.chmod(self.test_task_filename, 0400)
+
+        self.assertRaises(IOError, self.storage.add, self.my_task)
+
+    def test_find_read_fail(self):
+        file_handler = open(self.test_task_filename, 'w')
+        file_handler.write('Mock corrupt data')
+        file_handler.close()
+        os.chmod(self.test_task_filename, 000)
+
+        self.assertRaises(IOError, self.storage.find, self.my_task)
+
+    def test_get_all_read_fail(self):
+        file_handler = open(self.test_task_filename, 'w')
+        file_handler.write('Mock corrupt data')
+        file_handler.close()
+        os.chmod(self.test_task_filename, 000)
+
+        self.assertRaises(IOError, self.storage.get_all)
+
+    def test_update_write_fail(self):
+        self.storage.add(self.my_task)
+        os.chmod(self.test_task_filename, 0400)
+
+        self.assertRaises(IOError, self.storage.update, self.my_task)
+
+    def test_delete_write_fail(self):
+        self.storage.add(self.my_task)
+        os.chmod(self.test_task_filename, 0400)
+
+        self.assertRaises(IOError, self.storage.delete, self.my_task.key)
+
+    def test_search_not_found(self):
+        self.storage.add(self.my_task)
+        search_task = task.Task(title='title1', notes='note1')
+        task_search_list = self.storage.search(search_task)
+
+        self.assertEqual(task_search_list, None)
 
     def test_read(self):
         self.my_task.key = self.storage.add(self.my_task)
@@ -73,12 +121,11 @@ class TestTaskFileStorage(teststorage.TestStorage):
 
     def test_write_permission_fail(self):
         os.chmod(self.test_task_filename, 000)
-        
 
         self.assertRaises(IOError, self.storage.write, [self.my_task])
 
 
 if __name__ == '__main__':
-    unittest.main()
-#    suite = unittest.TestLoader().loadTestsFromTestCase(TestTaskFileStorage)
-#    unittest.TextTestRunner(verbosity=2).run(suite)
+#    unittest.main()
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestFileStorage)
+    unittest.TextTestRunner(verbosity=2).run(suite)
