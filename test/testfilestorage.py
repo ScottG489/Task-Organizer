@@ -29,10 +29,6 @@ class TestFileStorage(teststorage.TestStorage):
             '%(module)s.%(funcName)s(): %(message)s'
         )
 
-        # Clear/Create test files
-        open(self.test_task_filename, 'w').close()
-        open(self.test_key_filename, 'w').close()
-
         print   # So output from tests is on a new linex
 
     def tearDown(self):
