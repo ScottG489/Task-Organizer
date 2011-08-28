@@ -106,11 +106,9 @@ class FileStorage(storage.Storage):
             logging.exception('failed to access file for reading')
             raise
 
-        logging.debug('finding task list for item with matching key: %s'
-                % key)
         for task_item in task_list:
-            if key == task_item.key:
-                logging.info('success! task item found matching key')
+            if task_item.key == key:
+                logging.info('success! task item found with matching key')
                 return task_item
 
         logging.info('no matching key found in task list')
@@ -155,7 +153,7 @@ class FileStorage(storage.Storage):
                     logging.exception('failed to access file for writing')
                     raise
 
-                logging.info('success! task item updated')
+                logging.info('success! task item updated; returning key')
                 return key_match
 
         logging.info('no matching key found; nothing updated')

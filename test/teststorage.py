@@ -46,6 +46,7 @@ class TestStorage(unittest.TestCase):
         self.assertIsNone(self.key)
 
     def test_delete(self):
+        new_task = task.Task()
         self.my_task.key = self.storage.add(self.my_task)
 
         key = self.storage.delete(self.my_task.key)

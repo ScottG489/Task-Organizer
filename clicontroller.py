@@ -6,11 +6,13 @@ import logging
 class CLIController(uicontroller.UIController):
     def __init__(self,
             storage_type, 
-            task_filename='taskfile', 
+            task_dbname='taskdb',
+            task_filename='taskfile',
             key_filename='keyfile'):
         self.storage = storagefactory.StorageFactory()
         self.storage = self.storage.get(
                 storage_type,
+                task_dbname=task_dbname,
                 task_filename=task_filename,
                 key_filename=key_filename)
 

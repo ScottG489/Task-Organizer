@@ -39,6 +39,33 @@ class TestCLIControllerFileStorage(testuicontroller.TestUIController):
         os.remove(self.test_key_filename)
 
 
+class TestCLIControllerSQLiteStorage(testuicontroller.TestUIController):
+    def setUp(self):
+        self.ui = uicontrollerfactory.UIControllerFactory()
+        self.ui = self.ui.get(
+                'cli',
+                'sqlite',
+                task_dbname='testtaskdb')
+
+        # Initialize file storage object using test-specific file names
+        logging.basicConfig(
+            level=logging.WARNING,
+            format='[%(asctime)s] %(levelname)s:%(name)s:'
+            '%(module)s.%(funcName)s(): %(message)s'
+        )
+
+        self.title = 'tasks title'
+        self.notes = 'notes text'
+        self.key = None
+
+        #print   # So output from tests is on a new linex
+
+    def tearDown(self):
+        storage = storagefactory.StorageFactory()
+        storage = storage.get('sqlite')
+        storage.delete(self.key)
+
+
 class TestCLIControllerGTaskStorage(testuicontroller.TestUIController):
     def setUp(self):
         self.ui = uicontrollerfactory.UIControllerFactory()
