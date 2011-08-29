@@ -28,33 +28,28 @@ class TestTask(unittest.TestCase):
         self.assertEqual(self.my_task, new_task)
 
     def test_equal_false(self):
-        bool_value = True
         new_task = task.Task(title='title1', notes='note')
 
-        if self.my_task == new_task:
-            bool_value = False
+        bool_value = self.my_task == new_task
 
-        self.assertTrue(bool_value)
+        self.assertFalse(bool_value)
 
     def test_equal_false_instance(self):
-        bool_value = True
         not_task = 'Not a Task'
-        if self.my_task == not_task:
-            bool_value = False
 
-        self.assertTrue(bool_value)
+        bool_value = self.my_task == not_task
+
+        self.assertFalse(bool_value)
 
     def test_not_equal(self):
         new_task = task.Task(title='title1', notes='note')
 
         self.assertNotEqual(self.my_task, new_task)
-        bool_value = True
         new_task = task.Task(title='title', notes='note')
 
-        if self.my_task != new_task:
-            bool_value = False
+        bool_value = self.my_task != new_task
 
-        self.assertTrue(bool_value)
+        self.assertFalse(bool_value)
 
     def test_not_equal_instance(self):
         not_task = 'Not a Task'
