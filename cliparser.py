@@ -42,7 +42,7 @@ class CLIParser():
                 action='store',
                 nargs=1,
                 type=str,
-                help='a regular expression of the title of the task'
+                help='title of the task'
         )
         self.parent_parser_notes = argparse.ArgumentParser(add_help=False)
         self.parent_parser_notes.add_argument(
