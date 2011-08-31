@@ -134,6 +134,7 @@ class CLIParser():
 
 
     def parse_cl_args(self):
+        """Return a dictionary of arguments."""
         logging.info('attempting to parse arguments')
         raw_parsed_args = self.arg_parser.parse_args()
         args_dict = self.sanitize(raw_parsed_args)

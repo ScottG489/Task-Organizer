@@ -34,6 +34,14 @@ class GTaskStorage(storage.Storage):
                        developerKey='AIzaSyBcJBx1IHvzX7Kp7rcGuIzP01tzYY_pX9Y')
 
     def add(self, task_item):
+        """Add a Task to the GTask storage.
+
+        Arguments:
+        task_item -- the Task object to be added to Storage
+
+        The Task object is added to storage and given a key.
+
+        """
         logging.info('attempting to add task item:\n%s' % task_item)
         new_task = {
                 'title': task_item.title,
@@ -51,6 +59,14 @@ class GTaskStorage(storage.Storage):
         return task_item.key
 
     def find(self, key = None):
+        """Return a Task given it's key.
+
+        Arguments:
+        key -- the key for the desired Task object
+
+        Using the given key, return the Task with the matching key. If none
+        is found return None.
+        """
         logging.info('attempting to find item with key: %s' % key)
         gtask_item = self.service.tasks().get(
                 tasklist='@default',
@@ -76,6 +92,7 @@ class GTaskStorage(storage.Storage):
         return task_item
 
     def get_all(self):
+        """Return a list of all Tasks."""
         logging.info('attempting to get all tasks')
         gtask_list = self.service.tasks().list(tasklist='@default').execute()
 
@@ -96,6 +113,16 @@ class GTaskStorage(storage.Storage):
         return task_list
 
     def update(self, task_item):
+        """Update an existing Task in the GTask storage.
+
+        Arguments:
+        task_item -- the Task object to be updated
+
+        Using the given Task's key, find the Task with a matching key and
+        replace it with the given Task. Then return the old Task. If none
+        is found, updating nothing and return None.
+
+        """
         logging.info('attempting to update task:\n%s' % task_item)
         updating_task = self.service.tasks().get(
                 tasklist='@default',
@@ -129,6 +156,15 @@ class GTaskStorage(storage.Storage):
         return task_item.key
 
     def delete(self, key):
+        """Delete an existing Task in the GTask storage.
+
+        Arguments:
+        key -- the key for the desired Task object to delete
+
+        Using the given key, delete the matching Task. If none is found,
+        nothing is deleted and return None.
+
+        """
         logging.info('attempting to delete task: %s' % key)
         deleting_task = self.service.tasks().get(
                 tasklist='@default',
