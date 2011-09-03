@@ -19,7 +19,7 @@ class SQLiteStorage(storage.Storage):
             conn_cursor.fetchone()[0]
         except:
             logging.info('creating table as it doesn\'t exist: %s'
-                    % self.task_tablename)
+                   , self.task_tablename)
             conn_cursor.execute(
                     '''create table tasks
                     (id integer primary key,
@@ -37,11 +37,11 @@ class SQLiteStorage(storage.Storage):
         the database.
 
         """
-        logging.info('attempting to add task item:\n%s' % task_item)
+        logging.info('attempting to add task item:\n%s', task_item)
         conn_cursor = self.db_connection.cursor()
         result = conn_cursor.execute(
                 '''insert into %s (title, notes) values (?, ?)'''
-                % self.task_tablename, (task_item.title, task_item.notes))
+               , self.task_tablename, (task_item.title, task_item.notes))
         task_item.key = result.lastrowid
 
         self.db_connection.commit()
@@ -59,11 +59,11 @@ class SQLiteStorage(storage.Storage):
         database and return the Task. If none is found return None.
 
         """
-        logging.info('attempting to find item with key: %s' % key)
+        logging.info('attempting to find item with key: %s', key)
         conn_cursor = self.db_connection.cursor()
         result = conn_cursor.execute(
                 '''select * from %s where id=?'''
-                % self.task_tablename, (key,))
+               , self.task_tablename, (key,))
         result = result.fetchall()
 
         if result == []:
@@ -89,7 +89,7 @@ class SQLiteStorage(storage.Storage):
         logging.info('attempting to get all tasks')
         conn_cursor = self.db_connection.cursor()
         sqltask_list = conn_cursor.execute(
-                '''select * from %s ''' % self.task_tablename)
+                '''select * from %s ''', self.task_tablename)
 
         task_list = []
         for sqltask_item in sqltask_list.fetchmany():
@@ -114,11 +114,11 @@ class SQLiteStorage(storage.Storage):
         found, update nothing and return None.
 
         """
-        logging.info('attempting to update task:\n%s' % task_item)
+        logging.info('attempting to update task:\n%s', task_item)
         conn_cursor = self.db_connection.cursor()
         result = conn_cursor.execute(
                 '''update %s set title=?, notes=? where id=?'''
-                % self.task_tablename,
+               , self.task_tablename,
                 (task_item.title, task_item.notes, task_item.key))
 
         if result.rowcount == 0:
@@ -142,11 +142,11 @@ class SQLiteStorage(storage.Storage):
         delete it. If none is found, nothing is deleted and return None.
 
         """
-        logging.info('attempting to delete task: %s' % key)
+        logging.info('attempting to delete task: %s', key)
         conn_cursor = self.db_connection.cursor()
         result = conn_cursor.execute(
                 '''delete from %s where id=?'''
-                % self.task_tablename, (key,))
+               , self.task_tablename, (key,))
         if result.rowcount == 0:
             logging.info('no matching key found; nothing updated')
             self.db_connection.commit()
@@ -167,7 +167,7 @@ class SQLiteStorage(storage.Storage):
         Using the given search Task,
 
         """
-        logging.info('attempting to search for task:\n%s' % search_task)
+        logging.info('attempting to search for task:\n%s', search_task)
         pass
 
 #def main():

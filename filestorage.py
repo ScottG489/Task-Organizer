@@ -11,11 +11,11 @@ class FileStorage(storage.Storage):
 
         if not os.path.exists(task_filename):
             logging.info('creating task storage file as it doesn\'t exist: %s'
-                    % task_filename)
+                    , task_filename)
             open(self.task_filename, 'w').close()
         if not os.path.exists(key_filename):
             logging.info('creating key storage file as it doesn\'t exist: %s'
-                    % key_filename)
+                    , key_filename)
             open(self.key_filename, 'w').close()
 
 
@@ -25,7 +25,7 @@ class FileStorage(storage.Storage):
         task_list = []
         try:
             logging.debug("try: open file for reading: %s"
-                    % self.task_filename)
+                    , self.task_filename)
             task_file = open(self.task_filename, 'r')
 
             logging.debug("try: load pickled task list")
@@ -49,7 +49,7 @@ class FileStorage(storage.Storage):
         logging.info('attempting to write task list')
         try:
             logging.debug('try: open file for writing: %s'
-                    % self.task_filename)
+                    , self.task_filename)
             task_file = open(self.task_filename, 'w')
 
             logging.debug("try: dump pickled task list to file")
@@ -69,7 +69,7 @@ class FileStorage(storage.Storage):
         The Task object is given a key and appended to the list of Tasks in the file.
 
         """
-        logging.info('attempting to add task item:\n%s' % task_item)
+        logging.info('attempting to add task item:\n%s', task_item)
         try:
             task_list = self.read()
         except:
@@ -86,7 +86,7 @@ class FileStorage(storage.Storage):
             logging.exception('failed to access file for writing')
             raise
 
-        logging.info('success! task item added:\n%s' % task_item)
+        logging.info('success! task item added:\n%s', task_item)
         return task_item.key
 
     def find(self, key = None):
@@ -99,7 +99,7 @@ class FileStorage(storage.Storage):
         with matching key. If none is found return None.
 
         """
-        logging.info('attempting to find item with key: %s' % key)
+        logging.info('attempting to find item with key: %s', key)
         try:
             task_list = self.read()
         except:
@@ -138,7 +138,7 @@ class FileStorage(storage.Storage):
         return the old Task. If none is found, update nothing and return None.
 
         """
-        logging.info('attempting to update task:\n%s' % task_item)
+        logging.info('attempting to update task:\n%s', task_item)
         task_list = self.get_all()
         key_match = None
         #TODO: Call get_all() again except with an arg instead of below loop?
@@ -169,7 +169,7 @@ class FileStorage(storage.Storage):
         matching Task. If none is found, nothing is deleted and return None.
 
         """
-        logging.info('attempting to delete task: %s' % key)
+        logging.info('attempting to delete task: %s', key)
         task_list = self.get_all()
         key_match = None
         #TODO: Call get_all() again except with an arg instead of below loop?
@@ -200,13 +200,13 @@ class FileStorage(storage.Storage):
         return None.
 
         """
-        logging.info('attempting to search for task:\n%s' % search_task)
+        logging.info('attempting to search for task:\n%s', search_task)
         task_list = self.get_all()
         task_search_list = []
         for task_item in task_list:
             if search_task.title == task_item.title\
                     and search_task.notes == task_item.notes:
-                logging.debug('matching task found:\n%s' % task_item)
+                logging.debug('matching task found:\n%s', task_item)
                 task_search_list.append(task_item)
 
         if not task_search_list:

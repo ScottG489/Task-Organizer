@@ -42,7 +42,7 @@ class GTaskStorage(storage.Storage):
         The Task object is added to storage and given a key.
 
         """
-        logging.info('attempting to add task item:\n%s' % task_item)
+        logging.info('attempting to add task item:\n%s', task_item)
         new_task = {
                 'title': task_item.title,
                 'notes': task_item.notes,
@@ -58,7 +58,7 @@ class GTaskStorage(storage.Storage):
             task_item.notes = result['notes']
         except:
             pass
-        logging.info('success! task item added\n%s' % task_item)
+        logging.info('success! task item added\n%s', task_item)
         return task_item.key
 
     def find(self, key = None):
@@ -70,7 +70,7 @@ class GTaskStorage(storage.Storage):
         Using the given key, return the Task with the matching key. If none
         is found return None.
         """
-        logging.info('attempting to find item with key: %s' % key)
+        logging.info('attempting to find item with key: %s', key)
         gtask_item = self.service.tasks().get(
                 tasklist='@default',
                 task=key
@@ -126,7 +126,7 @@ class GTaskStorage(storage.Storage):
         is found, updating nothing and return None.
 
         """
-        logging.info('attempting to update task:\n%s' % task_item)
+        logging.info('attempting to update task:\n%s', task_item)
         updating_task = self.service.tasks().get(
                 tasklist='@default',
                 task=task_item.key
@@ -165,7 +165,7 @@ class GTaskStorage(storage.Storage):
         nothing is deleted and return None.
 
         """
-        logging.info('attempting to delete task: %s' % key)
+        logging.info('attempting to delete task: %s', key)
         deleting_task = self.service.tasks().get(
                 tasklist='@default',
                 task=key

@@ -13,7 +13,7 @@ class KeyGenerator():
         key = 0
         try:
             logging.debug("try: open file for reading: %s"
-                    % self.key_filename)
+                    , self.key_filename)
             key_file = open(self.key_filename, 'r')
 
             logging.debug("try: read key")
@@ -34,7 +34,7 @@ class KeyGenerator():
         logging.info('attempting to write key')
         try:
             logging.debug("try: open file for writing: %s"
-                    % self.key_filename)
+                    , self.key_filename)
             key_file = open(self.key_filename, 'w')
 
             logging.debug("try: write key to file")
@@ -63,7 +63,7 @@ class KeyGenerator():
         self.update(key)
 
         logging.debug('success! key retrieved and updated: %s'
-                % key)
+                , key)
         return key
 
     def update(self, key):
