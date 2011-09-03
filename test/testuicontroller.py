@@ -18,6 +18,7 @@ class TestUIController(unittest.TestCase):
 
 
     def test_add(self):
+        """Tests that add() correctly adds the arg dict as a Task to storage"""
         added_task = self.add_task()
         self.key = added_task.key
 
@@ -26,6 +27,7 @@ class TestUIController(unittest.TestCase):
                 [self.title, self.notes])
 
     def test_find(self):
+        """Tests that find() correctly returns a Task given an arg dict"""
         added_task = self.add_task()
         self.key = added_task.key
 
@@ -36,6 +38,7 @@ class TestUIController(unittest.TestCase):
                 [self.title, self.notes])
 
     def test_find_all(self):
+        """Tests that find() correctly returns all Tasks when given no key"""
         added_task = self.add_task()
         self.key = added_task.key
 
@@ -51,6 +54,7 @@ class TestUIController(unittest.TestCase):
 
 
     def test_edit(self):
+        """Tests that edit() correctly modifies a Task given an arg dict"""
         added_task = self.add_task()
         self.key = added_task.key
 
@@ -67,6 +71,7 @@ class TestUIController(unittest.TestCase):
         self.assertNotEqual(new_task.notes, old_task.notes)
 
     def test_edit_none(self):
+        """Tests edit()'s handling of arg dicts with empty attributes"""
         added_task = self.add_task()
         self.key = added_task.key
 
@@ -84,6 +89,7 @@ class TestUIController(unittest.TestCase):
                 [new_task.title, new_task.notes])
 
     def test_delete(self):
+        """Tests that delete() correctly deletes a Task given an arg dict"""
         added_task = self.add_task()
         self.key = added_task.key
 

@@ -15,7 +15,7 @@ class TestGTaskStorage(teststorage.TestStorage):
         self.storage = gtaskstorage.GTaskStorage()
 
         logging.basicConfig(
-            level=logging.DEBUG,
+            level=logging.WARNING,
             format='[%(asctime)s] %(levelname)s:%(name)s:'
             '%(module)s.%(funcName)s(): %(message)s'
         )
@@ -29,6 +29,7 @@ class TestGTaskStorage(teststorage.TestStorage):
         self.my_task = None
 
     def test_update_no_note(self):
+        """Tests that update() acts correctly when no note is specified"""
         self.my_task.notes = None
         self.my_task.key = self.storage.add(self.my_task)
 

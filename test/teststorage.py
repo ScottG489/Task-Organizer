@@ -6,6 +6,7 @@ import task
 #       Delete added tasks in tearDown()
 class TestStorage(unittest.TestCase):
     def test_add(self):
+        """Tests that add() correctly adds a Task to storage"""
         self.my_task.key = self.storage.add(self.my_task)
         new_task = self.storage.find(self.my_task.key)
         new_task.key = self.storage.add(new_task)
@@ -14,18 +15,21 @@ class TestStorage(unittest.TestCase):
         self.storage.delete(new_task.key)
 
     def test_find(self):
+        """Tests that find() correctly returns a Task given a key"""
         self.my_task.key = self.storage.add(self.my_task)
         new_task = self.storage.find(self.my_task.key)
 
         self.assertEqual(self.my_task, new_task)
 
     def test_get_all(self):
+        """Tests that get_all() returns a list of all Tasks"""
         self.my_task.key = self.storage.add(self.my_task)
         task_list = self.storage.get_all()
 
         self.assertEqual(task_list[0], self.my_task)
 
     def test_update(self):
+        """Tests that update() correctly updates a Task given a Task"""
         self.my_task.key = self.storage.add(self.my_task)
 
         self.my_task.title = 'foo'
@@ -35,6 +39,7 @@ class TestStorage(unittest.TestCase):
         self.assertEqual(self.my_task, new_task)
 
     def test_update_no_match(self):
+        """Tests updates()'s handling of no matching key"""
         self.my_task.key = self.storage.add(self.my_task)
 
         self.storage.delete(self.my_task.key)
@@ -46,6 +51,7 @@ class TestStorage(unittest.TestCase):
         self.assertIsNone(self.key)
 
     def test_delete(self):
+        """Tests that delete() correctly deletes a Task from storage"""
         new_task = task.Task()
         self.my_task.key = self.storage.add(self.my_task)
 
@@ -55,6 +61,7 @@ class TestStorage(unittest.TestCase):
         self.assertIsNone(new_task)
 
     def test_delete_no_match(self):
+        """Tests delete()'s handling of no matching key"""
         self.my_task.key = self.storage.add(self.my_task)
 
         self.storage.delete(self.my_task.key)
@@ -64,6 +71,7 @@ class TestStorage(unittest.TestCase):
         self.assertIsNone(self.key)
 
     def test_search(self):
+        """Tests that search() correctly returns a matching Task given a Task"""
         self.storage.add(self.my_task)
         search_task = task.Task(title='title', notes='note')
         task_search_list = self.storage.search(search_task)

@@ -24,6 +24,7 @@ class TestCLIParser(unittest.TestCase):
         pass
 
     def test_add_subparser(self):
+        """Tests the parser when the add sub-command is specified"""
         sub_cmd = 'add'
         sys.argv = [
                 'prog_name', 
@@ -38,6 +39,7 @@ class TestCLIParser(unittest.TestCase):
                     parsed_args['notes']])
 
     def test_find_subparser(self):
+        """Tests the parser when the find sub-command is specified"""
         sub_cmd = 'find'
         sys.argv = [
                 'prog_name', 
@@ -50,6 +52,7 @@ class TestCLIParser(unittest.TestCase):
                     parsed_args['key']])
 
     def test_edit_subparser(self):
+        """Tests the parser when the edit sub-command is specified"""
         sub_cmd = 'edit'
         sys.argv = [
                 'prog_name', 
@@ -64,6 +67,7 @@ class TestCLIParser(unittest.TestCase):
                     parsed_args['notes']])
 
     def test_delete_subparser(self):
+        """Tests the parser when the del sub-command is specified"""
         sub_cmd = 'del'
         sys.argv = [
                 'prog_name', 
@@ -76,6 +80,7 @@ class TestCLIParser(unittest.TestCase):
                     parsed_args['key']])
 
     def test_parse_cl_args(self):
+        """Tests that options are correctly transformed into a dict"""
         sub_cmd = 'edit'
         sys.argv = [
                 'prog_name', 
@@ -93,6 +98,7 @@ class TestCLIParser(unittest.TestCase):
                     parsed_args['notes']])
 
     def test_sanitize(self):
+        """Tests that raw parsed args are correctly sanitized"""
         sub_cmd = 'edit'
         sys.argv = [
                 'prog_name', 

@@ -118,7 +118,8 @@ class SQLiteStorage(storage.Storage):
         conn_cursor = self.db_connection.cursor()
         result = conn_cursor.execute(
                 '''update %s set title=?, notes=? where id=?'''
-                % self.task_tablename, (task_item.title, task_item.notes, task_item.key))
+                % self.task_tablename,
+                (task_item.title, task_item.notes, task_item.key))
 
         if result.rowcount == 0:
             logging.info('no matching key found; nothing updated')
@@ -183,11 +184,6 @@ class SQLiteStorage(storage.Storage):
 #
 #    title = 'task title'
 #    notes = 'task notes'
-#
-#    conn_cursor.execute('''insert into tasks (title, notes) values (?, ?)''', (title, notes))
-#    conn_cursor.execute('''insert into tasks (title, notes) values (?, ?)''', (title, notes))
-#    conn_cursor.execute('''insert into tasks (title, notes) values (?, ?)''', (title, notes))
-#
 #
 #
 #    #result = conn_cursor.execute('select * from tasks where id=4')
