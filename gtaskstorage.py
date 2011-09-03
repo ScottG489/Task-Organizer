@@ -54,7 +54,10 @@ class GTaskStorage(storage.Storage):
         ).execute()
         task_item.key = result['id']
         task_item.title = result['title']
-        task_item.notes = result['notes']
+        try:
+            task_item.notes = result['notes']
+        except:
+            pass
         logging.info('success! task item added\n%s' % task_item)
         return task_item.key
 
@@ -139,10 +142,7 @@ class GTaskStorage(storage.Storage):
 
         logging.debug('updating gtask attributes using supplied task')
         updating_task['title'] = task_item.title
-        try:
-            updating_task['notes'] = task_item.notes
-        except:
-            pass
+        updating_task['notes'] = task_item.notes
 
         logging.debug('sending updated gtask')
         result = self.service.tasks().update(

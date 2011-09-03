@@ -28,8 +28,18 @@ class TestGTaskStorage(teststorage.TestStorage):
         # Clear the my_task Task object
         self.my_task = None
 
+    def test_update_no_note(self):
+        self.my_task.notes = None
+        self.my_task.key = self.storage.add(self.my_task)
+
+        self.my_task.title = 'foo'
+        key = self.storage.update(self.my_task)
+        new_task = self.storage.find(key)
+
+        self.assertEqual(self.my_task, new_task)
+
 
 if __name__ == '__main__':
-    unittest.main()
-#    suite = unittest.TestLoader().loadTestsFromTestCase(TestTaskFileStorage)
-#    unittest.TextTestRunner(verbosity=2).run(suite)
+#    unittest.main()
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestGTaskStorage)
+    unittest.TextTestRunner(verbosity=2).run(suite)

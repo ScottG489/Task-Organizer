@@ -116,7 +116,7 @@ class FileStorage(storage.Storage):
         return task_item
 
     def get_all(self):
-        """Return a list of all Task's"""
+        """Return a list of all Tasks."""
         logging.info('attempting to get all tasks')
         try:
             task_list = self.read()

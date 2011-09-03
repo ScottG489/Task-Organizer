@@ -5,7 +5,9 @@ import sqlitestorage
 class StorageFactory():
     def __init__(self):
         pass
-
+# TODO: Shouldn't have to delete keywords as incorrect keyword Arguments
+        # shouldn't be passed in the first place. However, they are set as
+        # defaults in clicontroller.
     def get(
             self, 
             storage_type, 
@@ -17,7 +19,8 @@ class StorageFactory():
         kwargs -- keyword arguments specific to each storage type
 
         Using the given storage type, create an instance with the given
-        keyword arguments and return the storage instance.
+        optional keyword arguments and return the storage instance.
+
         """
         if storage_type == 'file':
             try:
