@@ -61,6 +61,7 @@ class CLIParser():
 
 
     def init_add_subparser(self):
+        """Initialize the sub-parser for the add sub-command"""
         arg_parser_add = self.arg_subparsers.add_parser(
             'add',
             parents=[self.parent_parser_title, self.parent_parser_notes],
@@ -77,6 +78,7 @@ class CLIParser():
         )
 
     def init_find_subparser(self):
+        """Initialize the sub-parser for the find sub-command"""
         arg_parser_find = self.arg_subparsers.add_parser(
             'find',
             epilog = 'Goodbye.',
@@ -98,6 +100,7 @@ class CLIParser():
             help='the key of the task')
 
     def init_edit_subparser(self):
+        """Initialize the sub-parser for the edit sub-command"""
         arg_parser_edit = self.arg_subparsers.add_parser(
             'edit',
             parents=[
@@ -117,6 +120,7 @@ class CLIParser():
         )
 
     def init_delete_subparser(self):
+        """Initialize the sub-parser for the del sub-command"""
         arg_parser_delete = self.arg_subparsers.add_parser(
             'del',
             parents=[self.parent_parser_key],
@@ -134,7 +138,14 @@ class CLIParser():
 
 
     def parse_cl_args(self):
-        """Return a dictionary of arguments."""
+        """Return a dictionary of arguments
+
+        Calls the argument parser to parse the command line arguments by
+        using sys.argv. Then calls a sanitizer to get an argument dictionary
+        which is returned.
+
+        """
+
         logging.info('attempting to parse arguments')
         raw_parsed_args = self.arg_parser.parse_args()
         args_dict = self.sanitize(raw_parsed_args)
@@ -142,6 +153,7 @@ class CLIParser():
         return args_dict
 
     def sanitize(self, raw_parsed_args):
+        """Creates and sanitizes an arg dict given the raw parsed args"""
         logging.info('attepting to sanitize arguments')
         args_dict = copy(vars(raw_parsed_args))
         for key, value in args_dict.iteritems():
