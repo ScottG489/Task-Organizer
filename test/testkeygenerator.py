@@ -15,7 +15,7 @@ class TestKeyGenerator(unittest.TestCase):
         )
 
         logging.basicConfig(
-            level=logging.DEBUG,
+            level=logging.WARNING,
             format='[%(asctime)s] %(levelname)s:%(name)s:'
             '%(module)s.%(funcName)s(): %(message)s'
         )

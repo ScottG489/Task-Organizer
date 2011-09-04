@@ -41,7 +41,7 @@ class SQLiteStorage(storage.Storage):
         conn_cursor = self.db_connection.cursor()
         result = conn_cursor.execute(
                 '''insert into %s (title, notes) values (?, ?)'''
-               , self.task_tablename, (task_item.title, task_item.notes))
+               % self.task_tablename, (task_item.title, task_item.notes))
         task_item.key = result.lastrowid
 
         self.db_connection.commit()
@@ -63,7 +63,7 @@ class SQLiteStorage(storage.Storage):
         conn_cursor = self.db_connection.cursor()
         result = conn_cursor.execute(
                 '''select * from %s where id=?'''
-               , self.task_tablename, (key,))
+               % self.task_tablename, (key,))
         result = result.fetchall()
 
         if result == []:
@@ -89,7 +89,7 @@ class SQLiteStorage(storage.Storage):
         logging.info('attempting to get all tasks')
         conn_cursor = self.db_connection.cursor()
         sqltask_list = conn_cursor.execute(
-                '''select * from %s ''', self.task_tablename)
+                '''select * from %s ''' % self.task_tablename)
 
         task_list = []
         for sqltask_item in sqltask_list.fetchmany():
@@ -118,7 +118,7 @@ class SQLiteStorage(storage.Storage):
         conn_cursor = self.db_connection.cursor()
         result = conn_cursor.execute(
                 '''update %s set title=?, notes=? where id=?'''
-               , self.task_tablename,
+               % self.task_tablename,
                 (task_item.title, task_item.notes, task_item.key))
 
         if result.rowcount == 0:
@@ -146,7 +146,7 @@ class SQLiteStorage(storage.Storage):
         conn_cursor = self.db_connection.cursor()
         result = conn_cursor.execute(
                 '''delete from %s where id=?'''
-               , self.task_tablename, (key,))
+               % self.task_tablename, (key,))
         if result.rowcount == 0:
             logging.info('no matching key found; nothing updated')
             self.db_connection.commit()

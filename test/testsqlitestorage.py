@@ -20,7 +20,7 @@ class TestSQLiteStorage(teststorage.TestStorage):
             self.test_task_dbname)
 
         logging.basicConfig(
-            level=logging.DEBUG
+            level=logging.WARNING
             ,
             format='[%(asctime)s] %(levelname)s:%(name)s:'
             '%(module)s.%(funcName)s(): %(message)s'
