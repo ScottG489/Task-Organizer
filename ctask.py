@@ -10,7 +10,6 @@ def main():
 #    task_filename = 'task_file'
 #    key_filename = 'key_file'
 
-
     my_parser = cliparser.CLIParser()
 
     parsed_args = my_parser.parse_cl_args()
