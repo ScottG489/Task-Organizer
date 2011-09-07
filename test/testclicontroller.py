@@ -1,11 +1,11 @@
 import unittest
-import logging
 import testuicontroller
 import uicontrollerfactory
-import os
 import storagefactory
+import os
+import sys
 
-# TODO: Get logging working in tests.
+# TODO: Get logger working in tests.
 class TestCLIControllerFileStorage(testuicontroller.TestUIController):
     def setUp(self):
         self.test_task_filename = 'test_taskfile'
@@ -18,12 +18,6 @@ class TestCLIControllerFileStorage(testuicontroller.TestUIController):
                 task_filename=self.test_task_filename,
                 key_filename=self.test_key_filename)
 
-        # Initialize file storage object using test-specific file names
-        logging.basicConfig(
-            level=logging.WARNING,
-            format='[%(asctime)s] %(levelname)s:%(name)s:'
-            '%(module)s.%(funcName)s(): %(message)s'
-        )
 
         self.title = 'tasks title'
         self.notes = 'notes text'
@@ -32,7 +26,11 @@ class TestCLIControllerFileStorage(testuicontroller.TestUIController):
         open(self.test_task_filename, 'w').close()
         open(self.test_key_filename, 'w').close()
 
-        #print   # So output from tests is on a new linex
+        try:
+            if sys.argv[1] == '-v':
+                sys.stderr.write()   # So output from tests is on a new linex
+        except:
+            pass
 
     def tearDown(self):
         os.remove(self.test_task_filename)
@@ -47,18 +45,16 @@ class TestCLIControllerSQLiteStorage(testuicontroller.TestUIController):
                 'sqlite',
                 task_dbname='testtaskdb')
 
-        # Initialize file storage object using test-specific file names
-        logging.basicConfig(
-            level=logging.WARNING,
-            format='[%(asctime)s] %(levelname)s:%(name)s:'
-            '%(module)s.%(funcName)s(): %(message)s'
-        )
 
         self.title = 'tasks title'
         self.notes = 'notes text'
         self.key = None
 
-        #print   # So output from tests is on a new linex
+        try:
+            if sys.argv[1] == '-v':
+                sys.stderr.write()   # So output from tests is on a new linex
+        except:
+            pass
 
     def tearDown(self):
         storage = storagefactory.StorageFactory()
@@ -73,18 +69,16 @@ class TestCLIControllerGTaskStorage(testuicontroller.TestUIController):
                 'cli',
                 'gtasks')
 
-        # Initialize file storage object using test-specific file names
-        logging.basicConfig(
-            level=logging.WARNING,
-            format='[%(asctime)s] %(levelname)s:%(name)s:'
-            '%(module)s.%(funcName)s(): %(message)s'
-        )
 
         self.title = 'tasks title'
         self.notes = 'notes text'
         self.key = None
 
-        #print   # So output from tests is on a new linex
+        try:
+            if sys.argv[1] == '-v':
+                sys.stderr.write()   # So output from tests is on a new linex
+        except:
+            pass
 
     def tearDown(self):
         storage = storagefactory.StorageFactory()
@@ -93,6 +87,14 @@ class TestCLIControllerGTaskStorage(testuicontroller.TestUIController):
 
 
 if __name__ == '__main__':
-    unittest.main()
-#    suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIController)
-#    unittest.TextTestRunner(verbosity=2).run(suite)
+    if len(sys.argv) == 1:
+        unittest.main()
+    elif sys.argv[1] == '-v':
+        suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIControllerFileStorage)
+        unittest.TextTestRunner(verbosity=2).run(suite)
+        suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIControllerSQLiteStorage)
+        unittest.TextTestRunner(verbosity=2).run(suite)
+        suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIControllerGTaskStorage)
+        unittest.TextTestRunner(verbosity=2).run(suite)
+    else:
+        unittest.main()

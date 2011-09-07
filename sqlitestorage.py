@@ -168,7 +168,7 @@ class SQLiteStorage(storage.Storage):
 
         """
         logging.info('attempting to search for task:\n%s', search_task)
-        pass
+        #pass
 
 #def main():
 #    task_dbname = 'taskdb'

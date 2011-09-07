@@ -3,10 +3,10 @@ import teststorage
 import filestorage
 import task
 import os
-import logging
-
+import sys
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
+
 class TestFileStorage(teststorage.TestStorage):
     def setUp(self):
         # Initialize task object with attributes
@@ -22,14 +22,11 @@ class TestFileStorage(teststorage.TestStorage):
             self.test_key_filename
         )
 
-        logging.basicConfig(
-            level=logging.WARNING
-            ,
-            format='[%(asctime)s] %(levelname)s:%(name)s:'
-            '%(module)s.%(funcName)s(): %(message)s'
-        )
-
-        print   # So output from tests is on a new linex
+        try:
+            if sys.argv[1] == '-v':
+                sys.stderr.write()   # So output from tests is on a new linex
+        except:
+            pass
 
     def tearDown(self):
         # Delete test files
@@ -132,8 +129,11 @@ class TestFileStorage(teststorage.TestStorage):
 
         self.assertRaises(IOError, self.storage.write, [self.my_task])
 
-
 if __name__ == '__main__':
-#    unittest.main()
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestFileStorage)
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    if len(sys.argv) == 1:
+        unittest.main()
+    elif sys.argv[1] == '-v':
+        suite = unittest.TestLoader().loadTestsFromTestCase(TestFileStorage)
+        unittest.TextTestRunner(verbosity=2).run(suite)
+    else:
+        unittest.main()

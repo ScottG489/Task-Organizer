@@ -3,7 +3,6 @@ import uicontrollerfactory
 import logging
 from copy import copy
 
-# TODO: Figure out how to make this more testable then create tests.
 class CLIParser():
     def __init__(self):
         self.user_interface = uicontrollerfactory.UIControllerFactory()

@@ -1,7 +1,6 @@
 import unittest
 import sys
 import cliparser
-import logging
 
 ## Is there a simple way to test non-returning functions?
 class TestCLIParser(unittest.TestCase):
@@ -12,13 +11,12 @@ class TestCLIParser(unittest.TestCase):
         self.notes = 'notes'
         self.key = '0'
 
-        logging.basicConfig(
-            level=logging.WARNING,
-            format='[%(asctime)s] %(levelname)s:%(name)s:'
-            '%(module)s.%(funcName)s(): %(message)s'
-        )
+        try:
+            if sys.argv[1] == '-v':
+                sys.stderr.write()   # So output from tests is on a new linex
+        except:
+            pass
 
-        #print   # So output from tests is on a new linex
 
     def tearDown(self):
         pass
@@ -120,6 +118,10 @@ class TestCLIParser(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
-#    suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIParser)
-#    unittest.TextTestRunner(verbosity=2).run(suite)
+    if len(sys.argv) == 1:
+        unittest.main()
+    elif sys.argv[1] == '-v':
+        suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIParser)
+        unittest.TextTestRunner(verbosity=2).run(suite)
+    else:
+        unittest.main()

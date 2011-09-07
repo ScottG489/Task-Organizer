@@ -1,6 +1,5 @@
 #!/usr/bin/python2
 import cliparser
-import logging
 
 # TODO: Add piping functionality (not directly in ctask):
             # i.e. do a search for a bunch of tasks then pipe that to a delete
@@ -11,11 +10,6 @@ def main():
 #    task_filename = 'task_file'
 #    key_filename = 'key_file'
 
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format='[%(asctime)s] %(levelname)s:%(name)s:'
-        '%(module)s.%(funcName)s(): %(message)s'
-    )
 
     my_parser = cliparser.CLIParser()
 

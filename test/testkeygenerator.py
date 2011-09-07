@@ -1,7 +1,8 @@
 import unittest
 import keygenerator
 import os
-import logging
+import sys
+import logger
 
 ## Is there a simple way to test non-returning functions?
 class TestKeyGenerator(unittest.TestCase):
@@ -14,16 +15,15 @@ class TestKeyGenerator(unittest.TestCase):
             self.test_key_filename
         )
 
-        logging.basicConfig(
-            level=logging.WARNING,
-            format='[%(asctime)s] %(levelname)s:%(name)s:'
-            '%(module)s.%(funcName)s(): %(message)s'
-        )
 
         # Clear/Create test files
         open(self.test_key_filename, 'w').close()
 
-        print   # So output from tests is on a new linex
+        try:
+            if sys.argv[1] == '-v':
+                sys.stderr.write()   # So output from tests is on a new linex
+        except:
+            pass
 
     def tearDown(self):
         # Delete test files
@@ -95,6 +95,10 @@ class TestKeyGenerator(unittest.TestCase):
         self.assertRaises(IOError, self.key_gen.update, 0)
 
 if __name__ == '__main__':
-#    unittest.main()
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestKeyGenerator)
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    if len(sys.argv) == 1:
+        unittest.main()
+    elif sys.argv[1] == '-v':
+        suite = unittest.TestLoader().loadTestsFromTestCase(TestKeyGenerator)
+        unittest.TextTestRunner(verbosity=2).run(suite)
+    else:
+        unittest.main()

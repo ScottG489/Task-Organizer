@@ -3,7 +3,7 @@ import teststorage
 import sqlitestorage
 import task
 import os
-import logging
+import sys
 
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
@@ -19,14 +19,12 @@ class TestSQLiteStorage(teststorage.TestStorage):
         self.storage = sqlitestorage.SQLiteStorage(
             self.test_task_dbname)
 
-        logging.basicConfig(
-            level=logging.WARNING
-            ,
-            format='[%(asctime)s] %(levelname)s:%(name)s:'
-            '%(module)s.%(funcName)s(): %(message)s'
-        )
 
-        print   # So output from tests is on a new linex
+        try:
+            if sys.argv[1] == '-v':
+                sys.stderr.write()   # So output from tests is on a new linex
+        except:
+            pass
 
     def tearDown(self):
         # Delete test database
@@ -37,6 +35,10 @@ class TestSQLiteStorage(teststorage.TestStorage):
 
 
 if __name__ == '__main__':
-#    unittest.main()
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestSQLiteStorage)
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    if len(sys.argv) == 1:
+        unittest.main()
+    elif sys.argv[1] == '-v':
+        suite = unittest.TestLoader().loadTestsFromTestCase(TestSQLiteStorage)
+        unittest.TextTestRunner(verbosity=2).run(suite)
+    else:
+        unittest.main()

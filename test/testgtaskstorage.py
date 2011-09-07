@@ -1,8 +1,8 @@
 import unittest
 import gtaskstorage
 import task
-import logging
 import teststorage
+import sys
 
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
@@ -14,13 +14,12 @@ class TestGTaskStorage(teststorage.TestStorage):
         # Initialize file storage object using test-specific file names
         self.storage = gtaskstorage.GTaskStorage()
 
-        logging.basicConfig(
-            level=logging.WARNING,
-            format='[%(asctime)s] %(levelname)s:%(name)s:'
-            '%(module)s.%(funcName)s(): %(message)s'
-        )
 
-        #print   # So output from tests is on a new linex
+        try:
+            if sys.argv[1] == '-v':
+                sys.stderr.write()   # So output from tests is on a new linex
+        except:
+            pass
 
     def tearDown(self):
         self.storage.delete(self.my_task.key)
@@ -41,6 +40,10 @@ class TestGTaskStorage(teststorage.TestStorage):
 
 
 if __name__ == '__main__':
-#    unittest.main()
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestGTaskStorage)
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    if len(sys.argv) == 1:
+        unittest.main()
+    elif sys.argv[1] == '-v':
+        suite = unittest.TestLoader().loadTestsFromTestCase(TestGTaskStorage)
+        unittest.TextTestRunner(verbosity=2).run(suite)
+    else:
+        unittest.main()

@@ -1,4 +1,5 @@
 import unittest
+import logger
 
 class TestUIController(unittest.TestCase):
     def add_task(self):

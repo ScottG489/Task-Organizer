@@ -37,7 +37,7 @@ class Task():
         if self.key == other.key\
                 and self.title == other.title\
                 and self.notes == other.notes:
-                    return True
+            return True
         return False
 
     def __ne__(self, other):

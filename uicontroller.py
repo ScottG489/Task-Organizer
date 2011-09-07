@@ -1,19 +1,19 @@
 class UIController():
     def __init__(self):
-        pass
+        raise NotImplementedError
 
     def add(self, args):
         """This functions is to be overridden by a specific storage method."""
-        pass
+        raise NotImplementedError
 
     def find(self, args):
         """This functions is to be overridden by a specific storage method."""
-        pass
+        raise NotImplementedError
 
     def edit(self, args):
         """This functions is to be overridden by a specific storage method."""
-        pass
+        raise NotImplementedError
 
     def delete(self, args):
         """This functions is to be overridden by a specific storage method."""
-        pass
+        raise NotImplementedError
