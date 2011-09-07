@@ -22,6 +22,7 @@ class FileStorage(storage.Storage):
 
     #TODO:Make private?
     def read(self):
+        """Read Task list from file"""
         logging.info('attempting to read task list')
         task_list = []
         try:
@@ -47,6 +48,7 @@ class FileStorage(storage.Storage):
 
     #TODO:Make private?
     def write(self, task_list):
+        """Write Task list to file"""
         logging.info('attempting to write task list')
         try:
             logging.debug('try: open file for writing: %s'

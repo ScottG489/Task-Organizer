@@ -23,5 +23,5 @@ class Storage():
         raise NotImplementedError
 
     def search(self, search_task):
-        raise NotImplementedError
         """This functions is to be overridden by a specific storage method."""
+        raise NotImplementedError

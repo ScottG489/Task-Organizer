@@ -9,6 +9,7 @@ class KeyGenerator():
 
     #TODO:Make private?
     def read(self):
+        """Read key from file"""
         logging.info('attempting to read key')
         key = 0
         try:
@@ -31,6 +32,7 @@ class KeyGenerator():
 
     #TODO:Make private?
     def write(self, key):
+        """Write key to file"""
         logging.info('attempting to write key')
         try:
             logging.debug("try: open file for writing: %s"
@@ -67,6 +69,7 @@ class KeyGenerator():
         return key
 
     def update(self, key):
+        """Update key in file by incrementing by 1"""
         logging.info("attempting to update key")
         key += 1
         try:
