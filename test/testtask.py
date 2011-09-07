@@ -10,11 +10,7 @@ class TestTask(unittest.TestCase):
         # Initialize task object with attributes
         self.my_task = task.Task(title='title', notes='note')
 
-        try:
-            if sys.argv[1] == '-v':
-                sys.stderr.write()   # So output from tests is on a new linex
-        except:
-            pass
+        print_helper()
 
     def tearDown(self):
         # Clear the my_task Task object
@@ -59,12 +55,25 @@ class TestTask(unittest.TestCase):
 
         self.assertNotEqual(self.my_task, not_task)
 
+def verbosity_helper():
+    verbosity = 1
+    try:
+        if sys.argv[1] == '-v':
+            verbosity = 2
+    except:
+        pass
+
+    return verbosity
+
+def print_helper():
+    try:
+        if verbosity_helper() == 2:
+            sys.stderr.write()   # So output from tests is on a new linex
+    except:
+        pass
 
 if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        unittest.main()
-    elif sys.argv[1] == '-v':
-        suite = unittest.TestLoader().loadTestsFromTestCase(TestTask)
-        unittest.TextTestRunner(verbosity=2).run(suite)
-    else:
-        unittest.main()
+    verbosity = verbosity_helper()
+
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestTask)
+    unittest.TextTestRunner(verbosity=verbosity).run(suite)

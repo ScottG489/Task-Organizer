@@ -1,7 +1,7 @@
 import unittest
 import testuicontroller
 import uicontrollerfactory
-import storagefactory
+import taskstorage
 import os
 import sys
 
@@ -26,11 +26,7 @@ class TestCLIControllerFileStorage(testuicontroller.TestUIController):
         open(self.test_task_filename, 'w').close()
         open(self.test_key_filename, 'w').close()
 
-        try:
-            if sys.argv[1] == '-v':
-                sys.stderr.write()   # So output from tests is on a new linex
-        except:
-            pass
+        print_helper()
 
     def tearDown(self):
         os.remove(self.test_task_filename)
@@ -50,14 +46,10 @@ class TestCLIControllerSQLiteStorage(testuicontroller.TestUIController):
         self.notes = 'notes text'
         self.key = None
 
-        try:
-            if sys.argv[1] == '-v':
-                sys.stderr.write()   # So output from tests is on a new linex
-        except:
-            pass
+        print_helper()
 
     def tearDown(self):
-        storage = storagefactory.StorageFactory()
+        storage = taskstorage.StorageFactory()
         storage = storage.get('sqlite')
         storage.delete(self.key)
 
@@ -74,27 +66,36 @@ class TestCLIControllerGTaskStorage(testuicontroller.TestUIController):
         self.notes = 'notes text'
         self.key = None
 
-        try:
-            if sys.argv[1] == '-v':
-                sys.stderr.write()   # So output from tests is on a new linex
-        except:
-            pass
+        print_helper()
 
     def tearDown(self):
-        storage = storagefactory.StorageFactory()
+        storage = taskstorage.StorageFactory()
         storage = storage.get('gtasks')
         storage.delete(self.key)
 
+def verbosity_helper():
+    verbosity = 1
+    try:
+        if sys.argv[1] == '-v':
+            verbosity = 2
+    except:
+        pass
+
+    return verbosity
+
+def print_helper():
+    try:
+        if verbosity_helper() == 2:
+            sys.stderr.write()   # So output from tests is on a new linex
+    except:
+        pass
 
 if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        unittest.main()
-    elif sys.argv[1] == '-v':
-        suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIControllerFileStorage)
-        unittest.TextTestRunner(verbosity=2).run(suite)
-        suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIControllerSQLiteStorage)
-        unittest.TextTestRunner(verbosity=2).run(suite)
-        suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIControllerGTaskStorage)
-        unittest.TextTestRunner(verbosity=2).run(suite)
-    else:
-        unittest.main()
+    verbosity = verbosity_helper()
+
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIControllerFileStorage)
+    unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIControllerSQLiteStorage)
+    unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIControllerGTaskStorage)
+    unittest.TextTestRunner(verbosity=verbosity).run(suite)

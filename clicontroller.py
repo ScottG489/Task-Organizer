@@ -1,5 +1,5 @@
 import task
-import storagefactory
+import taskstorage
 import uicontroller
 import logging
 
@@ -9,7 +9,7 @@ class CLIController(uicontroller.UIController):
             task_dbname='taskdb',
             task_filename='taskfile',
             key_filename='keyfile'):
-        self.storage = storagefactory.StorageFactory()
+        self.storage = taskstorage.StorageFactory()
         self.storage = self.storage.get(
                 storage_type,
                 task_dbname=task_dbname,

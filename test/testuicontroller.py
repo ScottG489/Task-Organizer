@@ -101,8 +101,3 @@ class TestUIController(unittest.TestCase):
         self.ui.delete(action_dict)
         found_task = self.find_task()
         self.assertIsNone(found_task)
-
-#if __name__ == '__main__':
-#    unittest.main()
-#    suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIController)
-#    unittest.TextTestRunner(verbosity=2).run(suite)

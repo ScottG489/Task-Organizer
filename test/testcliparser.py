@@ -11,12 +11,7 @@ class TestCLIParser(unittest.TestCase):
         self.notes = 'notes'
         self.key = '0'
 
-        try:
-            if sys.argv[1] == '-v':
-                sys.stderr.write()   # So output from tests is on a new linex
-        except:
-            pass
-
+        print_helper()
 
     def tearDown(self):
         pass
@@ -117,11 +112,26 @@ class TestCLIParser(unittest.TestCase):
                     args_dict['notes']])
 
 
+def verbosity_helper():
+    verbosity = 1
+    try:
+        if sys.argv[1] == '-v':
+            verbosity = 2
+    except:
+        pass
+
+    return verbosity
+
+def print_helper():
+    try:
+        if verbosity_helper() == 2:
+            sys.stderr.write()   # So output from tests is on a new linex
+    except:
+        pass
+
 if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        unittest.main()
-    elif sys.argv[1] == '-v':
-        suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIParser)
-        unittest.TextTestRunner(verbosity=2).run(suite)
-    else:
-        unittest.main()
+    verbosity = verbosity_helper()
+
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIParser)
+    unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    unittest.TextTestRunner(verbosity=verbosity).run(suite)
