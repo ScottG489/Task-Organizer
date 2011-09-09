@@ -1,6 +1,6 @@
 class UIController():
     def __init__(self):
-        raise NotImplementedError
+        pass
 
     def add(self, args):
         """This functions is to be overridden by a specific storage method."""

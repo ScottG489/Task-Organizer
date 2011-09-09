@@ -9,6 +9,7 @@ class CLIController(uicontroller.UIController):
             task_dbname='taskdb',
             task_filename='taskfile',
             key_filename='keyfile'):
+        uicontroller.UIController.__init__(self)
         self.storage = taskstorage.StorageFactory()
         self.storage = self.storage.get(
                 storage_type,
@@ -18,6 +19,7 @@ class CLIController(uicontroller.UIController):
 
 
     def add(self, action_info):
+        # pylint: disable=E1103
         """Return a Task given an argument dictionary.
 
         Arguments:
@@ -39,6 +41,7 @@ class CLIController(uicontroller.UIController):
         return task_item
 
     def find(self, action_info):
+        # pylint: disable=E1103
         """Return all Tasks or one with matching key.
 
         Arguments:
@@ -58,6 +61,7 @@ class CLIController(uicontroller.UIController):
             return self.storage.find(action_info['key'])
 
     def edit(self, action_info):
+        # pylint: disable=E1103
         """Edit an existing Task.
 
         Arguments:
@@ -91,6 +95,7 @@ class CLIController(uicontroller.UIController):
         return old_task
 
     def delete(self, action_info):
+        # pylint: disable=E1103
         """Delete an existing Task.
 
         Arguments:

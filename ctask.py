@@ -1,4 +1,22 @@
 #!/usr/bin/python2
+"""
+usage: ctask.py [-h] [--version] {add,find,edit,del} ...
+
+Task organizer.
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --version            show program's version number and exit
+
+Sub-commands:
+  Specify exactly one sub-command.
+
+  {add,find,edit,del}  valid sub-commands
+    add                add a task
+    find               find tasks
+    edit               edit a task
+    del                delete a task
+"""
 import cliparser
 
 # TODO: Add piping functionality (not directly in ctask):
@@ -9,6 +27,9 @@ import cliparser
 def main():
 #    task_filename = 'task_file'
 #    key_filename = 'key_file'
+    import logger 
+    import logging
+    logger.LOG.setLevel(logging.ERROR)
 
     my_parser = cliparser.CLIParser()
 

@@ -43,6 +43,7 @@ class Storage():
 
 class FileStorage(Storage):
     def __init__(self, task_filename='taskfile', key_filename='keyfile'):
+        Storage.__init__(self)
         self.task_filename = task_filename
         self.key_filename = key_filename
 
@@ -56,7 +57,6 @@ class FileStorage(Storage):
             open(self.key_filename, 'w').close()
 
 
-    #TODO:Make private?
     def _read(self):
         """Read Task list from file"""
         logging.info('attempting to read task list')
@@ -82,7 +82,6 @@ class FileStorage(Storage):
         logging.info('success! returning task list')
         return task_list
 
-    #TODO:Make private?
     def _write(self, task_list):
         """Write Task list to file"""
         logging.info('attempting to write task list')
@@ -258,6 +257,7 @@ class FileStorage(Storage):
 
 class SQLiteStorage(Storage):
     def __init__(self, task_dbname='taskdb'):
+        Storage.__init__(self)
         self.task_dbname = task_dbname
         self.task_tablename = 'tasks'
 
@@ -429,7 +429,8 @@ FLAGS = gflags.FLAGS
 #      Should I be including a key visibly in the program this way?
 class GTaskStorage(Storage):
     def __init__(self):
-        FLOW = OAuth2WebServerFlow(
+        Storage.__init__(self)
+        flow = OAuth2WebServerFlow(
                 client_id='651705833552.apps.googleusercontent.com',
                 client_secret='Znu3bxWRp8Iii1GwLdBBolde',
                 scope='https://www.googleapis.com/auth/tasks',
@@ -438,7 +439,7 @@ class GTaskStorage(Storage):
         gstorage = gStorage('tasks.dat')
         credentials = gstorage.get()
         if credentials is None or credentials.invalid == True:
-            credentials = run(FLOW, gstorage)
+            credentials = run(flow, gstorage)
 
         http = httplib2.Http()
         http = credentials.authorize(http)
@@ -447,6 +448,7 @@ class GTaskStorage(Storage):
                        developerKey='AIzaSyBcJBx1IHvzX7Kp7rcGuIzP01tzYY_pX9Y')
 
     def add(self, task_item):
+        # pylint: disable=E1101
         """Add a Task to the GTask storage.
 
         Arguments:
@@ -475,6 +477,7 @@ class GTaskStorage(Storage):
         return task_item.key
 
     def find(self, key = None):
+        # pylint: disable=E1101
         """Return a Task given it's key.
 
         Arguments:
@@ -508,6 +511,7 @@ class GTaskStorage(Storage):
         return task_item
 
     def get_all(self):
+        # pylint: disable=E1101
         """Return a list of all Tasks."""
         logging.info('attempting to get all tasks')
         gtask_list = self.service.tasks().list(tasklist='@default').execute()
@@ -529,6 +533,7 @@ class GTaskStorage(Storage):
         return task_list
 
     def update(self, task_item):
+        # pylint: disable=E1101
         """Update an existing Task in the GTask storage.
 
         Arguments:
@@ -569,6 +574,7 @@ class GTaskStorage(Storage):
         return task_item.key
 
     def delete(self, key):
+        # pylint: disable=E1101
         """Delete an existing Task in the GTask storage.
 
         Arguments:
@@ -646,7 +652,6 @@ class _KeyGenerator():
         self.key_filename = key_filename
 
 
-    #TODO:Make private?
     def _read(self):
         """Read key from file"""
         logging.info('attempting to read key')
@@ -669,7 +674,6 @@ class _KeyGenerator():
         logging.debug('success! returning key')
         return key
 
-    #TODO:Make private?
     def _write(self, key):
         """Write key to file"""
         logging.info('attempting to write key')

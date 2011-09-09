@@ -2,6 +2,9 @@ import unittest
 import task
 import sys
 import logger
+import logging
+
+logger.LOG.setLevel(logging.CRITICAL)
 
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference

@@ -4,6 +4,10 @@ import uicontrollerfactory
 import taskstorage
 import os
 import sys
+import logger
+import logging
+
+logger.LOG.setLevel(logging.CRITICAL)
 
 # TODO: Get logger working in tests.
 class TestCLIControllerFileStorage(testuicontroller.TestUIController):

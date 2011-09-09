@@ -60,6 +60,7 @@ class CLIParser():
 
 
     def init_add_subparser(self):
+        # pylint: disable=E1103
         """Initialize the sub-parser for the add sub-command"""
         arg_parser_add = self.arg_subparsers.add_parser(
             'add',
@@ -77,6 +78,7 @@ class CLIParser():
         )
 
     def init_find_subparser(self):
+        # pylint: disable=E1103
         """Initialize the sub-parser for the find sub-command"""
         arg_parser_find = self.arg_subparsers.add_parser(
             'find',
@@ -99,6 +101,7 @@ class CLIParser():
             help='the key of the task')
 
     def init_edit_subparser(self):
+        # pylint: disable=E1103
         """Initialize the sub-parser for the edit sub-command"""
         arg_parser_edit = self.arg_subparsers.add_parser(
             'edit',
@@ -119,6 +122,7 @@ class CLIParser():
         )
 
     def init_delete_subparser(self):
+        # pylint: disable=E1103
         """Initialize the sub-parser for the del sub-command"""
         arg_parser_delete = self.arg_subparsers.add_parser(
             'del',

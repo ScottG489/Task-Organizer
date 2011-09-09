@@ -1,6 +1,10 @@
 import unittest
 import sys
 import cliparser
+import logger
+import logging
+
+logger.LOG.setLevel(logging.CRITICAL)
 
 ## Is there a simple way to test non-returning functions?
 class TestCLIParser(unittest.TestCase):

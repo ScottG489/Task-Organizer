@@ -1,5 +1,8 @@
 import unittest
 import logger
+import logging
+
+logger.LOG.setLevel(logging.CRITICAL)
 
 class TestUIController(unittest.TestCase):
     def add_task(self):
