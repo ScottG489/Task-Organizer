@@ -270,7 +270,7 @@ class SQLiteStorage(Storage):
 
         try:
             conn_cursor.fetchone()[0]
-        except:
+        except TypeError:
             logging.info('creating table as it doesn\'t exist: %s'
                    , self.task_tablename)
             conn_cursor.execute(
@@ -471,7 +471,7 @@ class GTaskStorage(Storage):
         task_item.title = result['title']
         try:
             task_item.notes = result['notes']
-        except:
+        except KeyError:
             pass
         logging.info('success! task item added\n%s', task_item)
         return task_item.key
@@ -497,7 +497,7 @@ class GTaskStorage(Storage):
             if gtask_item['deleted'] == True:
                 logging.debug('task marked as deleted; returning None')
                 return None
-        except:
+        except KeyError:
             pass
 
         task_item = task.Task(
@@ -505,7 +505,7 @@ class GTaskStorage(Storage):
                 title = gtask_item['title'])
         try:
             task_item.notes = gtask_item['notes']
-        except:
+        except KeyError:
             pass
 
         return task_item
@@ -524,7 +524,7 @@ class GTaskStorage(Storage):
                     title = gtask_item['title'])
             try:
                 task_item.notes = gtask_item['notes']
-            except:
+            except KeyError:
                 pass
 
             task_list.append(task_item)
@@ -555,7 +555,7 @@ class GTaskStorage(Storage):
             if updating_task['deleted'] == True:
                 logging.debug('task marked as deleted; returning None')
                 return None
-        except:
+        except KeyError:
             pass
 
         logging.debug('updating gtask attributes using supplied task')
@@ -595,7 +595,7 @@ class GTaskStorage(Storage):
             if deleting_task['deleted'] == True:
                 logging.debug('task marked as deleted; returning None')
                 return None
-        except:
+        except KeyError:
             pass
 
         self.service.tasks().delete(tasklist='@default', task=key).execute()
@@ -612,8 +612,8 @@ class StorageFactory():
 # TODO: Shouldn't have to delete keywords as incorrect keyword Arguments
         # shouldn't be passed in the first place. However, they are set as
         # defaults in clicontroller.
+    @staticmethod
     def get(
-            self, 
             storage_type, 
             **kwargs):
         """Return a Task storage instance.
@@ -629,7 +629,7 @@ class StorageFactory():
         if storage_type == 'file':
             try:
                 del kwargs['task_dbname']
-            except:
+            except KeyError:
                 pass
             return FileStorage(**kwargs)
         if storage_type == 'gtasks':
@@ -637,11 +637,11 @@ class StorageFactory():
         if storage_type == 'sqlite':
             try:
                 del kwargs['task_filename']
-            except:
+            except KeyError:
                 pass
             try:
                 del kwargs['key_filename']
-            except:
+            except KeyError:
                 pass
             return SQLiteStorage(**kwargs)
 

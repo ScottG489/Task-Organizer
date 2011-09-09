@@ -4,17 +4,17 @@ class Task():
     def __init__(self, **kwargs):
         try:
             self.key = kwargs['key']
-        except:
+        except KeyError:
             self.key = None
 
         try:
             self.title = kwargs['title']
-        except:
+        except KeyError:
             self.title = None
 
         try:
             self.notes = kwargs['notes']
-        except:
+        except KeyError:
             self.notes = None
 
 #        self.priority = priority

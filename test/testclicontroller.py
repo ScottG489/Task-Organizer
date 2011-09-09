@@ -9,14 +9,13 @@ import logging
 
 logger.LOG.setLevel(logging.CRITICAL)
 
-# TODO: Get logger working in tests.
 class TestCLIControllerFileStorage(testuicontroller.TestUIController):
     def setUp(self):
         self.test_task_filename = 'test_taskfile'
         self.test_key_filename = 'test_keyfile'
 
-        self.ui = uicontrollerfactory.UIControllerFactory()
-        self.ui = self.ui.get(
+        self.user_interface = uicontrollerfactory.UIControllerFactory()
+        self.user_interface = self.user_interface.get(
                 'cli',
                 'file',
                 task_filename=self.test_task_filename,
@@ -39,12 +38,11 @@ class TestCLIControllerFileStorage(testuicontroller.TestUIController):
 
 class TestCLIControllerSQLiteStorage(testuicontroller.TestUIController):
     def setUp(self):
-        self.ui = uicontrollerfactory.UIControllerFactory()
-        self.ui = self.ui.get(
+        self.user_interface = uicontrollerfactory.UIControllerFactory()
+        self.user_interface = self.user_interface.get(
                 'cli',
                 'sqlite',
                 task_dbname='testtaskdb')
-
 
         self.title = 'tasks title'
         self.notes = 'notes text'
@@ -60,8 +58,8 @@ class TestCLIControllerSQLiteStorage(testuicontroller.TestUIController):
 
 class TestCLIControllerGTaskStorage(testuicontroller.TestUIController):
     def setUp(self):
-        self.ui = uicontrollerfactory.UIControllerFactory()
-        self.ui = self.ui.get(
+        self.user_interface = uicontrollerfactory.UIControllerFactory()
+        self.user_interface = self.user_interface.get(
                 'cli',
                 'gtasks')
 
@@ -82,7 +80,7 @@ def verbosity_helper():
     try:
         if sys.argv[1] == '-v':
             verbosity = 2
-    except:
+    except IndexError:
         pass
 
     return verbosity
@@ -91,15 +89,18 @@ def print_helper():
     try:
         if verbosity_helper() == 2:
             sys.stderr.write()   # So output from tests is on a new linex
-    except:
+    except IndexError:
         pass
 
 if __name__ == '__main__':
-    verbosity = verbosity_helper()
+    VERBOSITY = verbosity_helper()
 
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIControllerFileStorage)
-    unittest.TextTestRunner(verbosity=verbosity).run(suite)
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIControllerSQLiteStorage)
-    unittest.TextTestRunner(verbosity=verbosity).run(suite)
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIControllerGTaskStorage)
-    unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(
+            TestCLIControllerFileStorage)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(
+            TestCLIControllerSQLiteStorage)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(
+            TestCLIControllerGTaskStorage)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)

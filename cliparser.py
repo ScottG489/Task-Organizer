@@ -155,7 +155,8 @@ class CLIParser():
         logging.info('success! returning argument dictionary')
         return args_dict
 
-    def sanitize(self, raw_parsed_args):
+    @staticmethod
+    def sanitize(raw_parsed_args):
         """Creates and sanitizes an arg dict given the raw parsed args"""
         logging.info('attepting to sanitize arguments')
         args_dict = copy(vars(raw_parsed_args))

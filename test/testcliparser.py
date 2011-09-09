@@ -121,7 +121,7 @@ def verbosity_helper():
     try:
         if sys.argv[1] == '-v':
             verbosity = 2
-    except:
+    except IndexError:
         pass
 
     return verbosity
@@ -130,12 +130,11 @@ def print_helper():
     try:
         if verbosity_helper() == 2:
             sys.stderr.write()   # So output from tests is on a new linex
-    except:
+    except IndexError:
         pass
 
 if __name__ == '__main__':
-    verbosity = verbosity_helper()
+    VERBOSITY = verbosity_helper()
 
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestCLIParser)
-    unittest.TextTestRunner(verbosity=verbosity).run(suite)
-    unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(TestCLIParser)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)

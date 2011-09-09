@@ -6,8 +6,6 @@ import logging
 
 logger.LOG.setLevel(logging.CRITICAL)
 
-#TODO:  add() returns a key but it isn't necessary to assign it since it's
-#           pass by reference
 class TestTask(unittest.TestCase):
     def setUp(self):
         # Initialize task object with attributes
@@ -76,7 +74,7 @@ def print_helper():
         pass
 
 if __name__ == '__main__':
-    verbosity = verbosity_helper()
+    VERBOSITY = verbosity_helper()
 
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestTask)
-    unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(TestTask)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)

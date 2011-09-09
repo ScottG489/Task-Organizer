@@ -375,13 +375,13 @@ def print_helper():
         pass
 
 if __name__ == '__main__':
-    verbosity = verbosity_helper()
+    VERBOSITY = verbosity_helper()
 
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestSQLiteStorage)
-    unittest.TextTestRunner(verbosity=verbosity).run(suite)
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestKeyGenerator)
-    unittest.TextTestRunner(verbosity=verbosity).run(suite)
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestFileStorage)
-    unittest.TextTestRunner(verbosity=verbosity).run(suite)
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestGTaskStorage)
-    unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(TestKeyGenerator)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(TestFileStorage)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(TestSQLiteStorage)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(TestGTaskStorage)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)

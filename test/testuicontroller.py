@@ -11,14 +11,14 @@ class TestUIController(unittest.TestCase):
                 'title': self.title,
                 'notes': self.notes}
 
-        return self.ui.add(action_dict)
+        return self.user_interface.add(action_dict)
 
     def find_task(self):
         action_dict = {
                 'sub_cmd':  'find',
                 'key':      self.key}
 
-        return self.ui.find(action_dict)
+        return self.user_interface.find(action_dict)
 
 
     def test_add(self):
@@ -50,7 +50,7 @@ class TestUIController(unittest.TestCase):
                 'sub_cmd':  'find',
                 'key':      None}
 
-        task_list = self.ui.find(action_dict)
+        task_list = self.user_interface.find(action_dict)
 
         self.assertEqual(
                 [task_list[0].title, task_list[0].notes],
@@ -68,7 +68,7 @@ class TestUIController(unittest.TestCase):
                 'notes': 'new note',
                 'key': self.key}
 
-        old_task = self.ui.edit(action_dict)
+        old_task = self.user_interface.edit(action_dict)
         new_task = self.find_task()
 
         self.assertEqual(new_task.title, old_task.title)
@@ -85,7 +85,7 @@ class TestUIController(unittest.TestCase):
                 'notes': None,
                 'key': self.key}
 
-        old_task = self.ui.edit(action_dict)
+        old_task = self.user_interface.edit(action_dict)
         new_task = self.find_task()
 
         self.assertEqual(
@@ -101,6 +101,6 @@ class TestUIController(unittest.TestCase):
                 'sub_cmd': 'del',
                 'key': self.key}
 
-        self.ui.delete(action_dict)
+        self.user_interface.delete(action_dict)
         found_task = self.find_task()
         self.assertIsNone(found_task)
