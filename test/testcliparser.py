@@ -7,7 +7,7 @@ import logging
 logger.LOG.setLevel(logging.CRITICAL)
 
 class TestCLIParser(unittest.TestCase):
-    def setUp(self):
+    def setUp(self):    # pylint: disable=C0103
         self.parser = cliparser.CLIParser()
 
         self.title = 'title'
@@ -16,7 +16,7 @@ class TestCLIParser(unittest.TestCase):
 
         print_helper()
 
-    def tearDown(self):
+    def tearDown(self):    # pylint: disable=C0103
         pass
 
     def test_add_subparser(self):
@@ -92,27 +92,6 @@ class TestCLIParser(unittest.TestCase):
                     parsed_args['key'],
                     parsed_args['title'],
                     parsed_args['notes']])
-
-    def test_sanitize(self):
-        """Tests that raw parsed args are correctly sanitized"""
-        sub_cmd = 'edit'
-        sys.argv = [
-                'prog_name', 
-                sub_cmd, 
-                '--key', self.key,
-                '--title', self.title,
-                '-n', self.notes]
-
-        raw_parsed_args = self.parser.arg_parser.parse_args()
-
-        args_dict = self.parser.sanitize(raw_parsed_args)
-
-        self.assertEqual(
-                [sub_cmd, self.key, self.title, self.notes],
-                [args_dict['sub_cmd'],
-                    args_dict['key'],
-                    args_dict['title'],
-                    args_dict['notes']])
 
 
 def verbosity_helper():

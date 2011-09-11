@@ -10,7 +10,7 @@ import logging
 logger.LOG.setLevel(logging.CRITICAL)
 
 class TestCLIControllerFileStorage(testuicontroller.TestUIController):
-    def setUp(self):
+    def setUp(self):    # pylint: disable=C0103
         self.test_task_filename = 'test_taskfile'
         self.test_key_filename = 'test_keyfile'
 
@@ -33,13 +33,13 @@ class TestCLIControllerFileStorage(testuicontroller.TestUIController):
 
         self.added_task = self.add_task()
 
-    def tearDown(self):
+    def tearDown(self):    # pylint: disable=C0103
         os.remove(self.test_task_filename)
         os.remove(self.test_key_filename)
 
 
 class TestCLIControllerSQLiteStorage(testuicontroller.TestUIController):
-    def setUp(self):
+    def setUp(self):    # pylint: disable=C0103
         self.user_interface = uicontrollerfactory.UIControllerFactory()
         self.user_interface = self.user_interface.get(
                 'cli',
@@ -54,14 +54,14 @@ class TestCLIControllerSQLiteStorage(testuicontroller.TestUIController):
 
         self.added_task = self.add_task()
 
-    def tearDown(self):
+    def tearDown(self):    # pylint: disable=C0103
         storage = taskstorage.StorageFactory()
         storage = storage.get('sqlite')
         storage.delete(self.added_task.key)
 
 
 class TestCLIControllerGTaskStorage(testuicontroller.TestUIController):
-    def setUp(self):
+    def setUp(self):    # pylint: disable=C0103
         self.user_interface = uicontrollerfactory.UIControllerFactory()
         self.user_interface = self.user_interface.get(
                 'cli',
@@ -76,7 +76,7 @@ class TestCLIControllerGTaskStorage(testuicontroller.TestUIController):
 
         self.added_task = self.add_task()
 
-    def tearDown(self):
+    def tearDown(self):    # pylint: disable=C0103
         storage = taskstorage.StorageFactory()
         storage = storage.get('gtasks')
         storage.delete(self.added_task.key)
@@ -108,6 +108,6 @@ if __name__ == '__main__':
     SUITE = unittest.TestLoader().loadTestsFromTestCase(
             TestCLIControllerSQLiteStorage)
     unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
-#    SUITE = unittest.TestLoader().loadTestsFromTestCase(
-#            TestCLIControllerGTaskStorage)
-#    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(
+            TestCLIControllerGTaskStorage)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)

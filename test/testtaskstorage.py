@@ -93,7 +93,7 @@ class TestStorage(unittest.TestCase):
 #           pass by reference
 
 class TestFileStorage(TestStorage):
-    def setUp(self):
+    def setUp(self):    # pylint: disable=C0103
         # Initialize task object with attributes
         self.my_task = task.Task(title='title', notes='note')
 
@@ -107,13 +107,9 @@ class TestFileStorage(TestStorage):
             self.test_key_filename
         )
 
-        try:
-            if sys.argv[1] == '-v':
-                sys.stderr.write('\n')   # So output from tests is on a new linex
-        except IndexError:
-            pass
+        print_helper()
 
-    def tearDown(self):
+    def tearDown(self):    # pylint: disable=C0103
         # Delete test files
         os.remove(self.test_task_filename)
         os.remove(self.test_key_filename)
@@ -176,50 +172,11 @@ class TestFileStorage(TestStorage):
 
         self.assertEqual(task_search_list, None)
 
-    def test_read(self):
-        """Tests that read() correctly reads and returns the file contents"""
-        self.my_task.key = self.storage.add(self.my_task)
-        task_list = self.storage._read()
-
-        self.assertEqual(self.my_task, task_list[0])
-
-    def test_read_corrupt(self):
-        """Tests read()'s handling of a corrupt file"""
-        file_handler = open(self.test_task_filename, 'w')
-        file_handler.write('Mock corrupt data')
-        file_handler.close()
-
-        self.assertRaises(KeyError, self.storage._read)
-
-    def test_read_permission_fail(self):
-        """Tests read()'s handling of denied file read permissions"""
-        file_handler = open(self.test_task_filename, 'w')
-        file_handler.write('Mock corrupt data')
-        file_handler.close()
-
-        os.chmod(self.test_task_filename, 000)
-        # TODO: Make this assert it's errno 13 (Permission denied)
-        self.assertRaises(IOError, self.storage._read)
-
-    def test_write(self):
-        """Tests that write() correctly writes to the file"""
-        self.storage._write([self.my_task])
-        task_list = self.storage._read()
-
-        self.assertEqual(self.my_task, task_list[0])
-
-    def test_write_permission_fail(self):
-        """Tests write()'s handling of denied file write permissions"""
-        os.chmod(self.test_task_filename, 000)
-
-        self.assertRaises(IOError, self.storage._write, [self.my_task])
-
-
 
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
 class TestGTaskStorage(TestStorage):
-    def setUp(self):
+    def setUp(self):    # pylint: disable=C0103
         # Initialize task object with attributes
         self.my_task = task.Task(title='title', notes='note')
 
@@ -228,7 +185,7 @@ class TestGTaskStorage(TestStorage):
 
         print_helper()
 
-    def tearDown(self):
+    def tearDown(self):    # pylint: disable=C0103
         self.storage.delete(self.my_task.key)
 
         # Clear the my_task Task object
@@ -246,9 +203,11 @@ class TestGTaskStorage(TestStorage):
         self.assertEqual(self.my_task, new_task)
 
 
-## Is there a simple way to test non-returning functions?
+# TODO: How to test _update()'s failed write?
+#       _update will never fail because get() will never call it if it's
+#       call to write() has failed. Maybe add an assert in _update?
 class TestKeyGenerator(unittest.TestCase):
-    def setUp(self):
+    def setUp(self):    # pylint: disable=C0103
         # Initialize test file names
         self.test_key_filename = 'testkeyfile'
 
@@ -263,39 +222,10 @@ class TestKeyGenerator(unittest.TestCase):
 
         print_helper()
 
-    def tearDown(self):
+    def tearDown(self):    # pylint: disable=C0103
         # Delete test files
         os.remove(self.test_key_filename)
 
-
-    def test_read(self):
-        """Tests that read() correctly reads and returns the file contents"""
-        key = self.key_gen.get()
-        key2 = self.key_gen._read()
-
-        self.assertEqual(key, key2 - 1)
-
-    def test_read_corrupt(self):
-        """Tests read()'s handling of a corrupt file"""
-        file_handler = open(self.test_key_filename, 'w')
-        file_handler.write('Mock corrupt data')
-        file_handler.close()
-
-        self.assertRaises(ValueError, self.key_gen._read)
-
-    def test_write(self):
-        """Tests that write() correctly writes to the file"""
-        key = self.key_gen.get()
-        self.key_gen._write(key)
-        key2 = self.key_gen._read()
-
-        self.assertEqual(key, key2)
-
-    def test_write_permission_fail(self):
-        """Tests write()'s handling of denied file write permissions"""
-        os.chmod(self.test_key_filename, 000)
-
-        self.assertRaises(IOError, self.key_gen._write, 0)
 
     def test_get(self):
         """Tests that get() updates and returns the correct key"""
@@ -319,24 +249,11 @@ class TestKeyGenerator(unittest.TestCase):
 
         self.assertRaises(IOError, self.key_gen.get)
 
-    def test_update(self):
-        """Tests that update() correctly updates and writes key"""
-        key = self.key_gen.get()
-        key2 = self.key_gen._update(key)
-
-        self.assertEqual(key, key2 - 1)
-
-    def test_update_write_fail(self):
-        """Tests update()'s handling of failed file writing"""
-        os.chmod(self.test_key_filename, 0400)
-
-        self.assertRaises(IOError, self.key_gen._update, 0)
-
 
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
 class TestSQLiteStorage(TestStorage):
-    def setUp(self):
+    def setUp(self):    # pylint: disable=C0103
         # Initialize task object with attributes
         self.my_task = task.Task(title='title', notes='note')
 
@@ -349,7 +266,7 @@ class TestSQLiteStorage(TestStorage):
 
         print_helper()
 
-    def tearDown(self):
+    def tearDown(self):    # pylint: disable=C0103
         # Delete test database
         os.remove(self.test_task_dbname)
 
