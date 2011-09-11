@@ -8,7 +8,6 @@ import logging
 
 logger.LOG.setLevel(logging.CRITICAL)
 
-
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
 #       Delete added tasks in tearDown()
@@ -110,8 +109,8 @@ class TestFileStorage(TestStorage):
 
         try:
             if sys.argv[1] == '-v':
-                sys.stderr.write()   # So output from tests is on a new linex
-        except:
+                sys.stderr.write('\n')   # So output from tests is on a new linex
+        except IndexError:
             pass
 
     def tearDown(self):
@@ -362,7 +361,8 @@ def verbosity_helper():
     try:
         if sys.argv[1] == '-v':
             verbosity = 2
-    except:
+            logger.LOG.setLevel(logging.CRITICAL)
+    except IndexError:
         pass
 
     return verbosity
@@ -370,8 +370,8 @@ def verbosity_helper():
 def print_helper():
     try:
         if verbosity_helper() == 2:
-            sys.stderr.write()   # So output from tests is on a new linex
-    except:
+            sys.stderr.write('\n')   # So output from tests is on a new linex
+    except IndexError:
         pass
 
 if __name__ == '__main__':

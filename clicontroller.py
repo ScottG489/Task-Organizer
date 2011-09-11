@@ -10,8 +10,7 @@ class CLIController(uicontroller.UIController):
             task_filename='taskfile',
             key_filename='keyfile'):
         uicontroller.UIController.__init__(self)
-        self.storage = taskstorage.StorageFactory()
-        self.storage = self.storage.get(
+        self.storage = taskstorage.StorageFactory.get(
                 storage_type,
                 task_dbname=task_dbname,
                 task_filename=task_filename,

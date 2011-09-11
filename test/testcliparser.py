@@ -6,7 +6,6 @@ import logging
 
 logger.LOG.setLevel(logging.CRITICAL)
 
-## Is there a simple way to test non-returning functions?
 class TestCLIParser(unittest.TestCase):
     def setUp(self):
         self.parser = cliparser.CLIParser()
@@ -121,6 +120,7 @@ def verbosity_helper():
     try:
         if sys.argv[1] == '-v':
             verbosity = 2
+            logger.LOG.setLevel(logging.DEBUG)
     except IndexError:
         pass
 
@@ -129,7 +129,7 @@ def verbosity_helper():
 def print_helper():
     try:
         if verbosity_helper() == 2:
-            sys.stderr.write()   # So output from tests is on a new linex
+            sys.stderr.write('\n')   # So output from tests is on a new linex
     except IndexError:
         pass
 

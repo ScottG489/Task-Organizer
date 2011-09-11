@@ -5,8 +5,7 @@ from copy import copy
 
 class CLIParser():
     def __init__(self):
-        self.user_interface = uicontrollerfactory.UIControllerFactory()
-        self.user_interface = self.user_interface.get(
+        self.user_interface = uicontrollerfactory.UIControllerFactory.get(
                 'cli',
                 'file')
 

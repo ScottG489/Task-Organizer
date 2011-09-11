@@ -31,6 +31,8 @@ class TestCLIControllerFileStorage(testuicontroller.TestUIController):
 
         print_helper()
 
+        self.added_task = self.add_task()
+
     def tearDown(self):
         os.remove(self.test_task_filename)
         os.remove(self.test_key_filename)
@@ -50,10 +52,12 @@ class TestCLIControllerSQLiteStorage(testuicontroller.TestUIController):
 
         print_helper()
 
+        self.added_task = self.add_task()
+
     def tearDown(self):
         storage = taskstorage.StorageFactory()
         storage = storage.get('sqlite')
-        storage.delete(self.key)
+        storage.delete(self.added_task.key)
 
 
 class TestCLIControllerGTaskStorage(testuicontroller.TestUIController):
@@ -70,16 +74,19 @@ class TestCLIControllerGTaskStorage(testuicontroller.TestUIController):
 
         print_helper()
 
+        self.added_task = self.add_task()
+
     def tearDown(self):
         storage = taskstorage.StorageFactory()
         storage = storage.get('gtasks')
-        storage.delete(self.key)
+        storage.delete(self.added_task.key)
 
 def verbosity_helper():
     verbosity = 1
     try:
         if sys.argv[1] == '-v':
             verbosity = 2
+            logger.LOG.setLevel(logging.DEBUG)
     except IndexError:
         pass
 
@@ -88,7 +95,7 @@ def verbosity_helper():
 def print_helper():
     try:
         if verbosity_helper() == 2:
-            sys.stderr.write()   # So output from tests is on a new linex
+            sys.stderr.write('\n')   # So output from tests is on a new linex
     except IndexError:
         pass
 
@@ -101,6 +108,6 @@ if __name__ == '__main__':
     SUITE = unittest.TestLoader().loadTestsFromTestCase(
             TestCLIControllerSQLiteStorage)
     unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
-    SUITE = unittest.TestLoader().loadTestsFromTestCase(
-            TestCLIControllerGTaskStorage)
-    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
+#    SUITE = unittest.TestLoader().loadTestsFromTestCase(
+#            TestCLIControllerGTaskStorage)
+#    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
