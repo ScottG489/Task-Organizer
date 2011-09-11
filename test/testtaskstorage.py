@@ -1,3 +1,5 @@
+import cgitb
+cgitb.enable(format='text')
 import unittest
 import taskstorage
 import task
@@ -12,6 +14,11 @@ logger.LOG.setLevel(logging.CRITICAL)
 #           pass by reference
 #       Delete added tasks in tearDown()
 class TestStorage(unittest.TestCase):
+    def __init__(self, method_name):
+        unittest.TestCase.__init__(self, method_name)
+        self.storage = None
+        self.my_task = None
+
     def test_add(self):
         """Tests that add() correctly adds a Task to storage"""
         self.my_task.key = self.storage.add(self.my_task)
@@ -93,6 +100,9 @@ class TestStorage(unittest.TestCase):
 #           pass by reference
 
 class TestFileStorage(TestStorage):
+    def __init__(self, method_name):
+        TestStorage.__init__(self, method_name)
+
     def setUp(self):    # pylint: disable=C0103
         # Initialize task object with attributes
         self.my_task = task.Task(title='title', notes='note')
@@ -175,7 +185,37 @@ class TestFileStorage(TestStorage):
 
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
+class TestSQLiteStorage(TestStorage):
+    def __init__(self, method_name):
+        TestStorage.__init__(self, method_name)
+
+    def setUp(self):    # pylint: disable=C0103
+        # Initialize task object with attributes
+        self.my_task = task.Task(title='title', notes='note')
+
+        # Initialize test database name
+        self.test_task_dbname = 'testtaskdb'
+
+        # Initialize file storage object using test-specific file names
+        self.storage = taskstorage.SQLiteStorage(
+            self.test_task_dbname)
+
+        print_helper()
+
+    def tearDown(self):    # pylint: disable=C0103
+        # Delete test database
+        os.remove(self.test_task_dbname)
+
+        # Clear the my_task Task object
+        self.my_task = None
+
+
+#TODO:  add() returns a key but it isn't necessary to assign it since it's
+#           pass by reference
 class TestGTaskStorage(TestStorage):
+    def __init__(self, method_name):
+        TestStorage.__init__(self, method_name)
+
     def setUp(self):    # pylint: disable=C0103
         # Initialize task object with attributes
         self.my_task = task.Task(title='title', notes='note')
@@ -249,29 +289,6 @@ class TestKeyGenerator(unittest.TestCase):
 
         self.assertRaises(IOError, self.key_gen.get)
 
-
-#TODO:  add() returns a key but it isn't necessary to assign it since it's
-#           pass by reference
-class TestSQLiteStorage(TestStorage):
-    def setUp(self):    # pylint: disable=C0103
-        # Initialize task object with attributes
-        self.my_task = task.Task(title='title', notes='note')
-
-        # Initialize test database name
-        self.test_task_dbname = 'testtaskdb'
-
-        # Initialize file storage object using test-specific file names
-        self.storage = taskstorage.SQLiteStorage(
-            self.test_task_dbname)
-
-        print_helper()
-
-    def tearDown(self):    # pylint: disable=C0103
-        # Delete test database
-        os.remove(self.test_task_dbname)
-
-        # Clear the my_task Task object
-        self.my_task = None
 
 def verbosity_helper():
     verbosity = 1

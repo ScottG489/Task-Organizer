@@ -5,6 +5,13 @@ import logging
 logger.LOG.setLevel(logging.CRITICAL)
 
 class TestUIController(unittest.TestCase):
+    def __init__(self, method_name):
+        unittest.TestCase.__init__(self, method_name)
+        self.user_interface = None
+        self.title = None
+        self.notes = None
+        self.added_task = None
+
     def add_task(self):
         action_dict = {
                 'sub_cmd': 'add',
