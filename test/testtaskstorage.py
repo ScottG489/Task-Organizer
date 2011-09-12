@@ -14,6 +14,7 @@ logger.LOG.setLevel(logging.CRITICAL)
 #           pass by reference
 #       Delete added tasks in tearDown()
 class TestStorage(unittest.TestCase):
+    # pylint: disable=R0904
     def __init__(self, method_name):
         unittest.TestCase.__init__(self, method_name)
         self.storage = None
@@ -100,6 +101,7 @@ class TestStorage(unittest.TestCase):
 #           pass by reference
 
 class TestFileStorage(TestStorage):
+    # pylint: disable=R0904
     def __init__(self, method_name):
         TestStorage.__init__(self, method_name)
 
@@ -186,6 +188,7 @@ class TestFileStorage(TestStorage):
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
 class TestSQLiteStorage(TestStorage):
+    # pylint: disable=R0904
     def __init__(self, method_name):
         TestStorage.__init__(self, method_name)
 
@@ -213,6 +216,7 @@ class TestSQLiteStorage(TestStorage):
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
 class TestGTaskStorage(TestStorage):
+    # pylint: disable=R0904
     def __init__(self, method_name):
         TestStorage.__init__(self, method_name)
 
@@ -247,6 +251,7 @@ class TestGTaskStorage(TestStorage):
 #       _update will never fail because get() will never call it if it's
 #       call to write() has failed. Maybe add an assert in _update?
 class TestKeyGenerator(unittest.TestCase):
+    # pylint: disable=R0904
     def setUp(self):    # pylint: disable=C0103
         # Initialize test file names
         self.test_key_filename = 'testkeyfile'

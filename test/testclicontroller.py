@@ -10,6 +10,7 @@ import logging
 logger.LOG.setLevel(logging.CRITICAL)
 
 class TestCLIControllerFileStorage(testuicontroller.TestUIController):
+    # pylint: disable=R0904
     def __init__(self, method_name):
         testuicontroller.TestUIController.__init__(self, method_name)
 
@@ -42,6 +43,7 @@ class TestCLIControllerFileStorage(testuicontroller.TestUIController):
 
 
 class TestCLIControllerSQLiteStorage(testuicontroller.TestUIController):
+    # pylint: disable=R0904
     def __init__(self, method_name):
         testuicontroller.TestUIController.__init__(self, method_name)
 
@@ -67,6 +69,7 @@ class TestCLIControllerSQLiteStorage(testuicontroller.TestUIController):
 
 
 class TestCLIControllerGTaskStorage(testuicontroller.TestUIController):
+    # pylint: disable=R0904
     def __init__(self, method_name):
         testuicontroller.TestUIController.__init__(self, method_name)
 

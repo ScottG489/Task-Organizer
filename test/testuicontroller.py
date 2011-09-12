@@ -5,6 +5,7 @@ import logging
 logger.LOG.setLevel(logging.CRITICAL)
 
 class TestUIController(unittest.TestCase):
+    # pylint: disable=R0904
     def __init__(self, method_name):
         unittest.TestCase.__init__(self, method_name)
         self.user_interface = None

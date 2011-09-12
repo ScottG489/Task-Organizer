@@ -7,6 +7,7 @@ import logging
 logger.LOG.setLevel(logging.CRITICAL)
 
 class TestTask(unittest.TestCase):
+    # pylint: disable=R0904
     def setUp(self):    # pylint: disable=C0103
         # Initialize task object with attributes
         self.my_task = task.Task(title='title', notes='note')

@@ -7,6 +7,7 @@ import logging
 logger.LOG.setLevel(logging.CRITICAL)
 
 class TestCLIParser(unittest.TestCase):
+    # pylint: disable=R0904
     def setUp(self):    # pylint: disable=C0103
         self.parser = cliparser.CLIParser()
 
