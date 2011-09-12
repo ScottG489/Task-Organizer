@@ -261,9 +261,9 @@ class SQLiteStorage(Storage):
         self.task_dbname = task_dbname
         self.task_tablename = 'tasks'
 
-        self.db_connection = sqlite3.connect(task_dbname)
-        self.db_connection.row_factory = sqlite3.Row
-        conn_cursor = self.db_connection.cursor()
+        self._db_connection = sqlite3.connect(task_dbname)
+        self._db_connection.row_factory = sqlite3.Row
+        conn_cursor = self._db_connection.cursor()
 
         conn_cursor.execute('select name from sqlite_master where name=?'
                 , (self.task_tablename,))
@@ -291,13 +291,13 @@ class SQLiteStorage(Storage):
 
         """
         logging.info('attempting to add task item:\n%s', task_item)
-        conn_cursor = self.db_connection.cursor()
+        conn_cursor = self._db_connection.cursor()
         result = conn_cursor.execute(
                 '''insert into %s (title, notes) values (?, ?)'''
                % self.task_tablename, (task_item.title, task_item.notes))
         task_item.key = result.lastrowid
 
-        self.db_connection.commit()
+        self._db_connection.commit()
         conn_cursor.close()
         return task_item.key
 
@@ -313,7 +313,7 @@ class SQLiteStorage(Storage):
 
         """
         logging.info('attempting to find item with key: %s', key)
-        conn_cursor = self.db_connection.cursor()
+        conn_cursor = self._db_connection.cursor()
         result = conn_cursor.execute(
                 '''select * from %s where id=?'''
                % self.task_tablename, (key,))
@@ -321,7 +321,7 @@ class SQLiteStorage(Storage):
 
         if result == []:
             logging.info('no matching key found; nothing updated')
-            self.db_connection.commit()
+            self._db_connection.commit()
             conn_cursor.close()
             return None
 
@@ -332,7 +332,7 @@ class SQLiteStorage(Storage):
                 title=result['title'], 
                 notes=result['notes'])
 
-        self.db_connection.commit()
+        self._db_connection.commit()
         conn_cursor.close()
         return task_item
 
@@ -340,7 +340,7 @@ class SQLiteStorage(Storage):
     def get_all(self):
         """Return a list of all Task's"""
         logging.info('attempting to get all tasks')
-        conn_cursor = self.db_connection.cursor()
+        conn_cursor = self._db_connection.cursor()
         sqltask_list = conn_cursor.execute(
                 '''select * from %s ''' % self.task_tablename)
 
@@ -352,7 +352,7 @@ class SQLiteStorage(Storage):
                     notes=sqltask_item['notes'])
             task_list.append(task_item)
 
-        self.db_connection.commit()
+        self._db_connection.commit()
         conn_cursor.close()
         return task_list
 
@@ -368,7 +368,7 @@ class SQLiteStorage(Storage):
 
         """
         logging.info('attempting to update task:\n%s', task_item)
-        conn_cursor = self.db_connection.cursor()
+        conn_cursor = self._db_connection.cursor()
         result = conn_cursor.execute(
                 '''update %s set title=?, notes=? where id=?'''
                % self.task_tablename,
@@ -376,12 +376,12 @@ class SQLiteStorage(Storage):
 
         if result.rowcount == 0:
             logging.info('no matching key found; nothing updated')
-            self.db_connection.commit()
+            self._db_connection.commit()
             conn_cursor.close()
             return None
 
         logging.info('success! task item updated; returning key')
-        self.db_connection.commit()
+        self._db_connection.commit()
         conn_cursor.close()
         return task_item.key
 
@@ -396,18 +396,18 @@ class SQLiteStorage(Storage):
 
         """
         logging.info('attempting to delete task: %s', key)
-        conn_cursor = self.db_connection.cursor()
+        conn_cursor = self._db_connection.cursor()
         result = conn_cursor.execute(
                 '''delete from %s where id=?'''
                % self.task_tablename, (key,))
         if result.rowcount == 0:
             logging.info('no matching key found; nothing updated')
-            self.db_connection.commit()
+            self._db_connection.commit()
             conn_cursor.close()
             return None
 
         logging.info('success! task item updated; returning key')
-        self.db_connection.commit()
+        self._db_connection.commit()
         conn_cursor.close()
         return key
 
@@ -444,7 +444,7 @@ class GTaskStorage(Storage):
         http = httplib2.Http()
         http = credentials.authorize(http)
 
-        self.service = build(serviceName='tasks', version='v1', http=http,
+        self._service = build(serviceName='tasks', version='v1', http=http,
                        developerKey='AIzaSyBcJBx1IHvzX7Kp7rcGuIzP01tzYY_pX9Y')
 
     def add(self, task_item):
@@ -463,7 +463,7 @@ class GTaskStorage(Storage):
                 'notes': task_item.notes,
         }
 
-        result = self.service.tasks().insert(
+        result = self._service.tasks().insert(
                 tasklist='@default',
                 body=new_task
         ).execute()
@@ -487,7 +487,7 @@ class GTaskStorage(Storage):
         is found return None.
         """
         logging.info('attempting to find item with key: %s', key)
-        gtask_item = self.service.tasks().get(
+        gtask_item = self._service.tasks().get(
                 tasklist='@default',
                 task=key
         ).execute()
@@ -514,7 +514,7 @@ class GTaskStorage(Storage):
         # pylint: disable=E1101
         """Return a list of all Tasks."""
         logging.info('attempting to get all tasks')
-        gtask_list = self.service.tasks().list(tasklist='@default').execute()
+        gtask_list = self._service.tasks().list(tasklist='@default').execute()
 
         task_list = []
         logging.debug('creating task list from all gtasks')
@@ -545,7 +545,7 @@ class GTaskStorage(Storage):
 
         """
         logging.info('attempting to update task:\n%s', task_item)
-        updating_task = self.service.tasks().get(
+        updating_task = self._service.tasks().get(
                 tasklist='@default',
                 task=task_item.key
         ).execute()
@@ -563,7 +563,7 @@ class GTaskStorage(Storage):
         updating_task['notes'] = task_item.notes
 
         logging.debug('sending updated gtask')
-        result = self.service.tasks().update(
+        result = self._service.tasks().update(
                 tasklist='@default',
                 task=updating_task['id'],
                 body=updating_task
@@ -585,7 +585,7 @@ class GTaskStorage(Storage):
 
         """
         logging.info('attempting to delete task: %s', key)
-        deleting_task = self.service.tasks().get(
+        deleting_task = self._service.tasks().get(
                 tasklist='@default',
                 task=key
         ).execute()
@@ -598,7 +598,7 @@ class GTaskStorage(Storage):
         except KeyError:
             pass
 
-        self.service.tasks().delete(tasklist='@default', task=key).execute()
+        self._service.tasks().delete(tasklist='@default', task=key).execute()
         logging.info('success! returning deleted task\'s key')
         return key
 

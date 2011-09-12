@@ -5,27 +5,27 @@ from copy import copy
 
 class CLIParser():
     def __init__(self):
-        self.user_interface = uicontrollerfactory.UIControllerFactory.get(
+        self._user_interface = uicontrollerfactory.UIControllerFactory.get(
                 'cli',
                 'file')
 
-        self.arg_parser = argparse.ArgumentParser(
+        self._arg_parser = argparse.ArgumentParser(
             description='Task organizer.',
             epilog='Goodbye.'
         )
-        self.arg_parser.add_argument(
+        self._arg_parser.add_argument(
             '--version',
             action = 'version',
             version = '%(prog)s alpha'
         )
-        self.arg_subparsers = self.arg_parser.add_subparsers(
+        self._arg_subparsers = self._arg_parser.add_subparsers(
             title='Sub-commands',
             description='Specify exactly one sub-command.',
             help='valid sub-commands'
         )
 
-        self.parent_parser_key = argparse.ArgumentParser(add_help=False)
-        self.parent_parser_key.add_argument(
+        self._parent_parser_key = argparse.ArgumentParser(add_help=False)
+        self._parent_parser_key.add_argument(
                 '--key',
                 '-k',
                 action='store',
@@ -33,8 +33,8 @@ class CLIParser():
                 required=True,
                 help='the key of the task'
         )
-        self.parent_parser_title = argparse.ArgumentParser(add_help=False)
-        self.parent_parser_title.add_argument(
+        self._parent_parser_title = argparse.ArgumentParser(add_help=False)
+        self._parent_parser_title.add_argument(
                 '--title',
                 '-t',
                 action='store',
@@ -42,8 +42,8 @@ class CLIParser():
                 type=str,
                 help='title of the task'
         )
-        self.parent_parser_notes = argparse.ArgumentParser(add_help=False)
-        self.parent_parser_notes.add_argument(
+        self._parent_parser_notes = argparse.ArgumentParser(add_help=False)
+        self._parent_parser_notes.add_argument(
                 '--notes',
                 '-n',
                 action='store',
@@ -52,23 +52,23 @@ class CLIParser():
                 help='notes about the task'
         )
 
-        self.init_add_subparser()
-        self.init_find_subparser()
-        self.init_edit_subparser()
-        self.init_delete_subparser()
+        self._init_add_subparser()
+        self._init_find_subparser()
+        self._init_edit_subparser()
+        self._init_delete_subparser()
 
 
-    def init_add_subparser(self):
+    def _init_add_subparser(self):
         # pylint: disable=E1103
         """Initialize the sub-parser for the add sub-command"""
-        arg_parser_add = self.arg_subparsers.add_parser(
+        arg_parser_add = self._arg_subparsers.add_parser(
             'add',
-            parents=[self.parent_parser_title, self.parent_parser_notes],
+            parents=[self._parent_parser_title, self._parent_parser_notes],
             epilog = 'Goodbye.',
             help='add a task'
         )
 
-        arg_parser_add.set_defaults(func=self.user_interface.add)
+        arg_parser_add.set_defaults(func=self._user_interface.add)
 
         arg_parser_add.add_argument(
             'sub_cmd',
@@ -76,16 +76,16 @@ class CLIParser():
             const='add'
         )
 
-    def init_find_subparser(self):
+    def _init_find_subparser(self):
         # pylint: disable=E1103
         """Initialize the sub-parser for the find sub-command"""
-        arg_parser_find = self.arg_subparsers.add_parser(
+        arg_parser_find = self._arg_subparsers.add_parser(
             'find',
             epilog = 'Goodbye.',
             help='find tasks'
         )
 
-        arg_parser_find.set_defaults(func=self.user_interface.find)
+        arg_parser_find.set_defaults(func=self._user_interface.find)
 
         arg_parser_find.add_argument(
             'sub_cmd',
@@ -99,20 +99,20 @@ class CLIParser():
             nargs=1,
             help='the key of the task')
 
-    def init_edit_subparser(self):
+    def _init_edit_subparser(self):
         # pylint: disable=E1103
         """Initialize the sub-parser for the edit sub-command"""
-        arg_parser_edit = self.arg_subparsers.add_parser(
+        arg_parser_edit = self._arg_subparsers.add_parser(
             'edit',
             parents=[
-                self.parent_parser_key, 
-                self.parent_parser_title, 
-                self.parent_parser_notes],
+                self._parent_parser_key, 
+                self._parent_parser_title, 
+                self._parent_parser_notes],
             epilog = 'Goodbye.',
             help='edit a task'
         )
 
-        arg_parser_edit.set_defaults(func=self.user_interface.edit)
+        arg_parser_edit.set_defaults(func=self._user_interface.edit)
 
         arg_parser_edit.add_argument(
             'sub_cmd',
@@ -120,17 +120,17 @@ class CLIParser():
             const='edit'
         )
 
-    def init_delete_subparser(self):
+    def _init_delete_subparser(self):
         # pylint: disable=E1103
         """Initialize the sub-parser for the del sub-command"""
-        arg_parser_delete = self.arg_subparsers.add_parser(
+        arg_parser_delete = self._arg_subparsers.add_parser(
             'del',
-            parents=[self.parent_parser_key],
+            parents=[self._parent_parser_key],
             epilog = 'Goodbye.',
             help='delete a task'
         )
 
-        arg_parser_delete.set_defaults(func=self.user_interface.delete)
+        arg_parser_delete.set_defaults(func=self._user_interface.delete)
 
         arg_parser_delete.add_argument(
             'sub_cmd',
@@ -149,7 +149,7 @@ class CLIParser():
         """
 
         logging.info('attempting to parse arguments')
-        raw_parsed_args = self.arg_parser.parse_args()
+        raw_parsed_args = self._arg_parser.parse_args()
         args_dict = self._sanitize(raw_parsed_args)
         logging.info('success! returning argument dictionary')
         return args_dict

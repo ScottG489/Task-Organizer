@@ -10,7 +10,7 @@ class CLIController(uicontroller.UIController):
             task_filename='taskfile',
             key_filename='keyfile'):
         uicontroller.UIController.__init__(self)
-        self.storage = taskstorage.StorageFactory.get(
+        self._storage = taskstorage.StorageFactory.get(
                 storage_type,
                 task_dbname=task_dbname,
                 task_filename=task_filename,
@@ -36,7 +36,7 @@ class CLIController(uicontroller.UIController):
                 notes=action_info['notes'])
 
         logging.info('storing and returning task')
-        self.storage.add(task_item)
+        self._storage.add(task_item)
         return task_item
 
     def find(self, action_info):
@@ -54,10 +54,10 @@ class CLIController(uicontroller.UIController):
 
         if action_info['key'] == None:
             logging.info('no key specified; returning list of all tasks')
-            return self.storage.get_all()
+            return self._storage.get_all()
         else:
             logging.info('finding task with key and returning Task')
-            return self.storage.find(action_info['key'])
+            return self._storage.find(action_info['key'])
 
     def edit(self, action_info):
         # pylint: disable=E1103
@@ -81,7 +81,7 @@ class CLIController(uicontroller.UIController):
         )
 
         logging.debug('using old task attributes if new ones are\'t given')
-        old_task = self.storage.find(action_info['key'])
+        old_task = self._storage.find(action_info['key'])
         if old_task != None:
             if new_task.title == None:
                 new_task.title = old_task.title
@@ -89,7 +89,7 @@ class CLIController(uicontroller.UIController):
                 new_task.notes = old_task.notes
 
         logging.info('replacing task with newly created task')
-        self.storage.update(new_task)
+        self._storage.update(new_task)
 
         return old_task
 
@@ -106,8 +106,8 @@ class CLIController(uicontroller.UIController):
         """
         logging.info('attempting to delete Task(s) using arguments')
 
-        deleted_task = self.storage.find(action_info['key'])
-        self.storage.delete(action_info['key'])
+        deleted_task = self._storage.find(action_info['key'])
+        self._storage.delete(action_info['key'])
 
         logging.info('success! task deleted')
         return deleted_task
