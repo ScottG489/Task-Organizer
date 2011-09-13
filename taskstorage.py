@@ -1,3 +1,5 @@
+"""Facilitate Tasks in persistant storage
+"""
 import pickle
 import os
 import logging
@@ -411,17 +413,17 @@ class SQLiteStorage(Storage):
         conn_cursor.close()
         return key
 
-    def search(self, search_task):
-        """Return a Task given a search Task
-
-        Arguments:
-        search_task -- the Task to be used for searching
-
-        Using the given search Task,
-
-        """
-        logging.info('attempting to search for task:\n%s', search_task)
-        #pass
+#    def search(self, search_task):
+#        """Return a Task given a search Task
+#
+#        Arguments:
+#        search_task -- the Task to be used for searching
+#
+#        Using the given search Task,
+#
+#        """
+#        logging.info('attempting to search for task:\n%s', search_task)
+#        pass
 
 
 FLAGS = gflags.FLAGS
@@ -602,8 +604,32 @@ class GTaskStorage(Storage):
         logging.info('success! returning deleted task\'s key')
         return key
 
-    def search(self, search_task):
-        pass
+#    def search(self, search_task):
+#        """Return a Task given a search Task
+#
+#        Arguments:
+#        search_task -- the Task to be used for searching
+#
+#        Using the given search Task, iterate through the Task list and append
+#        matching Tasks to a Task list then return this list. If none matches,
+#        return None.
+#
+#        """
+#        logging.info('attempting to search for task:\n%s', search_task)
+#        task_list = self.get_all()
+#        task_search_list = []
+#        for task_item in task_list:
+#            if search_task.title == task_item.title\
+#                    and search_task.notes == task_item.notes:
+#                logging.debug('matching task found:\n%s', task_item)
+#                task_search_list.append(task_item)
+#
+#        if not task_search_list:
+#            logging.info('no matches found')
+#            task_search_list = None
+#        else:
+#            logging.info('success! returning matching tasks')
+#        return task_search_list
 
 
 class StorageFactory():

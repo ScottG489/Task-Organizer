@@ -4,11 +4,11 @@ import logging
 
 logger.LOG.setLevel(logging.CRITICAL)
 
-class TestUIController(unittest.TestCase):
+class TestTaskController(unittest.TestCase):
     # pylint: disable=R0904
     def __init__(self, method_name):
         unittest.TestCase.__init__(self, method_name)
-        self.user_interface = None
+        self.interface_controller = None
         self.title = None
         self.notes = None
         self.added_task = None
@@ -19,14 +19,14 @@ class TestUIController(unittest.TestCase):
                 'title': self.title,
                 'notes': self.notes}
 
-        return self.user_interface.add(action_dict)
+        return self.interface_controller.add(action_dict)
 
     def find_task(self, task_key):
         action_dict = {
                 'sub_cmd':  'find',
                 'key':      task_key}
 
-        return self.user_interface.find(action_dict)
+        return self.interface_controller.find(action_dict)
 
 
     def test_add(self):
@@ -49,7 +49,7 @@ class TestUIController(unittest.TestCase):
                 'sub_cmd':  'find',
                 'key':      None}
 
-        task_list = self.user_interface.find(action_dict)
+        task_list = self.interface_controller.find(action_dict)
 
         self.assertEqual(
                 [task_list[0].title, task_list[0].notes],
@@ -64,7 +64,7 @@ class TestUIController(unittest.TestCase):
                 'notes': 'new note',
                 'key': self.added_task.key}
 
-        old_task = self.user_interface.edit(action_dict)
+        old_task = self.interface_controller.edit(action_dict)
         new_task = self.find_task(self.added_task.key)
 
         self.assertEqual(new_task.title, old_task.title)
@@ -78,7 +78,7 @@ class TestUIController(unittest.TestCase):
                 'notes': None,
                 'key': self.added_task.key}
 
-        old_task = self.user_interface.edit(action_dict)
+        old_task = self.interface_controller.edit(action_dict)
         new_task = self.find_task(self.added_task.key)
 
         self.assertEqual(
@@ -91,6 +91,6 @@ class TestUIController(unittest.TestCase):
                 'sub_cmd': 'del',
                 'key': self.added_task.key}
 
-        self.user_interface.delete(action_dict)
+        self.interface_controller.delete(action_dict)
         found_task = self.find_task(self.added_task.key)
         self.assertIsNone(found_task)

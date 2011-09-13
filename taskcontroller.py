@@ -1,15 +1,22 @@
+"""Task controller library
+
+Classes:
+    TaskController
+
+The docstring for a module should generally list the classes, exceptions and functions (and any other objects) that are exported by the module, with a one-line summary of each. (These summaries generally give less detail than the summary line in the object's docstring.) The docstring for a package (i.e., the docstring of the package's __init__.py module) should also list the modules and subpackages exported by the package.
+"""
 import task
 import taskstorage
-import uicontroller
 import logging
 
-class CLIController(uicontroller.UIController):
+class TaskController():
+    """
+    """
     def __init__(self,
             storage_type, 
             task_dbname='taskdb',
             task_filename='taskfile',
             key_filename='keyfile'):
-        uicontroller.UIController.__init__(self)
         self._storage = taskstorage.StorageFactory.get(
                 storage_type,
                 task_dbname=task_dbname,

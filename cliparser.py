@@ -1,12 +1,14 @@
+"""
+The docstring for a module should generally list the classes, exceptions and functions (and any other objects) that are exported by the module, with a one-line summary of each. (These summaries generally give less detail than the summary line in the object's docstring.) The docstring for a package (i.e., the docstring of the package's __init__.py module) should also list the modules and subpackages exported by the package.
+"""
 import argparse
-import uicontrollerfactory
+import taskcontroller
 import logging
 from copy import copy
 
 class CLIParser():
     def __init__(self):
-        self._user_interface = uicontrollerfactory.UIControllerFactory.get(
-                'cli',
+        self._interface_controller = taskcontroller.TaskController(
                 'file')
 
         self._arg_parser = argparse.ArgumentParser(
@@ -68,7 +70,7 @@ class CLIParser():
             help='add a task'
         )
 
-        arg_parser_add.set_defaults(func=self._user_interface.add)
+        arg_parser_add.set_defaults(func=self._interface_controller.add)
 
         arg_parser_add.add_argument(
             'sub_cmd',
@@ -85,7 +87,7 @@ class CLIParser():
             help='find tasks'
         )
 
-        arg_parser_find.set_defaults(func=self._user_interface.find)
+        arg_parser_find.set_defaults(func=self._interface_controller.find)
 
         arg_parser_find.add_argument(
             'sub_cmd',
@@ -112,7 +114,7 @@ class CLIParser():
             help='edit a task'
         )
 
-        arg_parser_edit.set_defaults(func=self._user_interface.edit)
+        arg_parser_edit.set_defaults(func=self._interface_controller.edit)
 
         arg_parser_edit.add_argument(
             'sub_cmd',
@@ -130,7 +132,7 @@ class CLIParser():
             help='delete a task'
         )
 
-        arg_parser_delete.set_defaults(func=self._user_interface.delete)
+        arg_parser_delete.set_defaults(func=self._interface_controller.delete)
 
         arg_parser_delete.add_argument(
             'sub_cmd',

@@ -1,6 +1,6 @@
 import unittest
-import testuicontroller
-import uicontrollerfactory
+import testtaskcontroller
+import taskcontroller
 import taskstorage
 import os
 import sys
@@ -9,18 +9,16 @@ import logging
 
 logger.LOG.setLevel(logging.CRITICAL)
 
-class TestCLIControllerFileStorage(testuicontroller.TestUIController):
+class TestTaskControllerFileStorage(testtaskcontroller.TestTaskController):
     # pylint: disable=R0904
     def __init__(self, method_name):
-        testuicontroller.TestUIController.__init__(self, method_name)
+        testtaskcontroller.TestTaskController.__init__(self, method_name)
 
     def setUp(self):    # pylint: disable=C0103
         self.test_task_filename = 'test_taskfile'
         self.test_key_filename = 'test_keyfile'
 
-        self.user_interface = uicontrollerfactory.UIControllerFactory()
-        self.user_interface = self.user_interface.get(
-                'cli',
+        self.interface_controller = taskcontroller.TaskController(
                 'file',
                 task_filename=self.test_task_filename,
                 key_filename=self.test_key_filename)
@@ -42,15 +40,13 @@ class TestCLIControllerFileStorage(testuicontroller.TestUIController):
         os.remove(self.test_key_filename)
 
 
-class TestCLIControllerSQLiteStorage(testuicontroller.TestUIController):
+class TestTaskControllerSQLiteStorage(testtaskcontroller.TestTaskController):
     # pylint: disable=R0904
     def __init__(self, method_name):
-        testuicontroller.TestUIController.__init__(self, method_name)
+        testtaskcontroller.TestTaskController.__init__(self, method_name)
 
     def setUp(self):    # pylint: disable=C0103
-        self.user_interface = uicontrollerfactory.UIControllerFactory()
-        self.user_interface = self.user_interface.get(
-                'cli',
+        self.interface_controller = taskcontroller.TaskController(
                 'sqlite',
                 task_dbname='testtaskdb')
 
@@ -68,15 +64,13 @@ class TestCLIControllerSQLiteStorage(testuicontroller.TestUIController):
         storage.delete(self.added_task.key)
 
 
-class TestCLIControllerGTaskStorage(testuicontroller.TestUIController):
+class TestTaskControllerGTaskStorage(testtaskcontroller.TestTaskController):
     # pylint: disable=R0904
     def __init__(self, method_name):
-        testuicontroller.TestUIController.__init__(self, method_name)
+        testtaskcontroller.TestTaskController.__init__(self, method_name)
 
     def setUp(self):    # pylint: disable=C0103
-        self.user_interface = uicontrollerfactory.UIControllerFactory()
-        self.user_interface = self.user_interface.get(
-                'cli',
+        self.interface_controller = taskcontroller.TaskController(
                 'gtasks')
 
 
@@ -115,11 +109,11 @@ if __name__ == '__main__':
     VERBOSITY = verbosity_helper()
 
     SUITE = unittest.TestLoader().loadTestsFromTestCase(
-            TestCLIControllerFileStorage)
+            TestTaskControllerFileStorage)
     unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
     SUITE = unittest.TestLoader().loadTestsFromTestCase(
-            TestCLIControllerSQLiteStorage)
+            TestTaskControllerSQLiteStorage)
     unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
     SUITE = unittest.TestLoader().loadTestsFromTestCase(
-            TestCLIControllerGTaskStorage)
+            TestTaskControllerGTaskStorage)
     unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
