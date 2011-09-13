@@ -3,11 +3,8 @@ import testtaskcontroller
 import taskcontroller
 import taskstorage
 import os
-import sys
-import logger
-import logging
+import util
 
-logger.LOG.setLevel(logging.CRITICAL)
 
 class TestTaskControllerFileStorage(testtaskcontroller.TestTaskController):
     # pylint: disable=R0904
@@ -31,7 +28,7 @@ class TestTaskControllerFileStorage(testtaskcontroller.TestTaskController):
         open(self.test_task_filename, 'w').close()
         open(self.test_key_filename, 'w').close()
 
-        print_helper()
+        util.print_helper()
 
         self.added_task = self.add_task()
 
@@ -54,7 +51,7 @@ class TestTaskControllerSQLiteStorage(testtaskcontroller.TestTaskController):
         self.notes = 'notes text'
         self.key = None
 
-        print_helper()
+        util.print_helper()
 
         self.added_task = self.add_task()
 
@@ -78,7 +75,7 @@ class TestTaskControllerGTaskStorage(testtaskcontroller.TestTaskController):
         self.notes = 'notes text'
         self.key = None
 
-        print_helper()
+        util.print_helper()
 
         self.added_task = self.add_task()
 
@@ -87,26 +84,9 @@ class TestTaskControllerGTaskStorage(testtaskcontroller.TestTaskController):
         storage = storage.get('gtasks')
         storage.delete(self.added_task.key)
 
-def verbosity_helper():
-    verbosity = 1
-    try:
-        if sys.argv[1] == '-v':
-            verbosity = 2
-            logger.LOG.setLevel(logging.DEBUG)
-    except IndexError:
-        pass
-
-    return verbosity
-
-def print_helper():
-    try:
-        if verbosity_helper() == 2:
-            sys.stderr.write('\n')   # So output from tests is on a new linex
-    except IndexError:
-        pass
 
 if __name__ == '__main__':
-    VERBOSITY = verbosity_helper()
+    VERBOSITY = util.verbosity_helper()
 
     SUITE = unittest.TestLoader().loadTestsFromTestCase(
             TestTaskControllerFileStorage)

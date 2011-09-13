@@ -1,8 +1,5 @@
 import unittest
-import logger
-import logging
 
-logger.LOG.setLevel(logging.CRITICAL)
 
 class TestTaskController(unittest.TestCase):
     # pylint: disable=R0904

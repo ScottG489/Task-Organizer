@@ -4,11 +4,8 @@ import unittest
 import taskstorage
 import task
 import os
-import sys
-import logger
-import logging
+import util
 
-logger.LOG.setLevel(logging.CRITICAL)
 
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
@@ -119,7 +116,7 @@ class TestFileStorage(TestStorage):
             self.test_key_filename
         )
 
-        print_helper()
+        util.print_helper()
 
     def tearDown(self):    # pylint: disable=C0103
         # Delete test files
@@ -203,7 +200,7 @@ class TestSQLiteStorage(TestStorage):
         self.storage = taskstorage.SQLiteStorage(
             self.test_task_dbname)
 
-        print_helper()
+        util.print_helper()
 
     def tearDown(self):    # pylint: disable=C0103
         # Delete test database
@@ -227,7 +224,7 @@ class TestGTaskStorage(TestStorage):
         # Initialize file storage object using test-specific file names
         self.storage = taskstorage.GTaskStorage()
 
-        print_helper()
+        util.print_helper()
 
     def tearDown(self):    # pylint: disable=C0103
         self.storage.delete(self.my_task.key)
@@ -265,7 +262,7 @@ class TestKeyGenerator(unittest.TestCase):
         # Clear/Create test files
         open(self.test_key_filename, 'w').close()
 
-        print_helper()
+        util.print_helper()
 
     def tearDown(self):    # pylint: disable=C0103
         # Delete test files
@@ -295,26 +292,8 @@ class TestKeyGenerator(unittest.TestCase):
         self.assertRaises(IOError, self.key_gen.get)
 
 
-def verbosity_helper():
-    verbosity = 1
-    try:
-        if sys.argv[1] == '-v':
-            verbosity = 2
-            logger.LOG.setLevel(logging.CRITICAL)
-    except IndexError:
-        pass
-
-    return verbosity
-
-def print_helper():
-    try:
-        if verbosity_helper() == 2:
-            sys.stderr.write('\n')   # So output from tests is on a new linex
-    except IndexError:
-        pass
-
 if __name__ == '__main__':
-    VERBOSITY = verbosity_helper()
+    VERBOSITY = util.verbosity_helper()
 
     SUITE = unittest.TestLoader().loadTestsFromTestCase(TestKeyGenerator)
     unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)

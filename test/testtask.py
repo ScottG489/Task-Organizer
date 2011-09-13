@@ -1,10 +1,7 @@
 import unittest
 import task
-import sys
-import logger
-import logging
+import util
 
-logger.LOG.setLevel(logging.CRITICAL)
 
 class TestTask(unittest.TestCase):
     # pylint: disable=R0904
@@ -12,7 +9,7 @@ class TestTask(unittest.TestCase):
         # Initialize task object with attributes
         self.my_task = task.Task(title='title', notes='note')
 
-        print_helper()
+        util.print_helper()
 
     def tearDown(self):    # pylint: disable=C0103
         # Clear the my_task Task object
@@ -57,26 +54,9 @@ class TestTask(unittest.TestCase):
 
         self.assertNotEqual(self.my_task, not_task)
 
-def verbosity_helper():
-    verbosity = 1
-    try:
-        if sys.argv[1] == '-v':
-            verbosity = 2
-            logger.LOG.setLevel(logging.CRITICAL)
-    except IndexError:
-        pass
-
-    return verbosity
-
-def print_helper():
-    try:
-        if verbosity_helper() == 2:
-            sys.stderr.write('\n')   # So output from tests is on a new linex
-    except IndexError:
-        pass
 
 if __name__ == '__main__':
-    VERBOSITY = verbosity_helper()
+    VERBOSITY = util.verbosity_helper()
 
     SUITE = unittest.TestLoader().loadTestsFromTestCase(TestTask)
     unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
