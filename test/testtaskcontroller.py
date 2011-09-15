@@ -11,6 +11,7 @@ class TestTaskController(unittest.TestCase):
         self.added_task = None
 
     def add_task(self):
+        """Helper function to add Task to storage as given dict"""
         action_dict = {
                 'sub_cmd': 'add',
                 'title': self.title,
@@ -19,6 +20,7 @@ class TestTaskController(unittest.TestCase):
         return self.interface_controller.add(action_dict)
 
     def find_task(self, task_key):
+        """Helper function to find Task in storage when given key"""
         action_dict = {
                 'sub_cmd':  'find',
                 'key':      task_key}

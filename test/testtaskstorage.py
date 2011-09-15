@@ -10,6 +10,7 @@ import util
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
 #       Delete added tasks in tearDown()
+# TODO: self.my_task.key needs to be assiged so tearDown can delete self.my_task.key
 class TestStorage(unittest.TestCase):
     # pylint: disable=R0904
     def __init__(self, method_name):
@@ -93,6 +94,36 @@ class TestStorage(unittest.TestCase):
         # search(Task)
         # return task_list
 
+class TestGenericStorage(unittest.TestCase):
+    # pylint: disable=R0904
+    def setUp(self):    # pylint: disable=C0103
+        self.my_task = task.Task(title='title', notes='note')
+        self.storage_instance = taskstorage.Storage()
+
+    def tearDown(self):    # pylint: disable=C0103
+        pass
+
+    def test_not_implemented(self):
+        """Tests error handling in storage's abstract functions"""
+        self.assertRaises(
+                NotImplementedError,
+                self.storage_instance.find,
+                self.my_task.key)
+        self.assertRaises(
+                NotImplementedError,
+                self.storage_instance.get_all)
+        self.assertRaises(
+                NotImplementedError,
+                self.storage_instance.update,
+                self.my_task)
+        self.assertRaises(
+                NotImplementedError,
+                self.storage_instance.delete,
+                self.my_task.key)
+        self.assertRaises(
+                NotImplementedError,
+                self.storage_instance.search,
+                self.my_task)
 
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
@@ -295,6 +326,8 @@ class TestKeyGenerator(unittest.TestCase):
 if __name__ == '__main__':
     VERBOSITY = util.verbosity_helper()
 
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(TestGenericStorage)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
     SUITE = unittest.TestLoader().loadTestsFromTestCase(TestKeyGenerator)
     unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
     SUITE = unittest.TestLoader().loadTestsFromTestCase(TestFileStorage)

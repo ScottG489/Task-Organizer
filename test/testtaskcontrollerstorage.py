@@ -30,6 +30,7 @@ class TestTaskControllerFileStorage(testtaskcontroller.TestTaskController):
 
         util.print_helper()
 
+        # TODO: This isn't a good way to do this.
         self.added_task = self.add_task()
 
     def tearDown(self):    # pylint: disable=C0103
@@ -53,6 +54,7 @@ class TestTaskControllerSQLiteStorage(testtaskcontroller.TestTaskController):
 
         util.print_helper()
 
+        # TODO: This isn't a good way to do this.
         self.added_task = self.add_task()
 
     def tearDown(self):    # pylint: disable=C0103
@@ -76,7 +78,7 @@ class TestTaskControllerGTaskStorage(testtaskcontroller.TestTaskController):
         self.key = None
 
         util.print_helper()
-
+        # TODO: This isn't a good way to do this.
         self.added_task = self.add_task()
 
     def tearDown(self):    # pylint: disable=C0103

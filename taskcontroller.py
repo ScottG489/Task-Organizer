@@ -9,6 +9,7 @@ import task
 import taskstorage
 import logging
 
+# XXX: I believe this needs error handling.
 class TaskController():
     """
     """
