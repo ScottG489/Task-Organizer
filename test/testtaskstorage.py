@@ -90,9 +90,14 @@ class TestStorage(unittest.TestCase):
         task_search_list = self.storage.search(search_task)
 
         self.assertTrue(self.my_task in task_search_list)
-        #TODO: Do a matching AND on all attributes given.
-        # search(Task)
-        # return task_list
+
+    def test_search_not_found(self):
+        """Tests search()'s behavior when no match is found"""
+        self.storage.add(self.my_task)
+        search_task = task.Task(title='title1', notes='note1')
+        task_search_list = self.storage.search(search_task)
+
+        self.assertEqual(task_search_list, None)
 
 class TestGenericStorage(unittest.TestCase):
     # pylint: disable=R0904
@@ -204,13 +209,6 @@ class TestFileStorage(TestStorage):
 
         self.assertRaises(IOError, self.storage.delete, self.my_task.key)
 
-    def test_search_not_found(self):
-        """Tests search()'s behavior when no match is found"""
-        self.storage.add(self.my_task)
-        search_task = task.Task(title='title1', notes='note1')
-        task_search_list = self.storage.search(search_task)
-
-        self.assertEqual(task_search_list, None)
 
 
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
@@ -273,6 +271,7 @@ class TestGTaskStorage(TestStorage):
         new_task = self.storage.find(key)
 
         self.assertEqual(self.my_task, new_task)
+
 
 
 # TODO: How to test _update()'s failed write?

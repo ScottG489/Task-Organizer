@@ -230,7 +230,7 @@ class FileStorage(Storage):
         return key_match
 
     def search(self, search_task):
-        """Return a Task given a search Task
+        """Return a Task list given a search Task
 
         Arguments:
         search_task -- the Task to be used for searching
@@ -254,7 +254,7 @@ class FileStorage(Storage):
             task_search_list = None
         else:
             logging.info('success! returning matching tasks')
-        return task_search_list
+            return task_search_list
 
 
 class SQLiteStorage(Storage):
@@ -322,8 +322,7 @@ class SQLiteStorage(Storage):
         result = result.fetchall()
 
         if result == []:
-            logging.info('no matching key found; nothing updated')
-            self._db_connection.commit()
+            logging.info('no matching key found; returning: None')
             conn_cursor.close()
             return None
 
@@ -334,7 +333,6 @@ class SQLiteStorage(Storage):
                 title=result['title'], 
                 notes=result['notes'])
 
-        self._db_connection.commit()
         conn_cursor.close()
         return task_item
 
@@ -354,7 +352,6 @@ class SQLiteStorage(Storage):
                     notes=sqltask_item['notes'])
             task_list.append(task_item)
 
-        self._db_connection.commit()
         conn_cursor.close()
         return task_list
 
@@ -413,19 +410,41 @@ class SQLiteStorage(Storage):
         conn_cursor.close()
         return key
 
-#    def search(self, search_task):
-#        """Return a Task given a search Task
-#
-#        Arguments:
-#        search_task -- the Task to be used for searching
-#
-#        Using the given search Task,
-#
-#        """
-#        logging.info('attempting to search for task:\n%s', search_task)
-#        pass
+    def search(self, search_task):
+        """Return a Task list given a search Task
+
+        Arguments:
+        search_task -- the Task to be used for searching
+
+        Using the given search Task,
+
+        """
+        logging.info('attempting to search for task:\n%s', search_task)
+        conn_cursor = self._db_connection.cursor()
+        result = conn_cursor.execute(
+                '''select * from %s where title=? and notes=?'''
+               % self.task_tablename, (search_task.title, search_task.notes))
+        result = result.fetchall()
+
+        if result == []:
+            logging.info('no matching key found; returning: None')
+            conn_cursor.close()
+            return None
+
+        logging.debug('creating Task list from retrieved rows')
+        task_list = []
+        for sqltask_item in result:
+            task_item = task.Task(
+                    key=sqltask_item['id'], 
+                    title=sqltask_item['title'], 
+                    notes=sqltask_item['notes'])
+            task_list.append(task_item)
+
+        conn_cursor.close()
+        return task_list
 
 
+# TODO: Move this inside GTaskStorage
 FLAGS = gflags.FLAGS
 # XXX: Add try/except blocks around GTask API calls
 #      Should I be including a key visibly in the program this way?
@@ -604,32 +623,33 @@ class GTaskStorage(Storage):
         logging.info('success! returning deleted task\'s key')
         return key
 
-#    def search(self, search_task):
-#        """Return a Task given a search Task
-#
-#        Arguments:
-#        search_task -- the Task to be used for searching
-#
-#        Using the given search Task, iterate through the Task list and append
-#        matching Tasks to a Task list then return this list. If none matches,
-#        return None.
-#
-#        """
-#        logging.info('attempting to search for task:\n%s', search_task)
-#        task_list = self.get_all()
-#        task_search_list = []
-#        for task_item in task_list:
-#            if search_task.title == task_item.title\
-#                    and search_task.notes == task_item.notes:
-#                logging.debug('matching task found:\n%s', task_item)
-#                task_search_list.append(task_item)
-#
-#        if not task_search_list:
-#            logging.info('no matches found')
-#            task_search_list = None
-#        else:
-#            logging.info('success! returning matching tasks')
-#        return task_search_list
+    def search(self, search_task):
+        """Return a Task list given a search Task
+
+        Arguments:
+        search_task -- the Task to be used for searching
+
+        Using the given search Task, iterate through the Task list and append
+        matching Tasks to a Task list then return this list. If none matches,
+        return None.
+
+        """
+        logging.info('attempting to search for task:\n%s', search_task)
+        task_list = self.get_all()
+
+        task_search_list = []
+        for task_item in task_list:
+            if search_task.title == task_item.title\
+                    and search_task.notes == task_item.notes:
+                logging.debug('matching task found:\n%s', task_item)
+                task_search_list.append(task_item)
+
+        if not task_search_list:
+            logging.info('no matches found')
+            task_search_list = None
+        else:
+            logging.info('success! returning matching tasks')
+            return task_search_list
 
 
 class StorageFactory():
