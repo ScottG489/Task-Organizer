@@ -1,4 +1,5 @@
 import unittest
+import taskcreator
 
 
 class TestTaskController(unittest.TestCase):
@@ -17,7 +18,9 @@ class TestTaskController(unittest.TestCase):
                 'title': self.title,
                 'notes': self.notes}
 
-        return self.interface_controller.add(action_dict)
+        task_item = taskcreator.TaskCreator.build(action_dict)
+
+        return self.interface_controller.add(task_item)
 
     def find_task(self, task_key):
         """Helper function to find Task in storage when given key"""
@@ -25,7 +28,9 @@ class TestTaskController(unittest.TestCase):
                 'sub_cmd':  'find',
                 'key':      task_key}
 
-        return self.interface_controller.find(action_dict)
+        task_item = taskcreator.TaskCreator.build(action_dict)
+
+        return self.interface_controller.find(task_item)
 
 
     def test_add(self):
@@ -48,7 +53,9 @@ class TestTaskController(unittest.TestCase):
                 'sub_cmd':  'find',
                 'key':      None}
 
-        task_list = self.interface_controller.find(action_dict)
+        task_item = taskcreator.TaskCreator.build(action_dict)
+
+        task_list = self.interface_controller.find(task_item)
 
         self.assertEqual(
                 [task_list[0].title, task_list[0].notes],
@@ -63,7 +70,9 @@ class TestTaskController(unittest.TestCase):
                 'notes': 'new note',
                 'key': self.added_task.key}
 
-        old_task = self.interface_controller.edit(action_dict)
+        task_item = taskcreator.TaskCreator.build(action_dict)
+
+        old_task = self.interface_controller.edit(task_item)
         new_task = self.find_task(self.added_task.key)
 
         self.assertEqual(new_task.title, old_task.title)
@@ -77,7 +86,9 @@ class TestTaskController(unittest.TestCase):
                 'notes': None,
                 'key': self.added_task.key}
 
-        old_task = self.interface_controller.edit(action_dict)
+        task_item = taskcreator.TaskCreator.build(action_dict)
+
+        old_task = self.interface_controller.edit(task_item)
         new_task = self.find_task(self.added_task.key)
 
         self.assertEqual(
@@ -90,6 +101,8 @@ class TestTaskController(unittest.TestCase):
                 'sub_cmd': 'del',
                 'key': self.added_task.key}
 
-        self.interface_controller.delete(action_dict)
+        task_item = taskcreator.TaskCreator.build(action_dict)
+
+        self.interface_controller.delete(task_item)
         found_task = self.find_task(self.added_task.key)
         self.assertIsNone(found_task)

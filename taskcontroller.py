@@ -25,7 +25,7 @@ class TaskController():
                 key_filename=key_filename)
 
 
-    def add(self, action_info):
+    def add(self, task_item):
         # pylint: disable=E1103
         """Return a Task given an argument dictionary.
 
@@ -38,16 +38,11 @@ class TaskController():
         """
         logging.info('attempting to add arguments as Task')
 
-        logging.debug('creating task from arguments')
-        task_item = task.Task(
-                title=action_info['title'],
-                notes=action_info['notes'])
-
         logging.info('storing and returning task')
         self._storage.add(task_item)
         return task_item
 
-    def find(self, action_info):
+    def find(self, task_item):
         # pylint: disable=E1103
         """Return all Tasks or one with matching key.
 
@@ -60,14 +55,14 @@ class TaskController():
         """
         logging.info('attempting to find Task(s) using arguments')
 
-        if action_info['key'] == None:
+        if task_item.key == None:
             logging.info('no key specified; returning list of all tasks')
             return self._storage.get_all()
         else:
             logging.info('finding task with key and returning Task')
-            return self._storage.find(action_info['key'])
+            return self._storage.find(task_item.key)
 
-    def edit(self, action_info):
+    def edit(self, task_item):
         # pylint: disable=E1103
         """Edit an existing Task.
 
@@ -81,27 +76,20 @@ class TaskController():
         """
         logging.info('attempting to edit Task using arguments')
 
-        logging.debug('creating task from arguments')
-        new_task = task.Task(
-                key=action_info['key'],
-                title=action_info['title'],
-                notes=action_info['notes']
-        )
-
         logging.debug('using old task attributes if new ones are\'t given')
-        old_task = self._storage.find(action_info['key'])
+        old_task = self._storage.find(task_item.key)
         if old_task != None:
-            if new_task.title == None:
-                new_task.title = old_task.title
-            if new_task.notes == None:
-                new_task.notes = old_task.notes
+            if task_item.title == None:
+                task_item.title = old_task.title
+            if task_item.notes == None:
+                task_item.notes = old_task.notes
 
         logging.info('replacing task with newly created task')
-        self._storage.update(new_task)
+        self._storage.update(task_item)
 
         return old_task
 
-    def delete(self, action_info):
+    def delete(self, task_item):
         # pylint: disable=E1103
         """Delete an existing Task.
 
@@ -114,8 +102,8 @@ class TaskController():
         """
         logging.info('attempting to delete Task(s) using arguments')
 
-        deleted_task = self._storage.find(action_info['key'])
-        self._storage.delete(action_info['key'])
+        deleted_task = self._storage.find(task_item.key)
+        self._storage.delete(task_item.key)
 
         logging.info('success! task deleted')
         return deleted_task

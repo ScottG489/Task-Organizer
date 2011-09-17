@@ -58,8 +58,7 @@ class TestTaskControllerSQLiteStorage(testtaskcontroller.TestTaskController):
         self.added_task = self.add_task()
 
     def tearDown(self):    # pylint: disable=C0103
-        storage = taskstorage.StorageFactory()
-        storage = storage.get('sqlite')
+        storage = taskstorage.StorageFactory.get('sqlite')
         storage.delete(self.added_task.key)
 
 
@@ -82,8 +81,7 @@ class TestTaskControllerGTaskStorage(testtaskcontroller.TestTaskController):
         self.added_task = self.add_task()
 
     def tearDown(self):    # pylint: disable=C0103
-        storage = taskstorage.StorageFactory()
-        storage = storage.get('gtasks')
+        storage = taskstorage.StorageFactory.get('gtasks')
         storage.delete(self.added_task.key)
 
 

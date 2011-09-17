@@ -18,6 +18,7 @@ Sub-commands:
     del                delete a task
 """
 import cliparser
+import taskcreator
 
 # TODO: Add piping functionality (not directly in ctask):
             # i.e. do a search for a bunch of tasks then pipe that to a delete
@@ -34,8 +35,9 @@ def main():
     my_parser = cliparser.CLIParser()
 
     parsed_args = my_parser.parse_cl_args()
+    task_item = taskcreator.TaskCreator.build(parsed_args)
 
-    something = parsed_args['func'](parsed_args)
+    something = parsed_args['func'](task_item)
 
     if parsed_args['sub_cmd'] == 'find':
         if parsed_args['key'] == None:

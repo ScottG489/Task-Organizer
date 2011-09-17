@@ -10,7 +10,8 @@ import util
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
 #       Delete added tasks in tearDown()
-# TODO: self.my_task.key needs to be assiged so tearDown can delete self.my_task.key
+# TODO: self.my_task.key needs to be assiged so tearDown
+#       can delete self.my_task.key
 class TestStorage(unittest.TestCase):
     # pylint: disable=R0904
     def __init__(self, method_name):
@@ -110,6 +111,10 @@ class TestGenericStorage(unittest.TestCase):
 
     def test_not_implemented(self):
         """Tests error handling in storage's abstract functions"""
+        self.assertRaises(
+                NotImplementedError,
+                self.storage_instance.add,
+                self.my_task)
         self.assertRaises(
                 NotImplementedError,
                 self.storage_instance.find,
