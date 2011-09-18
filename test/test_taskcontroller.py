@@ -1,8 +1,17 @@
 import unittest
-import taskcreator
+import task
+import taskcontroller
+import taskstorage
+import os
+import util
 
 
 class TestTaskController(unittest.TestCase):
+    """Abstract tests for child tests using specific storage types
+
+    Generic tests used by all TaskController tests undependent on what
+    storage type they are using. These tests should never be called directly.
+    """
     # pylint: disable=R0904
     def __init__(self, method_name):
         unittest.TestCase.__init__(self, method_name)
@@ -18,7 +27,7 @@ class TestTaskController(unittest.TestCase):
                 'title': self.title,
                 'notes': self.notes}
 
-        task_item = taskcreator.TaskCreator.build(action_dict)
+        task_item = task.TaskCreator.build(action_dict)
 
         return self.interface_controller.add(task_item)
 
@@ -28,7 +37,7 @@ class TestTaskController(unittest.TestCase):
                 'sub_cmd':  'find',
                 'key':      task_key}
 
-        task_item = taskcreator.TaskCreator.build(action_dict)
+        task_item = task.TaskCreator.build(action_dict)
 
         return self.interface_controller.find(task_item)
 
@@ -53,7 +62,7 @@ class TestTaskController(unittest.TestCase):
                 'sub_cmd':  'find',
                 'key':      None}
 
-        task_item = taskcreator.TaskCreator.build(action_dict)
+        task_item = task.TaskCreator.build(action_dict)
 
         task_list = self.interface_controller.find(task_item)
 
@@ -70,7 +79,7 @@ class TestTaskController(unittest.TestCase):
                 'notes': 'new note',
                 'key': self.added_task.key}
 
-        task_item = taskcreator.TaskCreator.build(action_dict)
+        task_item = task.TaskCreator.build(action_dict)
 
         old_task = self.interface_controller.edit(task_item)
         new_task = self.find_task(self.added_task.key)
@@ -86,7 +95,7 @@ class TestTaskController(unittest.TestCase):
                 'notes': None,
                 'key': self.added_task.key}
 
-        task_item = taskcreator.TaskCreator.build(action_dict)
+        task_item = task.TaskCreator.build(action_dict)
 
         old_task = self.interface_controller.edit(task_item)
         new_task = self.find_task(self.added_task.key)
@@ -101,8 +110,106 @@ class TestTaskController(unittest.TestCase):
                 'sub_cmd': 'del',
                 'key': self.added_task.key}
 
-        task_item = taskcreator.TaskCreator.build(action_dict)
+        task_item = task.TaskCreator.build(action_dict)
 
         self.interface_controller.delete(task_item)
         found_task = self.find_task(self.added_task.key)
         self.assertIsNone(found_task)
+
+
+
+
+class TestTaskControllerFileStorage(TestTaskController):
+    """Tests the TaskController while using file storage"""
+    # pylint: disable=R0904
+    def __init__(self, method_name):
+        TestTaskController.__init__(self, method_name)
+
+    def setUp(self):    # pylint: disable=C0103
+        self.test_task_filename = 'test_taskfile'
+        self.test_key_filename = 'test_keyfile'
+
+        self.interface_controller = taskcontroller.TaskController(
+                'file',
+                task_filename=self.test_task_filename,
+                key_filename=self.test_key_filename)
+
+
+        self.title = 'tasks title'
+        self.notes = 'notes text'
+        self.key = None
+
+        open(self.test_task_filename, 'w').close()
+        open(self.test_key_filename, 'w').close()
+
+        util.print_helper()
+
+        # TODO: This isn't a good way to do this.
+        self.added_task = self.add_task()
+
+    def tearDown(self):    # pylint: disable=C0103
+        os.remove(self.test_task_filename)
+        os.remove(self.test_key_filename)
+
+
+class TestTaskControllerSQLiteStorage(TestTaskController):
+    """Tests the TaskController while using sqlite storage"""
+    # pylint: disable=R0904
+    def __init__(self, method_name):
+        TestTaskController.__init__(self, method_name)
+
+    def setUp(self):    # pylint: disable=C0103
+        self.interface_controller = taskcontroller.TaskController(
+                'sqlite',
+                task_dbname='testtaskdb')
+
+        self.title = 'tasks title'
+        self.notes = 'notes text'
+        self.key = None
+
+        util.print_helper()
+
+        # TODO: This isn't a good way to do this.
+        self.added_task = self.add_task()
+
+    def tearDown(self):    # pylint: disable=C0103
+        storage = taskstorage.StorageFactory.get('sqlite')
+        storage.delete(self.added_task.key)
+
+
+class TestTaskControllerGTaskStorage(TestTaskController):
+    """Tests the TaskController while using GTask storage"""
+    # pylint: disable=R0904
+    def __init__(self, method_name):
+        TestTaskController.__init__(self, method_name)
+
+    def setUp(self):    # pylint: disable=C0103
+        self.interface_controller = taskcontroller.TaskController(
+                'gtasks')
+
+
+        self.title = 'tasks title'
+        self.notes = 'notes text'
+        self.key = None
+
+        util.print_helper()
+        # TODO: This isn't a good way to do this.
+        self.added_task = self.add_task()
+
+    def tearDown(self):    # pylint: disable=C0103
+        storage = taskstorage.StorageFactory.get('gtasks')
+        storage.delete(self.added_task.key)
+
+
+if __name__ == '__main__':
+    VERBOSITY = util.verbosity_helper()
+
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(
+            TestTaskControllerFileStorage)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(
+            TestTaskControllerSQLiteStorage)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(
+            TestTaskControllerGTaskStorage)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)

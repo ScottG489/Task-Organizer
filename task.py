@@ -1,6 +1,22 @@
+"""Create task objects
+
+Public classes:
+    Task
+    TaskCreator
+
+Provides ways to intantiate a Task instance.
+
+"""
 from textwrap import dedent
 
+# TODO: Should this be private if TaskCreator is to be the only
+#       correct way to make a Task instance?
 class Task():
+    """Instantiate a Task object
+
+    Provides attributes for tasks and methods to compare Task instaces.
+
+    """
     def __init__(self, **kwargs):
         try:
             self.key = kwargs['key']
@@ -49,3 +65,44 @@ class Task():
             return True
 
         return False
+
+
+class TaskCreator():
+    """Create a Task instance automatically
+
+    Public methods:
+        build(arg_dict)
+
+    Create a Task instance in a automatic and safer manner."""
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def build(arg_dict):
+        """Creates a Task instance given a dictionary
+
+        Arguments:
+            arg_dict -- dictionary formatted properly to create a Task
+
+        The given dictionary must have a correct naming scheme. However, it
+        can be missing any field.
+        """
+
+        task_item = Task()
+
+        try:
+            task_item.key = arg_dict['key']
+        except KeyError:
+            task_item.key = None
+
+        try:
+            task_item.title = arg_dict['title']
+        except KeyError:
+            task_item.title = None
+
+        try:
+            task_item.notes = arg_dict['notes']
+        except KeyError:
+            task_item.notes = None
+
+        return task_item

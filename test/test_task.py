@@ -4,6 +4,7 @@ import util
 
 
 class TestTask(unittest.TestCase):
+    """Tests Task objects"""
     # pylint: disable=R0904
     def setUp(self):    # pylint: disable=C0103
         # Initialize task object with attributes
@@ -55,8 +56,36 @@ class TestTask(unittest.TestCase):
         self.assertNotEqual(self.my_task, not_task)
 
 
+class TestTaskCreator(unittest.TestCase):
+    """Tests that TaskCreator correctly creates Task objects"""
+    # pylint: disable=R0904
+    def setUp(self):    # pylint: disable=C0103
+        self.title = 'task title'
+        self.notes = 'task notes'
+
+    def tearDown(self):    # pylint: disable=C0103
+        self.title = None
+        self.notes = None
+
+
+    def test_build(self):
+        """Tests the creation of Task objects from dictionaries"""
+        action_dict = {
+                'sub_cmd': 'add',
+                'title': self.title,
+                'notes': self.notes}
+
+        task_item = task.TaskCreator.build(action_dict)
+
+        self.assertEqual(
+                [task_item.title, task_item.notes],
+                [action_dict['title'], action_dict['notes']])
+
+
 if __name__ == '__main__':
     VERBOSITY = util.verbosity_helper()
 
     SUITE = unittest.TestLoader().loadTestsFromTestCase(TestTask)
+    unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(TestTaskCreator)
     unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)
