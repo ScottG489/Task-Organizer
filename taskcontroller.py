@@ -5,13 +5,21 @@ Classes:
 
 The docstring for a module should generally list the classes, exceptions and functions (and any other objects) that are exported by the module, with a one-line summary of each. (These summaries generally give less detail than the summary line in the object's docstring.) The docstring for a package (i.e., the docstring of the package's __init__.py module) should also list the modules and subpackages exported by the package.
 """
-import task
 import taskstorage
 import logging
 
 # XXX: I believe this needs error handling.
 class TaskController():
-    """
+    """Interface to manipulate Tasks
+
+    Public methods:
+        add(task_item)
+        find(task_item)
+        edit(task_item)
+        delete(task_item)
+
+    API for working with Task objects.
+
     """
     def __init__(self,
             storage_type, 
@@ -30,7 +38,7 @@ class TaskController():
         """Return a Task given an argument dictionary.
 
         Arguments:
-        action_info -- dictionary created from command line arguments
+            action_info -- dictionary created from command line arguments
 
         Using the given dictionary, a Task object is created and added to
         storage.
@@ -47,7 +55,7 @@ class TaskController():
         """Return all Tasks or one with matching key.
 
         Arguments:
-        action_info -- dictionary created from command line arguments
+            action_info -- dictionary created from command line arguments
 
         Using the given dictionary, return a list of all Tasks if the given key
         is None. Return a single Task if a key is found to match the given key.
@@ -67,7 +75,7 @@ class TaskController():
         """Edit an existing Task.
 
         Arguments:
-        action_info -- dictionary created from command line arguments
+            action_info -- dictionary created from command line arguments
 
         Using the given dictionary, create a Task object. If any attributes
         are None, replace those values with the values of the current values
@@ -94,7 +102,7 @@ class TaskController():
         """Delete an existing Task.
 
         Arguments:
-        action_info -- dictionary created from command line arguments
+            action_info -- dictionary created from command line arguments
 
         Using the given dictionary's key, attempt to delete the Task if a
         matching key is found.
@@ -107,3 +115,6 @@ class TaskController():
 
         logging.info('success! task deleted')
         return deleted_task
+
+#    def search(self, task_item):
+#        pass

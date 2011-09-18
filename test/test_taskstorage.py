@@ -1,5 +1,3 @@
-import cgitb
-cgitb.enable(format='text')
 import unittest
 import taskstorage
 import task
@@ -13,6 +11,12 @@ import util
 # TODO: self.my_task.key needs to be assiged so tearDown
 #       can delete self.my_task.key
 class TestStorage(unittest.TestCase):
+    """Abstract tests for the child classes of the Storage class
+
+    This abstract test case's functions should be called only through a
+    child test case.
+
+    """
     # pylint: disable=R0904
     def __init__(self, method_name):
         unittest.TestCase.__init__(self, method_name)
@@ -101,6 +105,11 @@ class TestStorage(unittest.TestCase):
         self.assertEqual(task_search_list, None)
 
 class TestGenericStorage(unittest.TestCase):
+    """Tests the Storage abstract base class directly
+
+    Tests that Storage abstract base class handles direct instantiations.
+
+    """
     # pylint: disable=R0904
     def setUp(self):    # pylint: disable=C0103
         self.my_task = task.Task(title='title', notes='note')
@@ -139,6 +148,12 @@ class TestGenericStorage(unittest.TestCase):
 #           pass by reference
 
 class TestFileStorage(TestStorage):
+    """Tests specific to the FileStorage class
+
+    Tests that only apply to the implementation of the FileStorage class and
+    not other storage types.
+
+    """
     # pylint: disable=R0904
     def __init__(self, method_name):
         TestStorage.__init__(self, method_name)
@@ -219,6 +234,12 @@ class TestFileStorage(TestStorage):
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
 class TestSQLiteStorage(TestStorage):
+    """Tests specific to the SQLiteStorage class
+
+    Tests that only apply to the implementation of the SQLiteStorage class and
+    not other storage types.
+
+    """
     # pylint: disable=R0904
     def __init__(self, method_name):
         TestStorage.__init__(self, method_name)
@@ -247,6 +268,12 @@ class TestSQLiteStorage(TestStorage):
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
 class TestGTaskStorage(TestStorage):
+    """Tests specific to the GTaskStorage class
+
+    Tests that only apply to the implementation of the GTaskStorage class and
+    not other storage types.
+
+    """
     # pylint: disable=R0904
     def __init__(self, method_name):
         TestStorage.__init__(self, method_name)
@@ -283,6 +310,12 @@ class TestGTaskStorage(TestStorage):
 #       _update will never fail because get() will never call it if it's
 #       call to write() has failed. Maybe add an assert in _update?
 class TestKeyGenerator(unittest.TestCase):
+    """Tests for the KeyGenerator class
+
+    Tests the public methods of the KeyGenerator class used by the FileStorage
+    class.
+
+    """
     # pylint: disable=R0904
     def setUp(self):    # pylint: disable=C0103
         # Initialize test file names

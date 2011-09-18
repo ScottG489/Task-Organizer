@@ -26,6 +26,7 @@ import taskcreator
     # Allow find and del to accept a list of keys
     # Rename the subcommand 'find' to 'list'?
 def main():
+    """Command line implementation of task library"""
 #    task_filename = 'task_file'
 #    key_filename = 'key_file'
     import logger 

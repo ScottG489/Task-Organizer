@@ -1,4 +1,13 @@
 """Facilitate Tasks in persistant storage
+
+Public Classes:
+    FileStorage
+    SQLiteStorage
+    GTaskStorage
+    StorageFactory
+
+Provides an interface to persist Task objects in differet storage mediums.
+
 """
 import pickle
 import os
@@ -14,7 +23,20 @@ from oauth2client.tools import run
 import task
 import sqlite3
 
+# TODO: Should all classes except StorageFactory be private since it's
+#       the only interface that's really needed?
 class Storage():
+    """Abstract base class for Task storage
+
+    Public methods:
+        add(task_item)
+        find(key = None)
+        get_all()
+        update(task_item)
+        delete(key)
+        search(search_task)
+
+    """
     def __init__(self):
         pass
 
@@ -44,6 +66,23 @@ class Storage():
 
 
 class FileStorage(Storage):
+    """Interface for storing Tasks to a file
+
+    Keyword Arguments/Instance variables:
+        task_filename -- name of file in which to store the Task list
+        key_filename -- name of file in which to store the next key
+
+    Public methods:
+        add(task_item)
+        find(key = None)
+        get_all()
+        update(task_item)
+        delete(key)
+        search(search_task)
+
+    Reads and writes Task objects from a file as a single list.
+
+    """
     def __init__(self, task_filename='taskfile', key_filename='keyfile'):
         Storage.__init__(self)
         self.task_filename = task_filename
@@ -104,7 +143,7 @@ class FileStorage(Storage):
         """Add a Task to the file storage.
 
         Arguments:
-        task_item -- the Task object to be added to storage
+            task_item -- the Task object to be added to storage
 
         The Task object is given a key and appended to the list of Tasks in the file.
 
@@ -133,7 +172,7 @@ class FileStorage(Storage):
         """Return a Task given it's key.
 
         Arguments:
-        key -- the key for the desired Task object
+            key -- the key for the desired Task object
 
         Using the given key, iterate through the Task list and return the Task
         with matching key. If none is found return None.
@@ -171,7 +210,7 @@ class FileStorage(Storage):
         """Update an existing Task in the file storage.
 
         Arguments:
-        task_item -- the Task object to be updated
+            task_item -- the Task object to be updated
 
         Using the given Task's key, iterate through the Task list to find a
         matching key, replace the matching Task with the given Task, and
@@ -203,7 +242,7 @@ class FileStorage(Storage):
         """Delete an existing Task in the file storage.
 
         Arguments:
-        key -- the key for the desired Task object to delete
+            key -- the key for the desired Task object to delete
 
         Using the given key, iterate through the Task list and delete the 
         matching Task. If none is found, nothing is deleted and return None.
@@ -233,7 +272,7 @@ class FileStorage(Storage):
         """Return a Task list given a search Task
 
         Arguments:
-        search_task -- the Task to be used for searching
+            search_task -- the Task to be used for searching
 
         Using the given search Task, iterate through the Task list and append
         matching Tasks to a Task list then return this list. If none matches,
@@ -258,23 +297,40 @@ class FileStorage(Storage):
 
 
 class SQLiteStorage(Storage):
+    """Interface for storing Tasks to a SQLite database
+
+    Keyword Arguments/Instance variables:
+        task_dbname -- name of database/file in which to store Tasks
+
+    Public methods:
+        add(task_item)
+        find(key = None)
+        get_all()
+        update(task_item)
+        delete(key)
+        search(search_task)
+
+    Reads and writes Task objects from a sqlite database file. Tasks are
+    stored in a table whos columns coincide with the Task's attributes.
+
+    """
     def __init__(self, task_dbname='taskdb'):
         Storage.__init__(self)
         self.task_dbname = task_dbname
-        self.task_tablename = 'tasks'
+        self._task_tablename = 'tasks'
 
         self._db_connection = sqlite3.connect(task_dbname)
         self._db_connection.row_factory = sqlite3.Row
         conn_cursor = self._db_connection.cursor()
 
         conn_cursor.execute('select name from sqlite_master where name=?'
-                , (self.task_tablename,))
+                , (self._task_tablename,))
 
         try:
             conn_cursor.fetchone()[0]
         except TypeError:
             logging.info('creating table as it doesn\'t exist: %s'
-                   , self.task_tablename)
+                   , self._task_tablename)
             conn_cursor.execute(
                     '''create table tasks
                     (id integer primary key,
@@ -286,7 +342,7 @@ class SQLiteStorage(Storage):
         """Add a Task to the database storage.
 
         Arguments:
-        task_item -- the Task object to be added to storage
+            task_item -- the Task object to be added to storage
 
         The Task object is given a key and appended to the list of Tasks in
         the database.
@@ -296,7 +352,7 @@ class SQLiteStorage(Storage):
         conn_cursor = self._db_connection.cursor()
         result = conn_cursor.execute(
                 '''insert into %s (title, notes) values (?, ?)'''
-               % self.task_tablename, (task_item.title, task_item.notes))
+               % self._task_tablename, (task_item.title, task_item.notes))
         task_item.key = result.lastrowid
 
         self._db_connection.commit()
@@ -308,7 +364,7 @@ class SQLiteStorage(Storage):
         """Return a Task given it's key.
 
         Arguments:
-        key -- the key for the desired Task object
+            key -- the key for the desired Task object
 
         Using the given key, get the Task with the matching key from the
         database and return the Task. If none is found return None.
@@ -318,7 +374,7 @@ class SQLiteStorage(Storage):
         conn_cursor = self._db_connection.cursor()
         result = conn_cursor.execute(
                 '''select * from %s where id=?'''
-               % self.task_tablename, (key,))
+               % self._task_tablename, (key,))
         result = result.fetchall()
 
         if result == []:
@@ -342,7 +398,7 @@ class SQLiteStorage(Storage):
         logging.info('attempting to get all tasks')
         conn_cursor = self._db_connection.cursor()
         sqltask_list = conn_cursor.execute(
-                '''select * from %s ''' % self.task_tablename)
+                '''select * from %s ''' % self._task_tablename)
 
         task_list = []
         for sqltask_item in sqltask_list.fetchmany():
@@ -359,7 +415,7 @@ class SQLiteStorage(Storage):
         """Update an existing Task in the database storage.
 
         Arguments:
-        task_item -- the Task object to be updated
+            task_item -- the Task object to be updated
 
         Using the given Task's key, find the matching Task in the database and
         replace it with the given Task then return the old Task. If none is
@@ -370,7 +426,7 @@ class SQLiteStorage(Storage):
         conn_cursor = self._db_connection.cursor()
         result = conn_cursor.execute(
                 '''update %s set title=?, notes=? where id=?'''
-               % self.task_tablename,
+               % self._task_tablename,
                 (task_item.title, task_item.notes, task_item.key))
 
         if result.rowcount == 0:
@@ -388,7 +444,7 @@ class SQLiteStorage(Storage):
         """Delete an existing Task in the database storage.
 
         Arguments:
-        key -- the key for the desired Task object to delete
+            key -- the key for the desired Task object to delete
 
         Using the given key, find the matching Task in the database and
         delete it. If none is found, nothing is deleted and return None.
@@ -398,7 +454,7 @@ class SQLiteStorage(Storage):
         conn_cursor = self._db_connection.cursor()
         result = conn_cursor.execute(
                 '''delete from %s where id=?'''
-               % self.task_tablename, (key,))
+               % self._task_tablename, (key,))
         if result.rowcount == 0:
             logging.info('no matching key found; nothing updated')
             self._db_connection.commit()
@@ -414,7 +470,7 @@ class SQLiteStorage(Storage):
         """Return a Task list given a search Task
 
         Arguments:
-        search_task -- the Task to be used for searching
+            search_task -- the Task to be used for searching
 
         Using the given search Task,
 
@@ -423,7 +479,7 @@ class SQLiteStorage(Storage):
         conn_cursor = self._db_connection.cursor()
         result = conn_cursor.execute(
                 '''select * from %s where title=? and notes=?'''
-               % self.task_tablename, (search_task.title, search_task.notes))
+               % self._task_tablename, (search_task.title, search_task.notes))
         result = result.fetchall()
 
         if result == []:
@@ -449,6 +505,19 @@ FLAGS = gflags.FLAGS
 # XXX: Add try/except blocks around GTask API calls
 #      Should I be including a key visibly in the program this way?
 class GTaskStorage(Storage):
+    """Interface for storing Tasks to Google Tasks
+
+    Public methods:
+        add(task_item)
+        find(key = None)
+        get_all()
+        update(task_item)
+        delete(key)
+        search(search_task)
+
+    Reads and writes Task from Google Tasks. Task objects are transformed
+    to and from Google's task dictionaries.
+    """
     def __init__(self):
         Storage.__init__(self)
         flow = OAuth2WebServerFlow(
@@ -473,7 +542,7 @@ class GTaskStorage(Storage):
         """Add a Task to the GTask storage.
 
         Arguments:
-        task_item -- the Task object to be added to Storage
+            task_item -- the Task object to be added to Storage
 
         The Task object is added to storage and given a key.
 
@@ -502,7 +571,7 @@ class GTaskStorage(Storage):
         """Return a Task given it's key.
 
         Arguments:
-        key -- the key for the desired Task object
+            key -- the key for the desired Task object
 
         Using the given key, return the Task with the matching key. If none
         is found return None.
@@ -558,7 +627,7 @@ class GTaskStorage(Storage):
         """Update an existing Task in the GTask storage.
 
         Arguments:
-        task_item -- the Task object to be updated
+            task_item -- the Task object to be updated
 
         Using the given Task's key, find the Task with a matching key and
         replace it with the given Task. Then return the old Task. If none
@@ -599,7 +668,7 @@ class GTaskStorage(Storage):
         """Delete an existing Task in the GTask storage.
 
         Arguments:
-        key -- the key for the desired Task object to delete
+            key -- the key for the desired Task object to delete
 
         Using the given key, delete the matching Task. If none is found,
         nothing is deleted and return None.
@@ -627,7 +696,7 @@ class GTaskStorage(Storage):
         """Return a Task list given a search Task
 
         Arguments:
-        search_task -- the Task to be used for searching
+            search_task -- the Task to be used for searching
 
         Using the given search Task, iterate through the Task list and append
         matching Tasks to a Task list then return this list. If none matches,
@@ -653,6 +722,15 @@ class GTaskStorage(Storage):
 
 
 class StorageFactory():
+    """Interface for getting a storage instance
+
+    Public methods:
+        get(storage_type, **kwargs)
+
+    Select the type of storage in which to store Task objects and pass
+    arguments to the specified storage classes constructor.
+
+    """
     def __init__(self):
         pass
 # TODO: Shouldn't have to delete keywords as incorrect keyword Arguments
@@ -665,8 +743,8 @@ class StorageFactory():
         """Return a Task storage instance.
 
         Arguments:
-        storage_type -- name of the desired storage type
-        kwargs -- keyword arguments specific to each storage type
+            storage_type -- name of the desired storage type
+            kwargs -- keyword arguments specific to each storage type
 
         Using the given storage type, create an instance with the given
         optional keyword arguments and return the storage instance.
@@ -693,6 +771,18 @@ class StorageFactory():
 
 
 class _KeyGenerator():
+    """Generate unique keys for Tasks
+
+    Keyword Arguments/Instance variables:
+        key_filename -- name of file in which to store key
+
+    Public methods:
+        get()
+
+    Get a unique key for a Task being stored in a file. Key's are integers
+    incremented by 1.
+
+    """
     def __init__(self, key_filename='keyfile'):
     # File will hold the ID of the NEXT task
         self.key_filename = key_filename

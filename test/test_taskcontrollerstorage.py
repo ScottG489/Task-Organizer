@@ -1,15 +1,16 @@
 import unittest
-import testtaskcontroller
+import test_taskcontroller
 import taskcontroller
 import taskstorage
 import os
 import util
 
 
-class TestTaskControllerFileStorage(testtaskcontroller.TestTaskController):
+class TestTaskControllerFileStorage(test_taskcontroller.TestTaskController):
+    """Tests the TaskController while using file storage"""
     # pylint: disable=R0904
     def __init__(self, method_name):
-        testtaskcontroller.TestTaskController.__init__(self, method_name)
+        test_taskcontroller.TestTaskController.__init__(self, method_name)
 
     def setUp(self):    # pylint: disable=C0103
         self.test_task_filename = 'test_taskfile'
@@ -38,10 +39,11 @@ class TestTaskControllerFileStorage(testtaskcontroller.TestTaskController):
         os.remove(self.test_key_filename)
 
 
-class TestTaskControllerSQLiteStorage(testtaskcontroller.TestTaskController):
+class TestTaskControllerSQLiteStorage(test_taskcontroller.TestTaskController):
+    """Tests the TaskController while using sqlite storage"""
     # pylint: disable=R0904
     def __init__(self, method_name):
-        testtaskcontroller.TestTaskController.__init__(self, method_name)
+        test_taskcontroller.TestTaskController.__init__(self, method_name)
 
     def setUp(self):    # pylint: disable=C0103
         self.interface_controller = taskcontroller.TaskController(
@@ -62,10 +64,11 @@ class TestTaskControllerSQLiteStorage(testtaskcontroller.TestTaskController):
         storage.delete(self.added_task.key)
 
 
-class TestTaskControllerGTaskStorage(testtaskcontroller.TestTaskController):
+class TestTaskControllerGTaskStorage(test_taskcontroller.TestTaskController):
+    """Tests the TaskController while using GTask storage"""
     # pylint: disable=R0904
     def __init__(self, method_name):
-        testtaskcontroller.TestTaskController.__init__(self, method_name)
+        test_taskcontroller.TestTaskController.__init__(self, method_name)
 
     def setUp(self):    # pylint: disable=C0103
         self.interface_controller = taskcontroller.TaskController(
