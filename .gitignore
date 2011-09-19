@@ -4,3 +4,4 @@
 !*.py
 !.gitignore
 !README
+conf.py

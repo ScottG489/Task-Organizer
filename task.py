@@ -81,8 +81,8 @@ class TaskCreator():
     def build(arg_dict):
         """Creates a Task instance given a dictionary
 
-        Arguments:
-            arg_dict -- dictionary formatted properly to create a Task
+        Args:
+            arg_dict (dict): dictionary formatted to create a Task
 
         The given dictionary must have a correct naming scheme. However, it
         can be missing any field.

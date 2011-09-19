@@ -12,7 +12,15 @@ import logging
 class TaskController():
     """Interface to manipulate Tasks
 
-    Public methods:
+    Args:
+        storage_type (str): Type of storage in which to persist Tasks
+
+    Kwargs:
+        task_dbname (str): Name of the sqlite database file.
+        task_filename (str): Name of the file when using file storage.
+        key_filename (str): Name of the key file when using file storage.
+
+    Methods:
         add(task_item)
         find(task_item)
         edit(task_item)
@@ -37,11 +45,13 @@ class TaskController():
         # pylint: disable=E1103
         """Return a Task given an argument dictionary.
 
-        Arguments:
-            action_info -- dictionary created from command line arguments
+        Args:
+            task_item (Task): Task object to add to storage
 
-        Using the given dictionary, a Task object is created and added to
-        storage.
+        Returns:
+            task_item (Task): Newly added Task with key
+
+        The given task is added to storage.
 
         """
         logging.info('attempting to add arguments as Task')
@@ -55,10 +65,16 @@ class TaskController():
         """Return all Tasks or one with matching key.
 
         Arguments:
-            action_info -- dictionary created from command line arguments
+            task_item (Task): Task object to find in storage.
 
-        Using the given dictionary, return a list of all Tasks if the given key
-        is None. Return a single Task if a key is found to match the given key.
+        Returns:
+            task_list (Task[]): Returned if task_item.key is None.
+            task_match (Task): Returned if key has matching Task.
+            None (None): Returned if key has no matching Task.
+
+        Using the given Task, return a list of all Tasks if it's key is None.
+        Return a single Task if a key is specified and there is a Task in
+        storage with a matching key.
 
         """
         logging.info('attempting to find Task(s) using arguments')
@@ -75,11 +91,13 @@ class TaskController():
         """Edit an existing Task.
 
         Arguments:
-            action_info -- dictionary created from command line arguments
+            task_item (Task): Task with matching key and updated attributes.
 
-        Using the given dictionary, create a Task object. If any attributes
-        are None, replace those values with the values of the current values
-        of the Task being updated then update the Task in storage.
+        Returns:
+            old_task (Task): Task as it was in storage before being updated.
+
+        Using the given Task's key, finds a Task instorage with a matching key
+        and replaces it with the new Task's attributes that aren't None.
 
         """
         logging.info('attempting to edit Task using arguments')
@@ -102,10 +120,13 @@ class TaskController():
         """Delete an existing Task.
 
         Arguments:
-            action_info -- dictionary created from command line arguments
+            task_item (Task): Task to use to delete a Task in storage.
 
-        Using the given dictionary's key, attempt to delete the Task if a
-        matching key is found.
+        Returns:
+            deleted_task (Task): Task that was in storage before being deleted.
+
+        Using the given Task's key, if a Task with a matching key is found in
+        storage, delete it.
 
         """
         logging.info('attempting to delete Task(s) using arguments')
