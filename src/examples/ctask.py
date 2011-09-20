@@ -33,7 +33,7 @@ def main():
     import logging
     logger.LOG.setLevel(logging.ERROR)
 
-    my_parser = cliparser.CLIParser()
+    my_parser = cliparser.CLIParser('file')
 
     parsed_args = my_parser.parse_cl_args()
     task_item = task.TaskCreator.build(parsed_args)

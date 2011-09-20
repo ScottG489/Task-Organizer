@@ -5,7 +5,7 @@ Classes:
 
 The docstring for a module should generally list the classes, exceptions and functions (and any other objects) that are exported by the module, with a one-line summary of each. (These summaries generally give less detail than the summary line in the object's docstring.) The docstring for a package (i.e., the docstring of the package's __init__.py module) should also list the modules and subpackages exported by the package.
 """
-import taskstorage
+import storage
 import logging
 
 # XXX: I believe this needs error handling.
@@ -34,7 +34,7 @@ class TaskController():
             task_dbname='taskdb',
             task_filename='taskfile',
             key_filename='keyfile'):
-        self._storage = taskstorage.StorageFactory.get(
+        self._storage = storage.StorageFactory.get(
                 storage_type,
                 task_dbname=task_dbname,
                 task_filename=task_filename,

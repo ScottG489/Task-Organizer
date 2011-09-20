@@ -4,4 +4,7 @@
 !*.py
 !.gitignore
 !README
-conf.py
+!src/
+!src/examples/
+!src/task/
+!src/test/

@@ -604,7 +604,7 @@ class GTaskStorage(Storage):
 
         http = httplib2.Http()
         http = credentials.authorize(http)
-
+        # XXX: Should this be hardcoded?
         self._service = build(serviceName='tasks', version='v1', http=http,
                        developerKey='AIzaSyBcJBx1IHvzX7Kp7rcGuIzP01tzYY_pX9Y')
 
@@ -668,7 +668,7 @@ class GTaskStorage(Storage):
 
         try:
             logging.debug('try: check if task is marked as deleted')
-            if gtask_item['deleted'] == True:
+            if gtask_item['deleted']:
                 logging.debug('task marked as deleted; returning None')
                 return None
         except KeyError:
@@ -732,7 +732,7 @@ class GTaskStorage(Storage):
 
         try:
             logging.debug('try: check if task is marked as deleted')
-            if updating_task['deleted'] == True:
+            if updating_task['deleted']:
                 logging.debug('task marked as deleted; returning None')
                 return None
         except KeyError:
@@ -778,7 +778,7 @@ class GTaskStorage(Storage):
 
         try:
             logging.debug('try: check if task is marked as deleted')
-            if deleting_task['deleted'] == True:
+            if deleting_task['deleted']:
                 logging.debug('task marked as deleted; returning None')
                 return None
         except KeyError:
@@ -835,7 +835,7 @@ class StorageFactory():
     """
     def __init__(self):
         pass
-# TODO: Shouldn't have to delete keywords as incorrect keyword Arguments
+    # TODO: Shouldn't have to delete keywords as incorrect keyword Arguments
         # shouldn't be passed in the first place. However, they are set as
         # defaults in clicontroller.
     @staticmethod

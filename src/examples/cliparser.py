@@ -2,14 +2,21 @@
 The docstring for a module should generally list the classes, exceptions and functions (and any other objects) that are exported by the module, with a one-line summary of each. (These summaries generally give less detail than the summary line in the object's docstring.) The docstring for a package (i.e., the docstring of the package's __init__.py module) should also list the modules and subpackages exported by the package.
 """
 import argparse
-import taskcontroller
+import controller
 import logging
 from copy import copy
 
 class CLIParser():
-    def __init__(self):
-        self._interface_controller = taskcontroller.TaskController(
-                'file')
+    def __init__(self,
+            storage_type, 
+            task_dbname='taskdb',
+            task_filename='taskfile',
+            key_filename='keyfile'):
+        self._interface_controller = controller.TaskController(
+                storage_type,
+                task_dbname=task_dbname,
+                task_filename=task_filename,
+                key_filename=key_filename)
 
         self._arg_parser = argparse.ArgumentParser(
             description='Task organizer.',
@@ -62,7 +69,7 @@ class CLIParser():
 
     def _init_add_subparser(self):
         # pylint: disable=E1103
-        """Initialize the sub-parser for the add sub-command"""
+        """Initialize the sub-parser for the add sub-command."""
         arg_parser_add = self._arg_subparsers.add_parser(
             'add',
             parents=[self._parent_parser_title, self._parent_parser_notes],
@@ -80,7 +87,7 @@ class CLIParser():
 
     def _init_find_subparser(self):
         # pylint: disable=E1103
-        """Initialize the sub-parser for the find sub-command"""
+        """Initialize the sub-parser for the find sub-command."""
         arg_parser_find = self._arg_subparsers.add_parser(
             'find',
             epilog = 'Goodbye.',
@@ -103,7 +110,7 @@ class CLIParser():
 
     def _init_edit_subparser(self):
         # pylint: disable=E1103
-        """Initialize the sub-parser for the edit sub-command"""
+        """Initialize the sub-parser for the edit sub-command."""
         arg_parser_edit = self._arg_subparsers.add_parser(
             'edit',
             parents=[
@@ -124,7 +131,7 @@ class CLIParser():
 
     def _init_delete_subparser(self):
         # pylint: disable=E1103
-        """Initialize the sub-parser for the del sub-command"""
+        """Initialize the sub-parser for the del sub-command."""
         arg_parser_delete = self._arg_subparsers.add_parser(
             'del',
             parents=[self._parent_parser_key],
@@ -142,7 +149,7 @@ class CLIParser():
 
 
     def parse_cl_args(self):
-        """Return a dictionary of arguments
+        """Return a dictionary of arguments.
 
         Calls the argument parser to parse the command line arguments by
         using sys.argv. Then calls a sanitizer to get an argument dictionary
@@ -158,7 +165,7 @@ class CLIParser():
 
     @staticmethod
     def _sanitize(raw_parsed_args):
-        """Creates and sanitizes an arg dict given the raw parsed args"""
+        """Creates and sanitizes an arg dict given the raw parsed args."""
         logging.info('attepting to sanitize arguments')
         args_dict = copy(vars(raw_parsed_args))
         for key, value in args_dict.iteritems():

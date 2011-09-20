@@ -1,5 +1,5 @@
 import unittest
-import taskstorage
+import storage
 import task
 import os
 import util
@@ -20,87 +20,87 @@ class TestStorage(unittest.TestCase):
     # pylint: disable=R0904
     def __init__(self, method_name):
         unittest.TestCase.__init__(self, method_name)
-        self.storage = None
+        self.task_storage = None
         self.my_task = None
 
     def test_add(self):
         """Tests that add() correctly adds a Task to storage"""
-        self.my_task.key = self.storage.add(self.my_task)
-        new_task = self.storage.find(self.my_task.key)
-        new_task.key = self.storage.add(new_task)
+        self.my_task.key = self.task_storage.add(self.my_task)
+        new_task = self.task_storage.find(self.my_task.key)
+        new_task.key = self.task_storage.add(new_task)
 
         self.assertNotEqual(self.my_task.key, new_task.key)
-        self.storage.delete(new_task.key)
+        self.task_storage.delete(new_task.key)
 
     def test_find(self):
         """Tests that find() correctly returns a Task given a key"""
-        self.my_task.key = self.storage.add(self.my_task)
-        new_task = self.storage.find(self.my_task.key)
+        self.my_task.key = self.task_storage.add(self.my_task)
+        new_task = self.task_storage.find(self.my_task.key)
 
         self.assertEqual(self.my_task, new_task)
 
     def test_get_all(self):
         """Tests that get_all() returns a list of all Tasks"""
-        self.my_task.key = self.storage.add(self.my_task)
-        task_list = self.storage.get_all()
+        self.my_task.key = self.task_storage.add(self.my_task)
+        task_list = self.task_storage.get_all()
 
         self.assertEqual(task_list[0], self.my_task)
 
     def test_update(self):
         """Tests that update() correctly updates a Task given a Task"""
-        self.my_task.key = self.storage.add(self.my_task)
+        self.my_task.key = self.task_storage.add(self.my_task)
 
         self.my_task.title = 'foo'
-        key = self.storage.update(self.my_task)
-        new_task = self.storage.find(key)
+        key = self.task_storage.update(self.my_task)
+        new_task = self.task_storage.find(key)
 
         self.assertEqual(self.my_task, new_task)
 
     def test_update_no_match(self):
         """Tests updates()'s handling of no matching key"""
-        self.my_task.key = self.storage.add(self.my_task)
+        self.my_task.key = self.task_storage.add(self.my_task)
 
-        self.storage.delete(self.my_task.key)
+        self.task_storage.delete(self.my_task.key)
 
         self.my_task.title = 'foo'
 
-        self.key = self.storage.update(self.my_task)
+        self.key = self.task_storage.update(self.my_task)
 
         self.assertIsNone(self.key)
 
     def test_delete(self):
         """Tests that delete() correctly deletes a Task from storage"""
         new_task = task.Task()
-        self.my_task.key = self.storage.add(self.my_task)
+        self.my_task.key = self.task_storage.add(self.my_task)
 
-        key = self.storage.delete(self.my_task.key)
-        new_task = self.storage.find(key)
+        key = self.task_storage.delete(self.my_task.key)
+        new_task = self.task_storage.find(key)
 
         self.assertIsNone(new_task)
 
     def test_delete_no_match(self):
         """Tests delete()'s handling of no matching key"""
-        self.my_task.key = self.storage.add(self.my_task)
+        self.my_task.key = self.task_storage.add(self.my_task)
 
-        self.storage.delete(self.my_task.key)
+        self.task_storage.delete(self.my_task.key)
 
-        self.key = self.storage.delete(self.my_task.key)
+        self.key = self.task_storage.delete(self.my_task.key)
 
         self.assertIsNone(self.key)
 
     def test_search(self):
         """Tests that search() correctly returns a matching Task given a Task"""
-        self.storage.add(self.my_task)
+        self.task_storage.add(self.my_task)
         search_task = task.Task(title='title', notes='note')
-        task_search_list = self.storage.search(search_task)
+        task_search_list = self.task_storage.search(search_task)
 
         self.assertTrue(self.my_task in task_search_list)
 
     def test_search_not_found(self):
         """Tests search()'s behavior when no match is found"""
-        self.storage.add(self.my_task)
+        self.task_storage.add(self.my_task)
         search_task = task.Task(title='title1', notes='note1')
-        task_search_list = self.storage.search(search_task)
+        task_search_list = self.task_storage.search(search_task)
 
         self.assertEqual(task_search_list, None)
 
@@ -113,7 +113,7 @@ class TestGenericStorage(unittest.TestCase):
     # pylint: disable=R0904
     def setUp(self):    # pylint: disable=C0103
         self.my_task = task.Task(title='title', notes='note')
-        self.storage_instance = taskstorage.Storage()
+        self.storage_instance = storage.Storage()
 
     def tearDown(self):    # pylint: disable=C0103
         pass
@@ -151,7 +151,7 @@ class TestFileStorage(TestStorage):
     """Tests specific to the FileStorage class
 
     Tests that only apply to the implementation of the FileStorage class and
-    not other storage types.
+    not other task_storage types.
 
     """
     # pylint: disable=R0904
@@ -167,7 +167,7 @@ class TestFileStorage(TestStorage):
         self.test_key_filename = 'testkeyfile'
 
         # Initialize file storage object using test-specific file names
-        self.storage = taskstorage.FileStorage(
+        self.task_storage = storage.FileStorage(
             self.test_task_filename,
             self.test_key_filename
         )
@@ -189,13 +189,13 @@ class TestFileStorage(TestStorage):
         file_handler.close()
         os.chmod(self.test_task_filename, 000)
 
-        self.assertRaises(IOError, self.storage.add, self.my_task)
+        self.assertRaises(IOError, self.task_storage.add, self.my_task)
 
     def test_add_write_fail(self):
         """Tests add()'s handling of failed file writing"""
         os.chmod(self.test_task_filename, 0400)
 
-        self.assertRaises(IOError, self.storage.add, self.my_task)
+        self.assertRaises(IOError, self.task_storage.add, self.my_task)
 
     def test_find_read_fail(self):
         """Tests find()'s handling of failed file reading"""
@@ -204,7 +204,7 @@ class TestFileStorage(TestStorage):
         file_handler.close()
         os.chmod(self.test_task_filename, 000)
 
-        self.assertRaises(IOError, self.storage.find, self.my_task)
+        self.assertRaises(IOError, self.task_storage.find, self.my_task)
 
     def test_get_all_read_fail(self):
         """Tests get_all()'s handling of failed file reading"""
@@ -213,21 +213,21 @@ class TestFileStorage(TestStorage):
         file_handler.close()
         os.chmod(self.test_task_filename, 000)
 
-        self.assertRaises(IOError, self.storage.get_all)
+        self.assertRaises(IOError, self.task_storage.get_all)
 
     def test_update_write_fail(self):
         """Tests update()'s handling of failed file writing"""
-        self.storage.add(self.my_task)
+        self.task_storage.add(self.my_task)
         os.chmod(self.test_task_filename, 0400)
 
-        self.assertRaises(IOError, self.storage.update, self.my_task)
+        self.assertRaises(IOError, self.task_storage.update, self.my_task)
 
     def test_delete_write_fail(self):
         """Tests delete()'s handling of failed file writing"""
-        self.storage.add(self.my_task)
+        self.task_storage.add(self.my_task)
         os.chmod(self.test_task_filename, 0400)
 
-        self.assertRaises(IOError, self.storage.delete, self.my_task.key)
+        self.assertRaises(IOError, self.task_storage.delete, self.my_task.key)
 
 
 
@@ -237,7 +237,7 @@ class TestSQLiteStorage(TestStorage):
     """Tests specific to the SQLiteStorage class
 
     Tests that only apply to the implementation of the SQLiteStorage class and
-    not other storage types.
+    not other task_storage types.
 
     """
     # pylint: disable=R0904
@@ -252,7 +252,7 @@ class TestSQLiteStorage(TestStorage):
         self.test_task_dbname = 'testtaskdb'
 
         # Initialize file storage object using test-specific file names
-        self.storage = taskstorage.SQLiteStorage(
+        self.task_storage = storage.SQLiteStorage(
             self.test_task_dbname)
 
         util.print_helper()
@@ -271,7 +271,7 @@ class TestGTaskStorage(TestStorage):
     """Tests specific to the GTaskStorage class
 
     Tests that only apply to the implementation of the GTaskStorage class and
-    not other storage types.
+    not other task_storage types.
 
     """
     # pylint: disable=R0904
@@ -283,12 +283,12 @@ class TestGTaskStorage(TestStorage):
         self.my_task = task.Task(title='title', notes='note')
 
         # Initialize file storage object using test-specific file names
-        self.storage = taskstorage.GTaskStorage()
+        self.task_storage = storage.GTaskStorage()
 
         util.print_helper()
 
     def tearDown(self):    # pylint: disable=C0103
-        self.storage.delete(self.my_task.key)
+        self.task_storage.delete(self.my_task.key)
 
         # Clear the my_task Task object
         self.my_task = None
@@ -296,11 +296,11 @@ class TestGTaskStorage(TestStorage):
     def test_update_no_note(self):
         """Tests that update() acts correctly when no note is specified"""
         self.my_task.notes = None
-        self.my_task.key = self.storage.add(self.my_task)
+        self.my_task.key = self.task_storage.add(self.my_task)
 
         self.my_task.title = 'foo'
-        key = self.storage.update(self.my_task)
-        new_task = self.storage.find(key)
+        key = self.task_storage.update(self.my_task)
+        new_task = self.task_storage.find(key)
 
         self.assertEqual(self.my_task, new_task)
 
@@ -322,7 +322,7 @@ class TestKeyGenerator(unittest.TestCase):
         self.test_key_filename = 'testkeyfile'
 
         # Initialize file storage object using test-specific file names
-        self.key_gen = taskstorage._KeyGenerator(
+        self.key_gen = storage._KeyGenerator(
             self.test_key_filename
         )
 

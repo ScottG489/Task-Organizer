@@ -1,5 +1,6 @@
 import unittest
 import sys
+import os
 import cliparser
 import util
 
@@ -7,7 +8,12 @@ import util
 class TestCLIParser(unittest.TestCase):
     # pylint: disable=R0904
     def setUp(self):    # pylint: disable=C0103
-        self.parser = cliparser.CLIParser()
+        self.test_task_filename = 'testtaskfile'
+        self.test_key_filename = 'testkeyfile'
+        self.parser = cliparser.CLIParser(
+                'file',
+                task_filename=self.test_task_filename,
+                key_filename=self.test_key_filename)
 
         self.title = 'title'
         self.notes = 'notes'
@@ -16,7 +22,8 @@ class TestCLIParser(unittest.TestCase):
         util.print_helper()
 
     def tearDown(self):    # pylint: disable=C0103
-        pass
+        os.remove(self.test_task_filename)
+        os.remove(self.test_key_filename)
 
     def test_add_subparser(self):
         """Tests the parser when the add sub-command is specified"""

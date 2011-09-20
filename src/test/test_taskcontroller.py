@@ -1,7 +1,7 @@
 import unittest
 import task
-import taskcontroller
-import taskstorage
+import controller
+import storage
 import os
 import util
 
@@ -129,7 +129,7 @@ class TestTaskControllerFileStorage(TestTaskController):
         self.test_task_filename = 'test_taskfile'
         self.test_key_filename = 'test_keyfile'
 
-        self.interface_controller = taskcontroller.TaskController(
+        self.interface_controller = controller.TaskController(
                 'file',
                 task_filename=self.test_task_filename,
                 key_filename=self.test_key_filename)
@@ -159,9 +159,10 @@ class TestTaskControllerSQLiteStorage(TestTaskController):
         TestTaskController.__init__(self, method_name)
 
     def setUp(self):    # pylint: disable=C0103
-        self.interface_controller = taskcontroller.TaskController(
+        self.test_task_dbname = 'testtaskdb'
+        self.interface_controller = controller.TaskController(
                 'sqlite',
-                task_dbname='testtaskdb')
+                task_dbname=self.test_task_dbname)
 
         self.title = 'tasks title'
         self.notes = 'notes text'
@@ -173,8 +174,7 @@ class TestTaskControllerSQLiteStorage(TestTaskController):
         self.added_task = self.add_task()
 
     def tearDown(self):    # pylint: disable=C0103
-        storage = taskstorage.StorageFactory.get('sqlite')
-        storage.delete(self.added_task.key)
+        os.remove(self.test_task_dbname)
 
 
 class TestTaskControllerGTaskStorage(TestTaskController):
@@ -184,7 +184,7 @@ class TestTaskControllerGTaskStorage(TestTaskController):
         TestTaskController.__init__(self, method_name)
 
     def setUp(self):    # pylint: disable=C0103
-        self.interface_controller = taskcontroller.TaskController(
+        self.interface_controller = controller.TaskController(
                 'gtasks')
 
 
@@ -197,8 +197,8 @@ class TestTaskControllerGTaskStorage(TestTaskController):
         self.added_task = self.add_task()
 
     def tearDown(self):    # pylint: disable=C0103
-        storage = taskstorage.StorageFactory.get('gtasks')
-        storage.delete(self.added_task.key)
+        task_storage = storage.StorageFactory.get('gtasks')
+        task_storage.delete(self.added_task.key)
 
 
 if __name__ == '__main__':
