@@ -129,7 +129,7 @@ class TestTaskControllerFileStorage(TestTaskController):
         self.test_task_filename = 'test_taskfile'
         self.test_key_filename = 'test_keyfile'
 
-        self.interface_controller = controller.TaskController(
+        self.interface_controller = controller.Controller(
                 'file',
                 task_filename=self.test_task_filename,
                 key_filename=self.test_key_filename)
@@ -160,7 +160,7 @@ class TestTaskControllerSQLiteStorage(TestTaskController):
 
     def setUp(self):    # pylint: disable=C0103
         self.test_task_dbname = 'testtaskdb'
-        self.interface_controller = controller.TaskController(
+        self.interface_controller = controller.Controller(
                 'sqlite',
                 task_dbname=self.test_task_dbname)
 
@@ -184,7 +184,7 @@ class TestTaskControllerGTaskStorage(TestTaskController):
         TestTaskController.__init__(self, method_name)
 
     def setUp(self):    # pylint: disable=C0103
-        self.interface_controller = controller.TaskController(
+        self.interface_controller = controller.Controller(
                 'gtasks')
 
 

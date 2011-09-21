@@ -4,7 +4,7 @@ usage: ctask.py [-h] [--version] {add,find,edit,del} ...
 
 Task organizer.
 
-optional arguments:
+Optional arguments:
   -h, --help           show this help message and exit
   --version            show program's version number and exit
 
@@ -26,7 +26,7 @@ import task
     # Allow find and del to accept a list of keys
     # Rename the subcommand 'find' to 'list'?
 def main():
-    """Command line implementation of task library"""
+    """Command line implementation of task library."""
 #    task_filename = 'task_file'
 #    key_filename = 'key_file'
     import logger 
@@ -52,4 +52,5 @@ def main():
     else:
         print 'Task not found'
 
-main()
+if __name__ == '__main__':
+    main()

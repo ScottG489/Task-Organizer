@@ -12,7 +12,7 @@ from textwrap import dedent
 # TODO: Should this be private if TaskCreator is to be the only
 #       correct way to make a Task instance?
 class Task():
-    """Instantiate a Task object
+    """Instantiate a Task object.
 
     Provides attributes for tasks and methods to compare Task instaces.
 
@@ -68,7 +68,7 @@ class Task():
 
 
 class TaskCreator():
-    """Create a Task instance automatically
+    """Create a Task instance automatically.
 
     Public methods:
         build(arg_dict)
@@ -79,7 +79,7 @@ class TaskCreator():
 
     @staticmethod
     def build(arg_dict):
-        """Creates a Task instance given a dictionary
+        """Creates a Task instance given a dictionary.
 
         Args:
             arg_dict (dict): dictionary formatted to create a Task

@@ -12,7 +12,8 @@ class CLIParser():
             task_dbname='taskdb',
             task_filename='taskfile',
             key_filename='keyfile'):
-        self._interface_controller = controller.TaskController(
+        self._storage_type = storage_type
+        self._interface_controller = controller.Controller(
                 storage_type,
                 task_dbname=task_dbname,
                 task_filename=task_filename,
@@ -163,15 +164,17 @@ class CLIParser():
         logging.info('success! returning argument dictionary')
         return args_dict
 
-    @staticmethod
-    def _sanitize(raw_parsed_args):
+    def _sanitize(self, raw_parsed_args):
         """Creates and sanitizes an arg dict given the raw parsed args."""
         logging.info('attepting to sanitize arguments')
         args_dict = copy(vars(raw_parsed_args))
         for key, value in args_dict.iteritems():
             if value != None:
                 if key == 'key':
-                    args_dict[key] = ''.join(map(str, value))
+                    if self._storage_type in ['file', 'sqlite']:
+                        args_dict[key] = int(''.join(map(str, value)))
+                    else:
+                        args_dict[key] = ''.join(map(str, value))
                 elif key == 'title' or key == 'notes':
                     args_dict[key] = ''.join(value)
 

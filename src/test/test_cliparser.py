@@ -17,7 +17,7 @@ class TestCLIParser(unittest.TestCase):
 
         self.title = 'title'
         self.notes = 'notes'
-        self.key = '0'
+        self.key = 0
 
         util.print_helper()
 

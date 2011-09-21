@@ -827,7 +827,7 @@ class StorageFactory():
     """Interface for getting a storage instance.
 
     Public methods:
-        get(storage_type, **kwargs)
+        get(storage_type, kwargs)
 
     Select the type of storage in which to store Task objects and pass
     arguments to the specified storage classes constructor.
@@ -850,6 +850,7 @@ class StorageFactory():
 
         Returns:
             storage_instance (Storage): Child instance of a storage class.
+
         Using the given storage type, create an instance with the given
         optional keyword arguments and return the storage instance.
 
