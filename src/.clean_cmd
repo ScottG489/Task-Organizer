@@ -1,0 +1,3 @@
+trash-put /home/scott/school/capstone/Task-Organizer/src/test/*.pyc
+trash-put /home/scott/school/capstone/Task-Organizer/src/task/*.pyc
+trash-put /home/scott/school/capstone/Task-Organizer/src/examples/*.pyc

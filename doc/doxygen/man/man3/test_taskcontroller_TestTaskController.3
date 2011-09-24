@@ -1,0 +1,150 @@
+.TH "test_taskcontroller::TestTaskController" 3 "Sat Sep 24 2011" "Task-Organizer" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+test_taskcontroller::TestTaskController \- 
+.PP
+Abstract tests for child tests using specific storage types'\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherited by \fBtest_taskcontroller::TestTaskControllerFileStorage\fP, \fBtest_taskcontroller::TestTaskControllerGTaskStorage\fP, and \fBtest_taskcontroller::TestTaskControllerSQLiteStorage\fP'\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.ti -1c
+.RI "def \fBadd_task\fP"
+.br
+.RI "\fIHelper function to add Task to storage as given dict'\&. \fP"
+.ti -1c
+.RI "def \fBfind_task\fP"
+.br
+.RI "\fIHelper function to find Task in storage when given key'\&. \fP"
+.ti -1c
+.RI "def \fBtest_add\fP"
+.br
+.RI "\fITests that add() correctly adds the arg dict as a Task to storage'\&. \fP"
+.ti -1c
+.RI "def \fBtest_find\fP"
+.br
+.RI "\fITests that find() correctly returns a Task given an arg dict'\&. \fP"
+.ti -1c
+.RI "def \fBtest_find_all\fP"
+.br
+.RI "\fITests that find() correctly returns all Tasks when given no key'\&. \fP"
+.ti -1c
+.RI "def \fBtest_edit\fP"
+.br
+.RI "\fITests that edit() correctly modifies a Task given an arg dict'\&. \fP"
+.ti -1c
+.RI "def \fBtest_edit_none\fP"
+.br
+.RI "\fITests edit()'s handling of arg dicts with empty attributes'\&. \fP"
+.ti -1c
+.RI "def \fBtest_delete\fP"
+.br
+.RI "\fITests that delete() correctly deletes a Task given an arg dict'\&. \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBinterface_controller\fP"
+.br
+.ti -1c
+.RI "\fBtitle\fP"
+.br
+.ti -1c
+.RI "\fBnotes\fP"
+.br
+.ti -1c
+.RI "\fBadded_task\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Abstract tests for child tests using specific storage types'\&. 
+
+Generic tests used by all TaskController tests undependent on what storage type they are using'\&. These tests should never be called directly'\&. 
+.PP
+Definition at line 15 of file test_taskcontroller\&.py'\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def test_taskcontroller::TestTaskController::__init__ (self, method_name)"
+.PP
+Reimplemented in \fBtest_taskcontroller::TestTaskControllerGTaskStorage\fP, \fBtest_taskcontroller::TestTaskControllerSQLiteStorage\fP, and \fBtest_taskcontroller::TestTaskControllerFileStorage\fP'\&.
+.PP
+Definition at line 17 of file test_taskcontroller\&.py'\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "def test_taskcontroller::TestTaskController::add_task (self)"
+.PP
+Helper function to add Task to storage as given dict'\&. 
+.PP
+Definition at line 26 of file test_taskcontroller\&.py'\&.
+.SS "def test_taskcontroller::TestTaskController::find_task (self, task_key)"
+.PP
+Helper function to find Task in storage when given key'\&. 
+.PP
+Definition at line 38 of file test_taskcontroller\&.py'\&.
+.SS "def test_taskcontroller::TestTaskController::test_add (self)"
+.PP
+Tests that add() correctly adds the arg dict as a Task to storage'\&. 
+.PP
+Definition at line 50 of file test_taskcontroller\&.py'\&.
+.SS "def test_taskcontroller::TestTaskController::test_delete (self)"
+.PP
+Tests that delete() correctly deletes a Task given an arg dict'\&. 
+.PP
+Definition at line 117 of file test_taskcontroller\&.py'\&.
+.SS "def test_taskcontroller::TestTaskController::test_edit (self)"
+.PP
+Tests that edit() correctly modifies a Task given an arg dict'\&. 
+.PP
+Definition at line 82 of file test_taskcontroller\&.py'\&.
+.SS "def test_taskcontroller::TestTaskController::test_edit_none (self)"
+.PP
+Tests edit()'s handling of arg dicts with empty attributes'\&. 
+.PP
+Definition at line 99 of file test_taskcontroller\&.py'\&.
+.SS "def test_taskcontroller::TestTaskController::test_find (self)"
+.PP
+Tests that find() correctly returns a Task given an arg dict'\&. 
+.PP
+Definition at line 57 of file test_taskcontroller\&.py'\&.
+.SS "def test_taskcontroller::TestTaskController::test_find_all (self)"
+.PP
+Tests that find() correctly returns all Tasks when given no key'\&. 
+.PP
+Definition at line 66 of file test_taskcontroller\&.py'\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBtest_taskcontroller::TestTaskController::added_task\fP"
+.PP
+Reimplemented in \fBtest_taskcontroller::TestTaskControllerGTaskStorage\fP, \fBtest_taskcontroller::TestTaskControllerSQLiteStorage\fP, and \fBtest_taskcontroller::TestTaskControllerFileStorage\fP'\&.
+.PP
+Definition at line 17 of file test_taskcontroller\&.py'\&.
+.SS "\fBtest_taskcontroller::TestTaskController::interface_controller\fP"
+.PP
+Reimplemented in \fBtest_taskcontroller::TestTaskControllerGTaskStorage\fP, \fBtest_taskcontroller::TestTaskControllerSQLiteStorage\fP, and \fBtest_taskcontroller::TestTaskControllerFileStorage\fP'\&.
+.PP
+Definition at line 17 of file test_taskcontroller\&.py'\&.
+.SS "\fBtest_taskcontroller::TestTaskController::notes\fP"
+.PP
+Reimplemented in \fBtest_taskcontroller::TestTaskControllerGTaskStorage\fP, \fBtest_taskcontroller::TestTaskControllerSQLiteStorage\fP, and \fBtest_taskcontroller::TestTaskControllerFileStorage\fP'\&.
+.PP
+Definition at line 17 of file test_taskcontroller\&.py'\&.
+.SS "\fBtest_taskcontroller::TestTaskController::title\fP"
+.PP
+Reimplemented in \fBtest_taskcontroller::TestTaskControllerGTaskStorage\fP, \fBtest_taskcontroller::TestTaskControllerSQLiteStorage\fP, and \fBtest_taskcontroller::TestTaskControllerFileStorage\fP'\&.
+.PP
+Definition at line 17 of file test_taskcontroller\&.py'\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Task-Organizer from the source code'\&.

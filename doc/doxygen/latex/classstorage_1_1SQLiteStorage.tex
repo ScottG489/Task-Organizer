@@ -1,0 +1,248 @@
+\hypertarget{classstorage_1_1SQLiteStorage}{
+\section{storage\-:\-:\-S\-Q\-Lite\-Storage \-Class \-Reference}
+\label{classstorage_1_1SQLiteStorage}\index{storage\-::\-S\-Q\-Lite\-Storage@{storage\-::\-S\-Q\-Lite\-Storage}}
+}
+
+
+\-Interface for storing \-Tasks to a \-S\-Q\-Lite database.  
+
+
+\-Inheritance diagram for storage\-:\-:\-S\-Q\-Lite\-Storage\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classstorage_1_1SQLiteStorage}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classstorage_1_1SQLiteStorage_ac61e8f98fc1319468ec6e30b2ab9e4a7}{\-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def \hyperlink{classstorage_1_1SQLiteStorage_ae540c3c47f35a52d638f634a0782a7af}{add}
+\begin{DoxyCompactList}\small\item\em \-Add a \-Task to the database storage. \end{DoxyCompactList}\item 
+def \hyperlink{classstorage_1_1SQLiteStorage_a3ad42c6cfdc3a5740c461fe1a87a963a}{find}
+\begin{DoxyCompactList}\small\item\em \-Return a \-Task given it's key. \end{DoxyCompactList}\item 
+def \hyperlink{classstorage_1_1SQLiteStorage_a9a64b929488dfb6ceff46039a5f622ab}{get\-\_\-all}
+\begin{DoxyCompactList}\small\item\em \-Return a list of all \-Task's. \end{DoxyCompactList}\item 
+def \hyperlink{classstorage_1_1SQLiteStorage_a0a9ade02509f896caf7a32d02651857e}{update}
+\begin{DoxyCompactList}\small\item\em \-Update an existing \-Task in the database storage. \end{DoxyCompactList}\item 
+def \hyperlink{classstorage_1_1SQLiteStorage_a9ad3dc6a2fc126429be96188efda72a6}{delete}
+\begin{DoxyCompactList}\small\item\em \-Delete an existing \-Task in the database storage. \end{DoxyCompactList}\item 
+def \hyperlink{classstorage_1_1SQLiteStorage_a7e8c17a6ec5b2cbe72befb73bb38357c}{search}
+\begin{DoxyCompactList}\small\item\em \-Return a \-Task list given a search \-Task. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classstorage_1_1SQLiteStorage_a6cf1398c3b51050f89d8c3e6dab71250}{task\-\_\-dbname}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Interface for storing \-Tasks to a \-S\-Q\-Lite database. 
+
+\-Kwargs/\-Instance \-Vars\-: task\-\_\-dbname (str)\-: \-Name of database/file in which to store \-Tasks.
+
+\-Public methods\-: add(task\-\_\-item) find(key = \-None) \hyperlink{classstorage_1_1SQLiteStorage_a9a64b929488dfb6ceff46039a5f622ab}{get\-\_\-all()} update(task\-\_\-item) delete(key) search(search\-\_\-task)
+
+\-Reads and writes \-Task objects from a sqlite database file. \-Tasks are stored in a table whos columns coincide with the \-Task's attributes. 
+
+\-Definition at line 374 of file storage.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classstorage_1_1SQLiteStorage_ac61e8f98fc1319468ec6e30b2ab9e4a7}{
+\index{storage\-::\-S\-Q\-Lite\-Storage@{storage\-::\-S\-Q\-Lite\-Storage}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!storage::SQLiteStorage@{storage\-::\-S\-Q\-Lite\-Storage}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def storage\-::\-S\-Q\-Lite\-Storage\-::\-\_\-\-\_\-init\-\_\-\-\_\- (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{task\-\_\-dbname = {\ttfamily 'taskdb'}}
+\end{DoxyParamCaption}
+)}}
+\label{classstorage_1_1SQLiteStorage_ac61e8f98fc1319468ec6e30b2ab9e4a7}
+
+
+\-Definition at line 375 of file storage.\-py.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classstorage_1_1SQLiteStorage_ae540c3c47f35a52d638f634a0782a7af}{
+\index{storage\-::\-S\-Q\-Lite\-Storage@{storage\-::\-S\-Q\-Lite\-Storage}!add@{add}}
+\index{add@{add}!storage::SQLiteStorage@{storage\-::\-S\-Q\-Lite\-Storage}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}def storage\-::\-S\-Q\-Lite\-Storage\-::add (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{task\-\_\-item}
+\end{DoxyParamCaption}
+)}}
+\label{classstorage_1_1SQLiteStorage_ae540c3c47f35a52d638f634a0782a7af}
+
+
+\-Add a \-Task to the database storage. 
+
+\-Args\-: task\-\_\-item (\-Task)\-: \-The \-Task object to be added to storage.
+
+\-Returns\-: task\-\_\-item.\-key (int)\-: \-Newly added \-Task's key.
+
+\-Raises\-:
+
+\-The \-Task object is given a key and appended to the list of \-Tasks in the database. 
+
+\-Reimplemented from \hyperlink{classstorage_1_1Storage_abff2cc4bca8fd82e1eca9262ac6013d0}{storage\-::\-Storage}.
+
+
+
+\-Definition at line 415 of file storage.\-py.
+
+\hypertarget{classstorage_1_1SQLiteStorage_a9ad3dc6a2fc126429be96188efda72a6}{
+\index{storage\-::\-S\-Q\-Lite\-Storage@{storage\-::\-S\-Q\-Lite\-Storage}!delete@{delete}}
+\index{delete@{delete}!storage::SQLiteStorage@{storage\-::\-S\-Q\-Lite\-Storage}}
+\subsubsection[{delete}]{\setlength{\rightskip}{0pt plus 5cm}def storage\-::\-S\-Q\-Lite\-Storage\-::delete (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{key}
+\end{DoxyParamCaption}
+)}}
+\label{classstorage_1_1SQLiteStorage_a9ad3dc6a2fc126429be96188efda72a6}
+
+
+\-Delete an existing \-Task in the database storage. 
+
+\-Args\-: key (int)\-: \-The key for the desired \-Task object to delete.
+
+\-Returns\-: key\-\_\-match (int)\-: \-Task's key that was deleted in storage.
+
+\-Raises\-:
+
+\-Using the given key, find the matching \-Task in the database and delete it. \-If none is found, nothing is deleted and return \-None. 
+
+\-Reimplemented from \hyperlink{classstorage_1_1Storage_ab2da63e5da388a071b1a8ceccd777194}{storage\-::\-Storage}.
+
+
+
+\-Definition at line 539 of file storage.\-py.
+
+\hypertarget{classstorage_1_1SQLiteStorage_a3ad42c6cfdc3a5740c461fe1a87a963a}{
+\index{storage\-::\-S\-Q\-Lite\-Storage@{storage\-::\-S\-Q\-Lite\-Storage}!find@{find}}
+\index{find@{find}!storage::SQLiteStorage@{storage\-::\-S\-Q\-Lite\-Storage}}
+\subsubsection[{find}]{\setlength{\rightskip}{0pt plus 5cm}def storage\-::\-S\-Q\-Lite\-Storage\-::find (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{key = {\ttfamily \-None}}
+\end{DoxyParamCaption}
+)}}
+\label{classstorage_1_1SQLiteStorage_a3ad42c6cfdc3a5740c461fe1a87a963a}
+
+
+\-Return a \-Task given it's key. 
+
+\-Args\-: key (int)\-: \-The key for the desired \-Task object.
+
+\-Returns\-: task\-\_\-item (\-Task)\-: \-Task with matching key.
+
+\-Raises\-:
+
+\-Using the given key, get the \-Task with the matching key from the database and return the \-Task. \-If none is found return \-None. 
+
+\-Reimplemented from \hyperlink{classstorage_1_1Storage_ad6eb351cfbfcc4c9dea150ce21dadcd7}{storage\-::\-Storage}.
+
+
+
+\-Definition at line 444 of file storage.\-py.
+
+\hypertarget{classstorage_1_1SQLiteStorage_a9a64b929488dfb6ceff46039a5f622ab}{
+\index{storage\-::\-S\-Q\-Lite\-Storage@{storage\-::\-S\-Q\-Lite\-Storage}!get\-\_\-all@{get\-\_\-all}}
+\index{get\-\_\-all@{get\-\_\-all}!storage::SQLiteStorage@{storage\-::\-S\-Q\-Lite\-Storage}}
+\subsubsection[{get\-\_\-all}]{\setlength{\rightskip}{0pt plus 5cm}def storage\-::\-S\-Q\-Lite\-Storage\-::get\-\_\-all (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classstorage_1_1SQLiteStorage_a9a64b929488dfb6ceff46039a5f622ab}
+
+
+\-Return a list of all \-Task's. 
+
+
+
+\-Reimplemented from \hyperlink{classstorage_1_1Storage_a955f60e4ddfdfa4fae84d7b6b8aad438}{storage\-::\-Storage}.
+
+
+
+\-Definition at line 470 of file storage.\-py.
+
+\hypertarget{classstorage_1_1SQLiteStorage_a7e8c17a6ec5b2cbe72befb73bb38357c}{
+\index{storage\-::\-S\-Q\-Lite\-Storage@{storage\-::\-S\-Q\-Lite\-Storage}!search@{search}}
+\index{search@{search}!storage::SQLiteStorage@{storage\-::\-S\-Q\-Lite\-Storage}}
+\subsubsection[{search}]{\setlength{\rightskip}{0pt plus 5cm}def storage\-::\-S\-Q\-Lite\-Storage\-::search (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{search\-\_\-task}
+\end{DoxyParamCaption}
+)}}
+\label{classstorage_1_1SQLiteStorage_a7e8c17a6ec5b2cbe72befb73bb38357c}
+
+
+\-Return a \-Task list given a search \-Task. 
+
+\-Args\-: search\-\_\-task (\-Task)\-: \-The \-Task to be used for searching.
+
+\-Returns\-: task\-\_\-search\-\_\-list (\-Task\mbox{[}\mbox{]})\-: \-List of \-Tasks matching search criteria.
+
+\-Raises\-:
+
+\-Using the given search \-Task, return a \-Task list of all \-Tasks that match the search \-Task's attributes. 
+
+\-Reimplemented from \hyperlink{classstorage_1_1Storage_a393a72aca9a927cab5ac0a4b99d97ebb}{storage\-::\-Storage}.
+
+
+
+\-Definition at line 572 of file storage.\-py.
+
+\hypertarget{classstorage_1_1SQLiteStorage_a0a9ade02509f896caf7a32d02651857e}{
+\index{storage\-::\-S\-Q\-Lite\-Storage@{storage\-::\-S\-Q\-Lite\-Storage}!update@{update}}
+\index{update@{update}!storage::SQLiteStorage@{storage\-::\-S\-Q\-Lite\-Storage}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}def storage\-::\-S\-Q\-Lite\-Storage\-::update (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{task\-\_\-item}
+\end{DoxyParamCaption}
+)}}
+\label{classstorage_1_1SQLiteStorage_a0a9ade02509f896caf7a32d02651857e}
+
+
+\-Update an existing \-Task in the database storage. 
+
+\-Args\-: task\-\_\-item (\-Task)\-: \-The \-Task object to be updated.
+
+\-Returns\-: key\-\_\-match (int)\-: \-Task's key that was updating in storage.
+
+\-Raises\-:
+
+\-Using the given \-Task's key, find the matching \-Task in the database and replace it with the given \-Task then return the old \-Task. \-If none is found, update nothing and return \-None. 
+
+\-Reimplemented from \hyperlink{classstorage_1_1Storage_ae0ed2cc07e30a6f350a750c7428061e9}{storage\-::\-Storage}.
+
+
+
+\-Definition at line 504 of file storage.\-py.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\hypertarget{classstorage_1_1SQLiteStorage_a6cf1398c3b51050f89d8c3e6dab71250}{
+\index{storage\-::\-S\-Q\-Lite\-Storage@{storage\-::\-S\-Q\-Lite\-Storage}!task\-\_\-dbname@{task\-\_\-dbname}}
+\index{task\-\_\-dbname@{task\-\_\-dbname}!storage::SQLiteStorage@{storage\-::\-S\-Q\-Lite\-Storage}}
+\subsubsection[{task\-\_\-dbname}]{\setlength{\rightskip}{0pt plus 5cm}{\bf storage\-::\-S\-Q\-Lite\-Storage\-::task\-\_\-dbname}}}
+\label{classstorage_1_1SQLiteStorage_a6cf1398c3b51050f89d8c3e6dab71250}
+
+
+\-Definition at line 375 of file storage.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/scott/school/capstone/\-Task-\/\-Organizer/src/task/\hyperlink{storage_8py}{storage.\-py}\end{DoxyCompactItemize}

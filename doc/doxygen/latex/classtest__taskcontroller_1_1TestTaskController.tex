@@ -1,0 +1,277 @@
+\hypertarget{classtest__taskcontroller_1_1TestTaskController}{
+\section{test\-\_\-taskcontroller\-:\-:\-Test\-Task\-Controller \-Class \-Reference}
+\label{classtest__taskcontroller_1_1TestTaskController}\index{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}}
+}
+
+
+\-Abstract tests for child tests using specific storage types.  
+
+
+\-Inheritance diagram for test\-\_\-taskcontroller\-:\-:\-Test\-Task\-Controller\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.185185cm]{classtest__taskcontroller_1_1TestTaskController}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classtest__taskcontroller_1_1TestTaskController_a2ec547bb413edbb40c0ae582dd2466bd}{\-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def \hyperlink{classtest__taskcontroller_1_1TestTaskController_a89989d1173db14268c0329ad98d304d5}{add\-\_\-task}
+\begin{DoxyCompactList}\small\item\em \-Helper function to add \-Task to storage as given dict. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskcontroller_1_1TestTaskController_a37d53351ab2b48968965ef22ad6c4a18}{find\-\_\-task}
+\begin{DoxyCompactList}\small\item\em \-Helper function to find \-Task in storage when given key. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskcontroller_1_1TestTaskController_a9f241994236f76865549287f630b43ef}{test\-\_\-add}
+\begin{DoxyCompactList}\small\item\em \-Tests that add() correctly adds the arg dict as a \-Task to storage. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskcontroller_1_1TestTaskController_a8921a89235720f678cef5ee895e34cee}{test\-\_\-find}
+\begin{DoxyCompactList}\small\item\em \-Tests that find() correctly returns a \-Task given an arg dict. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskcontroller_1_1TestTaskController_ac5577377f866469b155257d7c2674b8c}{test\-\_\-find\-\_\-all}
+\begin{DoxyCompactList}\small\item\em \-Tests that find() correctly returns all \-Tasks when given no key. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskcontroller_1_1TestTaskController_afc1f00967a02557cf405a3428d6d86b2}{test\-\_\-edit}
+\begin{DoxyCompactList}\small\item\em \-Tests that edit() correctly modifies a \-Task given an arg dict. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskcontroller_1_1TestTaskController_ac5d4cb8d40e6976c97f7bd9f0d0e5dc4}{test\-\_\-edit\-\_\-none}
+\begin{DoxyCompactList}\small\item\em \-Tests edit()'s handling of arg dicts with empty attributes. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskcontroller_1_1TestTaskController_a2bf53edfdfd95abe028ce4ada0644263}{test\-\_\-delete}
+\begin{DoxyCompactList}\small\item\em \-Tests that delete() correctly deletes a \-Task given an arg dict. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classtest__taskcontroller_1_1TestTaskController_a16cbd17e4ad8bf93e164813b77313942}{interface\-\_\-controller}
+\item 
+\hyperlink{classtest__taskcontroller_1_1TestTaskController_a450431cde03f14169cd5ac04db704ab6}{title}
+\item 
+\hyperlink{classtest__taskcontroller_1_1TestTaskController_a9825f47dfebf3e25f03548d51d1d07d1}{notes}
+\item 
+\hyperlink{classtest__taskcontroller_1_1TestTaskController_a8b748405763b73406ca9cfafe467c0a1}{added\-\_\-task}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Abstract tests for child tests using specific storage types. 
+
+\-Generic tests used by all \-Task\-Controller tests undependent on what storage type they are using. \-These tests should never be called directly. 
+
+\-Definition at line 15 of file test\-\_\-taskcontroller.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classtest__taskcontroller_1_1TestTaskController_a2ec547bb413edbb40c0ae582dd2466bd}{
+\index{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!test_taskcontroller::TestTaskController@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-::\-\_\-\-\_\-init\-\_\-\-\_\- (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{method\-\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskcontroller_1_1TestTaskController_a2ec547bb413edbb40c0ae582dd2466bd}
+
+
+\-Reimplemented in \hyperlink{classtest__taskcontroller_1_1TestTaskControllerGTaskStorage_a6486ee999987082360633f99b887af86}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-G\-Task\-Storage}, \hyperlink{classtest__taskcontroller_1_1TestTaskControllerSQLiteStorage_a29417d2c4aee8c9bd135faff67203edc}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-S\-Q\-Lite\-Storage}, and \hyperlink{classtest__taskcontroller_1_1TestTaskControllerFileStorage_a1f63de1b9c566d073b4a11c5a49530c6}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-File\-Storage}.
+
+
+
+\-Definition at line 17 of file test\-\_\-taskcontroller.\-py.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classtest__taskcontroller_1_1TestTaskController_a89989d1173db14268c0329ad98d304d5}{
+\index{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}!add\-\_\-task@{add\-\_\-task}}
+\index{add\-\_\-task@{add\-\_\-task}!test_taskcontroller::TestTaskController@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}}
+\subsubsection[{add\-\_\-task}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-::add\-\_\-task (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskcontroller_1_1TestTaskController_a89989d1173db14268c0329ad98d304d5}
+
+
+\-Helper function to add \-Task to storage as given dict. 
+
+
+
+\-Definition at line 26 of file test\-\_\-taskcontroller.\-py.
+
+\hypertarget{classtest__taskcontroller_1_1TestTaskController_a37d53351ab2b48968965ef22ad6c4a18}{
+\index{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}!find\-\_\-task@{find\-\_\-task}}
+\index{find\-\_\-task@{find\-\_\-task}!test_taskcontroller::TestTaskController@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}}
+\subsubsection[{find\-\_\-task}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-::find\-\_\-task (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{task\-\_\-key}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskcontroller_1_1TestTaskController_a37d53351ab2b48968965ef22ad6c4a18}
+
+
+\-Helper function to find \-Task in storage when given key. 
+
+
+
+\-Definition at line 38 of file test\-\_\-taskcontroller.\-py.
+
+\hypertarget{classtest__taskcontroller_1_1TestTaskController_a9f241994236f76865549287f630b43ef}{
+\index{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}!test\-\_\-add@{test\-\_\-add}}
+\index{test\-\_\-add@{test\-\_\-add}!test_taskcontroller::TestTaskController@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}}
+\subsubsection[{test\-\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-::test\-\_\-add (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskcontroller_1_1TestTaskController_a9f241994236f76865549287f630b43ef}
+
+
+\-Tests that add() correctly adds the arg dict as a \-Task to storage. 
+
+
+
+\-Definition at line 50 of file test\-\_\-taskcontroller.\-py.
+
+\hypertarget{classtest__taskcontroller_1_1TestTaskController_a2bf53edfdfd95abe028ce4ada0644263}{
+\index{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}!test\-\_\-delete@{test\-\_\-delete}}
+\index{test\-\_\-delete@{test\-\_\-delete}!test_taskcontroller::TestTaskController@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}}
+\subsubsection[{test\-\_\-delete}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-::test\-\_\-delete (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskcontroller_1_1TestTaskController_a2bf53edfdfd95abe028ce4ada0644263}
+
+
+\-Tests that delete() correctly deletes a \-Task given an arg dict. 
+
+
+
+\-Definition at line 117 of file test\-\_\-taskcontroller.\-py.
+
+\hypertarget{classtest__taskcontroller_1_1TestTaskController_afc1f00967a02557cf405a3428d6d86b2}{
+\index{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}!test\-\_\-edit@{test\-\_\-edit}}
+\index{test\-\_\-edit@{test\-\_\-edit}!test_taskcontroller::TestTaskController@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}}
+\subsubsection[{test\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-::test\-\_\-edit (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskcontroller_1_1TestTaskController_afc1f00967a02557cf405a3428d6d86b2}
+
+
+\-Tests that edit() correctly modifies a \-Task given an arg dict. 
+
+
+
+\-Definition at line 82 of file test\-\_\-taskcontroller.\-py.
+
+\hypertarget{classtest__taskcontroller_1_1TestTaskController_ac5d4cb8d40e6976c97f7bd9f0d0e5dc4}{
+\index{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}!test\-\_\-edit\-\_\-none@{test\-\_\-edit\-\_\-none}}
+\index{test\-\_\-edit\-\_\-none@{test\-\_\-edit\-\_\-none}!test_taskcontroller::TestTaskController@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}}
+\subsubsection[{test\-\_\-edit\-\_\-none}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-::test\-\_\-edit\-\_\-none (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskcontroller_1_1TestTaskController_ac5d4cb8d40e6976c97f7bd9f0d0e5dc4}
+
+
+\-Tests edit()'s handling of arg dicts with empty attributes. 
+
+
+
+\-Definition at line 99 of file test\-\_\-taskcontroller.\-py.
+
+\hypertarget{classtest__taskcontroller_1_1TestTaskController_a8921a89235720f678cef5ee895e34cee}{
+\index{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}!test\-\_\-find@{test\-\_\-find}}
+\index{test\-\_\-find@{test\-\_\-find}!test_taskcontroller::TestTaskController@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}}
+\subsubsection[{test\-\_\-find}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-::test\-\_\-find (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskcontroller_1_1TestTaskController_a8921a89235720f678cef5ee895e34cee}
+
+
+\-Tests that find() correctly returns a \-Task given an arg dict. 
+
+
+
+\-Definition at line 57 of file test\-\_\-taskcontroller.\-py.
+
+\hypertarget{classtest__taskcontroller_1_1TestTaskController_ac5577377f866469b155257d7c2674b8c}{
+\index{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}!test\-\_\-find\-\_\-all@{test\-\_\-find\-\_\-all}}
+\index{test\-\_\-find\-\_\-all@{test\-\_\-find\-\_\-all}!test_taskcontroller::TestTaskController@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}}
+\subsubsection[{test\-\_\-find\-\_\-all}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-::test\-\_\-find\-\_\-all (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskcontroller_1_1TestTaskController_ac5577377f866469b155257d7c2674b8c}
+
+
+\-Tests that find() correctly returns all \-Tasks when given no key. 
+
+
+
+\-Definition at line 66 of file test\-\_\-taskcontroller.\-py.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\hypertarget{classtest__taskcontroller_1_1TestTaskController_a8b748405763b73406ca9cfafe467c0a1}{
+\index{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}!added\-\_\-task@{added\-\_\-task}}
+\index{added\-\_\-task@{added\-\_\-task}!test_taskcontroller::TestTaskController@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}}
+\subsubsection[{added\-\_\-task}]{\setlength{\rightskip}{0pt plus 5cm}{\bf test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-::added\-\_\-task}}}
+\label{classtest__taskcontroller_1_1TestTaskController_a8b748405763b73406ca9cfafe467c0a1}
+
+
+\-Reimplemented in \hyperlink{classtest__taskcontroller_1_1TestTaskControllerGTaskStorage_a150fa26a41cdce7d5d753edf43d5a09e}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-G\-Task\-Storage}, \hyperlink{classtest__taskcontroller_1_1TestTaskControllerSQLiteStorage_aa69b7c38504f5c50040bec6b0fcc73c3}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-S\-Q\-Lite\-Storage}, and \hyperlink{classtest__taskcontroller_1_1TestTaskControllerFileStorage_a5b9b16c50e8e488cbc066f5db85bca64}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-File\-Storage}.
+
+
+
+\-Definition at line 17 of file test\-\_\-taskcontroller.\-py.
+
+\hypertarget{classtest__taskcontroller_1_1TestTaskController_a16cbd17e4ad8bf93e164813b77313942}{
+\index{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}!interface\-\_\-controller@{interface\-\_\-controller}}
+\index{interface\-\_\-controller@{interface\-\_\-controller}!test_taskcontroller::TestTaskController@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}}
+\subsubsection[{interface\-\_\-controller}]{\setlength{\rightskip}{0pt plus 5cm}{\bf test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-::interface\-\_\-controller}}}
+\label{classtest__taskcontroller_1_1TestTaskController_a16cbd17e4ad8bf93e164813b77313942}
+
+
+\-Reimplemented in \hyperlink{classtest__taskcontroller_1_1TestTaskControllerGTaskStorage_ac6b50d155cf6a1b6e013aec3b5239506}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-G\-Task\-Storage}, \hyperlink{classtest__taskcontroller_1_1TestTaskControllerSQLiteStorage_a57793e2bedf041d117057533c98ecc48}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-S\-Q\-Lite\-Storage}, and \hyperlink{classtest__taskcontroller_1_1TestTaskControllerFileStorage_acc2ab298aa1f3e5416310c8dfd118246}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-File\-Storage}.
+
+
+
+\-Definition at line 17 of file test\-\_\-taskcontroller.\-py.
+
+\hypertarget{classtest__taskcontroller_1_1TestTaskController_a9825f47dfebf3e25f03548d51d1d07d1}{
+\index{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}!notes@{notes}}
+\index{notes@{notes}!test_taskcontroller::TestTaskController@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}}
+\subsubsection[{notes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-::notes}}}
+\label{classtest__taskcontroller_1_1TestTaskController_a9825f47dfebf3e25f03548d51d1d07d1}
+
+
+\-Reimplemented in \hyperlink{classtest__taskcontroller_1_1TestTaskControllerGTaskStorage_af68b73d943db052577719cfc4c1cebbf}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-G\-Task\-Storage}, \hyperlink{classtest__taskcontroller_1_1TestTaskControllerSQLiteStorage_a5ddf73f3d29305c397092befa1063493}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-S\-Q\-Lite\-Storage}, and \hyperlink{classtest__taskcontroller_1_1TestTaskControllerFileStorage_a6e7bbd4224d1fcff065cde59dbb651fc}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-File\-Storage}.
+
+
+
+\-Definition at line 17 of file test\-\_\-taskcontroller.\-py.
+
+\hypertarget{classtest__taskcontroller_1_1TestTaskController_a450431cde03f14169cd5ac04db704ab6}{
+\index{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}!title@{title}}
+\index{title@{title}!test_taskcontroller::TestTaskController@{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller}}
+\subsubsection[{title}]{\setlength{\rightskip}{0pt plus 5cm}{\bf test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-::title}}}
+\label{classtest__taskcontroller_1_1TestTaskController_a450431cde03f14169cd5ac04db704ab6}
+
+
+\-Reimplemented in \hyperlink{classtest__taskcontroller_1_1TestTaskControllerGTaskStorage_afac8474c0938bce8e9ffa5c809d65e7a}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-G\-Task\-Storage}, \hyperlink{classtest__taskcontroller_1_1TestTaskControllerSQLiteStorage_a3fcf0960dcbb4eb0c910638fc6789480}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-S\-Q\-Lite\-Storage}, and \hyperlink{classtest__taskcontroller_1_1TestTaskControllerFileStorage_a4e8286cf16ac1c8751a710a36785aa69}{test\-\_\-taskcontroller\-::\-Test\-Task\-Controller\-File\-Storage}.
+
+
+
+\-Definition at line 17 of file test\-\_\-taskcontroller.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/scott/school/capstone/\-Task-\/\-Organizer/src/test/\hyperlink{test__taskcontroller_8py}{test\-\_\-taskcontroller.\-py}\end{DoxyCompactItemize}

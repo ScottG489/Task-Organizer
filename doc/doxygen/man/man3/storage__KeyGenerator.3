@@ -1,0 +1,51 @@
+.TH "storage::_KeyGenerator" 3 "Sat Sep 24 2011" "Task-Organizer" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+storage::_KeyGenerator \- 
+.PP
+Generate unique keys for Tasks'\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.ti -1c
+.RI "def \fBget\fP"
+.br
+.RI "\fIReturn a unique Task key'\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Generate unique keys for Tasks'\&. 
+
+Kwargs/Instance Vars: key_filename (str): Name of file in which to store key'\&.
+.PP
+Public methods: \fBget()\fP
+.PP
+Get a unique key for a Task being stored in a file'\&. Key's are integers incremented by 1'\&. 
+.PP
+Definition at line 919 of file storage\&.py'\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def storage::_KeyGenerator::__init__ (self, key_filename = \fC'keyfile'\fP)"
+.PP
+Definition at line 920 of file storage\&.py'\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "def storage::_KeyGenerator::get (self)"
+.PP
+Return a unique Task key'\&. Returns: key (int): New unique key for a Task'\&.
+.PP
+Raises: 
+.PP
+Definition at line 974 of file storage\&.py'\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Task-Organizer from the source code'\&.

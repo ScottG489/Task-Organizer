@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>controller &mdash; Task-Organizer v0.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Task-Organizer v0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Task-Organizer v0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for controller</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;Task controller library</span>
+
+<span class="sd">Classes:</span>
+<span class="sd">    TaskController</span>
+
+<span class="sd">The docstring for a module should generally list the classes, exceptions and functions (and any other objects) that are exported by the module, with a one-line summary of each. (These summaries generally give less detail than the summary line in the object&#39;s docstring.) The docstring for a package (i.e., the docstring of the package&#39;s __init__.py module) should also list the modules and subpackages exported by the package.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">storage</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="c"># XXX: I believe this needs error handling.</span>
+<div class="viewcode-block" id="TaskController"><a class="viewcode-back" href="../index.html#controller.TaskController">[docs]</a><span class="k">class</span> <span class="nc">TaskController</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Interface to manipulate Tasks</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        storage_type (str): Type of storage in which to persist Tasks</span>
+
+<span class="sd">    Kwargs:</span>
+<span class="sd">        task_dbname (str): Name of the sqlite database file.</span>
+<span class="sd">        task_filename (str): Name of the file when using file storage.</span>
+<span class="sd">        key_filename (str): Name of the key file when using file storage.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        add(task_item)</span>
+<span class="sd">        find(task_item)</span>
+<span class="sd">        edit(task_item)</span>
+<span class="sd">        delete(task_item)</span>
+
+<span class="sd">    API for working with Task objects.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">storage_type</span><span class="p">,</span> 
+            <span class="n">task_dbname</span><span class="o">=</span><span class="s">&#39;taskdb&#39;</span><span class="p">,</span>
+            <span class="n">task_filename</span><span class="o">=</span><span class="s">&#39;taskfile&#39;</span><span class="p">,</span>
+            <span class="n">key_filename</span><span class="o">=</span><span class="s">&#39;keyfile&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">StorageFactory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="n">storage_type</span><span class="p">,</span>
+                <span class="n">task_dbname</span><span class="o">=</span><span class="n">task_dbname</span><span class="p">,</span>
+                <span class="n">task_filename</span><span class="o">=</span><span class="n">task_filename</span><span class="p">,</span>
+                <span class="n">key_filename</span><span class="o">=</span><span class="n">key_filename</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="TaskController.add"><a class="viewcode-back" href="../index.html#controller.TaskController.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_item</span><span class="p">):</span>
+        <span class="c"># pylint: disable=E1103</span>
+        <span class="sd">&quot;&quot;&quot;Return a Task given an argument dictionary.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            task_item (Task): Task object to add to storage</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            task_item (Task): Newly added Task with key</span>
+
+<span class="sd">        The given task is added to storage.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;attempting to add arguments as Task&#39;</span><span class="p">)</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;storing and returning task&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">task_item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">task_item</span>
+</div>
+<div class="viewcode-block" id="TaskController.find"><a class="viewcode-back" href="../index.html#controller.TaskController.find">[docs]</a>    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_item</span><span class="p">):</span>
+        <span class="c"># pylint: disable=E1103</span>
+        <span class="sd">&quot;&quot;&quot;Return all Tasks or one with matching key.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            task_item (Task): Task object to find in storage.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            task_list (Task[]): Returned if task_item.key is None.</span>
+<span class="sd">            task_match (Task): Returned if key has matching Task.</span>
+<span class="sd">            None (None): Returned if key has no matching Task.</span>
+
+<span class="sd">        Using the given Task, return a list of all Tasks if it&#39;s key is None.</span>
+<span class="sd">        Return a single Task if a key is specified and there is a Task in</span>
+<span class="sd">        storage with a matching key.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;attempting to find Task(s) using arguments&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">task_item</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;no key specified; returning list of all tasks&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span><span class="o">.</span><span class="n">get_all</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;finding task with key and returning Task&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">task_item</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="TaskController.edit"><a class="viewcode-back" href="../index.html#controller.TaskController.edit">[docs]</a>    <span class="k">def</span> <span class="nf">edit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_item</span><span class="p">):</span>
+        <span class="c"># pylint: disable=E1103</span>
+        <span class="sd">&quot;&quot;&quot;Edit an existing Task.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            task_item (Task): Task with matching key and updated attributes.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            old_task (Task): Task as it was in storage before being updated.</span>
+
+<span class="sd">        Using the given Task&#39;s key, finds a Task instorage with a matching key</span>
+<span class="sd">        and replaces it with the new Task&#39;s attributes that aren&#39;t None.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;attempting to edit Task using arguments&#39;</span><span class="p">)</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;using old task attributes if new ones are</span><span class="se">\&#39;</span><span class="s">t given&#39;</span><span class="p">)</span>
+        <span class="n">old_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">task_item</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">old_task</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">task_item</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">task_item</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">old_task</span><span class="o">.</span><span class="n">title</span>
+            <span class="k">if</span> <span class="n">task_item</span><span class="o">.</span><span class="n">notes</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">task_item</span><span class="o">.</span><span class="n">notes</span> <span class="o">=</span> <span class="n">old_task</span><span class="o">.</span><span class="n">notes</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;replacing task with newly created task&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">task_item</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">old_task</span>
+</div>
+<div class="viewcode-block" id="TaskController.delete"><a class="viewcode-back" href="../index.html#controller.TaskController.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_item</span><span class="p">):</span>
+        <span class="c"># pylint: disable=E1103</span>
+        <span class="sd">&quot;&quot;&quot;Delete an existing Task.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            task_item (Task): Task to use to delete a Task in storage.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            deleted_task (Task): Task that was in storage before being deleted.</span>
+
+<span class="sd">        Using the given Task&#39;s key, if a Task with a matching key is found in</span>
+<span class="sd">        storage, delete it.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;attempting to delete Task(s) using arguments&#39;</span><span class="p">)</span>
+
+        <span class="n">deleted_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">task_item</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">task_item</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;success! task deleted&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">deleted_task</span>
+
+<span class="c">#    def search(self, task_item):</span>
+<span class="c">#        pass</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Task-Organizer v0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Scott Giminiani.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

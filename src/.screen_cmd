@@ -1,0 +1,24 @@
+screen -t git
+cd ../doc
+screen -t doc
+cd -
+
+cd task
+screen -t controller vim controller.py
+screen -t task vim task.py
+screen -t storage vim storage.py
+screen -t logger vim logger.py
+cd ..
+
+cd examples
+screen -t ctask vim ctask.py
+screen -t cliparser vim cliparser.py
+cd ..
+
+cd test
+screen -t testcliparser vim test_cliparser.py
+screen -t testtaskcontroller vim test_taskcontroller.py
+screen -t testtask vim test_task.py
+screen -t testtaskstorage vim test_taskstorage.py
+screen -t util vim util.py
+cd ..

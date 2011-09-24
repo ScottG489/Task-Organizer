@@ -1,0 +1,38 @@
+.TH "cliparser::CLIParser" 3 "Sat Sep 24 2011" "Task-Organizer" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+cliparser::CLIParser \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.ti -1c
+.RI "def \fBparse_cl_args\fP"
+.br
+.RI "\fIReturn a dictionary of arguments'\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 10 of file cliparser\&.py'\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def cliparser::CLIParser::__init__ (self, storage_type, task_dbname = \fC'taskdb'\fP, task_filename = \fC'taskfile'\fP, key_filename = \fC'keyfile'\fP)"
+.PP
+Definition at line 11 of file cliparser\&.py'\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "def cliparser::CLIParser::parse_cl_args (self)"
+.PP
+Return a dictionary of arguments'\&. Calls the argument parser to parse the command line arguments by using sys'\&.argv'\&. Then calls a sanitizer to get an argument dictionary which is returned'\&. 
+.PP
+Definition at line 161 of file cliparser\&.py'\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Task-Organizer from the source code'\&.

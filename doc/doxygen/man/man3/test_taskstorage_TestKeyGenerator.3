@@ -1,0 +1,85 @@
+.TH "test_taskstorage::TestKeyGenerator" 3 "Sat Sep 24 2011" "Task-Organizer" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+test_taskstorage::TestKeyGenerator \- 
+.PP
+Tests for the KeyGenerator class'\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fBsetUp\fP"
+.br
+.ti -1c
+.RI "def \fBtearDown\fP"
+.br
+.ti -1c
+.RI "def \fBtest_get\fP"
+.br
+.RI "\fITests that get() updates and returns the correct key'\&. \fP"
+.ti -1c
+.RI "def \fBtest_get_read_fail\fP"
+.br
+.RI "\fITests add()'s handling of failed file reading'\&. \fP"
+.ti -1c
+.RI "def \fBtest_get_write_fail\fP"
+.br
+.RI "\fITests get()'s handling of failed file writing'\&. \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBtest_key_filename\fP"
+.br
+.ti -1c
+.RI "\fBkey_gen\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Tests for the KeyGenerator class'\&. 
+
+Tests the public methods of the KeyGenerator class used by the FileStorage class'\&. 
+.PP
+Definition at line 341 of file test_taskstorage\&.py'\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "def test_taskstorage::TestKeyGenerator::setUp (self)"
+.PP
+Definition at line 343 of file test_taskstorage\&.py'\&.
+.SS "def test_taskstorage::TestKeyGenerator::tearDown (self)"
+.PP
+Definition at line 358 of file test_taskstorage\&.py'\&.
+.SS "def test_taskstorage::TestKeyGenerator::test_get (self)"
+.PP
+Tests that get() updates and returns the correct key'\&. 
+.PP
+Definition at line 365 of file test_taskstorage\&.py'\&.
+.SS "def test_taskstorage::TestKeyGenerator::test_get_read_fail (self)"
+.PP
+Tests add()'s handling of failed file reading'\&. 
+.PP
+Definition at line 373 of file test_taskstorage\&.py'\&.
+.SS "def test_taskstorage::TestKeyGenerator::test_get_write_fail (self)"
+.PP
+Tests get()'s handling of failed file writing'\&. 
+.PP
+Definition at line 383 of file test_taskstorage\&.py'\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBtest_taskstorage::TestKeyGenerator::key_gen\fP"
+.PP
+Definition at line 343 of file test_taskstorage\&.py'\&.
+.SS "\fBtest_taskstorage::TestKeyGenerator::test_key_filename\fP"
+.PP
+Definition at line 343 of file test_taskstorage\&.py'\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Task-Organizer from the source code'\&.

@@ -6,6 +6,7 @@ import util
 
 
 class TestCLIParser(unittest.TestCase):
+    """Tests parsing of the command line for the ctask script."""
     # pylint: disable=R0904
     def setUp(self):    # pylint: disable=C0103
         self.test_task_filename = 'testtaskfile'

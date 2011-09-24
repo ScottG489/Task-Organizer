@@ -1,0 +1,276 @@
+\hypertarget{classtest__taskstorage_1_1TestStorage}{
+\section{test\-\_\-taskstorage\-:\-:\-Test\-Storage \-Class \-Reference}
+\label{classtest__taskstorage_1_1TestStorage}\index{test\-\_\-taskstorage\-::\-Test\-Storage@{test\-\_\-taskstorage\-::\-Test\-Storage}}
+}
+
+
+\-Abstract tests for the child classes of the \-Storage class.  
+
+
+\-Inheritance diagram for test\-\_\-taskstorage\-:\-:\-Test\-Storage\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.689291cm]{classtest__taskstorage_1_1TestStorage}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classtest__taskstorage_1_1TestStorage_a41a9bc77946b61981cdaebb9cdff74f8}{\-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def \hyperlink{classtest__taskstorage_1_1TestStorage_aa6ca7dc5de002789d4d4ccdf67fdb08e}{test\-\_\-add}
+\begin{DoxyCompactList}\small\item\em \-Tests that add() correctly adds a \-Task to storage. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskstorage_1_1TestStorage_a356b78c44916f1920e3a22c3dbca378f}{test\-\_\-find}
+\begin{DoxyCompactList}\small\item\em \-Tests that find() correctly returns a \-Task given a key. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskstorage_1_1TestStorage_a09f937b953d03c22d7630817d90b9362}{test\-\_\-get\-\_\-all}
+\begin{DoxyCompactList}\small\item\em \-Tests that get\-\_\-all() returns a list of all \-Tasks. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskstorage_1_1TestStorage_a9c88d63e97ce968fc34e873fa5d559c1}{test\-\_\-update}
+\begin{DoxyCompactList}\small\item\em \-Tests that update() correctly updates a \-Task given a \-Task. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskstorage_1_1TestStorage_a437b4c393131de87ba9c555f92c5cb79}{test\-\_\-update\-\_\-no\-\_\-match}
+\begin{DoxyCompactList}\small\item\em \-Tests updates()'s handling of no matching key. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskstorage_1_1TestStorage_a8b8bb9f5d0f2184902b2ce0dc1fd491d}{test\-\_\-delete}
+\begin{DoxyCompactList}\small\item\em \-Tests that delete() correctly deletes a \-Task from storage. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskstorage_1_1TestStorage_a4eb39b2d44a6e283b5aa7fec7878a351}{test\-\_\-delete\-\_\-no\-\_\-match}
+\begin{DoxyCompactList}\small\item\em \-Tests delete()'s handling of no matching key. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskstorage_1_1TestStorage_aef95d0237de543b3c466c0c0aa185b74}{test\-\_\-search}
+\begin{DoxyCompactList}\small\item\em \-Tests that search() correctly returns a matching \-Task given a \-Task. \end{DoxyCompactList}\item 
+def \hyperlink{classtest__taskstorage_1_1TestStorage_a5fa544513569dfa9632b5b34b2b30350}{test\-\_\-search\-\_\-not\-\_\-found}
+\begin{DoxyCompactList}\small\item\em \-Tests search()'s behavior when no match is found. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classtest__taskstorage_1_1TestStorage_a414fec77c1f9ac66b58f26df514fc048}{task\-\_\-storage}
+\item 
+\hyperlink{classtest__taskstorage_1_1TestStorage_a7d47cd41a51cd29b6f793d373599bd82}{my\-\_\-task}
+\item 
+\hyperlink{classtest__taskstorage_1_1TestStorage_ab9ddf07c905a5d38f3b48aa17411516e}{key}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Abstract tests for the child classes of the \-Storage class. 
+
+\-This abstract test case's functions should be called only through a child test case. 
+
+\-Definition at line 20 of file test\-\_\-taskstorage.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classtest__taskstorage_1_1TestStorage_a41a9bc77946b61981cdaebb9cdff74f8}{
+\index{test\-\_\-taskstorage\-::\-Test\-Storage@{test\-\_\-taskstorage\-::\-Test\-Storage}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!test_taskstorage::TestStorage@{test\-\_\-taskstorage\-::\-Test\-Storage}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskstorage\-::\-Test\-Storage\-::\-\_\-\-\_\-init\-\_\-\-\_\- (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{method\-\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskstorage_1_1TestStorage_a41a9bc77946b61981cdaebb9cdff74f8}
+
+
+\-Reimplemented in \hyperlink{classtest__taskstorage_1_1TestGTaskStorage_ae5d725daa8804f4bf01b56a5ba28303f}{test\-\_\-taskstorage\-::\-Test\-G\-Task\-Storage}, \hyperlink{classtest__taskstorage_1_1TestSQLiteStorage_ae0d8cf19d4b45aa22960c66adf1d1101}{test\-\_\-taskstorage\-::\-Test\-S\-Q\-Lite\-Storage}, and \hyperlink{classtest__taskstorage_1_1TestFileStorage_a3aeeb19983b93f40da74ca6f741bca7b}{test\-\_\-taskstorage\-::\-Test\-File\-Storage}.
+
+
+
+\-Definition at line 22 of file test\-\_\-taskstorage.\-py.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classtest__taskstorage_1_1TestStorage_aa6ca7dc5de002789d4d4ccdf67fdb08e}{
+\index{test\-\_\-taskstorage\-::\-Test\-Storage@{test\-\_\-taskstorage\-::\-Test\-Storage}!test\-\_\-add@{test\-\_\-add}}
+\index{test\-\_\-add@{test\-\_\-add}!test_taskstorage::TestStorage@{test\-\_\-taskstorage\-::\-Test\-Storage}}
+\subsubsection[{test\-\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskstorage\-::\-Test\-Storage\-::test\-\_\-add (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskstorage_1_1TestStorage_aa6ca7dc5de002789d4d4ccdf67fdb08e}
+
+
+\-Tests that add() correctly adds a \-Task to storage. 
+
+
+
+\-Definition at line 29 of file test\-\_\-taskstorage.\-py.
+
+\hypertarget{classtest__taskstorage_1_1TestStorage_a8b8bb9f5d0f2184902b2ce0dc1fd491d}{
+\index{test\-\_\-taskstorage\-::\-Test\-Storage@{test\-\_\-taskstorage\-::\-Test\-Storage}!test\-\_\-delete@{test\-\_\-delete}}
+\index{test\-\_\-delete@{test\-\_\-delete}!test_taskstorage::TestStorage@{test\-\_\-taskstorage\-::\-Test\-Storage}}
+\subsubsection[{test\-\_\-delete}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskstorage\-::\-Test\-Storage\-::test\-\_\-delete (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskstorage_1_1TestStorage_a8b8bb9f5d0f2184902b2ce0dc1fd491d}
+
+
+\-Tests that delete() correctly deletes a \-Task from storage. 
+
+
+
+\-Definition at line 79 of file test\-\_\-taskstorage.\-py.
+
+\hypertarget{classtest__taskstorage_1_1TestStorage_a4eb39b2d44a6e283b5aa7fec7878a351}{
+\index{test\-\_\-taskstorage\-::\-Test\-Storage@{test\-\_\-taskstorage\-::\-Test\-Storage}!test\-\_\-delete\-\_\-no\-\_\-match@{test\-\_\-delete\-\_\-no\-\_\-match}}
+\index{test\-\_\-delete\-\_\-no\-\_\-match@{test\-\_\-delete\-\_\-no\-\_\-match}!test_taskstorage::TestStorage@{test\-\_\-taskstorage\-::\-Test\-Storage}}
+\subsubsection[{test\-\_\-delete\-\_\-no\-\_\-match}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskstorage\-::\-Test\-Storage\-::test\-\_\-delete\-\_\-no\-\_\-match (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskstorage_1_1TestStorage_a4eb39b2d44a6e283b5aa7fec7878a351}
+
+
+\-Tests delete()'s handling of no matching key. 
+
+
+
+\-Definition at line 90 of file test\-\_\-taskstorage.\-py.
+
+\hypertarget{classtest__taskstorage_1_1TestStorage_a356b78c44916f1920e3a22c3dbca378f}{
+\index{test\-\_\-taskstorage\-::\-Test\-Storage@{test\-\_\-taskstorage\-::\-Test\-Storage}!test\-\_\-find@{test\-\_\-find}}
+\index{test\-\_\-find@{test\-\_\-find}!test_taskstorage::TestStorage@{test\-\_\-taskstorage\-::\-Test\-Storage}}
+\subsubsection[{test\-\_\-find}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskstorage\-::\-Test\-Storage\-::test\-\_\-find (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskstorage_1_1TestStorage_a356b78c44916f1920e3a22c3dbca378f}
+
+
+\-Tests that find() correctly returns a \-Task given a key. 
+
+
+
+\-Definition at line 39 of file test\-\_\-taskstorage.\-py.
+
+\hypertarget{classtest__taskstorage_1_1TestStorage_a09f937b953d03c22d7630817d90b9362}{
+\index{test\-\_\-taskstorage\-::\-Test\-Storage@{test\-\_\-taskstorage\-::\-Test\-Storage}!test\-\_\-get\-\_\-all@{test\-\_\-get\-\_\-all}}
+\index{test\-\_\-get\-\_\-all@{test\-\_\-get\-\_\-all}!test_taskstorage::TestStorage@{test\-\_\-taskstorage\-::\-Test\-Storage}}
+\subsubsection[{test\-\_\-get\-\_\-all}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskstorage\-::\-Test\-Storage\-::test\-\_\-get\-\_\-all (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskstorage_1_1TestStorage_a09f937b953d03c22d7630817d90b9362}
+
+
+\-Tests that get\-\_\-all() returns a list of all \-Tasks. 
+
+
+
+\-Definition at line 47 of file test\-\_\-taskstorage.\-py.
+
+\hypertarget{classtest__taskstorage_1_1TestStorage_aef95d0237de543b3c466c0c0aa185b74}{
+\index{test\-\_\-taskstorage\-::\-Test\-Storage@{test\-\_\-taskstorage\-::\-Test\-Storage}!test\-\_\-search@{test\-\_\-search}}
+\index{test\-\_\-search@{test\-\_\-search}!test_taskstorage::TestStorage@{test\-\_\-taskstorage\-::\-Test\-Storage}}
+\subsubsection[{test\-\_\-search}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskstorage\-::\-Test\-Storage\-::test\-\_\-search (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskstorage_1_1TestStorage_aef95d0237de543b3c466c0c0aa185b74}
+
+
+\-Tests that search() correctly returns a matching \-Task given a \-Task. 
+
+
+
+\-Definition at line 101 of file test\-\_\-taskstorage.\-py.
+
+\hypertarget{classtest__taskstorage_1_1TestStorage_a5fa544513569dfa9632b5b34b2b30350}{
+\index{test\-\_\-taskstorage\-::\-Test\-Storage@{test\-\_\-taskstorage\-::\-Test\-Storage}!test\-\_\-search\-\_\-not\-\_\-found@{test\-\_\-search\-\_\-not\-\_\-found}}
+\index{test\-\_\-search\-\_\-not\-\_\-found@{test\-\_\-search\-\_\-not\-\_\-found}!test_taskstorage::TestStorage@{test\-\_\-taskstorage\-::\-Test\-Storage}}
+\subsubsection[{test\-\_\-search\-\_\-not\-\_\-found}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskstorage\-::\-Test\-Storage\-::test\-\_\-search\-\_\-not\-\_\-found (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskstorage_1_1TestStorage_a5fa544513569dfa9632b5b34b2b30350}
+
+
+\-Tests search()'s behavior when no match is found. 
+
+
+
+\-Definition at line 110 of file test\-\_\-taskstorage.\-py.
+
+\hypertarget{classtest__taskstorage_1_1TestStorage_a9c88d63e97ce968fc34e873fa5d559c1}{
+\index{test\-\_\-taskstorage\-::\-Test\-Storage@{test\-\_\-taskstorage\-::\-Test\-Storage}!test\-\_\-update@{test\-\_\-update}}
+\index{test\-\_\-update@{test\-\_\-update}!test_taskstorage::TestStorage@{test\-\_\-taskstorage\-::\-Test\-Storage}}
+\subsubsection[{test\-\_\-update}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskstorage\-::\-Test\-Storage\-::test\-\_\-update (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskstorage_1_1TestStorage_a9c88d63e97ce968fc34e873fa5d559c1}
+
+
+\-Tests that update() correctly updates a \-Task given a \-Task. 
+
+
+
+\-Definition at line 55 of file test\-\_\-taskstorage.\-py.
+
+\hypertarget{classtest__taskstorage_1_1TestStorage_a437b4c393131de87ba9c555f92c5cb79}{
+\index{test\-\_\-taskstorage\-::\-Test\-Storage@{test\-\_\-taskstorage\-::\-Test\-Storage}!test\-\_\-update\-\_\-no\-\_\-match@{test\-\_\-update\-\_\-no\-\_\-match}}
+\index{test\-\_\-update\-\_\-no\-\_\-match@{test\-\_\-update\-\_\-no\-\_\-match}!test_taskstorage::TestStorage@{test\-\_\-taskstorage\-::\-Test\-Storage}}
+\subsubsection[{test\-\_\-update\-\_\-no\-\_\-match}]{\setlength{\rightskip}{0pt plus 5cm}def test\-\_\-taskstorage\-::\-Test\-Storage\-::test\-\_\-update\-\_\-no\-\_\-match (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classtest__taskstorage_1_1TestStorage_a437b4c393131de87ba9c555f92c5cb79}
+
+
+\-Tests updates()'s handling of no matching key. 
+
+
+
+\-Definition at line 66 of file test\-\_\-taskstorage.\-py.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\hypertarget{classtest__taskstorage_1_1TestStorage_ab9ddf07c905a5d38f3b48aa17411516e}{
+\index{test\-\_\-taskstorage\-::\-Test\-Storage@{test\-\_\-taskstorage\-::\-Test\-Storage}!key@{key}}
+\index{key@{key}!test_taskstorage::TestStorage@{test\-\_\-taskstorage\-::\-Test\-Storage}}
+\subsubsection[{key}]{\setlength{\rightskip}{0pt plus 5cm}{\bf test\-\_\-taskstorage\-::\-Test\-Storage\-::key}}}
+\label{classtest__taskstorage_1_1TestStorage_ab9ddf07c905a5d38f3b48aa17411516e}
+
+
+\-Definition at line 66 of file test\-\_\-taskstorage.\-py.
+
+\hypertarget{classtest__taskstorage_1_1TestStorage_a7d47cd41a51cd29b6f793d373599bd82}{
+\index{test\-\_\-taskstorage\-::\-Test\-Storage@{test\-\_\-taskstorage\-::\-Test\-Storage}!my\-\_\-task@{my\-\_\-task}}
+\index{my\-\_\-task@{my\-\_\-task}!test_taskstorage::TestStorage@{test\-\_\-taskstorage\-::\-Test\-Storage}}
+\subsubsection[{my\-\_\-task}]{\setlength{\rightskip}{0pt plus 5cm}{\bf test\-\_\-taskstorage\-::\-Test\-Storage\-::my\-\_\-task}}}
+\label{classtest__taskstorage_1_1TestStorage_a7d47cd41a51cd29b6f793d373599bd82}
+
+
+\-Reimplemented in \hyperlink{classtest__taskstorage_1_1TestGTaskStorage_a64044ab25309aa17502a40daa5983923}{test\-\_\-taskstorage\-::\-Test\-G\-Task\-Storage}, \hyperlink{classtest__taskstorage_1_1TestSQLiteStorage_af51f54f0c6c646bf1979afbc8005fa88}{test\-\_\-taskstorage\-::\-Test\-S\-Q\-Lite\-Storage}, and \hyperlink{classtest__taskstorage_1_1TestFileStorage_a986e73f6663aa98ee3f90e1be3fa2515}{test\-\_\-taskstorage\-::\-Test\-File\-Storage}.
+
+
+
+\-Definition at line 22 of file test\-\_\-taskstorage.\-py.
+
+\hypertarget{classtest__taskstorage_1_1TestStorage_a414fec77c1f9ac66b58f26df514fc048}{
+\index{test\-\_\-taskstorage\-::\-Test\-Storage@{test\-\_\-taskstorage\-::\-Test\-Storage}!task\-\_\-storage@{task\-\_\-storage}}
+\index{task\-\_\-storage@{task\-\_\-storage}!test_taskstorage::TestStorage@{test\-\_\-taskstorage\-::\-Test\-Storage}}
+\subsubsection[{task\-\_\-storage}]{\setlength{\rightskip}{0pt plus 5cm}{\bf test\-\_\-taskstorage\-::\-Test\-Storage\-::task\-\_\-storage}}}
+\label{classtest__taskstorage_1_1TestStorage_a414fec77c1f9ac66b58f26df514fc048}
+
+
+\-Reimplemented in \hyperlink{classtest__taskstorage_1_1TestGTaskStorage_abb748de83f5fdbc145f7570464fe13b7}{test\-\_\-taskstorage\-::\-Test\-G\-Task\-Storage}, \hyperlink{classtest__taskstorage_1_1TestSQLiteStorage_ae03503042105ca995288e3128553870b}{test\-\_\-taskstorage\-::\-Test\-S\-Q\-Lite\-Storage}, and \hyperlink{classtest__taskstorage_1_1TestFileStorage_af65fc75e8b921b475ea610cf3681e270}{test\-\_\-taskstorage\-::\-Test\-File\-Storage}.
+
+
+
+\-Definition at line 22 of file test\-\_\-taskstorage.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/scott/school/capstone/\-Task-\/\-Organizer/src/test/\hyperlink{test__taskstorage_8py}{test\-\_\-taskstorage.\-py}\end{DoxyCompactItemize}

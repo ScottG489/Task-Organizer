@@ -1,0 +1,200 @@
+\hypertarget{classstorage_1_1Storage}{
+\section{storage\-:\-:\-Storage \-Class \-Reference}
+\label{classstorage_1_1Storage}\index{storage\-::\-Storage@{storage\-::\-Storage}}
+}
+
+
+\-Abstract base class for \-Task storage.  
+
+
+\-Inheritance diagram for storage\-:\-:\-Storage\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classstorage_1_1Storage}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classstorage_1_1Storage_af32106831c466787182a5363c139c849}{\-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def \hyperlink{classstorage_1_1Storage_abff2cc4bca8fd82e1eca9262ac6013d0}{add}
+\begin{DoxyCompactList}\small\item\em \-This functions is to be overridden by a specific storage method. \end{DoxyCompactList}\item 
+def \hyperlink{classstorage_1_1Storage_ad6eb351cfbfcc4c9dea150ce21dadcd7}{find}
+\begin{DoxyCompactList}\small\item\em \-This functions is to be overridden by a specific storage method. \end{DoxyCompactList}\item 
+def \hyperlink{classstorage_1_1Storage_a955f60e4ddfdfa4fae84d7b6b8aad438}{get\-\_\-all}
+\begin{DoxyCompactList}\small\item\em \-This functions is to be overridden by a specific storage method. \end{DoxyCompactList}\item 
+def \hyperlink{classstorage_1_1Storage_ae0ed2cc07e30a6f350a750c7428061e9}{update}
+\begin{DoxyCompactList}\small\item\em \-This functions is to be overridden by a specific storage method. \end{DoxyCompactList}\item 
+def \hyperlink{classstorage_1_1Storage_ab2da63e5da388a071b1a8ceccd777194}{delete}
+\begin{DoxyCompactList}\small\item\em \-This functions is to be overridden by a specific storage method. \end{DoxyCompactList}\item 
+def \hyperlink{classstorage_1_1Storage_a393a72aca9a927cab5ac0a4b99d97ebb}{search}
+\begin{DoxyCompactList}\small\item\em \-This functions is to be overridden by a specific storage method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Abstract base class for \-Task storage. 
+
+\-Public methods\-: add(task\-\_\-item) find(key = \-None) \hyperlink{classstorage_1_1Storage_a955f60e4ddfdfa4fae84d7b6b8aad438}{get\-\_\-all()} update(task\-\_\-item) delete(key) search(search\-\_\-task) 
+
+\-Definition at line 41 of file storage.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classstorage_1_1Storage_af32106831c466787182a5363c139c849}{
+\index{storage\-::\-Storage@{storage\-::\-Storage}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!storage::Storage@{storage\-::\-Storage}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def storage\-::\-Storage\-::\-\_\-\-\_\-init\-\_\-\-\_\- (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classstorage_1_1Storage_af32106831c466787182a5363c139c849}
+
+
+\-Reimplemented in \hyperlink{classstorage_1_1GTaskStorage_af3ffb72b776e8710e4e8b21e0332e5aa}{storage\-::\-G\-Task\-Storage}.
+
+
+
+\-Definition at line 42 of file storage.\-py.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classstorage_1_1Storage_abff2cc4bca8fd82e1eca9262ac6013d0}{
+\index{storage\-::\-Storage@{storage\-::\-Storage}!add@{add}}
+\index{add@{add}!storage::Storage@{storage\-::\-Storage}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}def storage\-::\-Storage\-::add (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{task\-\_\-item}
+\end{DoxyParamCaption}
+)}}
+\label{classstorage_1_1Storage_abff2cc4bca8fd82e1eca9262ac6013d0}
+
+
+\-This functions is to be overridden by a specific storage method. 
+
+
+
+\-Reimplemented in \hyperlink{classstorage_1_1GTaskStorage_a72ab709717d8de24f98ac7bad49e2df7}{storage\-::\-G\-Task\-Storage}, \hyperlink{classstorage_1_1SQLiteStorage_ae540c3c47f35a52d638f634a0782a7af}{storage\-::\-S\-Q\-Lite\-Storage}, and \hyperlink{classstorage_1_1FileStorage_a04e4aa0ef4c652a74825db6ab1c3dd9b}{storage\-::\-File\-Storage}.
+
+
+
+\-Definition at line 47 of file storage.\-py.
+
+\hypertarget{classstorage_1_1Storage_ab2da63e5da388a071b1a8ceccd777194}{
+\index{storage\-::\-Storage@{storage\-::\-Storage}!delete@{delete}}
+\index{delete@{delete}!storage::Storage@{storage\-::\-Storage}}
+\subsubsection[{delete}]{\setlength{\rightskip}{0pt plus 5cm}def storage\-::\-Storage\-::delete (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{key}
+\end{DoxyParamCaption}
+)}}
+\label{classstorage_1_1Storage_ab2da63e5da388a071b1a8ceccd777194}
+
+
+\-This functions is to be overridden by a specific storage method. 
+
+
+
+\-Reimplemented in \hyperlink{classstorage_1_1GTaskStorage_a6a5ecc4bf9ea5604baaf29b98d6cf311}{storage\-::\-G\-Task\-Storage}, \hyperlink{classstorage_1_1SQLiteStorage_a9ad3dc6a2fc126429be96188efda72a6}{storage\-::\-S\-Q\-Lite\-Storage}, and \hyperlink{classstorage_1_1FileStorage_aa50ba6664b9e27d2bdcdfb4d8ce135d5}{storage\-::\-File\-Storage}.
+
+
+
+\-Definition at line 67 of file storage.\-py.
+
+\hypertarget{classstorage_1_1Storage_ad6eb351cfbfcc4c9dea150ce21dadcd7}{
+\index{storage\-::\-Storage@{storage\-::\-Storage}!find@{find}}
+\index{find@{find}!storage::Storage@{storage\-::\-Storage}}
+\subsubsection[{find}]{\setlength{\rightskip}{0pt plus 5cm}def storage\-::\-Storage\-::find (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{key = {\ttfamily \-None}}
+\end{DoxyParamCaption}
+)}}
+\label{classstorage_1_1Storage_ad6eb351cfbfcc4c9dea150ce21dadcd7}
+
+
+\-This functions is to be overridden by a specific storage method. 
+
+
+
+\-Reimplemented in \hyperlink{classstorage_1_1GTaskStorage_a618c0ae51a54f156dee09ecafef8d1a0}{storage\-::\-G\-Task\-Storage}, \hyperlink{classstorage_1_1SQLiteStorage_a3ad42c6cfdc3a5740c461fe1a87a963a}{storage\-::\-S\-Q\-Lite\-Storage}, and \hyperlink{classstorage_1_1FileStorage_a4638796fcbe063abc5f1e43230576cae}{storage\-::\-File\-Storage}.
+
+
+
+\-Definition at line 52 of file storage.\-py.
+
+\hypertarget{classstorage_1_1Storage_a955f60e4ddfdfa4fae84d7b6b8aad438}{
+\index{storage\-::\-Storage@{storage\-::\-Storage}!get\-\_\-all@{get\-\_\-all}}
+\index{get\-\_\-all@{get\-\_\-all}!storage::Storage@{storage\-::\-Storage}}
+\subsubsection[{get\-\_\-all}]{\setlength{\rightskip}{0pt plus 5cm}def storage\-::\-Storage\-::get\-\_\-all (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}
+\label{classstorage_1_1Storage_a955f60e4ddfdfa4fae84d7b6b8aad438}
+
+
+\-This functions is to be overridden by a specific storage method. 
+
+
+
+\-Reimplemented in \hyperlink{classstorage_1_1GTaskStorage_a7babf14f4d14119f9c8230d91b37ef79}{storage\-::\-G\-Task\-Storage}, \hyperlink{classstorage_1_1SQLiteStorage_a9a64b929488dfb6ceff46039a5f622ab}{storage\-::\-S\-Q\-Lite\-Storage}, and \hyperlink{classstorage_1_1FileStorage_a8b2e0dbaa297155c82ed56c924674841}{storage\-::\-File\-Storage}.
+
+
+
+\-Definition at line 57 of file storage.\-py.
+
+\hypertarget{classstorage_1_1Storage_a393a72aca9a927cab5ac0a4b99d97ebb}{
+\index{storage\-::\-Storage@{storage\-::\-Storage}!search@{search}}
+\index{search@{search}!storage::Storage@{storage\-::\-Storage}}
+\subsubsection[{search}]{\setlength{\rightskip}{0pt plus 5cm}def storage\-::\-Storage\-::search (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{search\-\_\-task}
+\end{DoxyParamCaption}
+)}}
+\label{classstorage_1_1Storage_a393a72aca9a927cab5ac0a4b99d97ebb}
+
+
+\-This functions is to be overridden by a specific storage method. 
+
+
+
+\-Reimplemented in \hyperlink{classstorage_1_1GTaskStorage_a1d112c05463018ea6dfa3eea65196fd6}{storage\-::\-G\-Task\-Storage}, \hyperlink{classstorage_1_1SQLiteStorage_a7e8c17a6ec5b2cbe72befb73bb38357c}{storage\-::\-S\-Q\-Lite\-Storage}, and \hyperlink{classstorage_1_1FileStorage_a062105b2d65e4fd3608022bb1ad3eb98}{storage\-::\-File\-Storage}.
+
+
+
+\-Definition at line 72 of file storage.\-py.
+
+\hypertarget{classstorage_1_1Storage_ae0ed2cc07e30a6f350a750c7428061e9}{
+\index{storage\-::\-Storage@{storage\-::\-Storage}!update@{update}}
+\index{update@{update}!storage::Storage@{storage\-::\-Storage}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}def storage\-::\-Storage\-::update (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{task\-\_\-item}
+\end{DoxyParamCaption}
+)}}
+\label{classstorage_1_1Storage_ae0ed2cc07e30a6f350a750c7428061e9}
+
+
+\-This functions is to be overridden by a specific storage method. 
+
+
+
+\-Reimplemented in \hyperlink{classstorage_1_1GTaskStorage_acc41c8c0e63a97bd2093efc542d92b1a}{storage\-::\-G\-Task\-Storage}, \hyperlink{classstorage_1_1SQLiteStorage_a0a9ade02509f896caf7a32d02651857e}{storage\-::\-S\-Q\-Lite\-Storage}, and \hyperlink{classstorage_1_1FileStorage_aa14c1efcc951e67d8cd85c041e32a4bc}{storage\-::\-File\-Storage}.
+
+
+
+\-Definition at line 62 of file storage.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/scott/school/capstone/\-Task-\/\-Organizer/src/task/\hyperlink{storage_8py}{storage.\-py}\end{DoxyCompactItemize}

@@ -1,0 +1,2 @@
+export PYTHONPATH=$PYTHONPATH:/home/scott/school/capstone/Task-Organizer/src/task/
+export PYTHONPATH=$PYTHONPATH:/home/scott/school/capstone/Task-Organizer/src/examples/

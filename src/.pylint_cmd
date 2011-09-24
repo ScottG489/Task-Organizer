@@ -1,0 +1,18 @@
+#pylint -d C0111,W0511,C0103,R0904,W0231,E1103 -r n *.py
+export PYTHONPATH=$PYTHONPATH:/home/scott/school/capstone/Task-Organizer/src/task/
+export PYTHONPATH=$PYTHONPATH:/home/scott/school/capstone/Task-Organizer/src/test/
+export PYTHONPATH=$PYTHONPATH:/home/scott/school/capstone/Task-Organizer/src/examples/
+
+source .clean_cmd
+
+cd examples
+pylint -r n *.py
+cd ..
+
+cd task
+pylint -r n *.py
+cd ..
+
+cd test
+pylint -r n test*
+cd ..
