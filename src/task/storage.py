@@ -351,7 +351,14 @@ class SQLiteStorage(Storage):
         search(search_task)
 
     Reads and writes Task objects from a sqlite database file. Tasks are
-    stored in a table whos columns coincide with the Task's attributes.
+    stored in a table whos columns coincide with the Task's attributes. When
+    instantiated it creates a database with the following schema if it
+    doesn't already exist:
+
+        create table tasks
+            (id integer primary key,
+            title text,
+            notes text)
 
     """
     def __init__(self, task_dbname='taskdb'):

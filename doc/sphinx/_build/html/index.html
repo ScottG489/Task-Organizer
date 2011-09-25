@@ -90,11 +90,16 @@ the <tt class="docutils literal"><span class="pre">[source]</span></tt> link.</p
 </div>
 <div class="section" id="task-package">
 <span id="id1"></span><h1>1. task Package<a class="headerlink" href="#task-package" title="Permalink to this headline">¶</a></h1>
+<p>The main entry point of this package is the controller module. It&#8217;s meant to
+be used as the API for manipulating tasks. Within the controller module is
+the Controller class. When instantiated it&#8217;s given the name of the desired
+storage type and other optional parameters. The StorageFactory class is called
+and returns an instance of the specified storage type.</p>
 <div class="section" id="module-controller">
 <span id="task-controller-module"></span><h2>1.1. task.controller Module<a class="headerlink" href="#module-controller" title="Permalink to this headline">¶</a></h2>
 <p>Task controller library</p>
 <dl class="docutils">
-<dt>Classes:</dt>
+<dt>Public Classes:</dt>
 <dd>Controller</dd>
 </dl>
 <p>The docstring for a module should generally list the classes, exceptions and functions (and any other objects) that are exported by the module, with a one-line summary of each. (These summaries generally give less detail than the summary line in the object&#8217;s docstring.) The docstring for a package (i.e., the docstring of the package&#8217;s __init__.py module) should also list the modules and subpackages exported by the package.</p>
@@ -409,7 +414,17 @@ delete(key)
 search(search_task)</dd>
 </dl>
 <p>Reads and writes Task objects from a sqlite database file. Tasks are
-stored in a table whos columns coincide with the Task&#8217;s attributes.</p>
+stored in a table whos columns coincide with the Task&#8217;s attributes. When
+instantiated it creates a database with the following schema if it
+doesn&#8217;t already exist:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>create table tasks</dt>
+<dd>(id integer primary key,
+title text,
+notes text)</dd>
+</dl>
+</div></blockquote>
 <dl class="method">
 <dt id="storage.SQLiteStorage.add">
 <tt class="descname">add</tt><big>(</big><em>task_item</em><big>)</big><a class="reference internal" href="_modules/storage.html#SQLiteStorage.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.SQLiteStorage.add" title="Permalink to this definition">¶</a></dt>
@@ -621,7 +636,7 @@ can be missing any field.</p>
 <p>The docstring for a module should generally list the classes, exceptions and functions (and any other objects) that are exported by the module, with a one-line summary of each. (These summaries generally give less detail than the summary line in the object&#8217;s docstring.) The docstring for a package (i.e., the docstring of the package&#8217;s __init__.py module) should also list the modules and subpackages exported by the package.</p>
 </div>
 <div class="section" id="module-ctask">
-<span id="ctask-script"></span><h2>2.1. ctask Script<a class="headerlink" href="#module-ctask" title="Permalink to this headline">¶</a></h2>
+<span id="ctask-script"></span><span id="ctask"></span><h2>2.1. ctask Script<a class="headerlink" href="#module-ctask" title="Permalink to this headline">¶</a></h2>
 <p>usage: ctask.py [-h] [&#8211;version] {add,find,edit,del} ...</p>
 <p>Task organizer.</p>
 <dl class="docutils">
@@ -1000,6 +1015,51 @@ child test case.</p>
 </div>
 <div class="section" id="project-notes">
 <h1>Project Notes<a class="headerlink" href="#project-notes" title="Permalink to this headline">¶</a></h1>
+<p>The Task-Organizer project is broken up into three parts: the task package, it&#8217;s
+tests, and an example command line program to show some functionality of the
+package.</p>
+<p>The <a class="reference internal" href="#task-package"><em>task package</em></a> consists of the task module, used for creating an actual task,
+the storage module, used to persist tasks in various types of storage, and the
+controller module, which is the API to be used by external applications.</p>
+<p>The <a class="reference internal" href="#ctask"><em>ctask.py</em></a> script is an example program included with the project that uses
+this API. It consists of the ctask script itself along with the cliparser class
+that does most of the work by parsing the command line. The ctask script uses
+the structured parsed arguments from the cliparser to call the API
+accordingly. It also outputs useful information according to what the API
+returns.</p>
+<p>The <a class="reference internal" href="#unit-tests"><em>test package</em></a> tests all all of the task package&#8217;s and example code&#8217;s public
+members. The project used a
+<a class="reference external" href="http://en.wikipedia.org/wiki/Test-driven_development">test-driven development</a>
+(TDD) software development process, meaning that when a new class or function
+was needed, it&#8217;s tests were written first. This helped with the planning of
+new features since writing the tests first makes the developer think about how
+the added features are going to be used when implemented. It also kept the
+code very stable throughout the development process since whenever a bug
+arose, the tests caught it.</p>
+<div class="section" id="development-process">
+<h2>Development Process<a class="headerlink" href="#development-process" title="Permalink to this headline">¶</a></h2>
+<p>Throughout the project&#8217;s development, certain development goals were held:</p>
+<ul class="simple">
+<li>A goal of 100% code <a class="reference external" href="http://netbatchelder.com/code/coverage/">coverage</a>
+was sought regarding tests.</li>
+<li>All code was to strictly adhere to <a class="reference external" href="http://www.logilab.org/857">pylint</a>
+complaints.</li>
+<li>All tests must pass before pushing out any code to the master repository.</li>
+</ul>
+<p>along with various development practices:</p>
+<ul class="simple">
+<li>All coding was done with command line tools on Arch Linux on the Bash shell.</li>
+<li>vim was used as the IDE to write all code. Various plugins were used to help
+with coding such as <a class="reference external" href="rope.sourceforge.net/ropevim.html">ropevim</a>.</li>
+<li>screen was used with each source file open in vim in a separate window. This
+made it easy to reference or change any file.</li>
+<li>git was used for source control. <a class="reference external" href="https://www.github.com">github</a> was used
+as the master repository.</li>
+<li>The test.sh shell script was created to make testing as simple as possible.</li>
+<li>Directories were kept as clean as possible of unneeded storage, *.pyc,
+or other extraneous files.</li>
+</ul>
+</div>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -1040,7 +1100,10 @@ child test case.</p>
 <li><a class="reference internal" href="#module-test_taskstorage">3.1. test_taskstorage Tests</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#project-notes">Project Notes</a></li>
+<li><a class="reference internal" href="#project-notes">Project Notes</a><ul>
+<li><a class="reference internal" href="#development-process">Development Process</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
