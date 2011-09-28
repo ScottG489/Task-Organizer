@@ -143,9 +143,10 @@ Public Attributes</h2></td></tr>
 <div class="textblock"><p>Interface for storing Tasks to a SQLite database. </p>
 <p>Kwargs/Instance Vars: task_dbname (str): Name of database/file in which to store Tasks.</p>
 <p>Public methods: add(task_item) find(key = None) <a class="el" href="classstorage_1_1SQLiteStorage.html#a9a64b929488dfb6ceff46039a5f622ab" title="Return a list of all Task&#39;s.">get_all()</a> update(task_item) delete(key) search(search_task)</p>
-<p>Reads and writes Task objects from a sqlite database file. Tasks are stored in a table whos columns coincide with the Task's attributes. </p>
+<p>Reads and writes Task objects from a sqlite database file. Tasks are stored in a table whos columns coincide with the Task's attributes. When instantiated it creates a database with the following schema if it doesn't already exist:</p>
+<p>create table tasks (id integer primary key, title text, notes text) </p>
 
-<p>Definition at line <a class="el" href="storage_8py_source.html#l00374">374</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p>Definition at line <a class="el" href="storage_8py_source.html#l00386">386</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac61e8f98fc1319468ec6e30b2ab9e4a7"></a><!-- doxytag: member="storage::SQLiteStorage::__init__" ref="ac61e8f98fc1319468ec6e30b2ab9e4a7" args="" -->
 <div class="memitem">
@@ -172,7 +173,7 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="storage_8py_source.html#l00375">375</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p>Definition at line <a class="el" href="storage_8py_source.html#l00387">387</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 
 </div>
 </div>
@@ -210,7 +211,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classstorage_1_1Storage.html#abff2cc4bca8fd82e1eca9262ac6013d0">storage::Storage</a>.</p>
 
-<p>Definition at line <a class="el" href="storage_8py_source.html#l00415">415</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p>Definition at line <a class="el" href="storage_8py_source.html#l00427">427</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 
 </div>
 </div>
@@ -247,7 +248,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classstorage_1_1Storage.html#ab2da63e5da388a071b1a8ceccd777194">storage::Storage</a>.</p>
 
-<p>Definition at line <a class="el" href="storage_8py_source.html#l00539">539</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p>Definition at line <a class="el" href="storage_8py_source.html#l00551">551</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 
 </div>
 </div>
@@ -284,7 +285,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classstorage_1_1Storage.html#ad6eb351cfbfcc4c9dea150ce21dadcd7">storage::Storage</a>.</p>
 
-<p>Definition at line <a class="el" href="storage_8py_source.html#l00444">444</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p>Definition at line <a class="el" href="storage_8py_source.html#l00456">456</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 
 </div>
 </div>
@@ -307,7 +308,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classstorage_1_1Storage.html#a955f60e4ddfdfa4fae84d7b6b8aad438">storage::Storage</a>.</p>
 
-<p>Definition at line <a class="el" href="storage_8py_source.html#l00470">470</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p>Definition at line <a class="el" href="storage_8py_source.html#l00482">482</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 
 </div>
 </div>
@@ -344,7 +345,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classstorage_1_1Storage.html#a393a72aca9a927cab5ac0a4b99d97ebb">storage::Storage</a>.</p>
 
-<p>Definition at line <a class="el" href="storage_8py_source.html#l00572">572</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p>Definition at line <a class="el" href="storage_8py_source.html#l00584">584</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 
 </div>
 </div>
@@ -381,7 +382,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classstorage_1_1Storage.html#ae0ed2cc07e30a6f350a750c7428061e9">storage::Storage</a>.</p>
 
-<p>Definition at line <a class="el" href="storage_8py_source.html#l00504">504</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p>Definition at line <a class="el" href="storage_8py_source.html#l00516">516</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 
 </div>
 </div>
@@ -397,7 +398,7 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="storage_8py_source.html#l00375">375</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p>Definition at line <a class="el" href="storage_8py_source.html#l00387">387</a> of file <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 
 </div>
 </div>
@@ -425,7 +426,7 @@ Public Attributes</h2></td></tr>
 </div>
 
 
-    <li class="footer">Generated on Sat Sep 24 2011 15:51:06 for Task-Organizer by
+    <li class="footer">Generated on Wed Sep 28 2011 13:57:35 for Task-Organizer by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

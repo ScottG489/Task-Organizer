@@ -4,7 +4,7 @@ Public classes:
     Task
     TaskCreator
 
-Provides ways to intantiate a Task instance.
+Provides ways to instantiate a Task instance.
 
 """
 from textwrap import dedent
@@ -14,7 +14,7 @@ from textwrap import dedent
 class Task():
     """Instantiate a Task object.
 
-    Provides attributes for tasks and methods to compare Task instaces.
+    Provides attributes for tasks and methods to compare Task instances.
 
     """
     def __init__(self, **kwargs):

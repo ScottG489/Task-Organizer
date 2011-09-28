@@ -1,4 +1,4 @@
-.TH "storage::SQLiteStorage" 3 "Sat Sep 24 2011" "Task-Organizer" \" -*- nroff -*-
+.TH "storage::SQLiteStorage" 3 "Wed Sep 28 2011" "Task-Organizer" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -57,14 +57,16 @@ Kwargs/Instance Vars: task_dbname (str): Name of database/file in which to store
 .PP
 Public methods: add(task_item) find(key = None) \fBget_all()\fP update(task_item) delete(key) search(search_task)
 .PP
-Reads and writes Task objects from a sqlite database file'\&. Tasks are stored in a table whos columns coincide with the Task's attributes'\&. 
+Reads and writes Task objects from a sqlite database file'\&. Tasks are stored in a table whos columns coincide with the Task's attributes'\&. When instantiated it creates a database with the following schema if it doesn't already exist:
 .PP
-Definition at line 374 of file storage\&.py'\&.
+create table tasks (id integer primary key, title text, notes text) 
+.PP
+Definition at line 386 of file storage\&.py'\&.
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "def storage::SQLiteStorage::__init__ (self, task_dbname = \fC'taskdb'\fP)"
 .PP
-Definition at line 375 of file storage\&.py'\&.
+Definition at line 387 of file storage\&.py'\&.
 .SH "Member Function Documentation"
 .PP 
 .SS "def storage::SQLiteStorage::add (self, task_item)"
@@ -79,7 +81,7 @@ The Task object is given a key and appended to the list of Tasks in the database
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 415 of file storage\&.py'\&.
+Definition at line 427 of file storage\&.py'\&.
 .SS "def storage::SQLiteStorage::delete (self, key)"
 .PP
 Delete an existing Task in the database storage'\&. Args: key (int): The key for the desired Task object to delete'\&.
@@ -92,7 +94,7 @@ Using the given key, find the matching Task in the database and delete it'\&. If
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 539 of file storage\&.py'\&.
+Definition at line 551 of file storage\&.py'\&.
 .SS "def storage::SQLiteStorage::find (self, key = \fCNone\fP)"
 .PP
 Return a Task given it's key'\&. Args: key (int): The key for the desired Task object'\&.
@@ -105,14 +107,14 @@ Using the given key, get the Task with the matching key from the database and re
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 444 of file storage\&.py'\&.
+Definition at line 456 of file storage\&.py'\&.
 .SS "def storage::SQLiteStorage::get_all (self)"
 .PP
 Return a list of all Task's'\&. 
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 470 of file storage\&.py'\&.
+Definition at line 482 of file storage\&.py'\&.
 .SS "def storage::SQLiteStorage::search (self, search_task)"
 .PP
 Return a Task list given a search Task'\&. Args: search_task (Task): The Task to be used for searching'\&.
@@ -125,7 +127,7 @@ Using the given search Task, return a Task list of all Tasks that match the sear
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 572 of file storage\&.py'\&.
+Definition at line 584 of file storage\&.py'\&.
 .SS "def storage::SQLiteStorage::update (self, task_item)"
 .PP
 Update an existing Task in the database storage'\&. Args: task_item (Task): The Task object to be updated'\&.
@@ -138,12 +140,12 @@ Using the given Task's key, find the matching Task in the database and replace i
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 504 of file storage\&.py'\&.
+Definition at line 516 of file storage\&.py'\&.
 .SH "Member Data Documentation"
 .PP 
 .SS "\fBstorage::SQLiteStorage::task_dbname\fP"
 .PP
-Definition at line 375 of file storage\&.py'\&.
+Definition at line 387 of file storage\&.py'\&.
 
 .SH "Author"
 .PP 

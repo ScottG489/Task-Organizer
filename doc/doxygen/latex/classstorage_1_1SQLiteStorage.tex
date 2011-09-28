@@ -44,9 +44,11 @@ def \hyperlink{classstorage_1_1SQLiteStorage_a7e8c17a6ec5b2cbe72befb73bb38357c}{
 
 \-Public methods\-: add(task\-\_\-item) find(key = \-None) \hyperlink{classstorage_1_1SQLiteStorage_a9a64b929488dfb6ceff46039a5f622ab}{get\-\_\-all()} update(task\-\_\-item) delete(key) search(search\-\_\-task)
 
-\-Reads and writes \-Task objects from a sqlite database file. \-Tasks are stored in a table whos columns coincide with the \-Task's attributes. 
+\-Reads and writes \-Task objects from a sqlite database file. \-Tasks are stored in a table whos columns coincide with the \-Task's attributes. \-When instantiated it creates a database with the following schema if it doesn't already exist\-:
 
-\-Definition at line 374 of file storage.\-py.
+create table tasks (id integer primary key, title text, notes text) 
+
+\-Definition at line 386 of file storage.\-py.
 
 
 
@@ -63,7 +65,7 @@ def \hyperlink{classstorage_1_1SQLiteStorage_a7e8c17a6ec5b2cbe72befb73bb38357c}{
 \label{classstorage_1_1SQLiteStorage_ac61e8f98fc1319468ec6e30b2ab9e4a7}
 
 
-\-Definition at line 375 of file storage.\-py.
+\-Definition at line 387 of file storage.\-py.
 
 
 
@@ -94,7 +96,7 @@ def \hyperlink{classstorage_1_1SQLiteStorage_a7e8c17a6ec5b2cbe72befb73bb38357c}{
 
 
 
-\-Definition at line 415 of file storage.\-py.
+\-Definition at line 427 of file storage.\-py.
 
 \hypertarget{classstorage_1_1SQLiteStorage_a9ad3dc6a2fc126429be96188efda72a6}{
 \index{storage\-::\-S\-Q\-Lite\-Storage@{storage\-::\-S\-Q\-Lite\-Storage}!delete@{delete}}
@@ -122,7 +124,7 @@ def \hyperlink{classstorage_1_1SQLiteStorage_a7e8c17a6ec5b2cbe72befb73bb38357c}{
 
 
 
-\-Definition at line 539 of file storage.\-py.
+\-Definition at line 551 of file storage.\-py.
 
 \hypertarget{classstorage_1_1SQLiteStorage_a3ad42c6cfdc3a5740c461fe1a87a963a}{
 \index{storage\-::\-S\-Q\-Lite\-Storage@{storage\-::\-S\-Q\-Lite\-Storage}!find@{find}}
@@ -150,7 +152,7 @@ def \hyperlink{classstorage_1_1SQLiteStorage_a7e8c17a6ec5b2cbe72befb73bb38357c}{
 
 
 
-\-Definition at line 444 of file storage.\-py.
+\-Definition at line 456 of file storage.\-py.
 
 \hypertarget{classstorage_1_1SQLiteStorage_a9a64b929488dfb6ceff46039a5f622ab}{
 \index{storage\-::\-S\-Q\-Lite\-Storage@{storage\-::\-S\-Q\-Lite\-Storage}!get\-\_\-all@{get\-\_\-all}}
@@ -171,7 +173,7 @@ def \hyperlink{classstorage_1_1SQLiteStorage_a7e8c17a6ec5b2cbe72befb73bb38357c}{
 
 
 
-\-Definition at line 470 of file storage.\-py.
+\-Definition at line 482 of file storage.\-py.
 
 \hypertarget{classstorage_1_1SQLiteStorage_a7e8c17a6ec5b2cbe72befb73bb38357c}{
 \index{storage\-::\-S\-Q\-Lite\-Storage@{storage\-::\-S\-Q\-Lite\-Storage}!search@{search}}
@@ -199,7 +201,7 @@ def \hyperlink{classstorage_1_1SQLiteStorage_a7e8c17a6ec5b2cbe72befb73bb38357c}{
 
 
 
-\-Definition at line 572 of file storage.\-py.
+\-Definition at line 584 of file storage.\-py.
 
 \hypertarget{classstorage_1_1SQLiteStorage_a0a9ade02509f896caf7a32d02651857e}{
 \index{storage\-::\-S\-Q\-Lite\-Storage@{storage\-::\-S\-Q\-Lite\-Storage}!update@{update}}
@@ -227,7 +229,7 @@ def \hyperlink{classstorage_1_1SQLiteStorage_a7e8c17a6ec5b2cbe72befb73bb38357c}{
 
 
 
-\-Definition at line 504 of file storage.\-py.
+\-Definition at line 516 of file storage.\-py.
 
 
 
@@ -239,7 +241,7 @@ def \hyperlink{classstorage_1_1SQLiteStorage_a7e8c17a6ec5b2cbe72befb73bb38357c}{
 \label{classstorage_1_1SQLiteStorage_a6cf1398c3b51050f89d8c3e6dab71250}
 
 
-\-Definition at line 375 of file storage.\-py.
+\-Definition at line 387 of file storage.\-py.
 
 
 

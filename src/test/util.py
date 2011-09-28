@@ -18,6 +18,6 @@ def verbosity_helper():
 def print_helper():
     try:
         if verbosity_helper() == 2:
-            sys.stderr.write('\n')   # So output from tests is on a new linex
+            sys.stderr.write('\n')   # So output from tests is on a new line
     except IndexError:
         pass

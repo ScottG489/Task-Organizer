@@ -1,4 +1,4 @@
-.TH "controller::Controller" 3 "Sat Sep 24 2011" "Task-Organizer" \" -*- nroff -*-
+.TH "controller::Controller" 3 "Wed Sep 28 2011" "Task-Organizer" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -40,12 +40,12 @@ Methods: add(task_item) find(task_item) edit(task_item) delete(task_item)
 .PP
 API for working with Task objects'\&. 
 .PP
-Definition at line 33 of file controller\&.py'\&.
+Definition at line 32 of file controller\&.py'\&.
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "def controller::Controller::__init__ (self, storage_type, task_dbname = \fC'taskdb'\fP, task_filename = \fC'taskfile'\fP, key_filename = \fC'keyfile'\fP)"
 .PP
-Definition at line 34 of file controller\&.py'\&.
+Definition at line 33 of file controller\&.py'\&.
 .SH "Member Function Documentation"
 .PP 
 .SS "def controller::Controller::add (self, task_item)".PP
@@ -64,7 +64,7 @@ The given task is added to storage.
 .PP
  
 .PP
-Definition at line 46 of file controller\&.py'\&.
+Definition at line 45 of file controller\&.py'\&.
 .SS "def controller::Controller::delete (self, task_item)".PP
 .nf
 Delete an existing Task.
@@ -82,7 +82,7 @@ storage, delete it.
 .PP
  
 .PP
-Definition at line 120 of file controller\&.py'\&.
+Definition at line 119 of file controller\&.py'\&.
 .SS "def controller::Controller::edit (self, task_item)".PP
 .nf
 Edit an existing Task.
@@ -93,14 +93,14 @@ Arguments:
 Returns:
     old_task (Task): Task as it was in storage before being updated.
 
-Using the given Task's key, finds a Task instorage with a matching key
+Using the given Task's key, finds a Task in storage with a matching key
 and replaces it with the new Task's attributes that aren't None.
 
 .fi
 .PP
  
 .PP
-Definition at line 91 of file controller\&.py'\&.
+Definition at line 90 of file controller\&.py'\&.
 .SS "def controller::Controller::find (self, task_item)".PP
 .nf
 Return all Tasks or one with matching key.
@@ -121,7 +121,7 @@ storage with a matching key.
 .PP
  
 .PP
-Definition at line 65 of file controller\&.py'\&.
+Definition at line 64 of file controller\&.py'\&.
 
 .SH "Author"
 .PP 

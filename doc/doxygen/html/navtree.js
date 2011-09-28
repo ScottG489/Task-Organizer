@@ -3,7 +3,7 @@ var NAVTREE =
   [ "Task-Organizer", "index.html", [
     [ "Class List", "annotated.html", [
       [ "storage::_KeyGenerator", "classstorage_1_1__KeyGenerator.html", null ],
-      [ "cliparser::CLIParser", "classcliparser_1_1CLIParser.html", null ],
+      [ "ctask::CLIParser", "classctask_1_1CLIParser.html", null ],
       [ "controller::Controller", "classcontroller_1_1Controller.html", null ],
       [ "storage::FileStorage", "classstorage_1_1FileStorage.html", null ],
       [ "storage::GTaskStorage", "classstorage_1_1GTaskStorage.html", null ],
@@ -12,7 +12,7 @@ var NAVTREE =
       [ "storage::StorageFactory", "classstorage_1_1StorageFactory.html", null ],
       [ "task::Task", "classtask_1_1Task.html", null ],
       [ "task::TaskCreator", "classtask_1_1TaskCreator.html", null ],
-      [ "test_cliparser::TestCLIParser", "classtest__cliparser_1_1TestCLIParser.html", null ],
+      [ "test_ctask::TestCTask", "classtest__ctask_1_1TestCTask.html", null ],
       [ "test_taskstorage::TestFileStorage", "classtest__taskstorage_1_1TestFileStorage.html", null ],
       [ "test_taskstorage::TestGenericStorage", "classtest__taskstorage_1_1TestGenericStorage.html", null ],
       [ "test_taskstorage::TestGTaskStorage", "classtest__taskstorage_1_1TestGTaskStorage.html", null ],
@@ -29,7 +29,7 @@ var NAVTREE =
     [ "Class Index", "classes.html", null ],
     [ "Class Hierarchy", "hierarchy.html", [
       [ "storage::_KeyGenerator", "classstorage_1_1__KeyGenerator.html", null ],
-      [ "cliparser::CLIParser", "classcliparser_1_1CLIParser.html", null ],
+      [ "ctask::CLIParser", "classctask_1_1CLIParser.html", null ],
       [ "controller::Controller", "classcontroller_1_1Controller.html", null ],
       [ "storage::Storage", "classstorage_1_1Storage.html", [
         [ "storage::FileStorage", "classstorage_1_1FileStorage.html", null ],
@@ -39,7 +39,7 @@ var NAVTREE =
       [ "storage::StorageFactory", "classstorage_1_1StorageFactory.html", null ],
       [ "task::Task", "classtask_1_1Task.html", null ],
       [ "task::TaskCreator", "classtask_1_1TaskCreator.html", null ],
-      [ "test_cliparser::TestCLIParser", "classtest__cliparser_1_1TestCLIParser.html", null ],
+      [ "test_ctask::TestCTask", "classtest__ctask_1_1TestCTask.html", null ],
       [ "test_taskstorage::TestGenericStorage", "classtest__taskstorage_1_1TestGenericStorage.html", null ],
       [ "test_taskstorage::TestKeyGenerator", "classtest__taskstorage_1_1TestKeyGenerator.html", null ],
       [ "test_taskstorage::TestStorage", "classtest__taskstorage_1_1TestStorage.html", [
@@ -57,13 +57,12 @@ var NAVTREE =
     ] ],
     [ "Class Members", "functions.html", null ],
     [ "Packages", "namespaces.html", [
-      [ "cliparser", "namespacecliparser.html", null ],
       [ "controller", "namespacecontroller.html", null ],
       [ "ctask", "namespacectask.html", null ],
       [ "logger", "namespacelogger.html", null ],
       [ "storage", "namespacestorage.html", null ],
       [ "task", "namespacetask.html", null ],
-      [ "test_cliparser", "namespacetest__cliparser.html", null ],
+      [ "test_ctask", "namespacetest__ctask.html", null ],
       [ "test_task", "namespacetest__task.html", null ],
       [ "test_taskcontroller", "namespacetest__taskcontroller.html", null ],
       [ "test_taskstorage", "namespacetest__taskstorage.html", null ],
@@ -71,13 +70,12 @@ var NAVTREE =
     ] ],
     [ "Package Functions", "namespacemembers.html", null ],
     [ "File List", "files.html", [
-      [ "/home/scott/school/capstone/Task-Organizer/src/examples/cliparser.py", "cliparser_8py.html", null ],
       [ "/home/scott/school/capstone/Task-Organizer/src/examples/ctask.py", "ctask_8py.html", null ],
       [ "/home/scott/school/capstone/Task-Organizer/src/task/controller.py", "controller_8py.html", null ],
       [ "/home/scott/school/capstone/Task-Organizer/src/task/logger.py", "logger_8py.html", null ],
       [ "/home/scott/school/capstone/Task-Organizer/src/task/storage.py", "storage_8py.html", null ],
       [ "/home/scott/school/capstone/Task-Organizer/src/task/task.py", "task_8py.html", null ],
-      [ "/home/scott/school/capstone/Task-Organizer/src/test/test_cliparser.py", "test__cliparser_8py.html", null ],
+      [ "/home/scott/school/capstone/Task-Organizer/src/test/test_ctask.py", "test__ctask_8py.html", null ],
       [ "/home/scott/school/capstone/Task-Organizer/src/test/test_task.py", "test__task_8py.html", null ],
       [ "/home/scott/school/capstone/Task-Organizer/src/test/test_taskcontroller.py", "test__taskcontroller_8py.html", null ],
       [ "/home/scott/school/capstone/Task-Organizer/src/test/test_taskstorage.py", "test__taskstorage_8py.html", null ],

@@ -9,7 +9,7 @@ import util
 class TestTaskController(unittest.TestCase):
     """Abstract tests for child tests using specific storage types
 
-    Generic tests used by all TaskController tests undependent on what
+    Generic tests used by all TaskController tests independent on what
     storage type they are using. These tests should never be called directly.
     """
     # pylint: disable=R0904

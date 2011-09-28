@@ -1,4 +1,4 @@
-"""Facilitate Tasks in persistant storage.
+"""Facilitate Tasks in persistent storage.
 
 Public Classes:
     FileStorage
@@ -6,7 +6,7 @@ Public Classes:
     GTaskStorage
     StorageFactory
 
-Provides an interface to persist Task objects in differet storage mediums.
+Provides an interface to persist Task objects in different storage mediums.
 
 """
 import pickle
@@ -65,7 +65,7 @@ class Storage():
         raise NotImplementedError
 
 
-# TODO: This still has unexplicit exception handling
+# TODO: This has inexplicit exception handling
 class FileStorage(Storage):
     """Interface for storing Tasks to a file.
 
@@ -98,7 +98,7 @@ class FileStorage(Storage):
                     , key_filename)
             open(self.key_filename, 'w').close()
 
-
+    # TODO: This has inexplicit exception handling.
     def _read(self):
         """Read Task list from file."""
         logging.info('attempting to read task list')
@@ -111,7 +111,6 @@ class FileStorage(Storage):
             logging.debug("try: load pickled task list")
             task_list = pickle.load(task_file)
             task_file.close()
-
         except:
             logging.debug('unable to open file for reading')
             if os.stat(self.task_filename).st_size == 0:
@@ -124,6 +123,7 @@ class FileStorage(Storage):
         logging.info('success! returning task list')
         return task_list
 
+    # TODO: This has inexplicit exception handling.
     def _write(self, task_list):
         """Write Task list to file."""
         logging.info('attempting to write task list')
@@ -140,6 +140,7 @@ class FileStorage(Storage):
             raise
 
 
+    # TODO: This has inexplicit exception handling.
     def add(self, task_item):
         """Add a Task to the file storage.
 
@@ -175,6 +176,7 @@ class FileStorage(Storage):
         logging.info('success! task item added:\n%s', task_item)
         return task_item.key
 
+    # TODO: This has inexplicit exception handling.
     def find(self, key = None):
         """Return a Task given it's key.
 
@@ -207,6 +209,7 @@ class FileStorage(Storage):
         task_item = None
         return task_item
 
+    # TODO: This has inexplicit exception handling.
     def get_all(self):
         """Return a list of all Tasks.
 
@@ -227,6 +230,7 @@ class FileStorage(Storage):
         logging.info('success! returning list of all tasks')
         return task_list
 
+    # TODO: This has inexplicit exception handling.
     def update(self, task_item):
         """Update an existing Task in the file storage.
 
@@ -265,6 +269,7 @@ class FileStorage(Storage):
         logging.info('no matching key found; nothing updated')
         return key_match
 
+    # TODO: This has inexplicit exception handling.
     def delete(self, key):
         """Delete an existing Task in the file storage.
 
@@ -578,8 +583,6 @@ class SQLiteStorage(Storage):
         return task_list
 
 
-# TODO: Move this inside GTaskStorage
-FLAGS = gflags.FLAGS
 # XXX: Add try/except blocks around GTask API calls
 #      Should I be including a key visibly in the program this way?
 class GTaskStorage(Storage):
@@ -596,6 +599,8 @@ class GTaskStorage(Storage):
     Reads and writes Task from Google Tasks. Task objects are transformed
     to and from Google's task dictionaries.
     """
+    FLAGS = gflags.FLAGS
+
     def __init__(self):
         Storage.__init__(self)
         flow = OAuth2WebServerFlow(
@@ -611,7 +616,7 @@ class GTaskStorage(Storage):
 
         http = httplib2.Http()
         http = credentials.authorize(http)
-        # XXX: Should this be hardcoded?
+        # XXX: Should this be hard-coded?
         self._service = build(serviceName='tasks', version='v1', http=http,
                        developerKey='AIzaSyBcJBx1IHvzX7Kp7rcGuIzP01tzYY_pX9Y')
 
@@ -900,6 +905,7 @@ class _KeyGenerator():
         self.key_filename = key_filename
 
 
+    # TODO: This has inexplicit exception handling.
     def _read(self):
         """Read key from file."""
         logging.info('attempting to read key')
@@ -922,6 +928,7 @@ class _KeyGenerator():
         logging.debug('success! returning key')
         return key
 
+    # TODO: This has inexplicit exception handling.
     def _write(self, key):
         """Write key to file."""
         logging.info('attempting to write key')
@@ -938,6 +945,7 @@ class _KeyGenerator():
 
         key_file.close()
 
+    # TODO: This has inexplicit exception handling.
     def get(self):
         """Return a unique Task key.
 
@@ -966,14 +974,13 @@ class _KeyGenerator():
                 , key)
         return key
 
+    # TODO: This has inexplicit exception handling.
     def _update(self, key):
         """Update key in file by incrementing by 1."""
         logging.info("attempting to update key")
         key += 1
-        try:
-            self._write(key)
-        except:
-            logging.exception("failed to access file for writing")
-            raise
+
+        self._write(key)
+
         logging.debug('success! key updated')
         return key

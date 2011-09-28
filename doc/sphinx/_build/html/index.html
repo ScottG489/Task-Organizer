@@ -82,7 +82,7 @@ Notes: task notes</pre>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">When importing the task and controller modules, be sure they are in your $PYTONPATH</p>
+<p class="last">When importing the task and controller modules, be sure they are in your $PYTHONPATH</p>
 </div>
 <p>See the <a class="reference internal" href="#examples"><em>examples</em></a> section below for a full command line interface client
 implementation using the <a class="reference internal" href="#task-package"><em>task package</em></a>. To view the source code click on
@@ -97,12 +97,11 @@ storage type and other optional parameters. The StorageFactory class is called
 and returns an instance of the specified storage type.</p>
 <div class="section" id="module-controller">
 <span id="task-controller-module"></span><h2>1.1. task.controller Module<a class="headerlink" href="#module-controller" title="Permalink to this headline">¶</a></h2>
-<p>Task controller library</p>
+<p>Task controller library.</p>
 <dl class="docutils">
 <dt>Public Classes:</dt>
 <dd>Controller</dd>
 </dl>
-<p>The docstring for a module should generally list the classes, exceptions and functions (and any other objects) that are exported by the module, with a one-line summary of each. (These summaries generally give less detail than the summary line in the object&#8217;s docstring.) The docstring for a package (i.e., the docstring of the package&#8217;s __init__.py module) should also list the modules and subpackages exported by the package.</p>
 <dl class="class">
 <dt id="controller.Controller">
 <em class="property">class </em><tt class="descclassname">controller.</tt><tt class="descname">Controller</tt><big>(</big><em>storage_type</em>, <em>task_dbname='taskdb'</em>, <em>task_filename='taskfile'</em>, <em>key_filename='keyfile'</em><big>)</big><a class="headerlink" href="#controller.Controller" title="Permalink to this definition">¶</a></dt>
@@ -158,7 +157,7 @@ storage, delete it.</p>
 <dt>Returns:</dt>
 <dd>old_task (Task): Task as it was in storage before being updated.</dd>
 </dl>
-<p>Using the given Task&#8217;s key, finds a Task instorage with a matching key
+<p>Using the given Task&#8217;s key, finds a Task in storage with a matching key
 and replaces it with the new Task&#8217;s attributes that aren&#8217;t None.</p>
 </dd></dl>
 
@@ -184,7 +183,7 @@ storage with a matching key.</p>
 </div>
 <div class="section" id="module-storage">
 <span id="task-storage-module"></span><h2>1.2. task.storage Module<a class="headerlink" href="#module-storage" title="Permalink to this headline">¶</a></h2>
-<p>Facilitate Tasks in persistant storage.</p>
+<p>Facilitate Tasks in persistent storage.</p>
 <dl class="docutils">
 <dt>Public Classes:</dt>
 <dd>FileStorage
@@ -192,7 +191,7 @@ SQLiteStorage
 GTaskStorage
 StorageFactory</dd>
 </dl>
-<p>Provides an interface to persist Task objects in differet storage mediums.</p>
+<p>Provides an interface to persist Task objects in different storage mediums.</p>
 <dl class="class">
 <dt id="storage.FileStorage">
 <em class="property">class </em><tt class="descclassname">storage.</tt><tt class="descname">FileStorage</tt><big>(</big><em>task_filename='taskfile'</em>, <em>key_filename='keyfile'</em><big>)</big><a class="reference internal" href="_modules/storage.html#FileStorage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.FileStorage" title="Permalink to this definition">¶</a></dt>
@@ -596,12 +595,12 @@ optional keyword arguments and return the storage instance.</p>
 <dd>Task
 TaskCreator</dd>
 </dl>
-<p>Provides ways to intantiate a Task instance.</p>
+<p>Provides ways to instantiate a Task instance.</p>
 <dl class="class">
 <dt id="task.Task">
 <em class="property">class </em><tt class="descclassname">task.</tt><tt class="descname">Task</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/task.html#Task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#task.Task" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instantiate a Task object.</p>
-<p>Provides attributes for tasks and methods to compare Task instaces.</p>
+<p>Provides attributes for tasks and methods to compare Task instances.</p>
 </dd></dl>
 
 <dl class="class">
@@ -631,10 +630,6 @@ can be missing any field.</p>
 </div>
 <div class="section" id="examples">
 <span id="id2"></span><h1>2. Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-cliparser">
-<span id="cliparser-module"></span><h2>2.1. cliparser Module<a class="headerlink" href="#module-cliparser" title="Permalink to this headline">¶</a></h2>
-<p>The docstring for a module should generally list the classes, exceptions and functions (and any other objects) that are exported by the module, with a one-line summary of each. (These summaries generally give less detail than the summary line in the object&#8217;s docstring.) The docstring for a package (i.e., the docstring of the package&#8217;s __init__.py module) should also list the modules and subpackages exported by the package.</p>
-</div>
 <div class="section" id="module-ctask">
 <span id="ctask-script"></span><span id="ctask"></span><h2>2.1. ctask Script<a class="headerlink" href="#module-ctask" title="Permalink to this headline">¶</a></h2>
 <p>usage: ctask.py [-h] [&#8211;version] {add,find,edit,del} ...</p>
@@ -665,6 +660,27 @@ del                delete a task</dd>
 </dl>
 </dd>
 </dl>
+<dl class="class">
+<dt id="ctask.CLIParser">
+<em class="property">class </em><tt class="descclassname">ctask.</tt><tt class="descname">CLIParser</tt><big>(</big><em>storage_type</em>, <em>task_dbname='taskdb'</em>, <em>task_filename='taskfile'</em>, <em>key_filename='keyfile'</em><big>)</big><a class="headerlink" href="#ctask.CLIParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parser for a cli program using the task package.</p>
+<dl class="docutils">
+<dt>Public Classes:</dt>
+<dd>CLIParser</dd>
+</dl>
+<p>Configures a command line parser and provides a means to invoke it on
+command line arguments.</p>
+<dl class="method">
+<dt id="ctask.CLIParser.parse_cl_args">
+<tt class="descname">parse_cl_args</tt><big>(</big><big>)</big><a class="headerlink" href="#ctask.CLIParser.parse_cl_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary of arguments.</p>
+<p>Calls the argument parser to parse the command line arguments by
+using sys.argv. Then calls a sanitizer to get an argument dictionary
+which is returned.</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="function">
 <dt id="ctask.main">
 <tt class="descclassname">ctask.</tt><tt class="descname">main</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ctask.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctask.main" title="Permalink to this definition">¶</a></dt>
@@ -675,39 +691,39 @@ del                delete a task</dd>
 </div>
 <div class="section" id="unit-tests">
 <span id="id3"></span><h1>3. Unit Tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-test_cliparser">
-<span id="test-cliparser-tests"></span><h2>3.1. test_cliparser Tests<a class="headerlink" href="#module-test_cliparser" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-test_ctask">
+<span id="test-ctask-tests"></span><h2>3.1. test_ctask Tests<a class="headerlink" href="#module-test_ctask" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="test_cliparser.TestCLIParser">
-<em class="property">class </em><tt class="descclassname">test_cliparser.</tt><tt class="descname">TestCLIParser</tt><big>(</big><em>methodName='runTest'</em><big>)</big><a class="reference internal" href="_modules/test_cliparser.html#TestCLIParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_cliparser.TestCLIParser" title="Permalink to this definition">¶</a></dt>
+<dt id="test_ctask.TestCTask">
+<em class="property">class </em><tt class="descclassname">test_ctask.</tt><tt class="descname">TestCTask</tt><big>(</big><em>methodName='runTest'</em><big>)</big><a class="headerlink" href="#test_ctask.TestCTask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tests parsing of the command line for the ctask script.</p>
 <dl class="method">
-<dt id="test_cliparser.TestCLIParser.test_add_subparser">
-<tt class="descname">test_add_subparser</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_cliparser.html#TestCLIParser.test_add_subparser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_cliparser.TestCLIParser.test_add_subparser" title="Permalink to this definition">¶</a></dt>
+<dt id="test_ctask.TestCTask.test_add_subparser">
+<tt class="descname">test_add_subparser</tt><big>(</big><big>)</big><a class="headerlink" href="#test_ctask.TestCTask.test_add_subparser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tests the parser when the add sub-command is specified</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="test_cliparser.TestCLIParser.test_delete_subparser">
-<tt class="descname">test_delete_subparser</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_cliparser.html#TestCLIParser.test_delete_subparser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_cliparser.TestCLIParser.test_delete_subparser" title="Permalink to this definition">¶</a></dt>
+<dt id="test_ctask.TestCTask.test_delete_subparser">
+<tt class="descname">test_delete_subparser</tt><big>(</big><big>)</big><a class="headerlink" href="#test_ctask.TestCTask.test_delete_subparser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tests the parser when the del sub-command is specified</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="test_cliparser.TestCLIParser.test_edit_subparser">
-<tt class="descname">test_edit_subparser</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_cliparser.html#TestCLIParser.test_edit_subparser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_cliparser.TestCLIParser.test_edit_subparser" title="Permalink to this definition">¶</a></dt>
+<dt id="test_ctask.TestCTask.test_edit_subparser">
+<tt class="descname">test_edit_subparser</tt><big>(</big><big>)</big><a class="headerlink" href="#test_ctask.TestCTask.test_edit_subparser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tests the parser when the edit sub-command is specified</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="test_cliparser.TestCLIParser.test_find_subparser">
-<tt class="descname">test_find_subparser</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_cliparser.html#TestCLIParser.test_find_subparser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_cliparser.TestCLIParser.test_find_subparser" title="Permalink to this definition">¶</a></dt>
+<dt id="test_ctask.TestCTask.test_find_subparser">
+<tt class="descname">test_find_subparser</tt><big>(</big><big>)</big><a class="headerlink" href="#test_ctask.TestCTask.test_find_subparser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tests the parser when the find sub-command is specified</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="test_cliparser.TestCLIParser.test_parse_cl_args">
-<tt class="descname">test_parse_cl_args</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_cliparser.html#TestCLIParser.test_parse_cl_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_cliparser.TestCLIParser.test_parse_cl_args" title="Permalink to this definition">¶</a></dt>
+<dt id="test_ctask.TestCTask.test_parse_cl_args">
+<tt class="descname">test_parse_cl_args</tt><big>(</big><big>)</big><a class="headerlink" href="#test_ctask.TestCTask.test_parse_cl_args" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tests that options are correctly transformed into a dict</p>
 </dd></dl>
 
@@ -720,7 +736,7 @@ del                delete a task</dd>
 <dt id="test_taskcontroller.TestTaskController">
 <em class="property">class </em><tt class="descclassname">test_taskcontroller.</tt><tt class="descname">TestTaskController</tt><big>(</big><em>method_name</em><big>)</big><a class="reference internal" href="_modules/test_taskcontroller.html#TestTaskController"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_taskcontroller.TestTaskController" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract tests for child tests using specific storage types</p>
-<p>Generic tests used by all TaskController tests undependent on what
+<p>Generic tests used by all TaskController tests independent on what
 storage type they are using. These tests should never be called directly.</p>
 <dl class="method">
 <dt id="test_taskcontroller.TestTaskController.add_task">
@@ -1022,9 +1038,9 @@ package.</p>
 the storage module, used to persist tasks in various types of storage, and the
 controller module, which is the API to be used by external applications.</p>
 <p>The <a class="reference internal" href="#ctask"><em>ctask.py</em></a> script is an example program included with the project that uses
-this API. It consists of the ctask script itself along with the cliparser class
+this API. It consists of the ctask script itself along with the CLIParser class
 that does most of the work by parsing the command line. The ctask script uses
-the structured parsed arguments from the cliparser to call the API
+the structured parsed arguments from the CLIParser to call the API
 accordingly. It also outputs useful information according to what the API
 returns.</p>
 <p>The <a class="reference internal" href="#unit-tests"><em>test package</em></a> tests all all of the task package&#8217;s and example code&#8217;s public
@@ -1089,12 +1105,11 @@ or other extraneous files.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#examples">2. Examples</a><ul>
-<li><a class="reference internal" href="#module-cliparser">2.1. cliparser Module</a></li>
 <li><a class="reference internal" href="#module-ctask">2.1. ctask Script</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#unit-tests">3. Unit Tests</a><ul>
-<li><a class="reference internal" href="#module-test_cliparser">3.1. test_cliparser Tests</a></li>
+<li><a class="reference internal" href="#module-test_ctask">3.1. test_ctask Tests</a></li>
 <li><a class="reference internal" href="#module-test_taskcontroller">3.1. test_taskcontroller Tests</a></li>
 <li><a class="reference internal" href="#module-test_task">3.1. test_task Tests</a></li>
 <li><a class="reference internal" href="#module-test_taskstorage">3.1. test_taskstorage Tests</a></li>

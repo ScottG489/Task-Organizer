@@ -50,7 +50,7 @@ This would output something like::
     Title: task title
     Notes: task notes
 
-.. note:: When importing the task and controller modules, be sure they are in your $PYTONPATH
+.. note:: When importing the task and controller modules, be sure they are in your $PYTHONPATH
 
 See the |examples| section below for a full command line interface client
 implementation using the |task-package|. To view the source code click on
@@ -87,11 +87,6 @@ and returns an instance of the specified storage type.
 
 2. Examples
 ===========
-2.1. cliparser Module
----------------------
-.. automodule:: cliparser
-    :members:
-
 .. _ctask:
 
 2.1. ctask Script
@@ -104,9 +99,9 @@ and returns an instance of the specified storage type.
 
 3. Unit Tests
 =============
-3.1. test_cliparser Tests
+3.1. test_ctask Tests
 -------------------------
-.. automodule:: test_cliparser
+.. automodule:: test_ctask
     :members:
 
 3.1. test_taskcontroller Tests
@@ -136,9 +131,9 @@ the storage module, used to persist tasks in various types of storage, and the
 controller module, which is the API to be used by external applications.
 
 The |ctask| script is an example program included with the project that uses
-this API. It consists of the ctask script itself along with the cliparser class
+this API. It consists of the ctask script itself along with the CLIParser class
 that does most of the work by parsing the command line. The ctask script uses
-the structured parsed arguments from the cliparser to call the API
+the structured parsed arguments from the CLIParser to call the API
 accordingly. It also outputs useful information according to what the API
 returns.
 

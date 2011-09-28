@@ -1,4 +1,4 @@
-.TH "storage::FileStorage" 3 "Sat Sep 24 2011" "Task-Organizer" \" -*- nroff -*-
+.TH "storage::FileStorage" 3 "Wed Sep 28 2011" "Task-Organizer" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -82,7 +82,7 @@ The Task object is given a key and appended to the list of Tasks in the file'\&.
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 169 of file storage\&.py'\&.
+Definition at line 170 of file storage\&.py'\&.
 .SS "def storage::FileStorage::delete (self, key)"
 .PP
 Delete an existing Task in the file storage'\&. Args: key (int): The key for the desired Task object to delete'\&.
@@ -95,7 +95,7 @@ Using the given key, iterate through the Task list and delete the matching Task'
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 299 of file storage\&.py'\&.
+Definition at line 304 of file storage\&.py'\&.
 .SS "def storage::FileStorage::find (self, key = \fCNone\fP)"
 .PP
 Return a Task given it's key'\&. Args: key (int): The key for the desired Task object'\&.
@@ -108,7 +108,7 @@ Using the given key, iterate through the Task list and return the Task with matc
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 206 of file storage\&.py'\&.
+Definition at line 208 of file storage\&.py'\&.
 .SS "def storage::FileStorage::get_all (self)"
 .PP
 Return a list of all Tasks'\&. Returns: task_list (Task[]): List of every task in storage'\&.
@@ -117,7 +117,7 @@ Raises:
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 233 of file storage\&.py'\&.
+Definition at line 236 of file storage\&.py'\&.
 .SS "def storage::FileStorage::search (self, search_task)"
 .PP
 Return a Task list given a search Task'\&. Args: search_task (Task): The Task to be used for searching'\&.
@@ -130,7 +130,7 @@ Using the given search Task, iterate through the Task list and append matching T
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 337 of file storage\&.py'\&.
+Definition at line 342 of file storage\&.py'\&.
 .SS "def storage::FileStorage::update (self, task_item)"
 .PP
 Update an existing Task in the file storage'\&. Args: task_item (Task): The Task object to be updated'\&.
@@ -143,7 +143,7 @@ Using the given Task's key, iterate through the Task list to find a matching key
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 261 of file storage\&.py'\&.
+Definition at line 265 of file storage\&.py'\&.
 .SH "Member Data Documentation"
 .PP 
 .SS "\fBstorage::FileStorage::key_filename\fP"

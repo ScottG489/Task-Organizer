@@ -10,8 +10,8 @@ echo "TestTask:"
 coverage run -a test/test_task.py $1
 echo
 
-echo "TestCLIParser:"
-coverage run -a test/test_cliparser.py $1
+echo "TestCTask:"
+coverage run -a test/test_ctask.py $1
 echo
 
 echo "TestTaskStorage:"

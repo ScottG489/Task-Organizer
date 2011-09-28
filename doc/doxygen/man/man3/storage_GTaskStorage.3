@@ -1,4 +1,4 @@
-.TH "storage::GTaskStorage" 3 "Sat Sep 24 2011" "Task-Organizer" \" -*- nroff -*-
+.TH "storage::GTaskStorage" 3 "Wed Sep 28 2011" "Task-Organizer" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -37,6 +37,13 @@ Inherits \fBstorage::Storage\fP'\&.
 .br
 .RI "\fIReturn a Task list given a search Task'\&. \fP"
 .in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBFLAGS\fP = gflags\&.FLAGS"
+.br
+.in -1c
 .SH "Detailed Description"
 .PP 
 Interface for storing Tasks to Google Tasks'\&. 
@@ -45,14 +52,14 @@ Public methods: add(task_item) find(key = None) \fBget_all()\fP update(task_item
 .PP
 Reads and writes Task from Google Tasks'\&. Task objects are transformed to and from Google's task dictionaries'\&. 
 .PP
-Definition at line 616 of file storage\&.py'\&.
+Definition at line 626 of file storage\&.py'\&.
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "def storage::GTaskStorage::__init__ (self)"
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 617 of file storage\&.py'\&.
+Definition at line 629 of file storage\&.py'\&.
 .SH "Member Function Documentation"
 .PP 
 .SS "def storage::GTaskStorage::add (self, task_item)".PP
@@ -77,7 +84,7 @@ The Task object is added to storage and given a key.
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 636 of file storage\&.py'\&.
+Definition at line 648 of file storage\&.py'\&.
 .SS "def storage::GTaskStorage::delete (self, key)".PP
 .nf
 Delete an existing Task in the GTask storage.
@@ -100,7 +107,7 @@ nothing is deleted and return None.
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 781 of file storage\&.py'\&.
+Definition at line 793 of file storage\&.py'\&.
 .SS "def storage::GTaskStorage::find (self, key = \fCNone\fP)".PP
 .nf
 Return a Task given it's key.
@@ -122,7 +129,7 @@ is found return None.
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 672 of file storage\&.py'\&.
+Definition at line 684 of file storage\&.py'\&.
 .SS "def storage::GTaskStorage::get_all (self)".PP
 .nf
 Return a list of all Tasks..fi
@@ -131,7 +138,7 @@ Return a list of all Tasks..fi
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 712 of file storage\&.py'\&.
+Definition at line 724 of file storage\&.py'\&.
 .SS "def storage::GTaskStorage::search (self, search_task)"
 .PP
 Return a Task list given a search Task'\&. Args: search_task (Task): The Task to be used for searching'\&.
@@ -144,7 +151,7 @@ Using the given search Task, iterate through the Task list and append matching T
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 833 of file storage\&.py'\&.
+Definition at line 845 of file storage\&.py'\&.
 .SS "def storage::GTaskStorage::update (self, task_item)".PP
 .nf
 Update an existing Task in the GTask storage.
@@ -168,7 +175,12 @@ is found, updating nothing and return None.
 .PP
 Reimplemented from \fBstorage::Storage\fP'\&.
 .PP
-Definition at line 734 of file storage\&.py'\&.
+Definition at line 746 of file storage\&.py'\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBstorage::GTaskStorage::FLAGS\fP = gflags\&.FLAGS\fC [static]\fP"
+.PP
+Definition at line 627 of file storage\&.py'\&.
 
 .SH "Author"
 .PP 

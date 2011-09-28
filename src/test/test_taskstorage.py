@@ -8,7 +8,7 @@ import util
 #TODO:  add() returns a key but it isn't necessary to assign it since it's
 #           pass by reference
 #       Delete added tasks in tearDown()
-# TODO: self.my_task.key needs to be assiged so tearDown
+# TODO: self.my_task.key needs to be assigned so tearDown
 #       can delete self.my_task.key
 class TestStorage(unittest.TestCase):
     """Abstract tests for the child classes of the Storage class

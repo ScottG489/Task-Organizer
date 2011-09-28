@@ -1,17 +1,17 @@
 import unittest
 import sys
 import os
-import cliparser
+import ctask
 import util
 
 
-class TestCLIParser(unittest.TestCase):
+class TestCTask(unittest.TestCase):
     """Tests parsing of the command line for the ctask script."""
     # pylint: disable=R0904
     def setUp(self):    # pylint: disable=C0103
         self.test_task_filename = 'testtaskfile'
         self.test_key_filename = 'testkeyfile'
-        self.parser = cliparser.CLIParser(
+        self.parser = ctask.CLIParser(
                 'file',
                 task_filename=self.test_task_filename,
                 key_filename=self.test_key_filename)
@@ -104,5 +104,5 @@ class TestCLIParser(unittest.TestCase):
 if __name__ == '__main__':
     VERBOSITY = util.verbosity_helper()
 
-    SUITE = unittest.TestLoader().loadTestsFromTestCase(TestCLIParser)
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(TestCTask)
     unittest.TextTestRunner(verbosity=VERBOSITY).run(SUITE)

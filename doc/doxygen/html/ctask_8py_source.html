@@ -117,45 +117,235 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00018"></a>00018 <span class="comment">#     edit               edit a task</span>
 <a name="l00019"></a>00019 <span class="comment">#     del                delete a task</span>
 <a name="l00020"></a>00020 <span class="comment"># </span>
-<a name="l00021"></a>00021 <span class="keyword">import</span> cliparser
-<a name="l00022"></a>00022 <span class="keyword">import</span> task
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024 <span class="comment"># TODO: Add piping functionality (not directly in ctask):</span>
-<a name="l00025"></a>00025             <span class="comment"># i.e. do a search for a bunch of tasks then pipe that to a delete</span>
-<a name="l00026"></a>00026     <span class="comment"># Make symbol tables (would help standardize even debugging output)</span>
-<a name="l00027"></a>00027     <span class="comment"># Allow find and del to accept a list of keys</span>
-<a name="l00028"></a>00028     <span class="comment"># Rename the subcommand &#39;find&#39; to &#39;list&#39;?</span>
-<a name="l00029"></a>00029 <span class="comment">##</span>
-<a name="l00030"></a>00030 <span class="comment"># Command line implementation of task library.</span>
-<a name="l00031"></a><a class="code" href="namespacectask.html#af12733c40168da50290682695234700b">00031</a> <span class="keyword">def </span><a class="code" href="namespacectask.html#af12733c40168da50290682695234700b" title="Command line implementation of task library.">main</a>():
-<a name="l00032"></a>00032 <span class="comment">#    task_filename = &#39;task_file&#39;</span>
-<a name="l00033"></a>00033 <span class="comment">#    key_filename = &#39;key_file&#39;</span>
-<a name="l00034"></a>00034     <span class="keyword">import</span> logger 
-<a name="l00035"></a>00035     <span class="keyword">import</span> logging
-<a name="l00036"></a>00036     logger.LOG.setLevel(logging.ERROR)
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038     my_parser = cliparser.CLIParser(<span class="stringliteral">&#39;file&#39;</span>)
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040     parsed_args = my_parser.parse_cl_args()
-<a name="l00041"></a>00041     task_item = task.TaskCreator.build(parsed_args)
+<a name="l00021"></a>00021 <span class="keyword">import</span> task
+<a name="l00022"></a>00022 <span class="keyword">import</span> logger 
+<a name="l00023"></a>00023 <span class="keyword">import</span> logging
+<a name="l00024"></a>00024 
+<a name="l00025"></a>00025 <span class="keyword">import</span> argparse
+<a name="l00026"></a>00026 <span class="keyword">import</span> controller
+<a name="l00027"></a>00027 <span class="keyword">from</span> copy <span class="keyword">import</span> copy
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029 <span class="comment"># TODO: Add piping functionality (not directly in ctask):</span>
+<a name="l00030"></a>00030             <span class="comment"># i.e. do a search for a bunch of tasks then pipe that to a delete</span>
+<a name="l00031"></a>00031     <span class="comment"># Make symbol tables (would help standardize even debugging output)</span>
+<a name="l00032"></a>00032     <span class="comment"># Allow find and del to accept a list of keys</span>
+<a name="l00033"></a>00033     <span class="comment"># Rename the subcommand &#39;find&#39; to &#39;list&#39;?</span>
+<a name="l00034"></a>00034 <span class="comment">##</span>
+<a name="l00035"></a>00035 <span class="comment"># Command line implementation of task library.</span>
+<a name="l00036"></a><a class="code" href="namespacectask.html#af12733c40168da50290682695234700b">00036</a> <span class="keyword">def </span><a class="code" href="namespacectask.html#af12733c40168da50290682695234700b" title="Command line implementation of task library.">main</a>():
+<a name="l00037"></a>00037 <span class="comment">#    task_filename = &#39;task_file&#39;</span>
+<a name="l00038"></a>00038 <span class="comment">#    key_filename = &#39;key_file&#39;</span>
+<a name="l00039"></a>00039     logger.LOG.setLevel(logging.ERROR)
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041     my_parser = <a class="code" href="classctask_1_1CLIParser.html" title="Parser for a cli program using the task package.">CLIParser</a>(<span class="stringliteral">&#39;file&#39;</span>)
 <a name="l00042"></a>00042 
-<a name="l00043"></a>00043     something = parsed_args[<span class="stringliteral">&#39;func&#39;</span>](task_item)
-<a name="l00044"></a>00044 
-<a name="l00045"></a>00045     <span class="keywordflow">if</span> parsed_args[<span class="stringliteral">&#39;sub_cmd&#39;</span>] == <span class="stringliteral">&#39;find&#39;</span>:
-<a name="l00046"></a>00046         <span class="keywordflow">if</span> parsed_args[<span class="stringliteral">&#39;key&#39;</span>] == <span class="keywordtype">None</span>:
-<a name="l00047"></a>00047             <span class="keywordflow">for</span> item <span class="keywordflow">in</span> something:
-<a name="l00048"></a>00048                 <span class="keywordflow">print</span> item
-<a name="l00049"></a>00049         <span class="keywordflow">else</span>:
-<a name="l00050"></a>00050             <span class="keywordflow">print</span> something
-<a name="l00051"></a>00051     <span class="keywordflow">elif</span> something:
-<a name="l00052"></a>00052         <span class="keywordflow">pass</span>
-<a name="l00053"></a>00053         <span class="comment">#print something</span>
-<a name="l00054"></a>00054     <span class="keywordflow">else</span>:
-<a name="l00055"></a>00055         <span class="keywordflow">print</span> <span class="stringliteral">&#39;Task not found&#39;</span>
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057 <span class="keywordflow">if</span> __name__ == <span class="stringliteral">&#39;__main__&#39;</span>:
-<a name="l00058"></a>00058     <a class="code" href="namespacectask.html#af12733c40168da50290682695234700b" title="Command line implementation of task library.">main</a>()
+<a name="l00043"></a>00043     parsed_args = my_parser.parse_cl_args()
+<a name="l00044"></a>00044     task_item = task.TaskCreator.build(parsed_args)
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046     result = parsed_args[<span class="stringliteral">&#39;func&#39;</span>](task_item)
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048     <span class="keywordflow">if</span> parsed_args[<span class="stringliteral">&#39;sub_cmd&#39;</span>] == <span class="stringliteral">&#39;find&#39;</span>:
+<a name="l00049"></a>00049         <span class="keywordflow">if</span> parsed_args[<span class="stringliteral">&#39;key&#39;</span>] == <span class="keywordtype">None</span>:
+<a name="l00050"></a>00050             <span class="keywordflow">for</span> item <span class="keywordflow">in</span> result:
+<a name="l00051"></a>00051                 <span class="keywordflow">print</span> item
+<a name="l00052"></a>00052         <span class="keywordflow">else</span>:
+<a name="l00053"></a>00053             <span class="keywordflow">print</span> result
+<a name="l00054"></a>00054     <span class="keywordflow">elif</span> result:
+<a name="l00055"></a>00055         <span class="keywordflow">pass</span>
+<a name="l00056"></a>00056         <span class="comment">#print result</span>
+<a name="l00057"></a>00057     <span class="keywordflow">else</span>:
+<a name="l00058"></a>00058         <span class="keywordflow">print</span> <span class="stringliteral">&#39;Task not found&#39;</span>
 <a name="l00059"></a>00059 
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061 <span class="comment">##</span>
+<a name="l00062"></a>00062 <span class="comment"># Parser for a cli program using the task package.</span>
+<a name="l00063"></a>00063 <span class="comment"># </span>
+<a name="l00064"></a>00064 <span class="comment">#     Public Classes:</span>
+<a name="l00065"></a>00065 <span class="comment">#         CLIParser</span>
+<a name="l00066"></a>00066 <span class="comment"># </span>
+<a name="l00067"></a>00067 <span class="comment">#     Configures a command line parser and provides a means to invoke it on</span>
+<a name="l00068"></a>00068 <span class="comment">#     command line arguments.</span>
+<a name="l00069"></a>00069 <span class="comment">#     </span>
+<a name="l00070"></a><a class="code" href="classctask_1_1CLIParser.html">00070</a> <span class="keyword">class </span><a class="code" href="classctask_1_1CLIParser.html" title="Parser for a cli program using the task package.">CLIParser</a>():
+<a name="l00071"></a><a class="code" href="classctask_1_1CLIParser.html#ab39b061e281bed5717a78c8a50ba5ba3">00071</a>     <span class="keyword">def </span><a class="code" href="classctask_1_1CLIParser.html#ab39b061e281bed5717a78c8a50ba5ba3">__init__</a>(self,
+<a name="l00072"></a>00072             storage_type, 
+<a name="l00073"></a>00073             task_dbname=<span class="stringliteral">&#39;taskdb&#39;</span>,
+<a name="l00074"></a>00074             task_filename=<span class="stringliteral">&#39;taskfile&#39;</span>,
+<a name="l00075"></a>00075             key_filename=<span class="stringliteral">&#39;keyfile&#39;</span>):
+<a name="l00076"></a>00076         self.<a class="code" href="classctask_1_1CLIParser.html#ab8d9f62fc39e5f0c7e09fb23d4408a70">_storage_type</a> = storage_type
+<a name="l00077"></a>00077         self.<a class="code" href="classctask_1_1CLIParser.html#a7d22bef9568f762f32b8afae3866e519">_interface_controller</a> = controller.Controller(
+<a name="l00078"></a>00078                 storage_type,
+<a name="l00079"></a>00079                 task_dbname=task_dbname,
+<a name="l00080"></a>00080                 task_filename=task_filename,
+<a name="l00081"></a>00081                 key_filename=key_filename)
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083         self.<a class="code" href="classctask_1_1CLIParser.html#a5d9f43202f78c2eae951b91ef46e0c77">_arg_parser</a> = argparse.ArgumentParser(
+<a name="l00084"></a>00084             description=<span class="stringliteral">&#39;Task organizer.&#39;</span>,
+<a name="l00085"></a>00085             epilog=<span class="stringliteral">&#39;Goodbye.&#39;</span>
+<a name="l00086"></a>00086         )
+<a name="l00087"></a>00087         self._arg_parser.add_argument(
+<a name="l00088"></a>00088             <span class="stringliteral">&#39;--version&#39;</span>,
+<a name="l00089"></a>00089             action = <span class="stringliteral">&#39;version&#39;</span>,
+<a name="l00090"></a>00090             version = <span class="stringliteral">&#39;%(prog)s alpha&#39;</span>
+<a name="l00091"></a>00091         )
+<a name="l00092"></a>00092         self.<a class="code" href="classctask_1_1CLIParser.html#adaed0d4e021e2e806a14866265caf288">_arg_subparsers</a> = self._arg_parser.add_subparsers(
+<a name="l00093"></a>00093             title=<span class="stringliteral">&#39;Sub-commands&#39;</span>,
+<a name="l00094"></a>00094             description=<span class="stringliteral">&#39;Specify exactly one sub-command.&#39;</span>,
+<a name="l00095"></a>00095             help=<span class="stringliteral">&#39;valid sub-commands&#39;</span>
+<a name="l00096"></a>00096         )
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098         self.<a class="code" href="classctask_1_1CLIParser.html#a20b3831add8319272ce1a993e7e0bd6b">_parent_parser_key</a> = argparse.ArgumentParser(add_help=<span class="keyword">False</span>)
+<a name="l00099"></a>00099         self._parent_parser_key.add_argument(
+<a name="l00100"></a>00100                 <span class="stringliteral">&#39;--key&#39;</span>,
+<a name="l00101"></a>00101                 <span class="stringliteral">&#39;-k&#39;</span>,
+<a name="l00102"></a>00102                 action=<span class="stringliteral">&#39;store&#39;</span>,
+<a name="l00103"></a>00103                 nargs=1,
+<a name="l00104"></a>00104                 required=<span class="keyword">True</span>,
+<a name="l00105"></a>00105                 help=<span class="stringliteral">&#39;the key of the task&#39;</span>
+<a name="l00106"></a>00106         )
+<a name="l00107"></a>00107         self.<a class="code" href="classctask_1_1CLIParser.html#a94f5da3b8e5d7e621993d6df6eee7138">_parent_parser_title</a> = argparse.ArgumentParser(add_help=<span class="keyword">False</span>)
+<a name="l00108"></a>00108         self._parent_parser_title.add_argument(
+<a name="l00109"></a>00109                 <span class="stringliteral">&#39;--title&#39;</span>,
+<a name="l00110"></a>00110                 <span class="stringliteral">&#39;-t&#39;</span>,
+<a name="l00111"></a>00111                 action=<span class="stringliteral">&#39;store&#39;</span>,
+<a name="l00112"></a>00112                 nargs=1,
+<a name="l00113"></a>00113                 type=str,
+<a name="l00114"></a>00114                 help=<span class="stringliteral">&#39;title of the task&#39;</span>
+<a name="l00115"></a>00115         )
+<a name="l00116"></a>00116         self.<a class="code" href="classctask_1_1CLIParser.html#a58b086e80b585586e92af7068f8c4013">_parent_parser_notes</a> = argparse.ArgumentParser(add_help=<span class="keyword">False</span>)
+<a name="l00117"></a>00117         self._parent_parser_notes.add_argument(
+<a name="l00118"></a>00118                 <span class="stringliteral">&#39;--notes&#39;</span>,
+<a name="l00119"></a>00119                 <span class="stringliteral">&#39;-n&#39;</span>,
+<a name="l00120"></a>00120                 action=<span class="stringliteral">&#39;store&#39;</span>,
+<a name="l00121"></a>00121                 nargs=1,
+<a name="l00122"></a>00122                 type=str,
+<a name="l00123"></a>00123                 help=<span class="stringliteral">&#39;notes about the task&#39;</span>
+<a name="l00124"></a>00124         )
+<a name="l00125"></a>00125 
+<a name="l00126"></a>00126         self.<a class="code" href="classctask_1_1CLIParser.html#a38930127a6564d4fb523f15f666b6a70">_init_add_subparser</a>()
+<a name="l00127"></a>00127         self.<a class="code" href="classctask_1_1CLIParser.html#af4386b459e8f14edbf1af73f2fe9b7dc">_init_find_subparser</a>()
+<a name="l00128"></a>00128         self.<a class="code" href="classctask_1_1CLIParser.html#a55ba549ab80e7b92515754aa5234c0b8">_init_edit_subparser</a>()
+<a name="l00129"></a>00129         self.<a class="code" href="classctask_1_1CLIParser.html#a5b90e87fbbc3c2d9cd7203746b6cd551">_init_delete_subparser</a>()
+<a name="l00130"></a>00130 
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132     <span class="keyword">def </span>_init_add_subparser(self):
+<a name="l00133"></a>00133         <span class="comment"># pylint: disable=E1103</span>
+<a name="l00134"></a>00134         <span class="stringliteral">&quot;&quot;&quot;Initialize the sub-parser for the add sub-command.&quot;&quot;&quot;</span>
+<a name="l00135"></a>00135         arg_parser_add = self._arg_subparsers.add_parser(
+<a name="l00136"></a>00136             <span class="stringliteral">&#39;add&#39;</span>,
+<a name="l00137"></a>00137             parents=[self.<a class="code" href="classctask_1_1CLIParser.html#a94f5da3b8e5d7e621993d6df6eee7138">_parent_parser_title</a>, self.<a class="code" href="classctask_1_1CLIParser.html#a58b086e80b585586e92af7068f8c4013">_parent_parser_notes</a>],
+<a name="l00138"></a>00138             epilog = <span class="stringliteral">&#39;Goodbye.&#39;</span>,
+<a name="l00139"></a>00139             help=<span class="stringliteral">&#39;add a task&#39;</span>
+<a name="l00140"></a>00140         )
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142         arg_parser_add.set_defaults(func=self.<a class="code" href="classctask_1_1CLIParser.html#a7d22bef9568f762f32b8afae3866e519">_interface_controller</a>.add)
+<a name="l00143"></a>00143 
+<a name="l00144"></a>00144         arg_parser_add.add_argument(
+<a name="l00145"></a>00145             <span class="stringliteral">&#39;sub_cmd&#39;</span>,
+<a name="l00146"></a>00146             action=<span class="stringliteral">&#39;store_const&#39;</span>,
+<a name="l00147"></a>00147             const=<span class="stringliteral">&#39;add&#39;</span>
+<a name="l00148"></a>00148         )
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150     <span class="keyword">def </span>_init_find_subparser(self):
+<a name="l00151"></a>00151         <span class="comment"># pylint: disable=E1103</span>
+<a name="l00152"></a>00152         <span class="stringliteral">&quot;&quot;&quot;Initialize the sub-parser for the find sub-command.&quot;&quot;&quot;</span>
+<a name="l00153"></a>00153         arg_parser_find = self._arg_subparsers.add_parser(
+<a name="l00154"></a>00154             <span class="stringliteral">&#39;find&#39;</span>,
+<a name="l00155"></a>00155             epilog = <span class="stringliteral">&#39;Goodbye.&#39;</span>,
+<a name="l00156"></a>00156             help=<span class="stringliteral">&#39;find tasks&#39;</span>
+<a name="l00157"></a>00157         )
+<a name="l00158"></a>00158 
+<a name="l00159"></a>00159         arg_parser_find.set_defaults(func=self.<a class="code" href="classctask_1_1CLIParser.html#a7d22bef9568f762f32b8afae3866e519">_interface_controller</a>.find)
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161         arg_parser_find.add_argument(
+<a name="l00162"></a>00162             <span class="stringliteral">&#39;sub_cmd&#39;</span>,
+<a name="l00163"></a>00163             action=<span class="stringliteral">&#39;store_const&#39;</span>,
+<a name="l00164"></a>00164             const=<span class="stringliteral">&#39;find&#39;</span>
+<a name="l00165"></a>00165         )
+<a name="l00166"></a>00166         arg_parser_find.add_argument(
+<a name="l00167"></a>00167             <span class="stringliteral">&#39;--key&#39;</span>,
+<a name="l00168"></a>00168             <span class="stringliteral">&#39;-k&#39;</span>,
+<a name="l00169"></a>00169             action=<span class="stringliteral">&#39;store&#39;</span>,
+<a name="l00170"></a>00170             nargs=1,
+<a name="l00171"></a>00171             help=<span class="stringliteral">&#39;the key of the task&#39;</span>)
+<a name="l00172"></a>00172 
+<a name="l00173"></a>00173     <span class="keyword">def </span>_init_edit_subparser(self):
+<a name="l00174"></a>00174         <span class="comment"># pylint: disable=E1103</span>
+<a name="l00175"></a>00175         <span class="stringliteral">&quot;&quot;&quot;Initialize the sub-parser for the edit sub-command.&quot;&quot;&quot;</span>
+<a name="l00176"></a>00176         arg_parser_edit = self._arg_subparsers.add_parser(
+<a name="l00177"></a>00177             <span class="stringliteral">&#39;edit&#39;</span>,
+<a name="l00178"></a>00178             parents=[
+<a name="l00179"></a>00179                 self.<a class="code" href="classctask_1_1CLIParser.html#a20b3831add8319272ce1a993e7e0bd6b">_parent_parser_key</a>, 
+<a name="l00180"></a>00180                 self.<a class="code" href="classctask_1_1CLIParser.html#a94f5da3b8e5d7e621993d6df6eee7138">_parent_parser_title</a>, 
+<a name="l00181"></a>00181                 self.<a class="code" href="classctask_1_1CLIParser.html#a58b086e80b585586e92af7068f8c4013">_parent_parser_notes</a>],
+<a name="l00182"></a>00182             epilog = <span class="stringliteral">&#39;Goodbye.&#39;</span>,
+<a name="l00183"></a>00183             help=<span class="stringliteral">&#39;edit a task&#39;</span>
+<a name="l00184"></a>00184         )
+<a name="l00185"></a>00185 
+<a name="l00186"></a>00186         arg_parser_edit.set_defaults(func=self.<a class="code" href="classctask_1_1CLIParser.html#a7d22bef9568f762f32b8afae3866e519">_interface_controller</a>.edit)
+<a name="l00187"></a>00187 
+<a name="l00188"></a>00188         arg_parser_edit.add_argument(
+<a name="l00189"></a>00189             <span class="stringliteral">&#39;sub_cmd&#39;</span>,
+<a name="l00190"></a>00190             action=<span class="stringliteral">&#39;store_const&#39;</span>,
+<a name="l00191"></a>00191             const=<span class="stringliteral">&#39;edit&#39;</span>
+<a name="l00192"></a>00192         )
+<a name="l00193"></a>00193 
+<a name="l00194"></a>00194     <span class="keyword">def </span>_init_delete_subparser(self):
+<a name="l00195"></a>00195         <span class="comment"># pylint: disable=E1103</span>
+<a name="l00196"></a>00196         <span class="stringliteral">&quot;&quot;&quot;Initialize the sub-parser for the del sub-command.&quot;&quot;&quot;</span>
+<a name="l00197"></a>00197         arg_parser_delete = self._arg_subparsers.add_parser(
+<a name="l00198"></a>00198             <span class="stringliteral">&#39;del&#39;</span>,
+<a name="l00199"></a>00199             parents=[self.<a class="code" href="classctask_1_1CLIParser.html#a20b3831add8319272ce1a993e7e0bd6b">_parent_parser_key</a>],
+<a name="l00200"></a>00200             epilog = <span class="stringliteral">&#39;Goodbye.&#39;</span>,
+<a name="l00201"></a>00201             help=<span class="stringliteral">&#39;delete a task&#39;</span>
+<a name="l00202"></a>00202         )
+<a name="l00203"></a>00203 
+<a name="l00204"></a>00204         arg_parser_delete.set_defaults(func=self.<a class="code" href="classctask_1_1CLIParser.html#a7d22bef9568f762f32b8afae3866e519">_interface_controller</a>.delete)
+<a name="l00205"></a>00205 
+<a name="l00206"></a>00206         arg_parser_delete.add_argument(
+<a name="l00207"></a>00207             <span class="stringliteral">&#39;sub_cmd&#39;</span>,
+<a name="l00208"></a>00208             action=<span class="stringliteral">&#39;store_const&#39;</span>,
+<a name="l00209"></a>00209             const=<span class="stringliteral">&#39;del&#39;</span>
+<a name="l00210"></a>00210         )
+<a name="l00211"></a>00211 
+<a name="l00212"></a>00212 
+<a name="l00213"></a>00213     <span class="comment">##</span>
+<a name="l00214"></a>00214     <span class="comment"># Return a dictionary of arguments.</span>
+<a name="l00215"></a>00215     <span class="comment"># </span>
+<a name="l00216"></a>00216     <span class="comment">#         Calls the argument parser to parse the command line arguments by</span>
+<a name="l00217"></a>00217     <span class="comment">#         using sys.argv. Then calls a sanitizer to get an argument dictionary</span>
+<a name="l00218"></a>00218     <span class="comment">#         which is returned.</span>
+<a name="l00219"></a>00219     <span class="comment"># </span>
+<a name="l00220"></a>00220     <span class="comment">#         </span>
+<a name="l00221"></a><a class="code" href="classctask_1_1CLIParser.html#a1bedc6576c66317dcea0e4ab565bfc49">00221</a>     <span class="keyword">def </span><a class="code" href="classctask_1_1CLIParser.html#a1bedc6576c66317dcea0e4ab565bfc49" title="Return a dictionary of arguments.">parse_cl_args</a>(self):
+<a name="l00222"></a>00222         logging.info(<span class="stringliteral">&#39;attempting to parse arguments&#39;</span>)
+<a name="l00223"></a>00223         raw_parsed_args = self._arg_parser.parse_args()
+<a name="l00224"></a>00224         args_dict = self.<a class="code" href="classctask_1_1CLIParser.html#ad5ac25fc541952a4a7757ff87c65b90b" title="Creates and sanitizes an arg dict given the raw parsed args.">_sanitize</a>(raw_parsed_args)
+<a name="l00225"></a>00225         logging.info(<span class="stringliteral">&#39;success! returning argument dictionary&#39;</span>)
+<a name="l00226"></a>00226         <span class="keywordflow">return</span> args_dict
+<a name="l00227"></a>00227 
+<a name="l00228"></a>00228     <span class="comment">##</span>
+<a name="l00229"></a>00229     <span class="comment"># Creates and sanitizes an arg dict given the raw parsed args.</span>
+<a name="l00230"></a>00230     <span class="keyword">def </span>_sanitize(self, raw_parsed_args):
+<a name="l00231"></a>00231         logging.info(<span class="stringliteral">&#39;attempting to sanitize arguments&#39;</span>)
+<a name="l00232"></a>00232         args_dict = copy(vars(raw_parsed_args))
+<a name="l00233"></a>00233         <span class="keywordflow">for</span> key, value <span class="keywordflow">in</span> args_dict.iteritems():
+<a name="l00234"></a>00234             <span class="keywordflow">if</span> value != <span class="keywordtype">None</span>:
+<a name="l00235"></a>00235                 <span class="keywordflow">if</span> key == <span class="stringliteral">&#39;key&#39;</span>:
+<a name="l00236"></a>00236                     <span class="keywordflow">if</span> self.<a class="code" href="classctask_1_1CLIParser.html#ab8d9f62fc39e5f0c7e09fb23d4408a70">_storage_type</a> <span class="keywordflow">in</span> [<span class="stringliteral">&#39;file&#39;</span>, <span class="stringliteral">&#39;sqlite&#39;</span>]:
+<a name="l00237"></a>00237                         args_dict[key] = int(<span class="stringliteral">&#39;&#39;</span>.join(map(str, value)))
+<a name="l00238"></a>00238                     <span class="keywordflow">else</span>:
+<a name="l00239"></a>00239                         args_dict[key] = <span class="stringliteral">&#39;&#39;</span>.join(map(str, value))
+<a name="l00240"></a>00240                 <span class="keywordflow">elif</span> key == <span class="stringliteral">&#39;title&#39;</span> <span class="keywordflow">or</span> key == <span class="stringliteral">&#39;notes&#39;</span>:
+<a name="l00241"></a>00241                     args_dict[key] = <span class="stringliteral">&#39;&#39;</span>.join(value)
+<a name="l00242"></a>00242 
+<a name="l00243"></a>00243         logging.info(<span class="stringliteral">&#39;success! returning sanitized argument dictionary&#39;</span>)
+<a name="l00244"></a>00244         <span class="keywordflow">return</span> args_dict
+<a name="l00245"></a>00245 
+<a name="l00246"></a>00246 
+<a name="l00247"></a>00247 <span class="keywordflow">if</span> __name__ == <span class="stringliteral">&#39;__main__&#39;</span>:
+<a name="l00248"></a>00248     <a class="code" href="namespacectask.html#af12733c40168da50290682695234700b" title="Command line implementation of task library.">main</a>()
+<a name="l00249"></a>00249 
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
@@ -176,7 +366,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 
-    <li class="footer">Generated on Sat Sep 24 2011 15:51:05 for Task-Organizer by
+    <li class="footer">Generated on Wed Sep 28 2011 13:57:34 for Task-Organizer by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>
