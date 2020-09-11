@@ -2,5 +2,5 @@ Task organizer.
 
 Implemented in python2.7. Will not work with python3.
 
-HTML documentation can be found for sphinx and doxygen in
+After being generated, HTML documentation can be found for sphinx and doxygen in
 doc/sphinx/_build/html/ and doc/doxygen/html/ respectively.
